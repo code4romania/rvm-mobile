@@ -48,7 +48,7 @@ API: https://github.com/code4romania/rvm-api
 ## Deployment
 
 ```
-expo start
+npm start
 ```
 
 If you experience any issues, follow the steps at https://facebook.github.io/react-native/docs/getting-started
