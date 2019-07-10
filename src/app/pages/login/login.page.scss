@@ -1,0 +1,26 @@
+.logo {
+    background-color: white;
+    border-radius: 50%;
+    height: 180px;
+    width: 180px;
+}
+
+.logo img {
+    display: block;
+}
+
+.full-button {
+    text-transform: capitalize;
+    height: 50px;
+}
+
+.login-item {
+    border-bottom: 1px solid white;
+}
+
+.login-form {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

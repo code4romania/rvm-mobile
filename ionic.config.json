@@ -1,5 +1,7 @@
 {
   "name": "rvm-mobile",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button color="dark" class="show-back-button" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+    <img src="../../assets/images/logo.PNG" class="logo-title mx-auto" />
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-item lines="none" class="item item-text-wrap title">
+    Caută după nume, CNP sau organizație
+  </ion-item>
+
+  <ion-item lines="none" class="search-box mx-auto">
+    <ion-input [(ngModel)]="keyword">
+    </ion-input>
+    <ion-button color="success" (click)="searchKeyword()">
+      Caută
+    </ion-button>
+  </ion-item>
+
+  <ion-list class="pb-0 underlined-list">
+    <div *ngFor="let user of users" class="list-item">
+      <ion-item lines="none">
+        <ion-label class="name">
+          {{user.name}}
+        </ion-label>
+        <ion-label class="organization pl-10">
+          <a href="/home">
+            {{user.organization}}
+          </a>
+        </ion-label>
+        <ion-icon name="arrow-dropdown" class="drop-down-icon" *ngIf="!user.menuOpen" (click)="openMenu(user.id)">
+        </ion-icon>
+        <ion-icon name="arrow-dropup" class="drop-down-icon" *ngIf="user.menuOpen" (click)="openMenu(user.id)">
+        </ion-icon>
+      </ion-item>
+
+      <div *ngIf="user.menuOpen" class="item-menu mb-5">
+        <ion-item lines="none">
+          <ion-label class="m-0">
+            Voluntar acreditat pentru <a href="/home">{{user.acredited}}</a>.
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label class="m-0">
+            {{user.occupation}}.
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label class="m-0">
+            Înregistrat în {{user.registered}}.
+          </ion-label>
+        </ion-item>
+
+        <ion-row lines="none" *ngIf="!user.isInAllocation">
+          <ion-col col-6>
+            <ion-button color="light" class="w-100" [routerLink]="['../send', user.id]">
+              Trimite mesaj
+            </ion-button>
+          </ion-col>
+          <ion-col col-6 *ngIf="!user.allocated" (click)="allocateUser(user.id)">
+            <ion-button color="secondary" class="w-100">
+              Alocă voluntari
+            </ion-button>
+          </ion-col>
+          <ion-col col-6 *ngIf="user.allocated">
+            <ion-button color="light" class="w-100">
+              Voluntar alocat
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <div *ngIf="user.isInAllocation">
+          <ion-row>
+            <ion-col col-6 class="custom-input">
+              <ion-label class="title">Județ</ion-label>
+              <ion-input type="text" [(ngModel)]="county" class="mt-5 h-25"></ion-input>
+            </ion-col>
+            <ion-col col-6 class="custom-input">
+                <ion-label class="title">Localitate</ion-label>
+                <ion-input type="text" [(ngModel)]="city" class="mt-5 h-25"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col col-6></ion-col>
+              <ion-col col-6>
+                <ion-button color="success" (click)="confirmAllocation(user.id)" class="w-100 h-25">
+                  Confirmă
+                </ion-button>
+                </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>

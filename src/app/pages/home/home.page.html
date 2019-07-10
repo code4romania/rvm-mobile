@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="end">
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+    <img src="../../assets/images/logo.PNG" class="logo-title mx-auto" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content center text-center>
+  <ion-grid class="home-columns pt-60">
+    <ion-row>
+      <ion-col size="5" *ngFor="let action of actions" class="menu-column m-7 border-5" (click)="performAction(action.url)">
+          <strong>
+            {{action.title}}
+          </strong>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

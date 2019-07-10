@@ -4,3 +4,236 @@
 // styles are for the entire app and not just one component. Additionally, this 
 // file can hold Sass mixins, functions, and placeholder classes to be imported 
 // and used throughout the application.
+
+ion-menu {
+    --width: 100%;
+}
+
+ion-header::after {
+  background-image: none;
+}
+
+.header-md:after {
+  background-image: none;
+}
+
+.m-20 {
+  margin: 20px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mx-10 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mt-30 {
+  margin-top: 30px;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.full-button {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-top: 50px;
+}
+
+.p-20 {
+  padding: 20px;
+}
+
+.mt-40p {
+  margin-top: 40%;
+}
+
+.logo-title {
+  max-height: 30px;
+  display: block;
+}
+
+.m-5 {
+  margin: 5px;
+}
+
+.m-7 {
+  margin: 5px;
+}
+
+.pt-60 {
+  padding-top: 60px;
+}
+
+.border-5 {
+  border-radius: 5px;
+}
+
+.header-ios ion-toolbar:last-child {
+  --border-width: 0;
+}
+
+.title {
+  font-size: 16px;
+  text-decoration: underline;
+  color: black;
+}
+
+.pl-16 {
+  padding-left: 16px;
+}
+
+.text-content {
+  font-size: 14px;
+  color: black;
+}
+
+.menu-entry .item.sc-ion-label-md-h, .item .sc-ion-label-md-h {
+  font-size: 14px;
+}
+
+.menu-entry {
+  width: 50%;
+  min-width: 200px;
+}
+
+.pb-0 {
+  padding-bottom: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.pl-10 {
+  padding-left: 10px;
+}
+
+.mb-5 {
+  margin-bottom: 5px;
+}
+
+ion-button {
+  text-transform: initial;
+  font-size: 12px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.list-item {
+  border-top: 1px solid black;
+}
+
+.underlined-list ion-list:last-child {
+  border-bottom: 1px solid black;
+}
+
+.list-item ion-label {
+  font-size: 12px;
+  color: black;
+}
+
+.list-item .name {
+  border-right: 1px solid #B3B3B3;
+  margin-right: 5px;
+}
+
+.drop-down-icon {
+  cursor: pointer;
+  color: #949494;
+  padding: 10px;
+}
+
+.item-menu ion-item {
+  --min-height: 20px;
+}
+
+.item-menu ion-item ion-label::before {
+  content: "::";
+  padding-right: 2px;
+  color: #B3B3B3;
+}
+
+.underlined-list.list-ios {
+  margin-top: 30px;
+}
+
+.underlined-list.list-md {
+  margin-top: 30px;
+}
+
+.selectors ion-select {
+  -webkit-box-shadow: 0px 0px 0px 5px rgba(240,237,240,1);
+  -moz-box-shadow: 0px 0px 0px 5px rgba(240,237,240,1);
+  box-shadow: 0px 0px 5px 2px rgba(240,237,240,1);
+  border-radius: 5px;
+  border: 1px solid #dddddd;
+  line-height: 20px;
+  padding-right: 5px;
+}
+
+* {
+  font-size: 12px;
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+.mb-50 {
+  margin-bottom: 50px;
+}
+
+*:focus {
+  outline: none;
+}
+
+.mt-5 {
+  margin-top: 5px;
+}
+
+.h-25 {
+  height: 25px;
+}
+
+.custom-input ion-input, ion-textarea {
+  -webkit-box-shadow: 0px 0px 0px 5px rgba(240,237,240,1);
+  -moz-box-shadow: 0px 0px 0px 5px rgba(240,237,240,1);
+  box-shadow: 0px 0px 5px 2px rgba(240,237,240,1);
+  border-radius: 5px;
+  border: 1px solid #dddddd;
+  padding-left: 5px;
+} 
+
+.h-70 {
+  height: 70px;
+}
+
+.p-15 {
+  padding: 15px;
+}
+
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}

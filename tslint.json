@@ -71,6 +71,12 @@
     "use-pipe-transform-interface": true,
     "one-variable-per-declaration": false,
     "component-class-suffix": [true, "Page", "Component"],
-    "directive-class-suffix": true
+    "directive-class-suffix": true,
+    "no-namespace": [true, "allow-declarations"],
+    "variable-name": {
+      "options": [ "allow-leading-underscore"]
+    },
+    "ban-types": [false, ["Function", "Use {} instead."]],
+    "no-string-literal": false,
   }
 }
