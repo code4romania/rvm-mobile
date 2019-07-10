@@ -1,0 +1,21 @@
+{
+  "env": {
+    "react-native/react-native": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "no-use-before-define": "off",
+    "react/jsx-filename-extension": "off",
+    "react/prop-types": "off",
+    "comma-dangle": "off",
+    "prettier/prettier": "error"
+  },
+  "globals": {
+    "fetch": false
+  },
+  "plugins": [
+    "prettier",
+    "react",
+    "react-native"
+  ]
+}
