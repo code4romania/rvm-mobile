@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild,OnInit } from '@angular/core';
+import { IonInfiniteScroll } from '@ionic/angular';
 import { UserService } from '../../../core/service/user.service';
+import { LocationsService } from 'src/app/core/service/locations.service';
 
 @Component({
   selector: 'app-list-volunteer',
@@ -7,40 +9,43 @@ import { UserService } from '../../../core/service/user.service';
   styleUrls: ['./list-volunteer.component.scss'],
 })
 export class ListVolunteerComponent implements OnInit {
-  users = [];
-  keyword = '';
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
-  constructor(private userService: UserService) { }
+  users = [];
+  counties = [];
+  organizations = [];
+  specializations = [];
+
+  keyword = '';
+  userIdWithDetails: string;
+  selectedCounty: string;
+  selectedOrganization: string;
+  selectedSpecialization: string;
+  
+  page = 0;
+  limit = 10;
+
+  constructor(private userService: UserService,
+              private locationsService: LocationsService) { }
 
   ngOnInit() {
-    this.users = this.userService.getUsers();
+    this.getData();
+
+    this.getCountyList();   
+    this.getOrganizations();
+    this.getSpecializations();
   }
 
   openMenu(userId) {
-    const index = this.users.findIndex(user => user.id === userId);
-    if (index >= 0) {
-      if (!this.users[index].menuOpen) {
-        this.users.forEach((user) => this.closeMenu(user.id));
-        this.users[index].menuOpen = true;
-      } else {
-        this.users[index].menuOpen = false;
-      }
+    if(this.userIdWithDetails === userId){
+      this.userIdWithDetails = null;
+    } else{
+      this.userIdWithDetails = userId;
     }
-  }
-
-  closeMenu(userId) {
-    const index = this.users.findIndex(user => user.id === userId);
-    if (index >= 0) {
-      this.users[index].menuOpen = false;
-    }
-  }
-
-  sendMessage(userId) {
-    console.log('send messege to: ', userId);
   }
 
   allocateUser(userId) {
-    const index = this.users.findIndex(user => user.id === userId);
+    const index = this.users.findIndex(user => user._id === userId);
     if (index >= 0) {
       this.users[index].allocated = true;
     }
@@ -48,5 +53,75 @@ export class ListVolunteerComponent implements OnInit {
 
   sendAlert() {
     console.log('Alert sent');
+  }
+
+  getCountyList() {
+    this.locationsService.getCountyList().subscribe((response) => {
+      this.counties = response;
+    });
+  }
+
+  getOrganizations() {
+    this.organizations.push({
+      id:'1',
+      name:'Crucea Roșie'
+    });
+    
+    this.organizations.push({id: '2',
+    name: 'Habitat for Humanity'
+    });
+  }
+
+  getSpecializations() {
+    this.specializations.push({
+      id:'1',
+      name:'prim ajutor'
+    });
+
+    this.specializations.push({id: '2',
+    name: 'constructii'
+    });
+  }
+
+  selectionsChanged() {
+    this.getData();
+  }
+
+  getData() {
+    if(this.page === 0) {
+      this.users = [];
+    }
+
+    if(this.selectedCounty || this.selectedOrganization || this.selectedSpecialization) {
+      this.userService.filter(this.selectedCounty, this.selectedOrganization, this.selectedSpecialization , this.page, this.limit , (response) => {
+        this.users = response;
+      });
+    } else {
+      this.userService.getUsers(this.page, this.limit, (response) => {
+        response.forEach(user => this.users.push(user));
+      });
+    }
+  }
+
+  loadData(event) {
+    setTimeout(() => {
+      this.page++;
+      this.getData();
+      event.target.complete();
+
+      // App logic to determine if all data is loaded
+      // and disable the infinite scroll
+      if (this.users.length == 20) {
+        event.target.disabled = true;
+      }
+    }, 500);
+  }
+
+  doRefresh(event) {
+    setTimeout(() => {
+      this.page = 0;
+      this.getData();
+      event.target.complete();
+    }, 1000);
   }
 }

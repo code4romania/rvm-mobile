@@ -22,6 +22,7 @@ import {
   UserService,
   UtilService
 } from './service';
+import { LocationsService } from './service/locations.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, RouterModule],
@@ -35,6 +36,7 @@ import {
     UserService,
     UtilService,
     ErrorMessageService,
+    LocationsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiPrefixInterceptor,

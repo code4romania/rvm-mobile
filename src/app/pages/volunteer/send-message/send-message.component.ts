@@ -38,4 +38,8 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     });
   }
 
+  sendMessage() {
+    console.log(this.userId, this.message);
+  }
+
 }

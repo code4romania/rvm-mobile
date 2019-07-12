@@ -31,9 +31,9 @@ export class LoginPage implements OnInit {
     //   .subscribe(
     //     (credentials: Authentication.Credentials) => {
     //       console.log(credentials);
-          // this.router.navigate(['../home'], {
-          //   replaceUrl: true
-          // });
+    //       this.router.navigate(['../home'], {
+    //         replaceUrl: true
+    //       });
     //     },
     //     (error: any) => {
     //       console.log(`Login error: ${error}`);
@@ -50,7 +50,7 @@ export class LoginPage implements OnInit {
 
   private createForm() {
     this.loginForm = this.formBuilder.group({
-      phoneNumer: ['', [Validators.required, Validators.maxLength(10), Validators.pattern('[0-9]*')]],
+      phoneNumer: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern('[0-9]*')]],
       securityCode: ['', Validators.required]
     });
   }

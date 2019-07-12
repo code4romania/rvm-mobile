@@ -11,15 +11,18 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <div class="selectors">
     <div class="mt-10">
       <ion-label class="title">
         Alege județ
       </ion-label>
-      <ion-select class="mt-10">
+      <ion-select class="mt-10" [(ngModel)]="selectedCounty" (ionChange)="getData()">
         <ion-select-option value="all" selected>Toate</ion-select-option>
-        <ion-select-option value="ab">Alba</ion-select-option>
-        <ion-select-option value="ar">Arad</ion-select-option>
+        <ion-select-option *ngFor="let county of counties" value="{{county.name}}">{{county.name}}</ion-select-option>
       </ion-select>
     </div>
 
@@ -27,26 +30,26 @@
       <ion-label class="title">
         Alege organizație
       </ion-label>
-      <ion-select class="mt-10">
-        <ion-select-option value="cr" selected>Crucea Roșie</ion-select-option>
-        <ion-select-option value="hh">Habitat for Humanity</ion-select-option>
+      <ion-select class="mt-10" [(ngModel)]="selectedOrganization" (ionChange)="getData()">
+        <ion-select-option *ngFor="let organization of organizations" value="{{organization.name}}">
+          {{organization.name}}</ion-select-option>
       </ion-select>
     </div>
-    
+
     <div class="mt-10">
       <ion-label class="title">
         Alege specializare
       </ion-label>
-      <ion-select class="mt-10">
-        <ion-select-option value="pa" selected>prim ajutor</ion-select-option>
-        <ion-select-option value="c">construcții</ion-select-option>
+      <ion-select class="mt-10" [(ngModel)]="selectedSpecialization" (ionChange)="getData()">
+        <ion-select-option *ngFor="let specialization of specializations" value="{{specialization.name}}">{{specialization.name}}
+        </ion-select-option>
       </ion-select>
     </div>
   </div>
 
   <ion-list class="mt-30 pb-0" class="underlined-list">
     <div *ngFor="let user of users" class="list-item">
-      <ion-item lines="none">
+      <ion-item lines="none" (click)="openMenu(user._id)">
         <ion-label class="name">
           {{user.name}}
         </ion-label>
@@ -55,16 +58,16 @@
             {{user.organization}}
           </a>
         </ion-label>
-        <ion-icon name="arrow-dropdown" class="drop-down-icon" *ngIf="!user.menuOpen" (click)="openMenu(user.id)">
+        <ion-icon name="arrow-dropdown" class="drop-down-icon" *ngIf="user._id !== userIdWithDetails">
         </ion-icon>
-        <ion-icon name="arrow-dropup" class="drop-down-icon" *ngIf="user.menuOpen" (click)="openMenu(user.id)">
+        <ion-icon name="arrow-dropup" class="drop-down-icon" *ngIf="user._id === userIdWithDetails">
         </ion-icon>
       </ion-item>
 
-      <div *ngIf="user.menuOpen" class="item-menu mb-5">
+      <div *ngIf="user._id === userIdWithDetails" class="item-menu mb-5">
         <ion-item lines="none">
           <ion-label class="m-0">
-            Voluntar acreditat pentru <a href="/home">{{user.acredited}}</a>.
+            Voluntar acreditat pentru <a href="/home">{{user.specialization}}</a>.
           </ion-label>
         </ion-item>
 
@@ -76,17 +79,17 @@
 
         <ion-item lines="none">
           <ion-label class="m-0">
-            Înregistrat în {{user.registered}}.
+            Înregistrat în {{user.created_at | date: 'dd.MM.yyyy'}}.
           </ion-label>
         </ion-item>
 
         <ion-row lines="none">
           <ion-col col-6>
-            <ion-button color="light" class="w-100" (click)="sendMessage(user.id)">
+            <ion-button color="light" class="w-100" [routerLink]="['../send', user._id]">
               Trimite mesaj
             </ion-button>
           </ion-col>
-          <ion-col col-6 *ngIf="!user.allocated" (click)="allocateUser(user.id)">
+          <ion-col col-6 *ngIf="!user.allocated" (click)="allocateUser(user._id)">
             <ion-button color="secondary" class="w-100">
               Alocă voluntari
             </ion-button>
@@ -101,7 +104,14 @@
     </div>
   </ion-list>
 
-  <ion-row>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Se încarcă voluntari...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+  <ion-row *ngIf="users.length > 0">
     <ion-col col-6></ion-col>
     <ion-col col-6 align-self-end>
       <ion-button color="secondary" (click)="sendAlert()" float-right class="w-100">

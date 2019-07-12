@@ -5,8 +5,10 @@
 export const environment = {
   env: 'DEFAULT',
   production: false,
+  apiUrl: 'http://192.168.0.109/api',
   serverBaseUrl: 'http://localhost:1355',
-  serverUrl: 'http://localhost:1355/v1'
+  serverUrl: 'http://localhost:1355/',
+  databaseURL: 'http://192.168.0.109:5984'
 };
 
 /*

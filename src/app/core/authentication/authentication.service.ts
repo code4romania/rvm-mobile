@@ -29,7 +29,7 @@ export class AuthenticationService {
   login(
     payload: Authentication.LoginPayload
   ): Observable<Authentication.Credentials> {
-    return this.httpClient.post('/login', payload).pipe(
+    return this.httpClient.post('/login/mobile', payload).pipe(
       map((body: Authentication.Credentials) => {
         this.setCredentials(body);
         return body;
@@ -40,7 +40,7 @@ export class AuthenticationService {
   signup(
     payload: Authentication.SignupPayload
   ): Observable<Authentication.User> {
-    return this.httpClient.post('/signup', payload).pipe(
+    return this.httpClient.post('/register', payload).pipe(
       map((body: Authentication.User) => {
         return body;
       })

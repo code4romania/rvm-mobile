@@ -21,49 +21,49 @@
     </div>
 
     <div class="selectors">
-        <div class="mt-10">
-            <ion-label class="title">
-              Alege județ
-            </ion-label>
-            <ion-select class="mt-10" formControlName="county">
-              <ion-select-option value="all" selected>Toate</ion-select-option>
-              <ion-select-option value="ab">Alba</ion-select-option>
-              <ion-select-option value="ar">Arad</ion-select-option>
-            </ion-select>
-          </div>
+      <div class="mt-10">
+        <ion-label class="title">
+          Alege județ
+        </ion-label>
+        <ion-select class="mt-10" formControlName="county" (ionChange)="countySelectionChanged($event)">
+          <ion-select-option *ngFor="let county of counties" value="{{county.name}}">{{county.name}}</ion-select-option>
+        </ion-select>
+      </div>
+
       <div class="mt-10">
         <ion-label class="title">
           Alege localitate
         </ion-label>
-        <ion-select class="mt-10" formControlName="city">
-          <ion-select-option value="o" selected>Oradea</ion-select-option>
-          <ion-select-option value="ab">Alba Iulia</ion-select-option>
-          <ion-select-option value="ar">Arad</ion-select-option>
+        <ion-select class="mt-10" formControlName="city" (ionChange)="citySelectionChanged($event)">
+          <ion-select-option *ngFor="let city of cities" value="{{city.name}}">{{city.name}}</ion-select-option>
         </ion-select>
       </div>
+
       <div class="mt-10">
-          <ion-label class="title">
-              Alege organizație
-            </ion-label>
-        <ion-select class="mt-10" (change)="selectOrganization()" formControlName="organization" *ngIf="!addNewOrganization">
-          <ion-select-option value="cr" selected>Crucea Roșie</ion-select-option>
-          <ion-select-option value="hh">Habitat for Humanity</ion-select-option>
+        <ion-label class="title">
+          Alege organizație
+        </ion-label>
+        <ion-select class="mt-10" formControlName="organization" *ngIf="!addNewOrganization"
+          (ionChange)="organizationSelectionChanged($event)">
+          <ion-select-option *ngFor="let organization of organizations" value="{{organization.name}}">
+            {{organization.name}}</ion-select-option>
           <ion-select-option value="new">Adaugă organizație nouă</ion-select-option>
         </ion-select>
-        <ion-input type="text" formControlName="organization" class="mt-10" *ngIf="addNewOrganization" ></ion-input>
+        <ion-input type="text" formControlName="organization" class="mt-10" *ngIf="addNewOrganization"></ion-input>
       </div>
 
       <ion-item lines="none" class="checkbox-item">
-          <ion-checkbox></ion-checkbox>
-          <ion-label class="pl-10">Neafiliat</ion-label>
+        <ion-checkbox></ion-checkbox>
+        <ion-label class="pl-10">Neafiliat</ion-label>
       </ion-item>
+
       <div class="mt-10">
         <ion-label class="title">
           Alege specializare
         </ion-label>
-        <ion-select class="mt-10" formControlName="speciality">
-          <ion-select-option value="pa" selected>prim ajutor</ion-select-option>
-          <ion-select-option value="c">construcții</ion-select-option>
+        <ion-select class="mt-10" formControlName="specialization" (ionChange)="specializationSelectionChanged($event)">
+          <ion-select-option *ngFor="let specialization of specializations" value="{{specialization.name}}">{{specialization.name}}
+          </ion-select-option>
         </ion-select>
       </div>
     </div>
@@ -72,7 +72,7 @@
       <ion-col col-6>
       </ion-col>
       <ion-col col-6>
-          <ion-button type="submit" color="success" class="mt-10 w-100">Savlează</ion-button>
+        <ion-button type="submit" color="success" class="mt-10 w-100">Savlează</ion-button>
       </ion-col>
     </ion-row>
   </form>
