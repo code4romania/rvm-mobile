@@ -1,12 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as PouchDB from 'pouchdb/dist/pouchdb';
 import * as PouchDBFind from 'pouchdb-find/lib/index';
 import { environment } from '../../../environments/environment';
 
-var localDB = new PouchDB('laravel');
+var localDB = new PouchDB('user');
 PouchDB.plugin(PouchDBFind);
-var remoteDB = new PouchDB(environment.databaseURL + '/laravel');
+var remoteDB = new PouchDB(environment.databaseURL + '/user');
 
 @Injectable()
 export class UserService {
@@ -19,7 +18,7 @@ export class UserService {
       continuous: true
     };
 
-   localDB.sync(remoteDB, options);    
+  //  localDB.sync(remoteDB, options);    
 
     localDB.createIndex({
       index: {fields: ['type', 'name', 'CNP', 'organization', 'county', 'specialization']}
@@ -70,9 +69,12 @@ export class UserService {
   updateUser(user) {
     localDB.get(user._id).then(function (doc) {
       doc.name = user.name ? user.name : doc.name;
-      doc.occupation = user.occupation ? user.occupation : doc.occupation;
+      doc.cnp = user.cnp ? user.cnp : doc.cnp;
+      doc.county = user.county ? user.county : doc.county;
+      doc.city = user.city ? user.city : doc.city;
       doc.organization = user.organization ? user.organization : doc.organization;
-      doc.registered = user.registered ? user.registered : doc.registered;
+      doc.specialization = user.specialization ? user.specialization : doc.specialization;
+      doc.occupation = user.occupation ? user.occupation : doc.occupation;
       localDB.put(doc);
     });
   }

@@ -70,6 +70,30 @@
                 }
               ]
             },
+            "developement": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
             "ci": {
               "progress": false
             }
@@ -83,6 +107,9 @@
           "configurations": {
             "production": {
               "browserTarget": "app:build:production"
+            },
+            "developement": {
+              "browserTarget": "app:build:developement"
             },
             "ci": {
               "progress": false
@@ -139,6 +166,9 @@
           "configurations": {
             "production": {
               "browserTarget": "app:build:production"
+            },
+            "developement": {
+              "browserTarget": "app:build:developement"
             }
           }
         },
@@ -152,6 +182,10 @@
             "production": {
               "cordovaBuildTarget": "app:ionic-cordova-build:production",
               "devServerTarget": "app:serve:production"
+            },
+            "developement": {
+              "cordovaBuildTarget": "app:ionic-cordova-build:developement",
+              "devServerTarget": "app:serve:developement"
             }
           }
         }
@@ -170,6 +204,9 @@
           "configurations": {
             "production": {
               "devServerTarget": "app:serve:production"
+            },
+            "developement": {
+              "devServerTarget": "app:serve:developement"
             },
             "ci": {
               "devServerTarget": "app:serve:ci"

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { IonRouterOutlet, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthenticationService } from './core';
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
   showSideMenu = true;
   public appPages = [
     {
@@ -32,6 +33,10 @@ export class AppComponent {
     {
       title: 'Apelează suport',
       url: 'tel:89992142265'
+    }, 
+    {
+      title: 'Delogare',
+      url: '/logout'
     }
   ];
 
@@ -39,16 +44,18 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private router: Router) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.backgroundColorByHexString('#264998');
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      if(this.platform.is('cordova')){
+        this.statusBar.backgroundColorByHexString('#264998');
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+      }
     });
   }
 

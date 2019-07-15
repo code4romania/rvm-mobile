@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import {
   AuthenticationGuard,
-  AuthenticationService
+  AuthenticationService,
 } from './authentication';
 import {
   ApiPrefixInterceptor,
@@ -20,9 +20,13 @@ import { RouteReusableStrategy } from './route-reusable-strategy';
 import {
   ErrorMessageService,
   UserService,
-  UtilService
+  UtilService,
+  CourseService,
+  VolunteerService,
+  OrganizationService
 } from './service';
 import { LocationsService } from './service/locations.service';
+import { UnauthenticatedGuard } from './authentication/unauthenticated.guard';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, RouterModule],
@@ -31,12 +35,16 @@ import { LocationsService } from './service/locations.service';
     LocalStorageService,
     AuthenticationService,
     AuthenticationGuard,
+    UnauthenticatedGuard,
     ApiPrefixInterceptor,
     ErrorHandlerInterceptor,
     UserService,
+    VolunteerService,
     UtilService,
     ErrorMessageService,
     LocationsService,
+    CourseService,
+    OrganizationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiPrefixInterceptor,

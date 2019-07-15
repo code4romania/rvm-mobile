@@ -17,7 +17,7 @@
     </div>
     <div class="mt-10">
       <ion-label class="title">Adaugă CNP</ion-label>
-      <ion-input type="number" formControlName="cnp" class="mt-10"></ion-input>
+      <ion-input type="number" formControlName="ssn" class="mt-10"></ion-input>
     </div>
 
     <div class="selectors">
@@ -61,10 +61,7 @@
         <ion-label class="title">
           Alege specializare
         </ion-label>
-        <ion-select class="mt-10" formControlName="specialization" (ionChange)="specializationSelectionChanged($event)">
-          <ion-select-option *ngFor="let specialization of specializations" value="{{specialization.name}}">{{specialization.name}}
-          </ion-select-option>
-        </ion-select>
+        <ion-input type="text" formControlName="course" (ionChange)="courseSelectionChanged($event)" class="mt-10"></ion-input>
       </div>
     </div>
 

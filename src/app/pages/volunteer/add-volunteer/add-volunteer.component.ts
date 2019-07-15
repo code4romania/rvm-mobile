@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { LocationsService } from 'src/app/core/service/locations.service';
+
+import { OrganizationService,
+  VolunteerService,
+  LocationsService,
+  CourseService } from 'src/app/core/service';
 
 @Component({
   selector: 'app-add-volunteer',
@@ -13,31 +17,44 @@ export class AddVolunteerComponent implements OnInit {
   counties = [];
   cities = [];
   organizations = [];
-  specializations = [];
+  courses = [];
 
   constructor(private formBuilder: FormBuilder,
-              private locationsService: LocationsService) { }
+              private locationsService: LocationsService,
+              private volunteerService: VolunteerService,
+              private organizationService: OrganizationService,
+              private courseService: CourseService) { }
 
   ngOnInit() {
     this.createForm();
     this.getCountyList();   
     this.getOrganizations();
-    this.getSpecializations();
+    this.getCourses();
   }
 
   private createForm() {
     this.addForm = this.formBuilder.group({
       name: ['', Validators.required],
-      cnp: ['', Validators.required],
+      ssn: ['', Validators.required],
       organization: ['', Validators.required],
       county: new FormControl({value: '', disabled: false}, Validators.required),
       city: new FormControl({value: '', disabled: true}, Validators.required),
-      specialization: ['', Validators.required],
+      course: ['', Validators.required],
     });
   }
 
   submit() {
-    console.log('volunteer added');
+    this.volunteerService.createVolunteer(
+      this.addForm.value.name, 
+      this.addForm.value.ssn, 
+      this.addForm.value.county, 
+      this.addForm.value.city, 
+      this.addForm.value.organization, 
+      this.addForm.value.course);
+      // todo add organization id and course id
+    
+    // todo replace this with something else
+    location.reload();
   }
 
   getCountyList() {
@@ -56,24 +73,18 @@ export class AddVolunteerComponent implements OnInit {
   }
 
   getOrganizations() {
-    this.organizations.push({
-      id:'1',
-      name:'Crucea Roșie'
-    });
-    
-    this.organizations.push({id: '2',
-    name: 'Habitat for Humanity'
+    this.organizationService.getOrganizations((result) => {
+      result.forEach(row => {
+        this.organizations.push(row.doc);
+      });
     });
   }
 
-  getSpecializations() {
-    this.specializations.push({
-      id:'1',
-      name:'prim ajutor'
-    });
-
-    this.specializations.push({id: '2',
-    name: 'constructii'
+  getCourses() {
+    this.courseService.getCourses((result) => {
+      result.forEach(row => {
+        this.courses.push(row.doc);
+      });
     });
   }
 
@@ -96,7 +107,7 @@ export class AddVolunteerComponent implements OnInit {
     }
   }
 
-  specializationSelectionChanged(event) {
-    this.addForm.controls['specialization'].setValue(event.detail.value);
+  courseSelectionChanged(event) {
+    this.addForm.controls['course'].setValue(event.detail.value);
   }
 }

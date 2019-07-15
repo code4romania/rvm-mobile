@@ -29,7 +29,7 @@ export class AuthenticationService {
   login(
     payload: Authentication.LoginPayload
   ): Observable<Authentication.Credentials> {
-    return this.httpClient.post('/login/mobile', payload).pipe(
+    return this.httpClient.post('/login', payload).pipe(
       map((body: Authentication.Credentials) => {
         this.setCredentials(body);
         return body;
@@ -49,9 +49,7 @@ export class AuthenticationService {
 
   logout(): Observable<boolean> {
     return this.httpClient
-      .post('/logout', {
-        sessionId: this.credentials.session
-      })
+      .get('/logout')
       .pipe(
         map(() => {
           this.setCredentials();
@@ -69,7 +67,7 @@ export class AuthenticationService {
   }
 
   get accessToken(): string | null {
-    return this.credentials ? this.credentials.accessToken : null;
+    return this.credentials ? this.credentials.token : null;
   }
 
   private setCredentials(credentials?: Authentication.Credentials) {

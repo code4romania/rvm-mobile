@@ -11,7 +11,7 @@ import { Camera } from '@ionic-native/camera';
 export class SendMessageComponent implements OnInit, OnDestroy {
   private routeSub: Subscription;
   private userId: string;
-  private message = '';
+  public message = '';
   public base64Image: string;
 
   constructor(private route: ActivatedRoute) { }

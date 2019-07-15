@@ -34,7 +34,7 @@
         </ion-label>
         <ion-label class="organization pl-10">
           <a href="/home">
-            {{user.organization}}
+            {{getOrganizationName(user.organization_id)}}
           </a>
         </ion-label>
         <ion-icon name="arrow-dropdown" class="drop-down-icon" *ngIf="user._id !== userIdWithDetails">
@@ -46,19 +46,19 @@
       <div *ngIf="user._id === userIdWithDetails" class="item-menu mb-5">
         <ion-item lines="none">
           <ion-label class="m-0">
-            Voluntar acreditat pentru <a href="/home">{{user.acredited}}</a>.
+            Voluntar acreditat pentru <a href="/home">{{user.comments}}</a>.
           </ion-label>
         </ion-item>
 
         <ion-item lines="none">
           <ion-label class="m-0">
-            {{user.occupation}}.
+            {{user.job}}.
           </ion-label>
         </ion-item>
 
         <ion-item lines="none">
           <ion-label class="m-0">
-            Înregistrat în {{user.created_at | date: 'dd.MM.yyyy'}}.
+            Înregistrat în {{user.created | date: 'dd.MM.yyyy'}}.
           </ion-label>
         </ion-item>
 

@@ -1,8 +1,6 @@
 <ion-app>
   <ion-split-pane>
-    <!-- *ngIf="authenticationService.isAuthenticated()" -->
-    <!-- TODO ADD THIS TO MENU WHEN BACKEND READY -->
-    <ion-menu type="overlay" side="end" class="side-menu" id="side-menu">
+    <ion-menu type="overlay" side="end" class="side-menu" id="side-menu" *ngIf="authenticationService.isAuthenticated()">
       <ion-header>
         <ion-toolbar mode="ios">
           <ion-buttons slot="end">
