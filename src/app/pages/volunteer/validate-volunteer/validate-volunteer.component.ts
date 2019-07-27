@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { VolunteerService } from 'src/app/core/service/volunteer.service';
-import { OrganizationService } from 'src/app/core';
 
 @Component({
   selector: 'app-validate-volunteer',
@@ -8,59 +7,66 @@ import { OrganizationService } from 'src/app/core';
   styleUrls: ['./validate-volunteer.component.scss'],
 })
 export class ValidateVolunteerComponent implements OnInit {
-  users = [];
+  volunteers = [];
   keyword = '';
-  userIdWithDetails: string;
-  organizations = [];
+  volunteerIdWithDetails: string;
 
   page = 0;
   limit = 10;
 
-  constructor(private volunteerService: VolunteerService,
-    private organizationService: OrganizationService) { }
+  constructor(private volunteerService: VolunteerService) { }
 
   ngOnInit() {
    this.getData();
-   this.getOrganizations();
   }
 
   getData() {
     if(this.page === 0) {
-      this.users = [];
+      this.volunteers = [];
     }
 
-    this.volunteerService.getVolunteers(this.page, this.limit, (response) => {
-      response.forEach(volunteer => {
-        this.users.push(volunteer.doc);
+    this.volunteerService.getVolunteers(this.page, this.limit).subscribe((response: any) => {
+      response.rows.forEach(volunteer => {
+        this.volunteers.push(volunteer.doc);
       });
     });
   }
 
-  openMenu(userId) {
-    if(this.userIdWithDetails === userId){
-      this.userIdWithDetails = null;
+  openMenu(volunteerId) {
+    if(this.volunteerIdWithDetails === volunteerId){
+      this.volunteerIdWithDetails = null;
     } else{
-      this.userIdWithDetails = userId;
+      this.volunteerIdWithDetails = volunteerId;
     }
   }
 
-  allocateUser(userId) {
-    const index = this.users.findIndex(user => user._id === userId);
+  allocateUser(volunteerId) {
+    const index = this.volunteers.findIndex(volunteer => volunteer._id === volunteerId);
     if (index >= 0) {
-      this.users[index].isInAllocation = true;
+      this.volunteers[index].isInAllocation = true;
     }
   }
 
-  confirmAllocation(userId) {
-    const index = this.users.findIndex(user => user._id === userId);
+  confirmAllocation(volunteerId) {
+    const index = this.volunteers.findIndex(volunteer => volunteer._id === volunteerId);
     if (index >= 0) {
-      this.users[index].allocated = true;
-      this.users[index].isInAllocation = false;
+      this.volunteers[index].allocated = true;
+      this.volunteers[index].isInAllocation = false;
     }
   }
 
   searchKeyword() {
-    this.volunteerService.search(this.keyword.toLowerCase(), 10);
+    if(this.keyword !== ''){
+      this.volunteerService.search(this.keyword.toLowerCase(), this.page, 10).subscribe((data: any) => {
+        this.volunteers = data.docs;
+        if(data.docs.length > 0) {
+          this.page++;
+        }
+      });
+    } else {
+      this.page = 0;
+      this.getData();
+    }
   }
 
   loadData(event) {
@@ -71,7 +77,7 @@ export class ValidateVolunteerComponent implements OnInit {
 
       // App logic to determine if all data is loaded
       // and disable the infinite scroll
-      if (this.users.length == 20) {
+      if (this.volunteers.length == 20) {
         event.target.disabled = true;
       }
     }, 500);
@@ -83,24 +89,5 @@ export class ValidateVolunteerComponent implements OnInit {
       this.getData();
       event.target.complete();
     }, 1000);
-  }
-
-  getOrganizationName(organizationId) {
-    // todo update this
-    const organization = this.organizations.find(item => item._id === organizationId);
-  
-    if(organization) {
-      return organization.name;
-    } else {
-      return null;
-    }
-  }
-
-  getOrganizations() {
-    this.organizationService.getOrganizations((result) => {
-      result.forEach(row => {
-        this.organizations.push(row.doc);
-      });
-    });
   }
 }

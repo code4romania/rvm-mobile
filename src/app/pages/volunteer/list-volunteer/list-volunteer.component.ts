@@ -3,7 +3,7 @@ import { IonInfiniteScroll } from '@ionic/angular';
 import { VolunteerService } from '../../../core/service/volunteer.service';
 import { LocationsService } from 'src/app/core/service/locations.service';
 import { isArray } from 'util';
-import { OrganizationService, CourseService } from 'src/app/core';
+import { OrganisationService, CourseService } from 'src/app/core';
 
 @Component({
   selector: 'app-list-volunteer',
@@ -13,45 +13,45 @@ import { OrganizationService, CourseService } from 'src/app/core';
 export class ListVolunteerComponent implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
-  users = [];
+  volunteers = [];
   counties = [];
-  organizations = [];
+  organisations = [];
   courses = [];
 
   keyword = '';
-  userIdWithDetails: string;
+  volunteerIdWithDetails: string;
   selectedCounty = 'all';
-  selectedOrganization: string;
-  selectedSpecialization: string;
+  selectedOrganisation: string;
+  selectedCourse: string;
   
   page = 0;
   limit = 10;
 
   constructor(private volunteerService: VolunteerService,
               private locationsService: LocationsService,
-              private organizationService: OrganizationService,
+              private organisationService: OrganisationService,
               private courseService: CourseService) { }
 
   ngOnInit() {
     this.getData();
 
     this.getCountyList();   
-    this.getOrganizations();
+    this.getOrganisations();
     this.getCourses();
   }
 
-  openMenu(userId) {
-    if(this.userIdWithDetails === userId){
-      this.userIdWithDetails = null;
+  openMenu(volunteerId) {
+    if(this.volunteerIdWithDetails === volunteerId){
+      this.volunteerIdWithDetails = null;
     } else{
-      this.userIdWithDetails = userId;
+      this.volunteerIdWithDetails = volunteerId;
     }
   }
 
-  allocateUser(userId) {
-    const index = this.users.findIndex(user => user._id === userId);
+  allocateUser(volunteerId) {
+    const index = this.volunteers.findIndex(volunteer => volunteer._id === volunteerId);
     if (index >= 0) {
-      this.users[index].allocated = true;
+      this.volunteers[index].allocated = true;
     }
   }
 
@@ -65,44 +65,53 @@ export class ListVolunteerComponent implements OnInit {
     });
   }
 
-  getOrganizations() {
-    this.organizationService.getOrganizations((result) => {
-      result.forEach(row => {
-        this.organizations.push(row.doc);
+  getOrganisations() {
+    this.organisationService.getOrganisations().subscribe((result: any) =>{
+      result.rows.forEach(row => {
+        this.organisations.push(row.doc);
       });
     });
   }
 
   getCourses() {
-    this.courseService.getCourses((result) => {
-      result.forEach(row => {
-        this.courses.push(row.doc);
-      });
+    this.courseService.getCourses().subscribe((response: any) =>{
+      const data = response.rows.filter(item => item.doc.language !== 'query');
+     
+      this.courses = data.map(item => item.doc.name).filter((value, index, self) => self.indexOf(value) === index);
     });
   }
 
   selectionsChanged() {
+    this.page = 0;
     this.getData();
   }
 
   getData() {
     if(this.page === 0) {
-      this.users = [];
+      this.volunteers = [];
     }
- 
-    if(this.selectedCounty === 'all') {
-      this.selectedCounty = '';
-    }
-
-    if(this.selectedCounty || this.selectedOrganization || this.selectedSpecialization) {
-      this.volunteerService.filter(this.selectedCounty, this.selectedOrganization, this.selectedSpecialization , this.page, this.limit , (response) => {
-        this.users = response;
+    
+    if(this.selectedCounty !== 'all' || this.selectedOrganisation || this.selectedCourse) {
+      this.volunteerService.filter(this.selectedCounty, this.selectedOrganisation, this.selectedCourse , this.page, this.limit).subscribe((response: any) => {
+        // todo replace this
+        if(this.selectedCourse) {
+          this.volunteers = response.docs.filter(doc => {
+            const course = doc.courses.find(course => course.name === this.selectedCourse)
+            if(course) {
+              return true;
+            } else {
+              return false;
+            }
+          });
+        } else {
+          this.volunteers = response.docs;
+        }
       });
     } else {
-      this.volunteerService.getVolunteers(this.page, this.limit, (response) => {
-        response.forEach(volunteer => {
-          this.users.push(volunteer.doc);
-        });   
+      this.volunteerService.getVolunteers(this.page, this.limit).subscribe((response: any) => {
+        response.rows.forEach(volunteer => {
+          this.volunteers.push(volunteer.doc);
+        });
       });
     }
   }
@@ -115,7 +124,7 @@ export class ListVolunteerComponent implements OnInit {
 
       // App logic to determine if all data is loaded
       // and disable the infinite scroll
-      if (this.users.length == 20) {
+      if (this.volunteers.length == 20) {
         event.target.disabled = true;
       }
     }, 500);
@@ -127,16 +136,5 @@ export class ListVolunteerComponent implements OnInit {
       this.getData();
       event.target.complete();
     }, 1000);
-  }
-
-  getOrganizationName(organizationId) {
-    // todo update this
-    const organization = this.organizations.find(item => item._id === organizationId);
-  
-    if(organization) {
-      return organization.name;
-    } else {
-      return null;
-    }
   }
 }

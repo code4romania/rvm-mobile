@@ -20,12 +20,25 @@ const credentialsKey = 'credentials';
  */
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {
+  
+  /**
+   * Class constructor
+   * @param router Angular value which handles routing operations
+   * @param localStorageService Injected service referes the LocalStorageService for handling operations related to storage
+   * @param errorMessageService Injected service referes the ErrorMessageService for handling operations related to error messagging
+   */
   constructor(
     private router: Router,
     private localStorageService: LocalStorageService,
     private errorMessageService: ErrorMessageService
   ) {}
 
+   /**
+   * Intercepts all requests that are sent and adds an error handling function to them
+   * @param request The current request that is being sent
+   * @param next Handles the next state of the request
+   * @returns An observable with the new request, with the additional information
+   */
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -35,7 +48,11 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
       .pipe(catchError(error => this.errorHandler(error)));
   }
 
-  // Customize the default error handler here if needed
+  /**
+   * Handles the request errors depending on its code
+   * @param response Request response
+   * @returns An observable with the http event
+   */
   private errorHandler(
     response: HttpResponse<any>
   ): Observable<HttpEvent<any>> {
@@ -66,7 +83,6 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
     }
 
     if (!environment.production) {
-      // Do something with the error
       console.error('Request error', response);
     }
     throw response;

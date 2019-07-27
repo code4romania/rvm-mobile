@@ -2,14 +2,33 @@ import { Injectable } from '@angular/core';
 import * as PouchDB from 'pouchdb/dist/pouchdb';
 import * as PouchDBFind from 'pouchdb-find/lib/index';
 import { environment } from '../../../environments/environment';
+import { from, Observable } from 'rxjs';
+import { Course } from '../model/course.model';
 
-var localDB = new PouchDB('course');
+/**
+ * Reference for local PouchDB Courses Database
+ */
+var localDB = new PouchDB('courses');
+
+/**
+ * PouchDB find plugin added 
+ */
 PouchDB.plugin(PouchDBFind);
-var remoteDB = new PouchDB(environment.databaseURL + '/course');
 
+/**
+ * Reference for server CouchDB Courses Database
+ */
+var remoteDB = new PouchDB(environment.databaseURL + '/courses');
+
+/**
+ * Provider for course related operations
+ */
 @Injectable()
 export class CourseService {
 
+  /**
+   * Class constructor, sets the synchronization options for CouchDB and PouchDB Courses Database
+   */
   constructor() {
     let options = {
       live: true,
@@ -17,55 +36,57 @@ export class CourseService {
       continuous: true
     };
 
-   localDB.sync(remoteDB, options);    
+    localDB.sync(remoteDB, options);    
 
     localDB.createIndex({
-      index: {fields: ['name', 'volunteer_id']}
+      index: {fields: ['name', 'volunteer_id', 'acredited']}
     });
    }
 
-  getCourses(callback) {
-    localDB.allDocs({
+  /**
+   * Getter method for all courses from the local database
+  * @returns An Observable with all courses
+  */
+  getCourses(): Observable<any> {
+    return from(localDB.allDocs({
       include_docs: true
-    }).then((result) => {
-      const data = result.rows.filter(item => item.doc.language !== 'query');
-      callback(data);
-    });
+    }));
   }
-
-  search(keyword: string, limit, callback) {
-    localDB.find({
+  
+  /**
+  * Finds a course by its name in the local database
+  * @param courseName The name of the course
+  * @returns An Observable with all courses with that name
+  */
+  getCourseByName(courseName: string): Observable<any> {
+    return from(localDB.find({
       selector: {
-        name: {$eq: keyword},
+        name: {$eq: courseName},
       },
       sort: ['name'],
-      limit: limit
-    }).then((result) => {
-      callback(result);
-    });
+    }));
   }
 
-  getCourseById(courseId, callback) {
-    localDB.find({
+  /**
+  * Finds a course by its id in the local database
+  * @param courseId Course's id
+  * @returns An Observable containing the course with that id
+  */
+  getCourseById(courseId: string): Observable<any> {
+    return from(localDB.find({
       selector: {
         _id: {$eq: courseId},
       }
-    }).then((result) => {
-      callback(result);
-    });
+    }));
   }
 
-  getCourseByName(name, callback) {
-    localDB.find({
-      selector: {
-        name: {$eq: name},
-      }
-    }).then((result) => {
-      callback(result);
-    });
-  }
-
-  createCourse(name: string, volunteer_id: string) {
+  /**
+   * Creates a course entry in the local database
+   * @param name String value containing the new course's name
+   * @param volunteer_id String value containing the volunteer's id
+   * @returns An Observable with the object created
+   */
+  createCourse(name: string, volunteer_id: string): Observable<any> {
     const id = Math.floor(Math.random() * 1000000000).toString();
     const course = {
         '_id': id,
@@ -73,10 +94,14 @@ export class CourseService {
         'name': name
     };
 
-    localDB.put(course);
+    return from(localDB.put(course));
   }
-
-  updateCourse(course) {
+ 
+  /**
+  * Updates a course entry in the local database
+  * @param course The new course entry
+  */
+  updateCourse(course: Course): void {
     localDB.get(course._id).then(function (doc) {
       doc.name = course.name ? course.name : doc.name;
       doc.acredited = course.acredited ? course.acredited : doc.acredited;
@@ -85,8 +110,12 @@ export class CourseService {
     });
   }
 
-  deleteCourseById(courseId) {
-    localDB.get(courseId).then(function (doc) {
+  /**
+   * Deletes an entry by its id from the local database
+   * @param courseId The course id
+   */
+  deleteCourseById(courseId: string): void {
+    localDB.get(courseId).then(doc => {
       return localDB.remove(doc);
     });
   }

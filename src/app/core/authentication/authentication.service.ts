@@ -1,52 +1,70 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LocalStorageService } from '../local-storage.service';
 
-
+/**
+ * Stores the value of credentials' key
+ */
 const credentialsKey = 'credentials';
 
 /**
- * Provides a base for authentication workflow.
- * The Credentials interface as well as login/logout methods should be replaced with proper implementation.
+ * Provides the basic authentication operations.
  */
 @Injectable()
 export class AuthenticationService {
+  /**
+   * Value that stores user's credentials after authentication
+   * It's null if the user never authenticates
+   */
   private _credentials: Authentication.Credentials | null;
+
+  /**
+   * Value which emits events when credentials' values change (on login/logout)
+   */
   public credentials$ = new EventEmitter<Authentication.Credentials>();
 
+  /**
+   * Class constructor, initializes current credentials value if some credentials are found in local storage
+   * @param httpClient Class reference injection, handles http requests sent from this service
+   * @param localStorageService Service reference injection, handles operations on local storage
+   */
   constructor(
     private httpClient: HttpClient,
-    private localStorageService: LocalStorageService
-  ) {
+    private localStorageService: LocalStorageService) {
     const savedCredentials = this.localStorageService.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
     }
   }
 
+  /**
+   * Sends a login request to the backend server
+   * If it's successful stores the credentials and returns the response body
+   * @param payload 
+   * @returns An observable that contains the authentication credentials
+   */
   login(
     payload: Authentication.LoginPayload
   ): Observable<Authentication.Credentials> {
     return this.httpClient.post('/login', payload).pipe(
       map((body: Authentication.Credentials) => {
         this.setCredentials(body);
+        this.getUserProfile().subscribe((response) => {
+          body.user = response;
+          this.setCredentials(body);
+        });
         return body;
       })
     );
   }
 
-  signup(
-    payload: Authentication.SignupPayload
-  ): Observable<Authentication.User> {
-    return this.httpClient.post('/register', payload).pipe(
-      map((body: Authentication.User) => {
-        return body;
-      })
-    );
-  }
-
+  /**
+   * Sends a logout rewuest to the backend server
+   * If it's successful clears the credentials information from local storage
+   * @returns An observable with a boolean value for success (true)
+   */
   logout(): Observable<boolean> {
     return this.httpClient
       .get('/logout')
@@ -58,18 +76,35 @@ export class AuthenticationService {
       );
   }
 
+  /**
+   * Determines if the current user is authenticated
+   * @returns A boolean value with the authenticated status
+   */
   isAuthenticated(): boolean {
     return !!this.credentials;
   }
 
+  /**
+   * Getter method for the credentials object
+   * @returns The current credentials
+   */
   get credentials(): Authentication.Credentials | null {
     return this._credentials;
   }
 
+  /**
+   * Getter method for the authentication token
+   * @returns The current token
+   */
   get accessToken(): string | null {
     return this.credentials ? this.credentials.token : null;
   }
 
+  /**
+   * Saves current user's credentials in local storage
+   * @param credentials An object that contains the authentication token and data from server if user performed a login,
+   * or nothing if user just performed a log out
+   */
   private setCredentials(credentials?: Authentication.Credentials) {
     this._credentials = credentials || null;
     if (credentials) {
@@ -81,5 +116,27 @@ export class AuthenticationService {
     } else {
       this.localStorageService.clearItem(credentialsKey);
     }
+  }
+
+   /**
+   * Getter method for current user's profile
+   * @returns The current user
+   */
+  get user(): Authentication.User | null {
+    return this.credentials ? this.credentials.user : null;
+  }
+
+  /**
+   * Sends a request to the backend server for current user's profile
+   * @returns An observable that contains the current user's profile
+   */
+  private getUserProfile(): Observable<Authentication.User> { 
+    return this.httpClient
+    .get('/profile')
+    .pipe(
+      map((response: Authentication.User) => {
+        return response;
+      })
+    );
   }
 }

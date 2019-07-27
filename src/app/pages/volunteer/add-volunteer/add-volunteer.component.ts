@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { IonSelect } from '@ionic/angular';
 
-import { OrganizationService,
+import { OrganisationService,
   VolunteerService,
   LocationsService,
   CourseService } from 'src/app/core/service';
@@ -13,22 +14,28 @@ import { OrganizationService,
 })
 export class AddVolunteerComponent implements OnInit {
   addForm: FormGroup;
-  addNewOrganization = false;
   counties = [];
   cities = [];
-  organizations = [];
+  organisations = [];
   courses = [];
+  organisationNone = false;
+  addNewOrganisation = false;
+  acreditedOrganisations = [];
+  selectedCourse: any;
+  selectedOrganisation: any;
+  newOrganisation = '';
+  @ViewChild('acreditedOrganisation') acreditedOrganisationSelect: IonSelect;
 
   constructor(private formBuilder: FormBuilder,
               private locationsService: LocationsService,
               private volunteerService: VolunteerService,
-              private organizationService: OrganizationService,
+              private organisationService: OrganisationService,
               private courseService: CourseService) { }
 
   ngOnInit() {
     this.createForm();
     this.getCountyList();   
-    this.getOrganizations();
+    this.getOrganisations();
     this.getCourses();
   }
 
@@ -36,25 +43,45 @@ export class AddVolunteerComponent implements OnInit {
     this.addForm = this.formBuilder.group({
       name: ['', Validators.required],
       ssn: ['', Validators.required],
-      organization: ['', Validators.required],
+      organisation: ['', Validators.required],
       county: new FormControl({value: '', disabled: false}, Validators.required),
       city: new FormControl({value: '', disabled: true}, Validators.required),
       course: ['', Validators.required],
+      acreditedOrganisation: ['', Validators.required],
     });
   }
 
   submit() {
+    if(this.newOrganisation) {
+      this.organisationService.createOrganisation(this.newOrganisation).subscribe((data: any) => {   
+        this.organisationService.getOrganisationById(data.id).subscribe((result: any) => {
+          this.selectedOrganisation = result.docs[0];
+          this.createVolunteer();
+        });
+      });
+    }
+
+    if(this.organisationNone) {
+      this.selectedOrganisation = null;
+      this.addForm.controls['organisation'].setValue('');
+      this.createVolunteer();
+    }
+
+    if(!this.newOrganisation && !this.organisationNone) {
+      this.createVolunteer();
+    }
+  }
+
+  createVolunteer() {
     this.volunteerService.createVolunteer(
       this.addForm.value.name, 
-      this.addForm.value.ssn, 
+      this.addForm.value.ssn.toString(), 
       this.addForm.value.county, 
       this.addForm.value.city, 
-      this.addForm.value.organization, 
-      this.addForm.value.course);
-      // todo add organization id and course id
-    
-    // todo replace this with something else
-    location.reload();
+      this.selectedOrganisation,
+      this.selectedCourse).subscribe(() => {
+        location.reload();
+      });
   }
 
   getCountyList() {
@@ -72,19 +99,19 @@ export class AddVolunteerComponent implements OnInit {
     });
   }
 
-  getOrganizations() {
-    this.organizationService.getOrganizations((result) => {
-      result.forEach(row => {
-        this.organizations.push(row.doc);
+  getOrganisations() {
+    this.organisationService.getOrganisations().subscribe((result: any) =>{
+      result.rows.forEach(row => {
+        this.organisations.push(row.doc);
       });
     });
   }
 
   getCourses() {
-    this.courseService.getCourses((result) => {
-      result.forEach(row => {
-        this.courses.push(row.doc);
-      });
+    this.courseService.getCourses().subscribe((response: any) =>{
+      const data = response.rows.filter(item => item.doc.language !== 'query');
+     
+      this.courses = data.map(item => item.doc.name).filter((value, index, self) => self.indexOf(value) === index);
     });
   }
 
@@ -97,17 +124,24 @@ export class AddVolunteerComponent implements OnInit {
     this.getCityList(this.addForm.value.county);
   }
 
-  organizationSelectionChanged(event) {
-    if (this.addForm.value.organization === 'new') {
-      this.addNewOrganization = true;
-      this.addForm.controls['organization'].setValue('');
+  organisationSelectionChanged(event) {
+    if (this.addForm.value.organisation === 'new') {
+      this.addForm.value.organisation === '';
+      this.addNewOrganisation = true;      
     } else {
-      this.addNewOrganization = false;
-      this.addForm.controls['organization'].setValue(event.detail.value);
+      this.selectedOrganisation = this.organisations.find(organisation => organisation._id === event.detail.value);
+      this.addNewOrganisation = false;
     }
   }
 
-  courseSelectionChanged(event) {
-    this.addForm.controls['course'].setValue(event.detail.value);
+  acreditedOrganisationSelectionChanged(event) {
+    this.selectedCourse = this.acreditedOrganisations.find(acreditor => acreditor._id === event.detail.value);
+  }
+
+  courseSelectionChanged() {   
+    this.courseService.getCourseByName(this.addForm.value.course).subscribe((response: any) => {
+      this.acreditedOrganisations = response.docs;
+    });
+    this.acreditedOrganisationSelect.open();
   }
 }

@@ -11,19 +11,16 @@ import {
   AuthenticationService,
 } from './authentication';
 import {
-  ApiPrefixInterceptor,
-  ErrorHandlerInterceptor,
-  HttpService
+  RequestInterceptor,
+  ErrorHandlerInterceptor
 } from './http';
 import { LocalStorageService } from './local-storage.service';
 import { RouteReusableStrategy } from './route-reusable-strategy';
 import {
   ErrorMessageService,
-  UserService,
-  UtilService,
   CourseService,
   VolunteerService,
-  OrganizationService
+  OrganisationService
 } from './service';
 import { LocationsService } from './service/locations.service';
 import { UnauthenticatedGuard } from './authentication/unauthenticated.guard';
@@ -36,23 +33,17 @@ import { UnauthenticatedGuard } from './authentication/unauthenticated.guard';
     AuthenticationService,
     AuthenticationGuard,
     UnauthenticatedGuard,
-    ApiPrefixInterceptor,
+    RequestInterceptor,
     ErrorHandlerInterceptor,
-    UserService,
     VolunteerService,
-    UtilService,
     ErrorMessageService,
     LocationsService,
     CourseService,
-    OrganizationService,
+    OrganisationService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: ApiPrefixInterceptor,
+      useClass: RequestInterceptor,
       multi: true
-    },
-    {
-      provide: HttpClient,
-      useClass: HttpService
     },
     {
       provide: RouteReuseStrategy,
@@ -60,4 +51,8 @@ import { UnauthenticatedGuard } from './authentication/unauthenticated.guard';
     }
   ]
 })
+
+/**
+ * Module for all core related services, interceptors and models
+ */
 export class CoreModule {}

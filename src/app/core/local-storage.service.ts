@@ -30,6 +30,7 @@ function readCookie(name: any) {
   }
   return null;
 }
+
 function setData(type: any, data: any) {
   // Convert data into JSON and encode to accommodate for special characters.
   data = encodeURIComponent(JSON.stringify(data));
@@ -68,6 +69,9 @@ function getSessionName() {
   return 'sessionStorage' + window.name;
 }
 
+/**
+ * Provider for storing information in local storage
+ */
 @Injectable()
 export class LocalStorageService {
   localStorage: any;
@@ -123,9 +127,6 @@ export class LocalStorageService {
           setData(this.type, this.data);
         }
       }
-
-      // Replace window.localStorage and window.sessionStorage with out custom
-      // implementation.
 
       const localStorage = new CustomStorage('local');
       const sessionStorage = new CustomStorage('session');

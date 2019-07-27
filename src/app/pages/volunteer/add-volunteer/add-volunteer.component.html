@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <form (ngSubmit)="submit()" class="mt-50 add-form" [formGroup]="addForm" id="addForm">
+  <form (ngSubmit)="submit()" class="add-form" [formGroup]="addForm" id="addForm">
     <div class="mt-10">
       <ion-label class="title">Adaugă nume</ion-label>
       <ion-input type="text" formControlName="name" class="mt-10"></ion-input>
@@ -43,25 +43,32 @@
         <ion-label class="title">
           Alege organizație
         </ion-label>
-        <ion-select class="mt-10" formControlName="organization" *ngIf="!addNewOrganization"
-          (ionChange)="organizationSelectionChanged($event)">
-          <ion-select-option *ngFor="let organization of organizations" value="{{organization.name}}">
-            {{organization.name}}</ion-select-option>
+        <ion-select class="mt-10" formControlName="organisation" *ngIf="!addNewOrganisation"
+          (ionChange)="organisationSelectionChanged($event)">
+          <ion-select-option *ngFor="let organisation of organisations" value="{{organisation._id}}">
+            {{organisation.name}}</ion-select-option>
           <ion-select-option value="new">Adaugă organizație nouă</ion-select-option>
         </ion-select>
-        <ion-input type="text" formControlName="organization" class="mt-10" *ngIf="addNewOrganization"></ion-input>
+        <ion-input type="text" [(ngModel)]="newOrganisation" [ngModelOptions]="{standalone: true}" class="mt-10" *ngIf="addNewOrganisation"></ion-input>
       </div>
 
       <ion-item lines="none" class="checkbox-item">
-        <ion-checkbox></ion-checkbox>
+        <ion-checkbox [(ngModel)]="organisationNone" [ngModelOptions]="{standalone: true}" name="organisationNone"></ion-checkbox>
         <ion-label class="pl-10">Neafiliat</ion-label>
       </ion-item>
 
-      <div class="mt-10">
+      <div>
         <ion-label class="title">
           Alege specializare
         </ion-label>
-        <ion-input type="text" formControlName="course" (ionChange)="courseSelectionChanged($event)" class="mt-10"></ion-input>
+        <ion-select class="mt-10" formControlName="course" (ionChange)="courseSelectionChanged()" class="mt-10">
+          <ion-select-option *ngFor="let course of courses" value="{{course}}">{{course}}
+          </ion-select-option>
+        </ion-select>
+        <ion-select class="mt-10" formControlName="acreditedOrganisation" (ionChange)="acreditedOrganisationSelectionChanged($event)" class="mt-10" #acreditedOrganisation hidden >
+          <ion-select-option *ngFor="let acreditedOrganisation of acreditedOrganisations" value="{{acreditedOrganisation._id}}">{{acreditedOrganisation.acredited}}
+          </ion-select-option>
+        </ion-select>
       </div>
     </div>
 
