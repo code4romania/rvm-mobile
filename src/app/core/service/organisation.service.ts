@@ -85,18 +85,15 @@ export class OrganisationService {
   /**
    * Creates an organisation entry in the local database
    * @param name String value containing the new organisation's name
-   * @returns An Observable with the object created
+   * @returns An Observable with the created object
    */
   createOrganisation(name: string) : Observable<any> {
     const currentUser = this.authenticationService.user;
-    const id = Math.floor(Math.random() * 1000000000).toString();
-    let organisation = {
-        '_id': id,
-        'name': name,
-        'added_by': currentUser._id
-    };
+    let organisation = new Organisation();
+    organisation.name = name;
+    organisation.added_by = currentUser._id;
  
-    return from(localDB.put(organisation));
+    return from(localDB.post(organisation));
   }
 
    /**

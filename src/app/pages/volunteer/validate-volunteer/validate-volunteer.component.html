@@ -19,8 +19,7 @@
   </ion-item>
 
   <ion-item lines="none" class="search-box mx-auto">
-    <ion-input [(ngModel)]="keyword" (keyup.enter)="searchKeyword()">
-    </ion-input>
+    <ion-searchbar type="text" debounce="500" (ionInput)="searchKeyword($event)"></ion-searchbar>
     <ion-button color="success" (click)="searchKeyword()">
       Caută
     </ion-button>
@@ -47,9 +46,9 @@
       </ion-item>
 
       <div *ngIf="volunteer._id === volunteerIdWithDetails" class="item-menu mb-5">
-        <ion-item lines="none">
+        <ion-item lines="none" *ngFor="let course of courses" >
           <ion-label class="m-0">
-            Voluntar acreditat pentru <a>{{volunteer.courses[volunteer.courses.length-1].name}}</a>.
+            Voluntar acreditat pentru <a>{{course.name}}</a>.
           </ion-label>
         </ion-item>
 
@@ -71,12 +70,12 @@
               Trimite mesaj
             </ion-button>
           </ion-col>
-          <ion-col col-6 *ngIf="!volunteer.allocated" (click)="allocateUser(volunteer._id)">
+          <ion-col col-6 *ngIf="!volunteer.allocation" (click)="allocateUser(volunteer._id)">
             <ion-button color="secondary" class="w-100">
               Alocă voluntari
             </ion-button>
           </ion-col>
-          <ion-col col-6 *ngIf="volunteer.allocated">
+          <ion-col col-6 *ngIf="volunteer.allocation"  (click)="allocateUser(volunteer._id)">
             <ion-button color="light" class="w-100">
               Voluntar alocat
             </ion-button>
@@ -85,13 +84,17 @@
 
         <div *ngIf="volunteer.isInAllocation">
           <ion-row>
-            <ion-col col-6 class="custom-input">
+            <ion-col col-6 class="custom-input selectors">
               <ion-label class="title">Județ</ion-label>
-              <ion-input type="text" [(ngModel)]="county" class="mt-5 h-25"></ion-input>
+              <ion-select class="mt-10" [(ngModel)]="county" (ionChange)="countySelectionChanged($event)" class="mt-5 p-5">
+                <ion-select-option *ngFor="let county of counties" value="{{county.name}}">{{county.name}}</ion-select-option>
+              </ion-select>
             </ion-col>
-            <ion-col col-6 class="custom-input">
+            <ion-col col-6 class="custom-input selectors">
               <ion-label class="title">Localitate</ion-label>
-              <ion-input type="text" [(ngModel)]="city" class="mt-5 h-25"></ion-input>
+              <ion-select class="mt-10" [(ngModel)]="city" class="mt-5 p-5">
+                <ion-select-option *ngFor="let city of cities" value="{{city.name}}">{{city.name}}</ion-select-option>
+              </ion-select>
             </ion-col>
           </ion-row>
           <ion-row>

@@ -10,3 +10,17 @@
 .checkbox-item {
     margin-left: -10px;
 }
+
+.add-form .input-error {
+    border: 1px solid red!important;
+}
+
+.add-form .error-message {
+    color: red;
+    margin-left: 10px;
+}
+
+.course-date {
+    text-align: center;
+    padding-top: 10px;
+}

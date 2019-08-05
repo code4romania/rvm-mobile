@@ -1,3 +1,6 @@
+/**
+ * Developement environment values
+ */
 export const environment = {
   env: 'DEV',
   production: false,

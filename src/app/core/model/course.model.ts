@@ -1,3 +1,6 @@
+/**
+ * Model for course object
+ */
 export class Course {
     _id: string;
     name: string;

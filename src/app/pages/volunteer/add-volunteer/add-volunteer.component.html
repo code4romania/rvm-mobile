@@ -17,7 +17,13 @@
     </div>
     <div class="mt-10">
       <ion-label class="title">Adaugă CNP</ion-label>
-      <ion-input type="number" formControlName="ssn" class="mt-10"></ion-input>
+      <ion-input type="number" formControlName="ssn" class="mt-10" (ionChange)="ssnExists($event)"
+        [ngClass]="{'input-error': this.addForm.hasError('incorrect-ssn')}"></ion-input>
+      <p *ngIf="this.addForm.hasError('incorrect-ssn')" class="error-message">Acest CNP aparține deja unui voluntar.</p>
+    </div>
+    <div class="mt-10">
+      <ion-label class="title">Adaugă număr de telefon</ion-label>
+      <ion-input type="tel" formControlName="phone" class="mt-10"></ion-input>
     </div>
 
     <div class="selectors">
@@ -44,16 +50,18 @@
           Alege organizație
         </ion-label>
         <ion-select class="mt-10" formControlName="organisation" *ngIf="!addNewOrganisation"
-          (ionChange)="organisationSelectionChanged($event)">
+          [attr.disabled]="organisationNone" (ionChange)="organisationSelectionChanged($event)">
           <ion-select-option *ngFor="let organisation of organisations" value="{{organisation._id}}">
             {{organisation.name}}</ion-select-option>
           <ion-select-option value="new">Adaugă organizație nouă</ion-select-option>
         </ion-select>
-        <ion-input type="text" [(ngModel)]="newOrganisation" [ngModelOptions]="{standalone: true}" class="mt-10" *ngIf="addNewOrganisation"></ion-input>
+        <ion-input type="text" [(ngModel)]="newOrganisation" [ngModelOptions]="{standalone: true}" class="mt-10"
+          *ngIf="addNewOrganisation" [attr.disabled]="organisationNone"></ion-input>
       </div>
 
       <ion-item lines="none" class="checkbox-item">
-        <ion-checkbox [(ngModel)]="organisationNone" [ngModelOptions]="{standalone: true}" name="organisationNone"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="organisationNone" [ngModelOptions]="{standalone: true}" name="organisationNone">
+        </ion-checkbox>
         <ion-label class="pl-10">Neafiliat</ion-label>
       </ion-item>
 
@@ -61,22 +69,51 @@
         <ion-label class="title">
           Alege specializare
         </ion-label>
-        <ion-select class="mt-10" formControlName="course" (ionChange)="courseSelectionChanged()" class="mt-10">
+        <ion-select class="mt-10" formControlName="course" (ionChange)="courseSelectionChanged()"
+          [attr.disabled]="courseNone">
           <ion-select-option *ngFor="let course of courses" value="{{course}}">{{course}}
           </ion-select-option>
         </ion-select>
-        <ion-select class="mt-10" formControlName="acreditedOrganisation" (ionChange)="acreditedOrganisationSelectionChanged($event)" class="mt-10" #acreditedOrganisation hidden >
-          <ion-select-option *ngFor="let acreditedOrganisation of acreditedOrganisations" value="{{acreditedOrganisation._id}}">{{acreditedOrganisation.acredited}}
-          </ion-select-option>
-        </ion-select>
       </div>
+
+      <div class="mt-10" *ngIf="selectedCourse && !courseNone">
+        <ion-label class="title">
+          Alege organizație acreditoare
+        </ion-label>
+        <ion-select class="mt-10" formControlName="acreditedOrganisation"
+          (ionChange)="acreditedOrganisationSelectionChanged($event)" *ngIf="!addNewAcreditedOrganisation">
+          <ion-select-option *ngFor="let acreditedOrganisation of acreditedOrganisations"
+            value="{{acreditedOrganisation._id}}">{{acreditedOrganisation.acredited}}
+          </ion-select-option>
+          <ion-select-option value="new">Adaugă organizație nouă</ion-select-option>
+        </ion-select>
+        <ion-input type="text" [(ngModel)]="selectedCourse.acredited" [ngModelOptions]="{standalone: true}" class="mt-10"
+          *ngIf="addNewAcreditedOrganisation" [attr.disabled]="courseNone"></ion-input>
+        <ion-row>
+          <ion-col>
+            <p class="course-date">
+              {{selectedCourse.obtained | date}}
+            </p>
+          </ion-col>
+          <ion-col>
+            <ion-button (click)="showDatePicker()" class="mt-10">
+              Alege data acreditării
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <ion-item lines="none" class="checkbox-item">
+        <ion-checkbox [(ngModel)]="courseNone" [ngModelOptions]="{standalone: true}" name="coursesNone"></ion-checkbox>
+        <ion-label class="pl-10">Fără acreditare</ion-label>
+      </ion-item>
     </div>
 
     <ion-row>
       <ion-col col-6>
       </ion-col>
       <ion-col col-6>
-        <ion-button type="submit" color="success" class="mt-10 w-100">Savlează</ion-button>
+        <ion-button type="submit" color="success" class="mt-10 w-100" [disabled]="!addForm.valid">Savlează</ion-button>
       </ion-col>
     </ion-row>
   </form>

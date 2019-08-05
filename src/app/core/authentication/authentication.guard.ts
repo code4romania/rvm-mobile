@@ -30,7 +30,7 @@ export class AuthenticationGuard implements CanActivate {
       return true;
     }
 
-    this.router.navigate(['/login'], {
+    this.router.navigate(['/auth/login'], {
       replaceUrl: true
     });
     return false;

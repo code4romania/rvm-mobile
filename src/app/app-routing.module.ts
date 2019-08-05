@@ -15,11 +15,6 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard]
   },
   {
-    path: 'login',
-    loadChildren: './pages/login/login.module#LoginPageModule',
-    canActivate: [UnauthenticatedGuard]
-  },
-  {
     path: 'about',
     loadChildren: './pages/about/about.module#AboutPageModule',
     canActivate: [AuthenticationGuard]
@@ -30,9 +25,8 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard]
   },
   { 
-    path: 'logout', 
-    loadChildren: './pages/logout/logout.module#LogoutPageModule',
-    canActivate: [AuthenticationGuard]
+    path: 'auth', 
+    loadChildren: './pages/authentication/authentication.module#AuthenticationPageModule' 
   }
 ];
 

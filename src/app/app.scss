@@ -241,3 +241,58 @@ ion-button {
 ion-menu-button {
   font-size: 24px;
 }
+
+.searchbar-input.sc-ion-searchbar-md {
+  -webkit-box-shadow: -6px 0px 0px 5px rgba(240,237,240,1);
+  -moz-box-shadow: -6px 0px 0px 5px rgba(240,237,240,1);
+  box-shadow: -6px 0px 5px 2px rgba(240,237,240,1);
+  border-radius: 5px 0 0 5px;
+  height: 35px;
+  border: 1px solid #dddddd;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.sc-ion-searchbar-md-h {
+  -webkit-padding-end: 0;
+  padding-inline-end: 0;
+}
+
+.searchbar-has-focus.sc-ion-searchbar-md-h .searchbar-cancel-button.sc-ion-searchbar-md, .searchbar-has-focus.sc-ion-searchbar-md-h .searchbar-search-icon.sc-ion-searchbar-md, .searchbar-should-show-cancel.sc-ion-searchbar-md-h .searchbar-cancel-button.sc-ion-searchbar-md {
+  display: none;
+}
+
+.searchbar-cancel-button.sc-ion-searchbar-md, .searchbar-search-icon.sc-ion-searchbar-md {
+  display: none;
+}
+
+.p-5 {
+  padding: 5px;
+}
+
+.logo {
+  background-color: white;
+  border-radius: 50%;
+  height: 180px;
+  width: 180px;
+}
+
+.logo img {
+  display: block;
+}
+
+.full-button {
+  text-transform: capitalize;
+  height: 50px;
+}
+
+.login-item {
+  border-bottom: 1px solid white;
+}
+
+.login-form {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

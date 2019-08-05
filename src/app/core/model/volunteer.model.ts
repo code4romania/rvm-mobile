@@ -1,3 +1,6 @@
+/**
+ * Model for volunteer object
+ */
 export class Volunteer {
     _id: string;
     organisation: {
@@ -7,21 +10,17 @@ export class Volunteer {
     };
     name: string;
     ssn: string;
-    email: string;
     phone: string;
+    email: string;
     county: string;
     city: string;
     address: string;
-    courses: {
-        id: string,
-        name: string,
-        acredited: string
-    }[];
     comments: string;
     job: string;
     added_by: number;
     created: Date;
     updated: Date;
-
+    allocation: string;
+    
     constructor() {}
 }

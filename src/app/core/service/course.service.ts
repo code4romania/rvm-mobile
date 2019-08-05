@@ -80,21 +80,29 @@ export class CourseService {
     }));
   }
 
+  getCourseByVolunteerId(volunteerId: string): Observable<any> {
+    return from(localDB.find({
+      selector: {
+        'volunteer_id': {$eq: volunteerId}
+      }
+    }));
+  }
+
   /**
    * Creates a course entry in the local database
    * @param name String value containing the new course's name
    * @param volunteer_id String value containing the volunteer's id
-   * @returns An Observable with the object created
+   * @param obtained Date value when a course was obtained
+   * @returns An Observable with the created object
    */
-  createCourse(name: string, volunteer_id: string): Observable<any> {
-    const id = Math.floor(Math.random() * 1000000000).toString();
-    const course = {
-        '_id': id,
-        'volunteer_id': volunteer_id,
-        'name': name
-    };
+  createCourse(name: string, volunteer_id: string, acredited: string, obtained: Date): Observable<any> {
+    const course = new Course();
+    course.volunteer_id = volunteer_id;
+    course.name = name;
+    course.obtained = obtained;
+    course.acredited = acredited;
 
-    return from(localDB.put(course));
+    return from(localDB.post(course));
   }
  
   /**

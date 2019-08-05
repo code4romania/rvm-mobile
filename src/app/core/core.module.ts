@@ -20,7 +20,9 @@ import {
   ErrorMessageService,
   CourseService,
   VolunteerService,
-  OrganisationService
+  OrganisationService,
+  DatabaseSyncService,
+  AllocationService
 } from './service';
 import { LocationsService } from './service/locations.service';
 import { UnauthenticatedGuard } from './authentication/unauthenticated.guard';
@@ -40,6 +42,8 @@ import { UnauthenticatedGuard } from './authentication/unauthenticated.guard';
     LocationsService,
     CourseService,
     OrganisationService,
+    DatabaseSyncService,
+    AllocationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,

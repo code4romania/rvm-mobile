@@ -13,6 +13,9 @@ import { catchError } from 'rxjs/operators';
 import { ErrorMessageService } from '../service/error-message.service';
 import { environment } from '../../../environments/environment';
 
+/**
+ * Key that identifies the credentials
+ */
 const credentialsKey = 'credentials';
 
 /**
@@ -58,7 +61,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     if (response.status === 401) {
       this.localStorageService.clearItem(credentialsKey);
-      this.router.navigate(['/login'], {
+      this.router.navigate(['/auth/login'], {
         replaceUrl: true
       });
     } else if (response.status === 400) {

@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutPage implements OnInit {
 
+  /**
+  * @ignore
+  */
   constructor() { }
 
-  ngOnInit() {
+  /**
+  * @ignore
+  */
+ ngOnInit() {
   }
 
 }

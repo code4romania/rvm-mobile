@@ -1,6 +1,5 @@
 import { Component,   } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +7,10 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  doubleClick = false;
+  
+  /**
+   * Actions that can be performed from the side-menu
+   */
   actions = [
     {
       title: 'Validează voluntar',
@@ -24,11 +26,19 @@ export class HomePage {
       url: 'tel:89992142265'
     }
   ];
+  
+  /**
+  * 
+  * @param router Provider for route navigation
+  */
+  constructor(private router: Router) { }
 
-  constructor(private router: Router,
-              private toastController: ToastController) { }
-
-  performAction(url) {
+  /**
+   * Performes the action selected by the user from the side-menu list;
+   * It can either mean navigation to a new page or opening the phone's call screen
+   * @param url String containing the url for the route that will be displayed on user click
+   */
+  performAction(url: string) {
     if(url.includes('tel')) {
       window.open(url);
     } else {
@@ -36,18 +46,11 @@ export class HomePage {
     }
   }
   
+  /**
+   * Ionic lifecycle method, in this case the default back navigation is blocked (android)
+   */
   ionViewDidEnter() {
     document.addEventListener("backbutton",function(e) {
-      // prevent back navigation to unauthenticated state
     }, false);
-  }
-
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'Apasă din nou pentru a părăsi aplicația',
-      position: 'bottom',
-      duration: 1000     
-    });
-    toast.present();
   }
 }

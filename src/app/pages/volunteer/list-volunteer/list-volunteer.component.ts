@@ -2,8 +2,7 @@ import { Component, ViewChild,OnInit } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { VolunteerService } from '../../../core/service/volunteer.service';
 import { LocationsService } from 'src/app/core/service/locations.service';
-import { isArray } from 'util';
-import { OrganisationService, CourseService } from 'src/app/core';
+import { OrganisationService, CourseService, AllocationService } from 'src/app/core';
 
 @Component({
   selector: 'app-list-volunteer',
@@ -11,27 +10,63 @@ import { OrganisationService, CourseService } from 'src/app/core';
   styleUrls: ['./list-volunteer.component.scss'],
 })
 export class ListVolunteerComponent implements OnInit {
+  /**
+   * Infinite scroll reference that detects user's swipe to refresh events
+   */
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   volunteers = [];
   counties = [];
   organisations = [];
   courses = [];
+  cities = [];
 
   keyword = '';
+
+  /**
+   * String that contains the id of the volunteer that currently has the open details
+   */
   volunteerIdWithDetails: string;
+  
   selectedCounty = 'all';
   selectedOrganisation: string;
   selectedCourse: string;
+
+  /**
+   * County for allocation
+   */
+  county: string;
+  /**
+   * City for allocation
+   */
+  city: string;
   
+  /**
+   * Pagination 
+   */
   page = 0;
+  /**
+   * Limit of volunteers per page
+   */
   limit = 10;
 
+  /**
+   * 
+   * @param volunteerService Provider for volunteer related operations
+   * @param locationsService Provider for location selection
+   * @param organisationService Provider for organisation related operations
+   * @param courseService Provider for course related operations
+   * @param allocationService  Provider for volunteer allocation related operations
+   */
   constructor(private volunteerService: VolunteerService,
               private locationsService: LocationsService,
               private organisationService: OrganisationService,
-              private courseService: CourseService) { }
+              private courseService: CourseService,
+              private allocationService: AllocationService) { }
 
+  /**
+  * Page initialisation
+  */
   ngOnInit() {
     this.getData();
 
@@ -40,31 +75,70 @@ export class ListVolunteerComponent implements OnInit {
     this.getCourses();
   }
 
-  openMenu(volunteerId) {
+  /**
+   * Opens a details menu for the selected volunteer and closes all already opened ones
+   * @param volunteerId String containing the id of the volunteer that was selected
+   */
+  openMenu(volunteerId: string) {
+    this.courses = [];
     if(this.volunteerIdWithDetails === volunteerId){
       this.volunteerIdWithDetails = null;
     } else{
       this.volunteerIdWithDetails = volunteerId;
+      this.courseService.getCourseByVolunteerId(volunteerId).subscribe(response => {
+        this.courses = response.docs;
+      });
     }
   }
 
-  allocateUser(volunteerId) {
+  /**
+   * Opens the allocation menu for the selected user
+   * @param volunteerId String containing the id of the volunteer that was selected for allocation
+   */
+  allocateUser(volunteerId: string) {
     const index = this.volunteers.findIndex(volunteer => volunteer._id === volunteerId);
     if (index >= 0) {
-      this.volunteers[index].allocated = true;
+      this.volunteers[index].isInAllocation = true;
     }
   }
 
+  /**
+   * Allocate the selected volunteer for a location using the allocation service
+   * @param volunteerId String containing the id of the volunteer that was selected for allocation
+   */
+  confirmAllocation(volunteerId: string) {
+    const index = this.volunteers.findIndex(volunteer => volunteer._id === volunteerId);
+    if (index >= 0) {
+      this.allocationService.createAllocation(this.volunteers[index], this.county, this.city, this.volunteers[index].organisation).subscribe(() => {   
+        this.volunteers[index] = this.volunteerService.getVolunteerById(volunteerId).subscribe((response) => {
+          if(response.docs && response.docs.length > 0) {
+            this.volunteers[index] = response.docs[0];
+          }
+          this.volunteers[index].isInAllocation = false;
+        });
+      });
+    }
+  }
+
+  /**
+   * Sends an alert message to all volunteers
+   */
   sendAlert() {
     console.log('Alert sent');
   }
 
+  /**
+   * Retrives the list of counties from the locations service
+   */
   getCountyList() {
     this.locationsService.getCountyList().subscribe((response) => {
       this.counties = response;
     });
   }
 
+  /**
+   * Retrives the list of organisations from the organisations service
+   */
   getOrganisations() {
     this.organisationService.getOrganisations().subscribe((result: any) =>{
       result.rows.forEach(row => {
@@ -73,6 +147,9 @@ export class ListVolunteerComponent implements OnInit {
     });
   }
 
+  /**
+   * Retrives the list of courses from the courses service
+   */
   getCourses() {
     this.courseService.getCourses().subscribe((response: any) =>{
       const data = response.rows.filter(item => item.doc.language !== 'query');
@@ -81,11 +158,17 @@ export class ListVolunteerComponent implements OnInit {
     });
   }
 
+  /**
+   * When a selection is changed, new data is retrived
+   */
   selectionsChanged() {
     this.page = 0;
     this.getData();
   }
 
+  /**
+   * Retrieves data, filtered by user's selections
+   */
   getData() {
     if(this.page === 0) {
       this.volunteers = [];
@@ -93,19 +176,7 @@ export class ListVolunteerComponent implements OnInit {
     
     if(this.selectedCounty !== 'all' || this.selectedOrganisation || this.selectedCourse) {
       this.volunteerService.filter(this.selectedCounty, this.selectedOrganisation, this.selectedCourse , this.page, this.limit).subscribe((response: any) => {
-        // todo replace this
-        if(this.selectedCourse) {
-          this.volunteers = response.docs.filter(doc => {
-            const course = doc.courses.find(course => course.name === this.selectedCourse)
-            if(course) {
-              return true;
-            } else {
-              return false;
-            }
-          });
-        } else {
-          this.volunteers = response.docs;
-        }
+        this.volunteers = response.docs;
       });
     } else {
       this.volunteerService.getVolunteers(this.page, this.limit).subscribe((response: any) => {
@@ -116,6 +187,10 @@ export class ListVolunteerComponent implements OnInit {
     }
   }
 
+  /**
+   * Loads more data, the response is paginated so on scorll down more informations needs to be loaded 
+   * @param event Scroll event
+   */
   loadData(event) {
     setTimeout(() => {
       this.page++;
@@ -130,11 +205,33 @@ export class ListVolunteerComponent implements OnInit {
     }, 500);
   }
 
+  /**
+   * Refreshes the data, on scroll up the page is reset
+   * @param event Scroll event 
+   */
   doRefresh(event) {
     setTimeout(() => {
       this.page = 0;
       this.getData();
       event.target.complete();
     }, 1000);
+  }
+
+  /**
+   * When a county is selected, the form's value is updated and starts retriving the list of cities from that county
+   * @param event Changing event, triggered when a change is detected on an element
+   */
+  countySelectionChanged(event) {
+    this.getCityList(event.detail.value);
+  }
+
+  /**
+   * 
+   * @param county Retrieves the list of cities from the selected county
+   */
+  getCityList(county: string) {
+    this.locationsService.getCityList().subscribe((response) => {
+      this.cities = response.filter(city => city.county === county);
+    });
   }
 }

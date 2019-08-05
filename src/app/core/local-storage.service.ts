@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
 
+/**
+ * Creates a cookie entry
+ * @param name Cookie name
+ * @param value Cookie value
+ * @param days Cookie expiration number of days
+ */
 function createCookie(name: any, value: any, days: any) {
   let date: any, expires;
 
@@ -13,6 +19,11 @@ function createCookie(name: any, value: any, days: any) {
   document.cookie = name + '=' + value + expires + '; path=/';
 }
 
+/**
+ * Getter for a cookie document by its name
+ * @param name Cookie's name
+ * @returns cookie document 
+ */
 function readCookie(name: any) {
   const nameEQ = name + '=',
     ca = document.cookie.split(';');
@@ -31,6 +42,11 @@ function readCookie(name: any) {
   return null;
 }
 
+/**
+ * Sets data into storage
+ * @param type Storage type (local or session)
+ * @param data Information that needs to be stored
+ */
 function setData(type: any, data: any) {
   // Convert data into JSON and encode to accommodate for special characters.
   data = encodeURIComponent(JSON.stringify(data));
@@ -42,6 +58,10 @@ function setData(type: any, data: any) {
   }
 }
 
+/**
+ * Clears data from storage
+ * @param type Storage type (local or session)
+ */
 function clearData(type: any) {
   if (type === 'session') {
     createCookie(getSessionName(), '', 365);
@@ -50,6 +70,11 @@ function clearData(type: any) {
   }
 }
 
+/**
+ * Retrieves all data from storage
+ * @param type Storage type (local or session)
+ * @returns stored data
+ */
 function getData(type: any) {
   // Get cookie data.
   const data =
@@ -60,6 +85,10 @@ function getData(type: any) {
   return data ? JSON.parse(decodeURIComponent(data)) : {};
 }
 
+/**
+ * Getter for session name
+ * @returns current session name
+ */
 function getSessionName() {
   // If there is no name for this window, set one.
   // To ensure it's unquie use the current timestamp.
@@ -74,8 +103,20 @@ function getSessionName() {
  */
 @Injectable()
 export class LocalStorageService {
+  /**
+   * Handles storing inside local storage
+   */
   localStorage: any;
+
+  /**
+   * Handles storing inside session storage
+   */
   sessionStorage: any;
+
+  /**
+   * Checks if localStorage can be used for basic storing operations
+   * If not, then a custom storage is created to handle this operations
+   */
   constructor() {
     try {
       // Test webstorage existence.
@@ -87,25 +128,48 @@ export class LocalStorageService {
       window.localStorage.removeItem('storage_test');
       this.localStorage = window.localStorage;
     } catch (e) {
+
+      /**
+       * Custom storage class
+       */
       class CustomStorage {
         type: any;
         data: any;
         length = 0;
+
+        /**
+         * 
+         * @param type Storage type (local or session)
+         */
         constructor(type: any) {
           this.type = type;
           // Init data, if already present
           this.data = getData(type);
         }
+
+        /**
+         * Clears the existing storage
+         */
         public clear() {
           this.data = {};
           this.length = 0;
           clearData(this.type);
         }
+
+        /**
+         * Retrieves an item by its key
+         * @param key Item key
+         */
         public getItem(key: any) {
           return this.data[key] === undefined ? null : this.data[key];
         }
+
+        /**
+         * 
+         * @param i key index
+         * @returns key index
+         */
         public key(i: any) {
-          // not perfect, but works
           let ctr = 0;
           for (const k in this.data) {
             if (ctr === i) {
@@ -116,11 +180,22 @@ export class LocalStorageService {
           }
           return null;
         }
+
+        /**
+         * Removes an item from storage by its key
+         * @param key Item key
+         */
         public removeItem(key: any) {
           delete this.data[key];
           this.length--;
           setData(this.type, this.data);
         }
+
+        /**
+         * Adds an item to storage
+         * @param key Item's key
+         * @param value Item itself
+         */
         public setItem(key: any, value: any) {
           this.data[key] = value + ''; // forces the value to a string
           this.length++;
@@ -137,15 +212,35 @@ export class LocalStorageService {
       this.sessionStorage = sessionStorage;
     }
   }
+
+  /**
+   * Adds an item to storage
+   * @param key Item's key
+   * @param value Item itself
+  */
   public setItem(key: string, value: any) {
     return this.localStorage.setItem(key, value);
   }
+
+   /**
+    * Retrieves an item by its key
+    * @param key Item key
+    */
   public getItem(key: string) {
     return this.localStorage.getItem(key);
   }
+
+  /**
+  * Removes an item from storage by its key
+  * @param key Item key
+  */
   public clearItem(key: string) {
     return this.localStorage.removeItem(key);
   }
+  
+  /**
+   * Clears the existing storage
+   */
   public clearAll() {
     return this.localStorage.clear();
   }

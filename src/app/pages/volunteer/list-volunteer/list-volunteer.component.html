@@ -68,11 +68,11 @@
       </ion-item>
 
       <div *ngIf="volunteer._id === volunteerIdWithDetails" class="item-menu mb-5">
-        <ion-item lines="none">
-          <ion-label class="m-0">
-            Voluntar acreditat pentru <a>{{volunteer.courses[volunteer.courses.length-1].name}}</a>.
-          </ion-label>
-        </ion-item>
+          <ion-item lines="none" *ngFor="let course of courses" >
+              <ion-label class="m-0">
+                Voluntar acreditat pentru <a>{{course.name}}</a>.
+              </ion-label>
+            </ion-item>
 
         <ion-item lines="none" *ngIf="volunteer.job">
           <ion-label class="m-0">
@@ -86,23 +86,48 @@
           </ion-label>
         </ion-item>
 
-        <ion-row lines="none">
+        <ion-row lines="none" *ngIf="!volunteer.isInAllocation">
           <ion-col col-6>
             <ion-button color="light" class="w-100" [routerLink]="['../send', volunteer._id]">
               Trimite mesaj
             </ion-button>
           </ion-col>
-          <ion-col col-6 *ngIf="!volunteer.allocated" (click)="allocateUser(volunteer._id)">
+          <ion-col col-6 *ngIf="!volunteer.allocation" (click)="allocateUser(volunteer._id)">
             <ion-button color="secondary" class="w-100">
               Alocă voluntari
             </ion-button>
           </ion-col>
-          <ion-col col-6 *ngIf="volunteer.allocated">
+          <ion-col col-6 *ngIf="volunteer.allocation" (click)="allocateUser(volunteer._id)">
             <ion-button color="light" class="w-100">
               Voluntar alocat
             </ion-button>
           </ion-col>
         </ion-row>
+
+        <div *ngIf="volunteer.isInAllocation">
+          <ion-row>
+            <ion-col col-6 class="custom-input selectors">
+              <ion-label class="title">Județ</ion-label>
+              <ion-select class="mt-10" [(ngModel)]="county" (ionChange)="countySelectionChanged($event)" class="mt-5 p-5">
+                <ion-select-option *ngFor="let county of counties" value="{{county.name}}">{{county.name}}</ion-select-option>
+              </ion-select>
+            </ion-col>
+            <ion-col col-6 class="custom-input selectors">
+              <ion-label class="title">Localitate</ion-label>
+              <ion-select class="mt-10" [(ngModel)]="city" class="mt-5 p-5">
+                <ion-select-option *ngFor="let city of cities" value="{{city.name}}">{{city.name}}</ion-select-option>
+              </ion-select>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6></ion-col>
+            <ion-col col-6>
+              <ion-button color="success" (click)="confirmAllocation(volunteer._id)" class="w-100 h-25">
+                Confirmă
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
       </div>
     </div>
   </ion-list>
