@@ -437,7 +437,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
   ): Observable&lt;HttpEvent&lt;any&gt;&gt; {
     if (response.status &#x3D;&#x3D;&#x3D; 401) {
       this.localStorageService.clearItem(credentialsKey);
-      this.router.navigate([&#x27;/login&#x27;], {
+      this.router.navigate([&#x27;/auth/login&#x27;], {
         replaceUrl: true
       });
     } else if (response.status &#x3D;&#x3D;&#x3D; 400) {

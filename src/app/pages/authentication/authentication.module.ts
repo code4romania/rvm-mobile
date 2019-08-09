@@ -10,16 +10,18 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { UnauthenticatedGuard } from 'src/app/core/authentication/unauthenticated.guard';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: AuthenticationPage
+    component: AuthenticationPage,
   }, 
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [UnauthenticatedGuard]
   },
   {
     path: 'logout',
@@ -27,11 +29,13 @@ const routes: Routes = [
   },
 	{
     path: 'reset/:token',
-    component: ResetPasswordComponent
+    component: ResetPasswordComponent,
+    canActivate: [UnauthenticatedGuard]
   },
   {
-    path: 'forgot-password',
-    component: RecoverPasswordComponent
+    path: 'recover',
+    component: RecoverPasswordComponent,
+    canActivate: [UnauthenticatedGuard]
   }
 ];
 

@@ -77,6 +77,6 @@
       "options": [ "allow-leading-underscore"]
     },
     "ban-types": [false, ["Function", "Use {} instead."]],
-    "no-string-literal": false,
+    "no-string-literal": false
   }
 }

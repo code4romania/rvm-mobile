@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { IonSelect } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { OrganisationService,
   VolunteerService,
@@ -35,17 +34,12 @@ export class AddVolunteerComponent implements OnInit {
    */
   addNewOrganisation = false;
 
-  /**
-   * Boolean value that contains the value of the volunteer's acredited organisation's status for the selected course: belongs to an existing one (false) or belongs to a new organisation (true)
-   */
-  addNewAcreditedOrganisation = false;
+  // /**
+  //  * Array with the list of all organisations that have acreditations for a selected course
+  //  */
+  // acreditedOrganisations = [];
 
-  /**
-   * Array with the list of all organisations that have acreditations for a selected course
-   */
-  acreditedOrganisations = [];
-
-  selectedCourse: any;
+  selectedCourse: any = {};
   selectedOrganisation: any;
 
   /**
@@ -92,8 +86,8 @@ export class AddVolunteerComponent implements OnInit {
       organisation: ['', Validators.required],
       county: new FormControl({value: '', disabled: false}, Validators.required),
       city: new FormControl({value: '', disabled: true}, Validators.required),
-      course: new FormControl({value: '', disabled: false}),
-      acreditedOrganisation: new FormControl({value: '', disabled: false})
+      course: new FormControl({value: '', disabled: false}, Validators.required),
+      // acreditedOrganisation: new FormControl({value: '', disabled: false}, Validators.required)
     });
   }
 
@@ -223,17 +217,13 @@ export class AddVolunteerComponent implements OnInit {
     }
   }
 
-  /**
-   * When an acreditor organisation is selected, the selection is updated as well
-   * @param event Changing event, triggered when a change is detected on an element
-   */
-  acreditedOrganisationSelectionChanged(event) {
-    if(this.addForm.value.acreditedOrganisation === 'new'){
-      this.addNewAcreditedOrganisation = true;
-    } else {
-      this.addNewAcreditedOrganisation = false;
-    }
-  }
+  // /**
+  //  * When an acreditor organisation is selected, the selection is updated as well
+  //  * @param event Changing event, triggered when a change is detected on an element
+  //  */
+  // acreditedOrganisationSelectionChanged(event) {
+  //   this.selectedCourse.acredited = this.addForm.value.acreditedOrganisation;
+  // }
 
   /**
    * When a course is selected, the acreditor organisations pop-up select is automatically triggered, 
@@ -243,9 +233,20 @@ export class AddVolunteerComponent implements OnInit {
     this.selectedCourse = {
       name: this.addForm.value.course
     };
-    this.courseService.getCourseByName(this.addForm.value.course).subscribe((response: any) => {
-      this.acreditedOrganisations = response.docs;
-    });
+
+    // this.courseService.getCourseByName(this.addForm.value.course).subscribe((response: any) => {
+    //   this.acreditedOrganisations = response.docs;
+    // });
+
+    // this.acreditedOrganisations = [
+    //   {
+    //     _id: '1',
+    //     acredited: 'Crucea Rosie'
+    //   },
+    //   {
+    //     _id: '2',
+    //     acredited:'SMURD'
+    //   }];
   }
 
   /**
@@ -261,21 +262,53 @@ export class AddVolunteerComponent implements OnInit {
     });
   }
 
+  // /**
+  //  * Triggers a date picker pop-up after a course is added in order to take the course acreditation date
+  //  */
+  // showDatePicker() {
+  //   this.datePicker.show({
+  //     date: new Date(),
+  //     mode: 'date',
+  //     androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
+  //   }).then(
+  //     date => {
+  //       this.selectedCourse.obtained = date;
+  //     },
+  //     err => {
+  //       this.selectedCourse.obtained = new Date();
+  //     }
+  //   );
+  // }
+
   /**
-   * Triggers a date picker pop-up after a course is added in order to take the course acreditation date
+   * Triggered when 'Neafiliat' option is selected; updates the form so that organisation is no longer required
    */
-  showDatePicker() {
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
-    }).then(
-      date => {
-        this.selectedCourse.obtained = date;
-      },
-      err => {
-        this.selectedCourse.obtained = new Date();
-      }
-    );
+  organisationNoneChanged() {
+    if(this.organisationNone) {
+      this.addForm.controls['organisation'].clearValidators();
+      this.addForm.controls['organisation'].updateValueAndValidity();
+    } else {
+      this.addForm.controls['organisation'].setValidators([Validators.required]);
+      this.addForm.controls['organisation'].updateValueAndValidity();
+    }
+  }
+
+ /**
+   * Triggered when 'Fără acreditare' option is selected; updates the form so that course and acreditedOrganisation is no longer required
+   */
+  courseNoneChanged() {
+    if(this.courseNone) {
+      this.addForm.controls['course'].clearValidators();
+      this.addForm.controls['course'].updateValueAndValidity();
+
+      // this.addForm.controls['acreditedOrganisation'].clearValidators();
+      // this.addForm.controls['acreditedOrganisation'].updateValueAndValidity();
+    } else {
+      this.addForm.controls['course'].setValidators([Validators.required]);
+      this.addForm.controls['course'].updateValueAndValidity();
+
+      // this.addForm.controls['acreditedOrganisation'].setValidators([Validators.required]);
+      // this.addForm.controls['acreditedOrganisation'].updateValueAndValidity();
+    }
   }
 }

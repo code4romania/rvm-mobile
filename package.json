@@ -10,7 +10,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.json -w -s"
+    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.json -w -s",
+    "ionic-android" : "ng.cmd run app:ionic-cordova-build:developement --platform=android",
+    "ionic-ios" : "ng.cmd run app:ionic-cordova-build:developement --platform=ios"
   },
   "private": true,
   "dependencies": {
@@ -90,12 +92,12 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-camera": {},
       "cordova-plugin-datepicker": {},
-      "cordova-sms-plugin": {},
       "ionic-plugin-deeplinks": {
         "URL_SCHEME": "rvm",
         "DEEPLINK_SCHEME": "https",
         "DEEPLINK_HOST": "rvm.lxhost.ro"
-      }
+      },
+      "cordova-sms-plugin": {}
     },
     "platforms": [
       "ios",

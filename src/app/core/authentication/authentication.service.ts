@@ -139,4 +139,23 @@ export class AuthenticationService {
       })
     );
   }
+
+  /**
+  * Sends a request to the backend server for password recovery
+  * @param email User's email, it's the one that will receive the password reset link
+  * @returns an observable that contains a truth value: successful or not
+  */
+  public recoverPassword(email: string) {
+    return this.httpClient.post('/password/recovery', {email: email});
+  }
+
+   /**
+  * Sends a request to the backend server for password reset
+  * @param password User's new password
+  * @param token The token from the email send by password recovery to prove that it's the same user
+  * @returns an observable that contains a truth value: successful or not
+  */
+  public resetPassword(password: string, token: string) {
+    return this.httpClient.post('/password/reset', {passowrd: password, password_confirm: password, token: token});
+  }
 }

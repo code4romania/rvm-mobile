@@ -10,19 +10,37 @@ import { AuthenticationService } from 'src/app/core';
   styleUrls: ['./recover-password.component.scss'],
 })
 export class RecoverPasswordComponent implements OnInit {
-  resetPasswordForm: FormGroup;
+	/**
+	 * Form reference
+	 */
+  	resetPasswordForm: FormGroup;
 
-	constructor(public router: Router,
+	/**
+   	* Class constructor
+   	* 
+   	* @param router Provider for router navigation
+   	* @param authenticationService Injected reference for AuthenticationService
+   	*/
+	constructor(private router: Router,
 		private authenticationService: AuthenticationService) { }
 
+	/**
+  	* Page initialisation
+  	*/
 	ngOnInit() {
 		this.resetPasswordForm = new FormGroup({
 			email: new FormControl('', [Validators.required])
 		});
 	}
 
+	/**
+	 * Sends the recover password request
+	 */
 	resetPassword() {
-		console.log('sent');
 		// TODO handles this when backend ready
+		this.authenticationService.recoverPassword(this.resetPasswordForm.value.email).subscribe(response => {
+			console.log(response);
+			this.router.navigate(['/auth/login']);
+		});
 	}
 }

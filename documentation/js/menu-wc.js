@@ -86,6 +86,40 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/AppRoutingModule.html" data-type="entity-link">AppRoutingModule</a>
                             </li>
                             <li class="link">
+                                <a href="modules/AuthenticationPageModule.html" data-type="entity-link">AuthenticationPageModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                            'data-target="#components-links-module-AuthenticationPageModule-4d664a49115af9b67e68ccef74a949bc"' : 'data-target="#xs-components-links-module-AuthenticationPageModule-4d664a49115af9b67e68ccef74a949bc"' }>
+                                            <span class="icon ion-md-cog"></span>
+                                            <span>Components</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-AuthenticationPageModule-4d664a49115af9b67e68ccef74a949bc"' :
+                                            'id="xs-components-links-module-AuthenticationPageModule-4d664a49115af9b67e68ccef74a949bc"' }>
+                                            <li class="link">
+                                                <a href="components/AuthenticationPage.html"
+                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">AuthenticationPage</a>
+                                            </li>
+                                            <li class="link">
+                                                <a href="components/LoginComponent.html"
+                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">LoginComponent</a>
+                                            </li>
+                                            <li class="link">
+                                                <a href="components/LogoutComponent.html"
+                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">LogoutComponent</a>
+                                            </li>
+                                            <li class="link">
+                                                <a href="components/RecoverPasswordComponent.html"
+                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">RecoverPasswordComponent</a>
+                                            </li>
+                                            <li class="link">
+                                                <a href="components/ResetPasswordComponent.html"
+                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">ResetPasswordComponent</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                            </li>
+                            <li class="link">
                                 <a href="modules/CoreModule.html" data-type="entity-link">CoreModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
@@ -150,42 +184,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     </li>
                             </li>
                             <li class="link">
-                                <a href="modules/LoginPageModule.html" data-type="entity-link">LoginPageModule</a>
-                                    <li class="chapter inner">
-                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-LoginPageModule-df5c29376464b6e3aa12607c731b3d31"' : 'data-target="#xs-components-links-module-LoginPageModule-df5c29376464b6e3aa12607c731b3d31"' }>
-                                            <span class="icon ion-md-cog"></span>
-                                            <span>Components</span>
-                                            <span class="icon ion-ios-arrow-down"></span>
-                                        </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-LoginPageModule-df5c29376464b6e3aa12607c731b3d31"' :
-                                            'id="xs-components-links-module-LoginPageModule-df5c29376464b6e3aa12607c731b3d31"' }>
-                                            <li class="link">
-                                                <a href="components/LoginPage.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">LoginPage</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                            </li>
-                            <li class="link">
-                                <a href="modules/LogoutPageModule.html" data-type="entity-link">LogoutPageModule</a>
-                                    <li class="chapter inner">
-                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-LogoutPageModule-ae2f533e53373691d38c65446e0809d6"' : 'data-target="#xs-components-links-module-LogoutPageModule-ae2f533e53373691d38c65446e0809d6"' }>
-                                            <span class="icon ion-md-cog"></span>
-                                            <span>Components</span>
-                                            <span class="icon ion-ios-arrow-down"></span>
-                                        </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-LogoutPageModule-ae2f533e53373691d38c65446e0809d6"' :
-                                            'id="xs-components-links-module-LogoutPageModule-ae2f533e53373691d38c65446e0809d6"' }>
-                                            <li class="link">
-                                                <a href="components/LogoutPage.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">LogoutPage</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                            </li>
-                            <li class="link">
                                 <a href="modules/VolunteerPageModule.html" data-type="entity-link">VolunteerPageModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
@@ -243,6 +241,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="classes/Organisation.html" data-type="entity-link">Organisation</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/PasswordValidation.html" data-type="entity-link">PasswordValidation</a>
                             </li>
                             <li class="link">
                                 <a href="classes/RouteReusableStrategy.html" data-type="entity-link">RouteReusableStrategy</a>

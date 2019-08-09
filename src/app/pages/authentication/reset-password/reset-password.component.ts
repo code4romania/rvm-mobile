@@ -10,20 +10,38 @@ import { PasswordValidation } from 'src/app/core/validators/password-validation'
   styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent implements OnInit {
-  resetPasswordForm: FormGroup;
+	/**
+	 * Form reference
+	 */
+ 	resetPasswordForm: FormGroup;
+	
+	 /**
+	 * Token for password reset
+	 */
 	token: string;
 
+
+	/**
+	* 
+	* @param router Provider for router navigation
+   	* @param authenticationService Injected reference for AuthenticationService
+	* @param formBuilder FormBuilder reference, used in creating rective forms
+	* @param route Provider for current route
+	*/
 	constructor(public router: Router,
 		private authenticationService: AuthenticationService,
 		private formBuilder: FormBuilder,
 		private route: ActivatedRoute) { }
 
+	/**
+  	* Page initialisation
+  	*/
 	ngOnInit() {
-		this.route.queryParams.subscribe(
-			(queryParams) => {
-				this.token = queryParams['token'];
+		this.route.params.subscribe(
+			(params) => {
+				this.token = params['token'];
 			}
-    );
+    	);
     
 		this.resetPasswordForm = this.formBuilder.group({
 			password: ['', Validators.required],
@@ -33,8 +51,14 @@ export class ResetPasswordComponent implements OnInit {
 			});
 	}
 
+	/**
+	 * Sends the reset password request
+	 */
 	resetPassword() {
-		console.log('sent');
 		// TODO handles this when backend ready
+		this.authenticationService.resetPassword(this.resetPasswordForm.value.password, this.token).subscribe(response => {
+			console.log(response);
+			this.router.navigate(['/auth/login']);
+		});
 	}
 }

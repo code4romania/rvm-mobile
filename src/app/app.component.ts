@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { IonRouterOutlet, Platform } from '@ionic/angular';
+import { IonRouterOutlet, Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthenticationService } from './core';
 import { Router } from '@angular/router';
-import { AboutPage } from './pages/about/about.page';
+import { Deeplinks } from '@ionic-native/deeplinks';
+import { ResetPasswordComponent } from './pages/authentication/reset-password/reset-password.component';
 
 @Component({
   selector: 'app-root',
@@ -65,7 +66,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public authenticationService: AuthenticationService,
-    private router: Router) {
+    private router: Router,
+    private nav: NavController) {
     this.initializeApp();
   }
 
@@ -96,20 +98,17 @@ export class AppComponent {
   }
 
   ngAfterViewInit() {
-    // this.platform.ready().then(() => {
-    //   window['IonicDeeplink'].route({
-    //     '/about': AboutPage
-    //   }).subscribe((match) => {
-    //     // match.$route - the route we matched, which is the matched entry from the arguments to route()
-    //     // match.$args - the args passed in the link
-    //     // match.$link - the full link data
-    //     console.log('Successfully matched route', match);
-    //   },
-    //   (nomatch) => {
-    //     // nomatch.$link - the full link data
-    //     console.error('Got a deeplink that didn\'t match', nomatch);
-    //   });
-    // });
+    this.platform.ready().then(() => {
+      Deeplinks.route({
+        '/reset/:token': ResetPasswordComponent
+      }).subscribe((match) => {
+        setTimeout(() => {
+          this.router.navigate(['/auth/reset/', match.$args.token])
+        }, 1000);
+      }, (nomatch) => {
+        console.warn('Unmatched Route', nomatch);
+      });
+    });
     
   }
 }

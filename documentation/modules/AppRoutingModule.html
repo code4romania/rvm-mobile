@@ -87,11 +87,6 @@ const routes: Routes &#x3D; [
     canActivate: [AuthenticationGuard]
   },
   {
-    path: &#x27;login&#x27;,
-    loadChildren: &#x27;./pages/login/login.module#LoginPageModule&#x27;,
-    canActivate: [UnauthenticatedGuard]
-  },
-  {
     path: &#x27;about&#x27;,
     loadChildren: &#x27;./pages/about/about.module#AboutPageModule&#x27;,
     canActivate: [AuthenticationGuard]
@@ -102,9 +97,8 @@ const routes: Routes &#x3D; [
     canActivate: [AuthenticationGuard]
   },
   { 
-    path: &#x27;logout&#x27;, 
-    loadChildren: &#x27;./pages/logout/logout.module#LogoutPageModule&#x27;,
-    canActivate: [AuthenticationGuard]
+    path: &#x27;auth&#x27;, 
+    loadChildren: &#x27;./pages/authentication/authentication.module#AuthenticationPageModule&#x27; 
   }
 ];
 

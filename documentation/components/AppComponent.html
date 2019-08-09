@@ -146,6 +146,9 @@
                                 <a href="#initializeApp">initializeApp</a>
                             </li>
                             <li>
+                                <a href="#ngAfterViewInit">ngAfterViewInit</a>
+                            </li>
+                            <li>
                                 <a href="#performAction">performAction</a>
                             </li>
                         </ul>
@@ -166,12 +169,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(platform: Platform, splashScreen: SplashScreen, statusBar: StatusBar, authenticationService: <a href="../injectables/AuthenticationService.html">AuthenticationService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(platform: Platform, splashScreen: SplashScreen, statusBar: StatusBar, authenticationService: <a href="../injectables/AuthenticationService.html">AuthenticationService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, nav: NavController)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/app.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/app.component.ts:54</a></div>
                             </td>
                         </tr>
 
@@ -269,6 +272,20 @@
 </code>
                                                         </td>
                                                 </tr>
+                                                <tr>
+                                                        <td>nav</td>
+                                                  
+                                                        <td>
+                                                                    <code>NavController</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -309,8 +326,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="75"
-                            class="link-to-prism">src/app/app.component.ts:75</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="78"
+                            class="link-to-prism">src/app/app.component.ts:78</a></div>
                 </td>
             </tr>
 
@@ -320,6 +337,45 @@
                     <div class="io-description"><p>Application initialisation
 If cordova is available then the splash screen is hidden and status bar style is set</p>
 </div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <b>
+                            ngAfterViewInit
+                        </b>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="100"
+                            class="link-to-prism">src/app/app.component.ts:100</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -351,8 +407,8 @@ If cordova is available then the splash screen is hidden and status bar style is
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="89"
-                            class="link-to-prism">src/app/app.component.ts:89</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="92"
+                            class="link-to-prism">src/app/app.component.ts:92</a></div>
                 </td>
             </tr>
 
@@ -454,14 +510,14 @@ If cordova is available then the splash screen is hidden and status bar style is
     }, 
     {
       title: &#x27;Delogare&#x27;,
-      url: &#x27;/logout&#x27;
+      url: &#x27;/auth/logout&#x27;
     }
   ]</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/app.component.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/app.component.ts:29</a></div>
                             </td>
                         </tr>
 
@@ -495,7 +551,7 @@ If cordova is available then the splash screen is hidden and status bar style is
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/app.component.ts:66</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/app.component.ts:68</a></div>
                             </td>
                         </tr>
 
@@ -536,7 +592,7 @@ If cordova is available then the splash screen is hidden and status bar style is
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/app.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/app.component.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -568,7 +624,7 @@ If cordova is available then the splash screen is hidden and status bar style is
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/app.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/app.component.ts:24</a></div>
                             </td>
                         </tr>
 
@@ -589,11 +645,13 @@ If cordova is available then the splash screen is hidden and status bar style is
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ViewChild } from &#x27;@angular/core&#x27;;
 
-import { IonRouterOutlet, Platform } from &#x27;@ionic/angular&#x27;;
+import { IonRouterOutlet, Platform, NavController } from &#x27;@ionic/angular&#x27;;
 import { SplashScreen } from &#x27;@ionic-native/splash-screen/ngx&#x27;;
 import { StatusBar } from &#x27;@ionic-native/status-bar/ngx&#x27;;
 import { AuthenticationService } from &#x27;./core&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
+import { Deeplinks } from &#x27;@ionic-native/deeplinks&#x27;;
+import { ResetPasswordComponent } from &#x27;./pages/authentication/reset-password/reset-password.component&#x27;;
 
 @Component({
   selector: &#x27;app-root&#x27;,
@@ -636,7 +694,7 @@ export class AppComponent {
     }, 
     {
       title: &#x27;Delogare&#x27;,
-      url: &#x27;/logout&#x27;
+      url: &#x27;/auth/logout&#x27;
     }
   ];
 
@@ -653,7 +711,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public authenticationService: AuthenticationService,
-    private router: Router) {
+    private router: Router,
+    private nav: NavController) {
     this.initializeApp();
   }
 
@@ -681,6 +740,21 @@ export class AppComponent {
     } else {
       this.router.navigate([url]);
     }
+  }
+
+  ngAfterViewInit() {
+    this.platform.ready().then(() &#x3D;&gt; {
+      Deeplinks.route({
+        &#x27;/reset/:token&#x27;: ResetPasswordComponent
+      }).subscribe((match) &#x3D;&gt; {
+        setTimeout(() &#x3D;&gt; {
+          this.router.navigate([&#x27;/auth/reset/&#x27;, match.$args.token])
+        }, 1000);
+      }, (nomatch) &#x3D;&gt; {
+        console.warn(&#x27;Unmatched Route&#x27;, nomatch);
+      });
+    });
+    
   }
 }
 </code></pre>
@@ -746,7 +820,7 @@ export class AppComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><ion-app>  <ion-split-pane>    <ion-menu type="overlay" side="end" class="side-menu" id="side-menu" *ngIf="authenticationService.isAuthenticated()">      <ion-header>        <ion-toolbar mode="ios">          <ion-buttons slot="end">            <ion-menu-button color="dark"></ion-menu-button>          </ion-buttons>          <ion-title>            RVM          </ion-title>        </ion-toolbar>      </ion-header>      <ion-content>        <ion-list padding>          <ion-menu-toggle auto-hide="false">            <ion-item *ngFor="let p of appPages" class="menu-entry mx-auto pt-5" (click)="performAction(p.url)">              <ion-label class="ion-text-center">                <strong>                  {{p.title}}                </strong>              </ion-label>            </ion-item>          </ion-menu-toggle>        </ion-list>      </ion-content>    </ion-menu>    <ion-router-outlet main></ion-router-outlet>  </ion-split-pane></ion-app></div>'
-    var COMPONENTS = [{'name': 'AboutPage', 'selector': 'app-about'},{'name': 'AddVolunteerComponent', 'selector': 'app-add-volunteer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'ListVolunteerComponent', 'selector': 'app-list-volunteer'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'LogoutPage', 'selector': 'app-logout'},{'name': 'SendMessageComponent', 'selector': 'app-send-message'},{'name': 'ValidateVolunteerComponent', 'selector': 'app-validate-volunteer'},{'name': 'VolunteerPage', 'selector': 'app-volunteer'}];
+    var COMPONENTS = [{'name': 'AboutPage', 'selector': 'app-about'},{'name': 'AddVolunteerComponent', 'selector': 'app-add-volunteer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthenticationPage', 'selector': 'app-authentication'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'ListVolunteerComponent', 'selector': 'app-list-volunteer'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutComponent', 'selector': 'app-logout'},{'name': 'RecoverPasswordComponent', 'selector': 'app-recover-password'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SendMessageComponent', 'selector': 'app-send-message'},{'name': 'ValidateVolunteerComponent', 'selector': 'app-validate-volunteer'},{'name': 'VolunteerPage', 'selector': 'app-volunteer'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>

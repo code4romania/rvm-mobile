@@ -20,7 +20,7 @@
 
   <ion-item lines="none" class="search-box mx-auto">
     <ion-searchbar type="text" debounce="500" (ionInput)="searchKeyword($event)"></ion-searchbar>
-    <ion-button color="success" (click)="searchKeyword()">
+    <ion-button color="success" (click)="searchKeyword($event)">
       Caută
     </ion-button>
   </ion-item>
@@ -72,7 +72,7 @@
           </ion-col>
           <ion-col col-6 *ngIf="!volunteer.allocation" (click)="allocateUser(volunteer._id)">
             <ion-button color="secondary" class="w-100">
-              Alocă voluntari
+              Alocă voluntar
             </ion-button>
           </ion-col>
           <ion-col col-6 *ngIf="volunteer.allocation"  (click)="allocateUser(volunteer._id)">
@@ -92,7 +92,7 @@
             </ion-col>
             <ion-col col-6 class="custom-input selectors">
               <ion-label class="title">Localitate</ion-label>
-              <ion-select class="mt-10" [(ngModel)]="city" class="mt-5 p-5">
+              <ion-select class="mt-10" [(ngModel)]="city" class="mt-5 p-5" [disabled]="!county">
                 <ion-select-option *ngFor="let city of cities" value="{{city.name}}">{{city.name}}</ion-select-option>
               </ion-select>
             </ion-col>

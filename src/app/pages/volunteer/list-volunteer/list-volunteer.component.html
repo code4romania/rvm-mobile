@@ -16,34 +16,43 @@
   </ion-refresher>
 
   <div class="selectors">
-    <div class="mt-10">
+    <div class="mt-10 clear-selector">
       <ion-label class="title">
         Alege județ
       </ion-label>
-      <ion-select class="mt-10" [(ngModel)]="selectedCounty" (ionChange)="selectionsChanged()">
+      <ion-select class="mt-10" [(ngModel)]="selectedCounty" (ionChange)="selectionsChanged()" [ngClass]="{'selector-active': selectedCounty != 'all'}">
         <ion-select-option value="all" selected>Toate</ion-select-option>
         <ion-select-option *ngFor="let county of counties" value="{{county.name}}">{{county.name}}</ion-select-option>
       </ion-select>
+      <ion-button float-right color="light" *ngIf="selectedCounty != 'all'" (click)="selectedCounty = 'all'">
+          <ion-icon name="close"></ion-icon>
+      </ion-button>
     </div>
 
-    <div class="mt-10">
+    <div class="mt-10 clear-selector">
       <ion-label class="title">
         Alege organizație
       </ion-label>
-      <ion-select class="mt-10" [(ngModel)]="selectedOrganisation" (ionChange)="selectionsChanged()">
+      <ion-select class="mt-10" [(ngModel)]="selectedOrganisation" (ionChange)="selectionsChanged()" [ngClass]="{'selector-active': selectedOrganisation}">
         <ion-select-option *ngFor="let organisation of organisations" value="{{organisation._id}}">
           {{organisation.name}}</ion-select-option>
       </ion-select>
+      <ion-button color="light" *ngIf="selectedOrganisation" (click)="selectedOrganisation = null">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>    
     </div>
 
-    <div class="mt-10">
+    <div class="mt-10 clear-selector">
       <ion-label class="title">
         Alege specializare
       </ion-label>
-      <ion-select class="mt-10" [(ngModel)]="selectedCourse" (ionChange)="selectionsChanged()">
+      <ion-select class="mt-10" [(ngModel)]="selectedCourse" (ionChange)="selectionsChanged()" [ngClass]="{'selector-active': selectedCourse}">
         <ion-select-option *ngFor="let course of courses" value="{{course}}">{{course}}
         </ion-select-option>
       </ion-select>
+      <ion-button float-right color="light" *ngIf="selectedCourse" (click)="selectedCourse = null">
+          <ion-icon name="close"></ion-icon>
+      </ion-button>
     </div>
   </div>
 
@@ -94,7 +103,7 @@
           </ion-col>
           <ion-col col-6 *ngIf="!volunteer.allocation" (click)="allocateUser(volunteer._id)">
             <ion-button color="secondary" class="w-100">
-              Alocă voluntari
+              Alocă voluntar
             </ion-button>
           </ion-col>
           <ion-col col-6 *ngIf="volunteer.allocation" (click)="allocateUser(volunteer._id)">

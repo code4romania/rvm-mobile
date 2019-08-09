@@ -472,7 +472,7 @@ export class HomePage {
 &lt;/ion-header&gt;
 
 &lt;ion-content center text-center&gt;
-  &lt;ion-grid class&#x3D;&quot;home-columns pt-60&quot;&gt;
+  &lt;ion-grid class&#x3D;&quot;home-columns&quot;&gt;
     &lt;ion-row&gt;
       &lt;ion-col size&#x3D;&quot;5&quot; *ngFor&#x3D;&quot;let action of actions&quot; class&#x3D;&quot;menu-column m-7 border-5&quot; (click)&#x3D;&quot;performAction(action.url)&quot;&gt;
           &lt;strong&gt;
@@ -489,24 +489,30 @@ export class HomePage {
                     <code>home.page.scss</code>
                 </p>
                 <pre class="line-numbers"><code class="language-scss">.menu-column {
-  padding: 70px 10px;
-  text-align: center;
-  text-decoration: underline;
   -webkit-box-shadow: 0px 0px 0px 5px rgba(240,237,240,1);
   -moz-box-shadow: 0px 0px 0px 5px rgba(240,237,240,1);
   box-shadow: 0px 0px 5px 2px rgba(240,237,240,1);
+  color: black;
   font-size: 12px;
-  color: black;
+  padding: 80px 10px;
+  text-align: center;
+  text-decoration: underline;
+
+  a {
+    color: black;
+  }
 }
 
-.menu-column a {
-  color: black;
-}
-
-.home-columns ion-row {
+.home-columns {
+  align-items: center;
+  display: flex;
+  height: 100%;
   justify-content: center;
-}
-</code></pre>
+  
+  ion-row {
+    justify-content: center;
+  }
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -534,8 +540,8 @@ export class HomePage {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar mode="ios">    <ion-buttons slot="end">      <ion-menu-button color="dark"></ion-menu-button>    </ion-buttons>    <img src="../../assets/images/logo.PNG" class="logo-title mx-auto" />  </ion-toolbar></ion-header><ion-content center text-center>  <ion-grid class="home-columns pt-60">    <ion-row>      <ion-col size="5" *ngFor="let action of actions" class="menu-column m-7 border-5" (click)="performAction(action.url)">          <strong>            {{action.title}}          </strong>      </ion-col>    </ion-row>  </ion-grid></ion-content></div>'
-    var COMPONENTS = [{'name': 'AboutPage', 'selector': 'app-about'},{'name': 'AddVolunteerComponent', 'selector': 'app-add-volunteer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'ListVolunteerComponent', 'selector': 'app-list-volunteer'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'LogoutPage', 'selector': 'app-logout'},{'name': 'SendMessageComponent', 'selector': 'app-send-message'},{'name': 'ValidateVolunteerComponent', 'selector': 'app-validate-volunteer'},{'name': 'VolunteerPage', 'selector': 'app-volunteer'}];
+        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar mode="ios">    <ion-buttons slot="end">      <ion-menu-button color="dark"></ion-menu-button>    </ion-buttons>    <img src="../../assets/images/logo.PNG" class="logo-title mx-auto" />  </ion-toolbar></ion-header><ion-content center text-center>  <ion-grid class="home-columns">    <ion-row>      <ion-col size="5" *ngFor="let action of actions" class="menu-column m-7 border-5" (click)="performAction(action.url)">          <strong>            {{action.title}}          </strong>      </ion-col>    </ion-row>  </ion-grid></ion-content></div>'
+    var COMPONENTS = [{'name': 'AboutPage', 'selector': 'app-about'},{'name': 'AddVolunteerComponent', 'selector': 'app-add-volunteer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthenticationPage', 'selector': 'app-authentication'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'ListVolunteerComponent', 'selector': 'app-list-volunteer'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutComponent', 'selector': 'app-logout'},{'name': 'RecoverPasswordComponent', 'selector': 'app-recover-password'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SendMessageComponent', 'selector': 'app-send-message'},{'name': 'ValidateVolunteerComponent', 'selector': 'app-validate-volunteer'},{'name': 'VolunteerPage', 'selector': 'app-volunteer'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HomePage'};
 </script>
