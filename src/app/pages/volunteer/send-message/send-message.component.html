@@ -11,7 +11,10 @@
 </ion-header>
 
 <ion-content>
-  <img src="../../../../assets/images/send-message.PNG" class="w-100" />
+  <div class="header">
+    <ion-icon name="list-box" color="primary"></ion-icon>
+    <ion-label>Trimite mesaj</ion-label>
+  </div>
 
   <div padding>
     <ion-item lines="none">
@@ -22,7 +25,7 @@
     <ion-item lines="none" class="custom-input">
       <ion-textarea [(ngModel)]="message" class="h-70"></ion-textarea>
     </ion-item>
-    <ion-row class="p-15">
+    <!-- <ion-row class="p-15">
       <ion-col col-6 class="my-auto">
         <img [src]="base64Image" *ngIf="base64Image" />
         <ion-label *ngIf="!base64Image" class="text-content">
@@ -34,7 +37,7 @@
           <ion-icon name="camera"></ion-icon>
         </ion-button>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
   </div>
 
   <ion-button ion-button color="dark" expand="full" class="full-button-bottom" (click)="checkPemission()">Trimite mesaj</ion-button>

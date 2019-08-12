@@ -85,16 +85,16 @@
                             <a href="#localCoursesDB" title="src/app/core/service/database-sync.service.ts"><b>localCoursesDB</b>&nbsp;&nbsp;&nbsp;(src/.../database-sync.service.ts)</a>
                         </li>
                         <li>
-                            <a href="#localDB" title="src/app/core/service/allocation.service.ts"><b>localDB</b>&nbsp;&nbsp;&nbsp;(src/.../allocation.service.ts)</a>
-                        </li>
-                        <li>
                             <a href="#localDB" title="src/app/core/service/course.service.ts"><b>localDB</b>&nbsp;&nbsp;&nbsp;(src/.../course.service.ts)</a>
                         </li>
                         <li>
-                            <a href="#localDB" title="src/app/core/service/organisation.service.ts"><b>localDB</b>&nbsp;&nbsp;&nbsp;(src/.../organisation.service.ts)</a>
+                            <a href="#localDB" title="src/app/core/service/allocation.service.ts"><b>localDB</b>&nbsp;&nbsp;&nbsp;(src/.../allocation.service.ts)</a>
                         </li>
                         <li>
                             <a href="#localDB" title="src/app/core/service/volunteer.service.ts"><b>localDB</b>&nbsp;&nbsp;&nbsp;(src/.../volunteer.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#localDB" title="src/app/core/service/organisation.service.ts"><b>localDB</b>&nbsp;&nbsp;&nbsp;(src/.../organisation.service.ts)</a>
                         </li>
                         <li>
                             <a href="#localOrganisationsDB" title="src/app/core/service/database-sync.service.ts"><b>localOrganisationsDB</b>&nbsp;&nbsp;&nbsp;(src/.../database-sync.service.ts)</a>
@@ -109,16 +109,16 @@
                             <a href="#remoteCoursesDB" title="src/app/core/service/database-sync.service.ts"><b>remoteCoursesDB</b>&nbsp;&nbsp;&nbsp;(src/.../database-sync.service.ts)</a>
                         </li>
                         <li>
-                            <a href="#remoteDB" title="src/app/core/service/allocation.service.ts"><b>remoteDB</b>&nbsp;&nbsp;&nbsp;(src/.../allocation.service.ts)</a>
-                        </li>
-                        <li>
                             <a href="#remoteDB" title="src/app/core/service/course.service.ts"><b>remoteDB</b>&nbsp;&nbsp;&nbsp;(src/.../course.service.ts)</a>
                         </li>
                         <li>
-                            <a href="#remoteDB" title="src/app/core/service/organisation.service.ts"><b>remoteDB</b>&nbsp;&nbsp;&nbsp;(src/.../organisation.service.ts)</a>
+                            <a href="#remoteDB" title="src/app/core/service/allocation.service.ts"><b>remoteDB</b>&nbsp;&nbsp;&nbsp;(src/.../allocation.service.ts)</a>
                         </li>
                         <li>
                             <a href="#remoteDB" title="src/app/core/service/volunteer.service.ts"><b>remoteDB</b>&nbsp;&nbsp;&nbsp;(src/.../volunteer.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#remoteDB" title="src/app/core/service/organisation.service.ts"><b>remoteDB</b>&nbsp;&nbsp;&nbsp;(src/.../organisation.service.ts)</a>
                         </li>
                         <li>
                             <a href="#remoteOrganisationsDB" title="src/app/core/service/database-sync.service.ts"><b>remoteOrganisationsDB</b>&nbsp;&nbsp;&nbsp;(src/.../database-sync.service.ts)</a>
@@ -401,7 +401,7 @@
   production: false,
   serverBaseUrl: &#x27;https://rvm-api.lxhost.ro&#x27;,
   serverUrl: &#x27;https://rvm-api.lxhost.ro/api&#x27;,
- databaseURL: &#x27;http://rvm.lxhost.ro:5984&#x27;
+  databaseURL: &#x27;http://rvm.lxhost.ro:5984&#x27;
 }</code>
                         </td>
                     </tr>
@@ -635,63 +635,6 @@
             </tbody>
         </table>
 </section>
-    <h3>src/app/core/service/allocation.service.ts</h3>
-    <section>
-    <h3></h3>        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="localDB"></a>
-                        <span class="name">
-                            <b>
-                            localDB</b>
-                            <a href="#localDB"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new PouchDB(&#x27;allocations&#x27;)</code>
-                        </td>
-                    </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Reference for local PouchDB Allocations Database</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="remoteDB"></a>
-                        <span class="name">
-                            <b>
-                            remoteDB</b>
-                            <a href="#remoteDB"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new PouchDB(environment.databaseURL + &#x27;/allocations&#x27;)</code>
-                        </td>
-                    </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Reference for server CouchDB Allocations Database</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-</section>
     <h3>src/app/core/service/course.service.ts</h3>
     <section>
     <h3></h3>        <table class="table table-sm table-bordered">
@@ -749,7 +692,7 @@
             </tbody>
         </table>
 </section>
-    <h3>src/app/core/service/organisation.service.ts</h3>
+    <h3>src/app/core/service/allocation.service.ts</h3>
     <section>
     <h3></h3>        <table class="table table-sm table-bordered">
             <tbody>
@@ -765,13 +708,13 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new PouchDB(&#x27;organisations&#x27;)</code>
+                            <i>Default value : </i><code>new PouchDB(&#x27;allocations&#x27;)</code>
                         </td>
                     </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Reference for local PouchDB Organisations Database</p>
+                        <div class="io-description"><p>Reference for local PouchDB Allocations Database</p>
 </div>
                     </td>
                 </tr>
@@ -792,13 +735,13 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new PouchDB(environment.databaseURL + &#x27;/organisations&#x27;)</code>
+                            <i>Default value : </i><code>new PouchDB(environment.databaseURL + &#x27;/allocations&#x27;)</code>
                         </td>
                     </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Reference for server CouchDB Organisations Database</p>
+                        <div class="io-description"><p>Reference for server CouchDB Allocations Database</p>
 </div>
                     </td>
                 </tr>
@@ -856,6 +799,63 @@
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>Reference for server CouchDB Volunteers Database</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+    <h3>src/app/core/service/organisation.service.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="localDB"></a>
+                        <span class="name">
+                            <b>
+                            localDB</b>
+                            <a href="#localDB"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new PouchDB(&#x27;organisations&#x27;)</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Reference for local PouchDB Organisations Database</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="remoteDB"></a>
+                        <span class="name">
+                            <b>
+                            remoteDB</b>
+                            <a href="#remoteDB"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new PouchDB(environment.databaseURL + &#x27;/organisations&#x27;)</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Reference for server CouchDB Organisations Database</p>
 </div>
                     </td>
                 </tr>
