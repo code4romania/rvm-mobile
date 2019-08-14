@@ -74,7 +74,7 @@
     "directive-class-suffix": true,
     "no-namespace": [true, "allow-declarations"],
     "variable-name": {
-      "options": [ "allow-leading-underscore"]
+      "options": [ "allow-leading-underscore", "allow-snake-case"]
     },
     "ban-types": [false, ["Function", "Use {} instead."]],
     "no-string-literal": false

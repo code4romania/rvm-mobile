@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 
 import { IonRouterOutlet, Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -12,12 +12,12 @@ import { ResetPasswordComponent } from './pages/authentication/reset-password/re
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   /**
    * Router outlet reference
    */
   @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
-  
+
   /**
    * Boolean value that shows/hides the side menu depending on user's state
    */
@@ -77,7 +77,7 @@ export class AppComponent {
    */
   initializeApp() {
     this.platform.ready().then(() => {
-      if(this.platform.is('cordova')){
+      if (this.platform.is('cordova')) {
         this.statusBar.backgroundColorByHexString('#264998');
         this.statusBar.styleDefault();
         this.splashScreen.hide();
@@ -99,16 +99,17 @@ export class AppComponent {
 
   ngAfterViewInit() {
     this.platform.ready().then(() => {
-      Deeplinks.route({
-        '/reset/:token': ResetPasswordComponent
-      }).subscribe((match) => {
-        setTimeout(() => {
-          this.router.navigate(['/auth/reset/', match.$args.token])
-        }, 1000);
-      }, (nomatch) => {
-        console.warn('Unmatched Route', nomatch);
-      });
+      if (this.platform.is('cordova')) {
+        Deeplinks.route({
+          '/reset/:token': ResetPasswordComponent
+        }).subscribe((match) => {
+          setTimeout(() => {
+            this.router.navigate(['/auth/reset/', match.$args.token]);
+          }, 1000);
+        }, (nomatch) => {
+          console.warn('Unmatched Route', nomatch);
+        });
+      }
     });
-    
   }
 }

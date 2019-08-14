@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/core';
 import { PasswordValidation } from 'src/app/core/validators/password-validation';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reset-password',
@@ -10,55 +11,111 @@ import { PasswordValidation } from 'src/app/core/validators/password-validation'
   styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent implements OnInit {
-	/**
-	 * Form reference
-	 */
- 	resetPasswordForm: FormGroup;
-	
-	 /**
-	 * Token for password reset
-	 */
-	token: string;
+    /**
+     * Form reference
+     */
+     resetPasswordForm: FormGroup;
+
+     /**
+      * Token for password reset
+      */
+    token: string;
+
+    /**
+     * Error message that will be displayed
+     */
+    errorMessage: string;
+
+    /**
+     * Page is loading or not
+     */
+    loading = false;
 
 
-	/**
-	* 
-	* @param router Provider for router navigation
-   	* @param authenticationService Injected reference for AuthenticationService
-	* @param formBuilder FormBuilder reference, used in creating rective forms
-	* @param route Provider for current route
-	*/
-	constructor(public router: Router,
-		private authenticationService: AuthenticationService,
-		private formBuilder: FormBuilder,
-		private route: ActivatedRoute) { }
+    /**
+     * @param router Provider for router navigation
+     * @param authenticationService Injected reference for AuthenticationService
+     * @param formBuilder FormBuilder reference, used in creating rective forms
+     * @param route Provider for current route
+     * @param toastController Controller for toast messages display
+     */
+    constructor(public router: Router,
+                private authenticationService: AuthenticationService,
+                private formBuilder: FormBuilder,
+                private route: ActivatedRoute,
+                private toastController: ToastController) { }
 
-	/**
-  	* Page initialisation
-  	*/
-	ngOnInit() {
-		this.route.params.subscribe(
-			(params) => {
-				this.token = params['token'];
-			}
-    	);
-    
-		this.resetPasswordForm = this.formBuilder.group({
-			password: ['', Validators.required],
-			confirmPassword: ['', Validators.required],
-			}, {
-				validator: PasswordValidation.MatchPassword
-			});
-	}
+    /**
+     * Page initialisation
+     */
+    ngOnInit() {
+        this.route.params.subscribe(
+            (params) => {
+                this.token = params['token'];
+            }
+        );
 
-	/**
-	 * Sends the reset password request
-	 */
-	resetPassword() {
-		// TODO handles this when backend ready
-		this.authenticationService.resetPassword(this.resetPasswordForm.value.password, this.token).subscribe(response => {
-			console.log(response);
-			this.router.navigate(['/auth/login']);
-		});
-	}
+        // todo password validation not ok
+        this.resetPasswordForm = this.formBuilder.group({
+            password: ['', [Validators.required,
+                PasswordValidation.passwordValidation
+            ]],
+            confirmPassword: ['', [Validators.required,
+                PasswordValidation.passwordValidation
+            ]],
+            }, {
+                validator: PasswordValidation.MatchPassword
+            });
+    }
+
+    /**
+     * Sends the reset password request
+     */
+    resetPassword() {
+        // TODO handles this when backend ready
+        if (this.resetPasswordForm.valid) {
+            this.loading = true;
+            this.authenticationService.resetPassword(this.resetPasswordForm.value.password, this.token).subscribe(response => {
+                this.presentToast('Parolă resetată cu succes.');
+                this.loading = false;
+                this.router.navigate(['/auth/login']);
+            }, error => {
+                this.loading = false;
+                this.setErrorMessage('A apărut o eroare. Vă rugăm reîncercați.');
+            });
+        } else {
+
+            if (this.resetPasswordForm.controls['password'].errors && this.resetPasswordForm.controls['password'].errors['password']) {
+               this.setErrorMessage(
+                   'Parola trebuie să conțină cel puțin o literă mare, o cifră și cu un caracter special ( !#$%&‘()*?@[\]^_`{|}~ ).'
+                   );
+               } else {
+                this.setErrorMessage('Parolele trebuie să coincidă.');
+               }
+        }
+    }
+
+    /**
+     * Changes the value of the error message and clears it after 3 seconds
+     * @param message error message that will be displayed
+     */
+    setErrorMessage(message: string) {
+        this.errorMessage = message;
+        setTimeout(() => {
+            this.errorMessage = null;
+        }, 3000);
+    }
+
+    /**
+     * Presents a toast that will be automatically dismessed after 3 seconds
+     * @param message toast message
+     */
+    async presentToast(message: string) {
+        const toast = await this.toastController.create({
+          message,
+          position: 'bottom',
+          duration: 3000
+        });
+        toast.present();
+    }
 }

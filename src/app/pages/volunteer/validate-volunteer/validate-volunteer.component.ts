@@ -3,6 +3,7 @@ import { VolunteerService } from 'src/app/core/service/volunteer.service';
 import { AllocationService } from 'src/app/core/service/allocation.service';
 import { LocationsService } from 'src/app/core/service/locations.service';
 import { CourseService } from 'src/app/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-validate-volunteer',
@@ -17,7 +18,7 @@ export class ValidateVolunteerComponent implements OnInit {
    * String that contains the id of the volunteer that currently has the open details
    */
   volunteerIdWithDetails: string;
-  
+
   courses = [];
   counties = [];
   cities = [];
@@ -28,44 +29,48 @@ export class ValidateVolunteerComponent implements OnInit {
    * Pagination
    */
   page = 0;
-  
+
   /**
    * Limit of volunteers per page
    */
   limit = 10;
 
   /**
-   * 
+   *
    * @param volunteerService Provider for volunteer related operations
    * @param allocationService Provider for volunteer allocation related operations
    * @param locationsService Provider for location selection
    * @param courseService Provider for course related operations
+   * @param iab Provider for accessing an url in browser
    */
   constructor(private volunteerService: VolunteerService,
-    private allocationService: AllocationService,
-    private locationsService: LocationsService,
-    private courseService: CourseService) { }
+              private allocationService: AllocationService,
+              private locationsService: LocationsService,
+              private courseService: CourseService,
+              private iab: InAppBrowser) { }
 
   /**
-  * Page initialisation
-  */
+   * Page initialisation
+   */
   ngOnInit() {
    this.getData();
    this.getCountyList();
   }
 
-    /**
+  /**
    * Retrieves data, filtered by user's selections
    */
   getData() {
-    if(this.page === 0) {
+    if (this.page === 0) {
       this.volunteers = [];
     }
 
     this.volunteerService.getVolunteers(this.page, this.limit).subscribe((response: any) => {
-      response.rows.forEach(volunteer => {
-        this.volunteers.push(volunteer.doc);
-      });
+      if (response.docs && response.docs.length > 0) {
+        response.docs.forEach(volunteer => {
+          this.volunteers.push(volunteer);
+        });
+      }
     });
   }
 
@@ -75,9 +80,9 @@ export class ValidateVolunteerComponent implements OnInit {
    */
   openMenu(volunteerId: string) {
     this.courses = [];
-    if(this.volunteerIdWithDetails === volunteerId){
+    if (this.volunteerIdWithDetails === volunteerId) {
       this.volunteerIdWithDetails = null;
-    } else{
+    } else {
       this.volunteerIdWithDetails = volunteerId;
       this.courseService.getCourseByVolunteerId(volunteerId).subscribe(response => {
         this.courses = response.docs;
@@ -86,9 +91,9 @@ export class ValidateVolunteerComponent implements OnInit {
   }
 
     /**
-   * Opens the allocation menu for the selected user
-   * @param volunteerId String containing the id of the volunteer that was selected for allocation
-   */
+     * Opens the allocation menu for the selected user
+     * @param volunteerId String containing the id of the volunteer that was selected for allocation
+     */
   allocateUser(volunteerId: string) {
     const index = this.volunteers.findIndex(volunteer => volunteer._id === volunteerId);
     if (index >= 0) {
@@ -97,15 +102,16 @@ export class ValidateVolunteerComponent implements OnInit {
   }
 
    /**
-   * Allocate the selected volunteer for a location using the allocation service
-   * @param volunteerId String containing the id of the volunteer that was selected for allocation
-   */
+    * Allocate the selected volunteer for a location using the allocation service
+    * @param volunteerId String containing the id of the volunteer that was selected for allocation
+    */
   confirmAllocation(volunteerId: string) {
     const index = this.volunteers.findIndex(volunteer => volunteer._id === volunteerId);
     if (index >= 0) {
-      this.allocationService.createAllocation(this.volunteers[index], this.county, this.city, this.volunteers[index].organisation).subscribe(() => {   
+      this.allocationService.createAllocation(this.volunteers[index], this.county, this.city, this.volunteers[index].organisation)
+      .subscribe(() => {
         this.volunteers[index] = this.volunteerService.getVolunteerById(volunteerId).subscribe((response) => {
-          if(response.docs && response.docs.length > 0) {
+          if (response.docs && response.docs.length > 0) {
             this.volunteers[index] = response.docs[0];
           }
           this.volunteers[index].isInAllocation = false;
@@ -121,13 +127,13 @@ export class ValidateVolunteerComponent implements OnInit {
    * @param event Change event
    */
   searchKeyword(event: any) {
-    if(event && event.target){
+    if (event && event.target) {
       this.keyword = event.target.value;
 
-      if (this.keyword && this.keyword.trim() != '') {
+      if (this.keyword && this.keyword.trim() !== '') {
         this.volunteerService.search(this.keyword.toLowerCase(), this.page, 10).subscribe((data: any) => {
           this.volunteers = data.docs;
-          if(data.docs.length >= 10) {
+          if (data.docs.length >= 10) {
             this.page++;
           }
         });
@@ -135,7 +141,7 @@ export class ValidateVolunteerComponent implements OnInit {
         this.page = 0;
         this.getData();
       }
-      
+
     } else {
       this.page = 0;
       this.getData();
@@ -143,9 +149,9 @@ export class ValidateVolunteerComponent implements OnInit {
   }
 
    /**
-   * Loads more data, the response is paginated so on scorll down more informations needs to be loaded 
-   * @param event Scroll event
-   */
+    * Loads more data, the response is paginated so on scorll down more informations needs to be loaded
+    * @param event Scroll event
+    */
   loadData(event) {
     setTimeout(() => {
       this.page++;
@@ -154,7 +160,7 @@ export class ValidateVolunteerComponent implements OnInit {
 
       // App logic to determine if all data is loaded
       // and disable the infinite scroll
-      if (this.volunteers.length == 20) {
+      if (this.volunteers.length === 20) {
         event.target.disabled = true;
       }
     }, 500);
@@ -162,7 +168,7 @@ export class ValidateVolunteerComponent implements OnInit {
 
   /**
    * Refreshes the data, on scroll up the page is reset
-   * @param event Scroll event 
+   * @param event Scroll event
    */
   doRefresh(event) {
     setTimeout(() => {
@@ -182,7 +188,7 @@ export class ValidateVolunteerComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param county Retrieves the list of cities from the selected county
    */
   getCityList(county: string) {
@@ -197,5 +203,12 @@ export class ValidateVolunteerComponent implements OnInit {
    */
   countySelectionChanged(event) {
     this.getCityList(event.detail.value);
+  }
+
+  openBrowser(website: string) {
+    if (website) {
+      website = 'http://' + website.replace('http://', '').replace('https://', '');
+      this.iab.create(website);
+    }
   }
 }

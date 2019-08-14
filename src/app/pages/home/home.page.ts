@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  
+
   /**
    * Actions that can be performed from the side-menu
    */
@@ -16,7 +16,7 @@ export class HomePage {
       title: 'Validează voluntar',
       url: '/volunteer/validate'
     }, {
-      title: 'Adaugă voluntar nou',
+      title: 'Adaugă voluntar',
       url: '/volunteer/add'
     }, {
       title: 'Vezi toți voluntarii',
@@ -26,11 +26,11 @@ export class HomePage {
       url: 'tel:89992142265'
     }
   ];
-  
+
   /**
-  * 
-  * @param router Provider for route navigation
-  */
+   *
+   * @param router Provider for route navigation
+   */
   constructor(private router: Router) { }
 
   /**
@@ -39,18 +39,17 @@ export class HomePage {
    * @param url String containing the url for the route that will be displayed on user click
    */
   performAction(url: string) {
-    if(url.includes('tel')) {
+    if (url.includes('tel')) {
       window.open(url);
     } else {
       this.router.navigate([url]);
     }
   }
-  
+
   /**
    * Ionic lifecycle method, in this case the default back navigation is blocked (android)
    */
   ionViewDidEnter() {
-    document.addEventListener("backbutton",function(e) {
-    }, false);
+    document.addEventListener('backbutton', (e) => { }, false);
   }
 }

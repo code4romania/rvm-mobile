@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { Location } from '@angular/common';
-import { ToastController } from '@ionic/angular';
 import { DatabaseSyncService, AuthenticationService } from 'src/app/core';
+import { EmailValidation } from 'src/app/core/validators/email-validation';
+import { PasswordValidation } from 'src/app/core/validators/password-validation';
 
 @Component({
   selector: 'app-login',
@@ -13,22 +14,21 @@ import { DatabaseSyncService, AuthenticationService } from 'src/app/core';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  errorMessage: string;
 
   /**
-   * 
-  * @param router Provider for route navigation
+   *
+   * @param router Provider for route navigation
    * @param formBuilder Provider for reactive form creation
    * @param authenticationService Provider for authentication related operation
    * @param databaseSyncService Provider for database synchronization
    * @param location Provider for location changes
-   * @param toastController Controller for toast messages display
    */
   constructor(private router: Router,
-    private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService,
-    private databaseSyncService: DatabaseSyncService,
-    private location: Location,
-    private toastController: ToastController) { }
+              private formBuilder: FormBuilder,
+              private authenticationService: AuthenticationService,
+              private databaseSyncService: DatabaseSyncService,
+              private location: Location) { }
 
   /**
    * Page initialisation
@@ -42,8 +42,8 @@ export class LoginComponent implements OnInit {
    */
   private createForm() {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      email: ['', [Validators.required, EmailValidation.emailValidation]],
+      password: ['', [Validators.required, PasswordValidation.passwordValidation]]
     });
   }
 
@@ -68,37 +68,18 @@ export class LoginComponent implements OnInit {
           this.location.replaceState(this.router.serializeUrl(this.router.createUrlTree(['home'])));
         },
         (error: any) => {
-          this.presentToastWithOptions();
+          this.errorMessage = 'Informații incorecte';
+          setTimeout(() => {
+            this.errorMessage = null;
+          }, 3000);
         }
       );
   }
 
   /**
-    * Ionic lifecycle method, in this case the default back navigation is blocked (android)
-    */
-  ionViewDidEnter() {
-    document.addEventListener("backbutton", function (e) {
-    }, false);
-  }
-
-  /**
-   * Presents a toast with an error message if the credentials are incorrect
+   * Ionic lifecycle method, in this case the default back navigation is blocked (android)
    */
-  async presentToastWithOptions() {
-    const toast = await this.toastController.create({
-      message: 'Informații incorecte',
-      position: 'bottom',
-      buttons: [
-        {
-          text: 'Reîncearcă',
-          side: 'end',
-          role: 'cancel',
-          handler: () => {
-            toast.dismiss();
-          }
-        }
-      ]
-    });
-    toast.present();
+  ionViewDidEnter() {
+    document.addEventListener('backbutton', (e) => { }, false);
   }
 }

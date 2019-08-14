@@ -24,13 +24,14 @@ export class AddVolunteerComponent implements OnInit {
    */
   organisationNone = false;
 
-    /**
+  /**
    * Boolean value that contains the status of the new volunteer: has a course (false) or not (true)
    */
   courseNone = false;
 
   /**
-   * Boolean value that contains the value of the volunteer's organisation's status: belongs to an existing one (false) or belongs to a new organisation (true)
+   * Boolean value that contains the value of the volunteer's organisation's status:
+   * belongs to an existing one (false) or belongs to a new organisation (true)
    */
   addNewOrganisation = false;
 
@@ -46,9 +47,9 @@ export class AddVolunteerComponent implements OnInit {
    * New organisation's name
    */
   newOrganisation = '';
-  
+
   /**
-   * 
+   *
    * @param formBuilder Provider for reactive form creation
    * @param locationsService Provider for location selection
    * @param volunteerService Provider for volunteer related operations
@@ -66,11 +67,11 @@ export class AddVolunteerComponent implements OnInit {
               private router: Router) { }
 
   /**
-  * Page initialisation
-  */
+   * Page initialisation
+   */
   ngOnInit() {
     this.createForm();
-    this.getCountyList();   
+    this.getCountyList();
     this.getOrganisations();
     this.getCourses();
   }
@@ -97,8 +98,8 @@ export class AddVolunteerComponent implements OnInit {
    */
   submit() {
     this.computeSelectedOrganisation();
-    
-    if(this.courseNone) {
+
+    if (this.courseNone) {
       this.addForm.controls['course'].setValue('');
       this.selectedCourse = null;
     }
@@ -110,13 +111,13 @@ export class AddVolunteerComponent implements OnInit {
    * Computes the selected organisation
    */
   computeSelectedOrganisation() {
-    if(this.organisationNone) {
+    if (this.organisationNone) {
       this.addForm.controls['organisation'].setValue('');
       this.selectedOrganisation = null;
     }
-    
-    if(this.newOrganisation) {
-      this.organisationService.createOrganisation(this.newOrganisation).subscribe((data: any) => {   
+
+    if (this.newOrganisation) {
+      this.organisationService.createOrganisation(this.newOrganisation).subscribe((data: any) => {
       this.organisationService.getOrganisationById(data.id).subscribe((result: any) => {
         this.selectedOrganisation = result.docs[0];
         });
@@ -129,11 +130,11 @@ export class AddVolunteerComponent implements OnInit {
    */
   private createVolunteer() {
     this.volunteerService.createVolunteer(
-      this.addForm.value.name, 
-      this.addForm.value.ssn.toString(), 
-      this.addForm.value.phone.toString(), 
-      this.addForm.value.county, 
-      this.addForm.value.city, 
+      this.addForm.value.name,
+      this.addForm.value.ssn.toString(),
+      this.addForm.value.phone.toString(),
+      this.addForm.value.county,
+      this.addForm.value.city,
       this.selectedOrganisation,
       this.selectedCourse).subscribe(() => {
         this.router.navigate(['/home'], {
@@ -157,7 +158,7 @@ export class AddVolunteerComponent implements OnInit {
   private getCityList(county) {
     this.locationsService.getCityList().subscribe((response) => {
       this.cities = response.filter(city => city.county === county);
-      if(this.cities.length > 0){
+      if (this.cities.length > 0) {
         this.addForm.controls['city'].enable();
       }
     });
@@ -167,9 +168,9 @@ export class AddVolunteerComponent implements OnInit {
    * Retrieves the list of organisations from the organisations service
    */
   private getOrganisations() {
-    this.organisationService.getOrganisations().subscribe((result: any) =>{
-      result.rows.forEach(row => {
-        this.organisations.push(row.doc);
+    this.organisationService.getOrganisations().subscribe((result: any) => {
+      result.docs.forEach(doc => {
+        this.organisations.push(doc);
       });
     });
   }
@@ -180,7 +181,7 @@ export class AddVolunteerComponent implements OnInit {
   private getCourses() {
     // this.courseService.getCourses().subscribe((response: any) =>{
     //   const data = response.rows.filter(item => item.doc.language !== 'query');
-     
+
     //   this.courses = data.map(item => item.doc.name).filter((value, index, self) => self.indexOf(value) === index);
     // });
     this.courses = ['prim-ajutor', 'constructii'];
@@ -209,8 +210,8 @@ export class AddVolunteerComponent implements OnInit {
    */
   organisationSelectionChanged(event) {
     if (this.addForm.value.organisation === 'new') {
-      this.addForm.value.organisation === '';
-      this.addNewOrganisation = true;      
+      this.addForm.value.organisation = '';
+      this.addNewOrganisation = true;
     } else {
       this.selectedOrganisation = this.organisations.find(organisation => organisation._id === event.detail.value);
       this.addNewOrganisation = false;
@@ -226,10 +227,10 @@ export class AddVolunteerComponent implements OnInit {
   // }
 
   /**
-   * When a course is selected, the acreditor organisations pop-up select is automatically triggered, 
+   * When a course is selected, the acreditor organisations pop-up select is automatically triggered,
    * Containing the organisations that are acreditors for the selected course
    */
-  courseSelectionChanged() {   
+  courseSelectionChanged() {
     this.selectedCourse = {
       name: this.addForm.value.course
     };
@@ -255,8 +256,8 @@ export class AddVolunteerComponent implements OnInit {
   ssnExists(event) {
     const ssn = event.detail.value;
     this.volunteerService.getVolunteerBySsn(ssn.trim()).subscribe((response) => {
-      if(response.docs.length > 0){
-        this.addForm.controls['ssn'].setErrors({'incorrect': true});
+      if (response.docs.length > 0) {
+        this.addForm.controls['ssn'].setErrors({incorrect: true});
         this.addForm.setErrors({'incorrect-ssn': true});
       }
     });
@@ -284,7 +285,7 @@ export class AddVolunteerComponent implements OnInit {
    * Triggered when 'Neafiliat' option is selected; updates the form so that organisation is no longer required
    */
   organisationNoneChanged() {
-    if(this.organisationNone) {
+    if (this.organisationNone) {
       this.addForm.controls['organisation'].clearValidators();
       this.addForm.controls['organisation'].updateValueAndValidity();
     } else {
@@ -294,10 +295,10 @@ export class AddVolunteerComponent implements OnInit {
   }
 
  /**
-   * Triggered when 'Fără acreditare' option is selected; updates the form so that course and acreditedOrganisation is no longer required
-   */
+  * Triggered when 'Fără acreditare' option is selected; updates the form so that course and acreditedOrganisation is no longer required
+  */
   courseNoneChanged() {
-    if(this.courseNone) {
+    if (this.courseNone) {
       this.addForm.controls['course'].clearValidators();
       this.addForm.controls['course'].updateValueAndValidity();
 

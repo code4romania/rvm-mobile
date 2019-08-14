@@ -60,7 +60,7 @@ ion-header::after {
 }
 
 .logo-title {
-  max-height: 30px;
+  max-height: 50px;
   display: block;
 }
 
@@ -264,13 +264,15 @@ ion-menu-button {
 }
 
 .logo {
-  background-color: white;
   border-radius: 50%;
   height: 180px;
   width: 180px;
 
   img {
     display: block;
+    border: 1px solid white;
+    border-radius: 50%;
+    background: white;
   }
 }
 
@@ -282,6 +284,13 @@ ion-menu-button {
 
 .login-item {
   border-bottom: 1px solid white;
+}
+
+.error-message {
+  color: white;
+  background-color: red;
+  border: none;
+  border-radius: 2px;
 }
 
 .login-form {
@@ -297,4 +306,22 @@ ion-menu-button {
     text-align: right;
     text-decoration: underline;
   }
+}
+
+.m-10 {
+  margin: 10px;
+}
+
+ion-spinner {
+  color: white;
+  height: 100px;
+  width: 100px;
+}
+
+.center-spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }

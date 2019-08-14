@@ -7,6 +7,7 @@ export class Organisation {
     website: string;
     obtained: Date;
     added_by: string;
+    type: string;
 
     constructor() {}
 }

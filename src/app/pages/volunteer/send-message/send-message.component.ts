@@ -34,13 +34,13 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   public base64Image: string;
 
   /**
-   * 
+   *
    * @param route Provider for current route
    * @param sms Provider for sending SMS messages
    */
   constructor(private route: ActivatedRoute,
-    private sms: SMS,
-    private volunteerService: VolunteerService) { }
+              private sms: SMS,
+              private volunteerService: VolunteerService) { }
 
   /**
    * Page initialisation: the volunteer id needs to be retrieved from the url
@@ -49,7 +49,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     this.routeSub = this.route.params.subscribe(params => {
       this.volunteerId = params['id'];
       this.volunteerService.getVolunteerById(this.volunteerId).subscribe((response) => {
-        this.volunteer = response.docs[0]
+        this.volunteer = response.docs[0];
       });
     });
   }
@@ -70,7 +70,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
       targetWidth: 1000,
       targetHeight: 1000
     }).then((imageData) => {
-      this.base64Image = "data:image/jpeg;base64," + imageData;
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
     });
   }
@@ -91,9 +91,9 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   /**
    * Checks for SMS permission, if granted sends the SMS
    */
-  checkPemission(){
+  checkPemission() {
     this.sms.hasPermission();
-    if(this.sms.hasPermission()) {
+    if (this.sms.hasPermission()) {
       this.sendMessage();
     }
   }

@@ -7,6 +7,7 @@ export class Course {
     acredited: string;
     obtained: Date;
     volunteer_id: string;
+    type: string;
 
     constructor() {}
 }

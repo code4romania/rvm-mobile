@@ -1,8 +1,9 @@
-import { Component, ViewChild,OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { VolunteerService } from '../../../core/service/volunteer.service';
 import { LocationsService } from 'src/app/core/service/locations.service';
 import { OrganisationService, CourseService, AllocationService } from 'src/app/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-list-volunteer',
@@ -27,7 +28,7 @@ export class ListVolunteerComponent implements OnInit {
    * String that contains the id of the volunteer that currently has the open details
    */
   volunteerIdWithDetails: string;
-  
+
   selectedCounty = 'all';
   selectedOrganisation: string;
   selectedCourse: string;
@@ -40,9 +41,9 @@ export class ListVolunteerComponent implements OnInit {
    * City for allocation
    */
   city: string;
-  
+
   /**
-   * Pagination 
+   * Pagination
    */
   page = 0;
   /**
@@ -51,26 +52,28 @@ export class ListVolunteerComponent implements OnInit {
   limit = 10;
 
   /**
-   * 
+   *
    * @param volunteerService Provider for volunteer related operations
    * @param locationsService Provider for location selection
    * @param organisationService Provider for organisation related operations
    * @param courseService Provider for course related operations
    * @param allocationService  Provider for volunteer allocation related operations
+   * @param iab Provider for accessing an url in browser
    */
   constructor(private volunteerService: VolunteerService,
               private locationsService: LocationsService,
               private organisationService: OrganisationService,
               private courseService: CourseService,
-              private allocationService: AllocationService) { }
+              private allocationService: AllocationService,
+              private iab: InAppBrowser) { }
 
   /**
-  * Page initialisation
-  */
+   * Page initialisation
+   */
   ngOnInit() {
     this.getData();
 
-    this.getCountyList();   
+    this.getCountyList();
     this.getOrganisations();
     this.getCourses();
   }
@@ -81,9 +84,9 @@ export class ListVolunteerComponent implements OnInit {
    */
   openMenu(volunteerId: string) {
     this.courses = [];
-    if(this.volunteerIdWithDetails === volunteerId){
+    if (this.volunteerIdWithDetails === volunteerId) {
       this.volunteerIdWithDetails = null;
-    } else{
+    } else {
       this.volunteerIdWithDetails = volunteerId;
       this.courseService.getCourseByVolunteerId(volunteerId).subscribe(response => {
         this.courses = response.docs;
@@ -109,9 +112,9 @@ export class ListVolunteerComponent implements OnInit {
   confirmAllocation(volunteerId: string) {
     const index = this.volunteers.findIndex(volunteer => volunteer._id === volunteerId);
     if (index >= 0) {
-      this.allocationService.createAllocation(this.volunteers[index], this.county, this.city, this.volunteers[index].organisation).subscribe(() => {   
+      this.allocationService.createAllocation(this.volunteers[index], this.county, this.city, this.volunteers[index].organisation).subscribe(() => {
         this.volunteers[index] = this.volunteerService.getVolunteerById(volunteerId).subscribe((response) => {
-          if(response.docs && response.docs.length > 0) {
+          if (response.docs && response.docs.length > 0) {
             this.volunteers[index] = response.docs[0];
           }
           this.volunteers[index].isInAllocation = false;
@@ -140,9 +143,9 @@ export class ListVolunteerComponent implements OnInit {
    * Retrives the list of organisations from the organisations service
    */
   getOrganisations() {
-    this.organisationService.getOrganisations().subscribe((result: any) =>{
-      result.rows.forEach(row => {
-        this.organisations.push(row.doc);
+    this.organisationService.getOrganisations().subscribe((result: any) => {
+      result.docs.forEach(doc => {
+        this.organisations.push(doc);
       });
     });
   }
@@ -151,10 +154,8 @@ export class ListVolunteerComponent implements OnInit {
    * Retrives the list of courses from the courses service
    */
   getCourses() {
-    this.courseService.getCourses().subscribe((response: any) =>{
-      const data = response.rows.filter(item => item.doc.language !== 'query');
-     
-      this.courses = data.map(item => item.doc.name).filter((value, index, self) => self.indexOf(value) === index);
+    this.courseService.getCourses().subscribe((response: any) => {
+      this.courses = response.docs;
     });
   }
 
@@ -170,25 +171,26 @@ export class ListVolunteerComponent implements OnInit {
    * Retrieves data, filtered by user's selections
    */
   getData() {
-    if(this.page === 0) {
+    if (this.page === 0) {
       this.volunteers = [];
     }
-    
-    if(this.selectedCounty !== 'all' || this.selectedOrganisation || this.selectedCourse) {
-      this.volunteerService.filter(this.selectedCounty, this.selectedOrganisation, this.selectedCourse , this.page, this.limit).subscribe((response: any) => {
+
+    if (this.selectedCounty !== 'all' || this.selectedOrganisation || this.selectedCourse) {
+      this.volunteerService.filter(this.selectedCounty, this.selectedOrganisation, this.selectedCourse , this.page, this.limit)
+      .subscribe((response: any) => {
         this.volunteers = response.docs;
       });
     } else {
       this.volunteerService.getVolunteers(this.page, this.limit).subscribe((response: any) => {
-        response.rows.forEach(volunteer => {
-          this.volunteers.push(volunteer.doc);
+        response.docs.forEach(volunteer => {
+          this.volunteers.push(volunteer);
         });
       });
     }
   }
 
   /**
-   * Loads more data, the response is paginated so on scorll down more informations needs to be loaded 
+   * Loads more data, the response is paginated so on scorll down more informations needs to be loaded
    * @param event Scroll event
    */
   loadData(event) {
@@ -207,7 +209,7 @@ export class ListVolunteerComponent implements OnInit {
 
   /**
    * Refreshes the data, on scroll up the page is reset
-   * @param event Scroll event 
+   * @param event Scroll event
    */
   doRefresh(event) {
     setTimeout(() => {
@@ -226,12 +228,19 @@ export class ListVolunteerComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param county Retrieves the list of cities from the selected county
    */
   getCityList(county: string) {
     this.locationsService.getCityList().subscribe((response) => {
       this.cities = response.filter(city => city.county === county);
     });
+  }
+
+  openBrowser(website: string) {
+    if (website) {
+      website = 'http://' + website.replace('http://', '').replace('https://', '');
+      this.iab.create(website);
+    }
   }
 }

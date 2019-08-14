@@ -19,4 +19,5 @@ export class Allocation {
         website: string;
     };
     created_at: Date;
+    type: string;
 }

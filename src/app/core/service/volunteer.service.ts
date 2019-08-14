@@ -7,114 +7,127 @@ import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CourseService } from './course.service';
 
+declare const emit: any;
 /**
  * Reference for local PouchDB Volunteers Database
  */
-var localDB = new PouchDB('volunteers');
+const localDB = new PouchDB('volunteers');
 
 /**
- * PouchDB find plugin added 
+ * PouchDB find plugin added
  */
 PouchDB.plugin(PouchDBFind);
 
 /**
  * Reference for server CouchDB Volunteers Database
  */
-var remoteDB = new PouchDB(environment.databaseURL + '/volunteers');
+const remoteDB = new PouchDB(environment.databaseURL + '/volunteers');
 
 /**
  * Provider for volunteer related operations
  */
 @Injectable()
 export class VolunteerService {
+  private type = 'volunteers';
 
    /**
-   * Class constructor, sets the synchronization options for CouchDB and PouchDB Volunteers Database
-   * @param courseService Provider for course related operations
-   */
+    * Class constructor, sets the synchronization options for CouchDB and PouchDB Volunteers Database
+    * @param courseService Provider for course related operations
+    */
   constructor(private courseService: CourseService) {
-    let options = {
+    const options = {
       live: true,
       retry: true,
       continuous: true
     };
 
-    localDB.sync(remoteDB, options);    
+    localDB.sync(remoteDB, options);
 
     localDB.createIndex({
-      index: {fields: ['name', 'ssn', 'organisation.name','course.[].name', 'organisation.id', 'county', 'city', 'job', 'comments']}
+      index: {fields: ['name', 'ssn', 'organisation.name', 'course.[].name', 'organisation.id', 'county', 'city', 'job', 'comments']}
     });
    }
 
   /**
-  * Getter method for all volunteers from the local database
-  * @params page A number defining the current page of volunteers from the total list (used to paginate the response)
-  * @params limit The number of volunteers per page
-  * @returns An Observable with all volunteers
-  */
+   * Getter method for all volunteers from the local database
+   * @params page A number defining the current page of volunteers from the total list (used to paginate the response)
+   * @params limit The number of volunteers per page
+   * @returns An Observable with all volunteers
+   */
   getVolunteers(page: number, limit: number): Observable<any> {
     const skip = page * limit;
-    return from(localDB.allDocs({
-        limit: limit,
-        include_docs: true,
-        skip: skip,
-        endkey: "_design"
-    }));
-  }
- 
-  /**
-  * Searches for all volunteers from the local database whose name,ssn or organisation name matches the keyword
-  * @param keyword The string used for search
-  * @param page A number defining the current page of volunteers from the total list (used to paginate the response)
-  * @param limit The number of volunteers per page
-  * @returns An Observable with all volunteers
-  */
-  search(keyword: string, page: number, limit: number): Observable<any> {
-    const skip = page * limit;
-    const pattern = new RegExp('.*' + keyword + '.*','ig');
+
     return from(localDB.find({
       selector: {
-        "$or": [
-          {
-          "name": {$regex: pattern},
-          },
-           {
-             "ssn": {$regex: pattern},
-           },
-           {
-             "organisation.name": {$regex: pattern},
-           },
-        ]        
+          type: this.type
       },
-      limit: limit,
+      limit,
       include_docs: true,
-      skip: skip,
-      endkey: "_design"
+      skip,
+    }));
+  }
+
+  /**
+   * Searches for all volunteers from the local database whose name,ssn or organisation name matches the keyword
+   * @param keyword The string used for search
+   * @param page A number defining the current page of volunteers from the total list (used to paginate the response)
+   * @param limit The number of volunteers per page
+   * @returns An Observable with all volunteers
+   */
+  search(keyword: string, page: number, limit: number): Observable<any> {
+    const skip = page * limit;
+    const pattern = new RegExp('.*' + keyword + '.*', 'ig');
+    return from(localDB.find({
+      selector: {
+        $and: [
+          {
+            $or: [
+              {
+                name_slug: {$regex: pattern},
+              },
+              {
+                ssn: {$regex: pattern},
+              },
+              {
+                'organisation.name_slug': {$regex: pattern},
+              },
+            ]
+          },
+          {
+            type: this.type
+          }
+        ]
+      },
+      limit,
+      include_docs: true,
+      skip,
     }));
   }
 
    /**
-  * Finds a volunteer by its id in the local database
-  * @param volunteerId Volunteer's id
-  * @returns An Observable containing the volunteer with that id
-  */
+    * Finds a volunteer by its id in the local database
+    * @param volunteerId Volunteer's id
+    * @returns An Observable containing the volunteer with that id
+    */
   getVolunteerById(volunteerId: string): Observable<any> {
     return from(localDB.find({
       selector: {
         _id: {$eq: volunteerId},
+        type: this.type
       }
     }));
   }
 
   /**
-  * Finds a volunteer by its ssn in the local database
-  * @param ssn A ssn code
-  * @returns An Observable containing the volunteer with that id
-  */
+   * Finds a volunteer by its ssn in the local database
+   * @param ssn A ssn code
+   * @returns An Observable containing the volunteer with that id
+   */
   getVolunteerBySsn(ssn: string): Observable<any> {
     return from(localDB.find({
       selector: {
         ssn: {$eq: ssn},
+        type: this.type
       }
     }));
   }
@@ -126,13 +139,13 @@ export class VolunteerService {
    * @param phone String value containing the new volunteer's phone number
    * @param county String value containing the new volunteer's county
    * @param city String value containing the new volunteer's city
-   * @param organisation Object value containing the new volunteer's organisation 
+   * @param organisation Object value containing the new volunteer's organisation
    * Either contains an object with the following properties {id, name, website}, or it's null
    * @param course Volunteer's course with properties: {id, name, acredited, obtained}
    * @returns An Observable with the created object
    */
   createVolunteer(name: string, ssn: string, phone: string, county: string, city: string, organisation: any, course: any): Observable<any> {
-    let volunteer = new Volunteer;
+    const volunteer = new Volunteer();
     volunteer.name = name;
     volunteer.ssn = ssn;
     volunteer.county = county;
@@ -141,12 +154,15 @@ export class VolunteerService {
     volunteer.updated = new Date();
     volunteer.allocation = '';
     volunteer.phone = phone;
+    volunteer.name_slug = this.removeSpecialChars(name);
+    volunteer.type = this.type;
 
-    if(organisation) {
+    if (organisation) {
       volunteer.organisation = {
-        "id": organisation._id,
-        "name": organisation.name,
-        "website": organisation.website
+        id: organisation._id,
+        name: organisation.name,
+        website: organisation.website,
+        name_slug: this.removeSpecialChars(organisation.name)
       };
     } else {
       volunteer.organisation = null;
@@ -155,7 +171,7 @@ export class VolunteerService {
     return from(localDB.post(volunteer))
     .pipe(
         map((response) => {
-          if(course) {
+          if (course) {
             this.courseService.createCourse(course.name, volunteer._id, course.acredited, course.obtained).subscribe(() => {});
           }
           return response;
@@ -164,11 +180,11 @@ export class VolunteerService {
   }
 
    /**
-  * Updates a volunteer entry in the local database
-  * @param volunteer The new volunteer entry
-  */
+    * Updates a volunteer entry in the local database
+    * @param volunteer The new volunteer entry
+    */
   updateVolunteer(volunteer: Volunteer) {
-    localDB.get(volunteer._id).then(function (doc) {
+    localDB.get(volunteer._id).then((doc) => {
       doc.name = volunteer.name ? volunteer.name : doc.name;
       doc.ssn = volunteer.ssn ? volunteer.ssn : doc.ssn;
       doc.phone = volunteer.phone ? volunteer.phone : doc.phone;
@@ -183,11 +199,11 @@ export class VolunteerService {
   }
 
    /**
-   * Deletes an entry by its id from the local database
-   * @param volunteerId The volunteer id
-   */
+    * Deletes an entry by its id from the local database
+    * @param volunteerId The volunteer id
+    */
   deleteVolunteerById(volunteerId: string) {
-    localDB.get(volunteerId).then(function (doc) {
+    localDB.get(volunteerId).then((doc) => {
       localDB.remove(doc);
     });
   }
@@ -201,36 +217,39 @@ export class VolunteerService {
    * @param limit The number of volunteers per page
    * @returns An Observable with all volunteers matching the filters
    */
-  filter(county: string, organisationId: string, courseName: string, page:number, limit: number): Observable<any> {
+  filter(county: string, organisationId: string, courseName: string, page: number, limit: number): Observable<any> {
     const skip = page * limit;
-    let selector:any = {"$and" : []};
+    const selector: any = {$and : []};
 
-      
-    if(county !== 'all') {
+    selector['$and'].push( {
+      type: this.type,
+    });
+
+    if (county !== 'all') {
       selector['$and'].push( {
-        "county": {$eq: county},
+        county: {$eq: county},
       });
     }
 
-    if(organisationId) {
+    if (organisationId) {
       selector['$and'].push(  {
-        "organisation.id": {$eq: organisationId},
+        'organisation.id': {$eq: organisationId},
       });
     }
 
-    if(courseName) {
-      selector['$and'].push( {"courses": {
-        "$elemMatch" : {
-          "name": {$eq: courseName},
+    if (courseName) {
+      selector['$and'].push( {courses: {
+        $elemMatch : {
+          name: {$eq: courseName},
           }
         }
       });
     }
 
     return from(localDB.find({
-      selector: selector,
-      limit: limit,
-      skip: skip
+      selector,
+      limit,
+      skip
     }));
   }
 
@@ -240,10 +259,25 @@ export class VolunteerService {
    * @param volunteerId Volunteer id
    */
   allocateVolunteer(allocationId: string, volunteerId: string) {
-    return localDB.get(volunteerId).then(function (doc) {
+    return localDB.get(volunteerId).then((doc) => {
       doc.allocation = allocationId;
       doc.updated = new Date();
       localDB.put(doc);
     });
+  }
+
+  private removeSpecialChars(text: string): string {
+      const input   = 'ăâîșț';
+      const output  = 'aaist';
+      const regex = new RegExp('[' + input + ']', 'g');
+      const transl = {};
+
+      const lookup = (m) => transl[m] || m;
+
+      for (let i = 0; i < input.length; i++) {
+        transl[input[i]] = output[i];
+      }
+
+      return text.replace(regex, lookup);
   }
 }

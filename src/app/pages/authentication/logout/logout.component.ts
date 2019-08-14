@@ -10,17 +10,17 @@ import { Router } from '@angular/router';
 export class LogoutComponent implements OnInit {
 
   /**
-   * 
+   *
    * @param authenticationService Provider for authentication related operations
    * @param router Provider for router navigation
    */
   constructor(private authenticationService: AuthenticationService,
-    private router: Router) { }
+              private router: Router) { }
 
   /**
-  * A request through the authentication service is sent for logout;
-  * If its successful the user will be redirected to the login screen
-  */
+   * A request through the authentication service is sent for logout;
+   * If its successful the user will be redirected to the login screen
+   */
   ngOnInit() {
     this.authenticationService.logout().subscribe(() => {
       this.router.navigate(['../auth/login'], {

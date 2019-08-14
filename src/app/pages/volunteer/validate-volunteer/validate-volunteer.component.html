@@ -6,7 +6,7 @@
     <ion-buttons slot="end">
       <ion-menu-button color="dark"></ion-menu-button>
     </ion-buttons>
-    <img src="../../assets/images/logo.PNG" class="logo-title mx-auto" />
+    <img src="../../assets/images/DSU_logo.PNG" class="logo-title mx-auto" />
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
@@ -32,7 +32,7 @@
           {{volunteer.name}}
         </ion-label>
         <ion-label class="organisation pl-10">
-          <a href="{{volunteer.organisation?.website}}" *ngIf="volunteer.organisation">
+          <a (click)="openBrowser(volunteer.organisation?.website)" *ngIf="volunteer.organisation">
             {{(volunteer.organisation.name)}}
           </a>
           <a *ngIf="!volunteer.organisation">
