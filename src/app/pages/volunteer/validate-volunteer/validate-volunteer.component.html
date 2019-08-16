@@ -48,7 +48,7 @@
       <div *ngIf="volunteer._id === volunteerIdWithDetails" class="item-menu mb-5">
         <ion-item lines="none" *ngFor="let course of courses" >
           <ion-label class="m-0">
-            Voluntar acreditat pentru <a>{{course.name}}</a>.
+            Voluntar acreditat pentru <a>{{course.course_name.name}}</a>.
           </ion-label>
         </ion-item>
 
@@ -60,7 +60,7 @@
 
         <ion-item lines="none">
           <ion-label class="m-0">
-            Înregistrat în {{volunteer.created | date: 'dd.MM.yyyy'}}.
+            Înregistrat în {{volunteer.created_at | date: 'dd.MM.yyyy'}}.
           </ion-label>
         </ion-item>
 
@@ -87,13 +87,13 @@
             <ion-col col-6 class="custom-input selectors">
               <ion-label class="title">Județ</ion-label>
               <ion-select class="mt-10" [(ngModel)]="county" (ionChange)="countySelectionChanged($event)" class="mt-5 p-5">
-                <ion-select-option *ngFor="let county of counties" value="{{county.name}}">{{county.name}}</ion-select-option>
+                <ion-select-option *ngFor="let county of counties" [value]="county">{{county.name}}</ion-select-option>
               </ion-select>
             </ion-col>
             <ion-col col-6 class="custom-input selectors">
               <ion-label class="title">Localitate</ion-label>
               <ion-select class="mt-10" [(ngModel)]="city" class="mt-5 p-5" [disabled]="!county">
-                <ion-select-option *ngFor="let city of cities" value="{{city.name}}">{{city.name}}</ion-select-option>
+                <ion-select-option *ngFor="let city of cities" [value]="city">{{city.name}}</ion-select-option>
               </ion-select>
             </ion-col>
           </ion-row>

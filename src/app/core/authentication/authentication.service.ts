@@ -42,7 +42,7 @@ export class AuthenticationService {
   /**
    * Sends a login request to the backend server
    * If it's successful stores the credentials and returns the response body
-   * @param payload 
+   * @param payload Login credentials
    * @returns An observable that contains the authentication credentials
    */
   login(
@@ -119,9 +119,9 @@ export class AuthenticationService {
   }
 
    /**
-   * Getter method for current user's profile
-   * @returns The current user
-   */
+    * Getter method for current user's profile
+    * @returns The current user
+    */
   get user(): Authentication.User | null {
     return this.credentials ? this.credentials.user : null;
   }
@@ -130,7 +130,7 @@ export class AuthenticationService {
    * Sends a request to the backend server for current user's profile
    * @returns An observable that contains the current user's profile
    */
-  private getUserProfile(): Observable<Authentication.User> { 
+  private getUserProfile(): Observable<Authentication.User> {
     return this.httpClient
     .get('/profile')
     .pipe(
@@ -141,10 +141,10 @@ export class AuthenticationService {
   }
 
   /**
-  * Sends a request to the backend server for password recovery
-  * @param email User's email, it's the one that will receive the password reset link
-  * @returns an observable that contains a truth value: successful or not
-  */
+   * Sends a request to the backend server for password recovery
+   * @param email User's email, it's the one that will receive the password reset link
+   * @returns an observable that contains a truth value: successful or not
+   */
   public recoverPassword(email: string) {
     return this.httpClient.post('/password/recovery', {email: email});
   }

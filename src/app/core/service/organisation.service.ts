@@ -42,7 +42,7 @@ export class OrganisationService {
     localDB.sync(remoteDB, options);
 
     localDB.createIndex({
-      index: {fields: ['name']}
+      index: {fields: ['name', 'slug']}
     });
    }
 
@@ -97,7 +97,10 @@ export class OrganisationService {
     const currentUser = this.authenticationService.user;
     const organisation = new Organisation();
     organisation.name = name;
+    organisation.slug = this.removeSpecialChars(name);
     organisation.added_by = currentUser._id;
+    organisation.created_at = new Date();
+    organisation.updated_at = new Date();
     organisation.type = this.type;
 
     return from(localDB.post(organisation));
@@ -110,6 +113,7 @@ export class OrganisationService {
   updateOrganisation(organisation: Organisation) {
     localDB.get(organisation._id).then((doc) => {
       doc.name = organisation.name ? organisation.name : doc.name;
+      doc.slug = organisation.name ? this.removeSpecialChars(organisation.name) : doc.slug;
       localDB.put(doc);
     });
   }
@@ -122,5 +126,20 @@ export class OrganisationService {
     localDB.get(organisationId).then((doc) => {
       return localDB.remove(doc);
     });
+  }
+
+  private removeSpecialChars(text: string): string {
+    const input   = 'ăâîșț';
+    const output  = 'aaist';
+    const regex = new RegExp('[' + input + ']', 'g');
+    const transl = {};
+
+    const lookup = (m) => transl[m] || m;
+
+    for (let i = 0; i < input.length; i++) {
+      transl[input[i]] = output[i];
+    }
+
+    return text.replace(regex, lookup);
   }
 }

@@ -20,6 +20,7 @@ export class ListVolunteerComponent implements OnInit {
   counties = [];
   organisations = [];
   courses = [];
+  courseOptions = [];
   cities = [];
 
   keyword = '';
@@ -29,18 +30,18 @@ export class ListVolunteerComponent implements OnInit {
    */
   volunteerIdWithDetails: string;
 
-  selectedCounty = 'all';
+  selectedCounty: string;
   selectedOrganisation: string;
   selectedCourse: string;
 
   /**
    * County for allocation
    */
-  county: string;
+  county: any;
   /**
    * City for allocation
    */
-  city: string;
+  city: any;
 
   /**
    * Pagination
@@ -75,7 +76,7 @@ export class ListVolunteerComponent implements OnInit {
 
     this.getCountyList();
     this.getOrganisations();
-    this.getCourses();
+    this.getCourseOptions();
   }
 
   /**
@@ -95,6 +96,19 @@ export class ListVolunteerComponent implements OnInit {
   }
 
   /**
+   * Retrives the list of courses from the courses service
+   */
+  getCourseOptions() {
+    this.courseOptions = [{
+      _id: '1',
+      name: 'prim-ajutor'
+    }, {
+      _id: '2',
+      name: 'constructii'
+    }];
+  }
+
+  /**
    * Opens the allocation menu for the selected user
    * @param volunteerId String containing the id of the volunteer that was selected for allocation
    */
@@ -111,8 +125,11 @@ export class ListVolunteerComponent implements OnInit {
    */
   confirmAllocation(volunteerId: string) {
     const index = this.volunteers.findIndex(volunteer => volunteer._id === volunteerId);
+    delete this.city.county;
+
     if (index >= 0) {
-      this.allocationService.createAllocation(this.volunteers[index], this.county, this.city, this.volunteers[index].organisation).subscribe(() => {
+      this.allocationService.createAllocation(this.volunteers[index], this.county, this.city, this.volunteers[index].organisation)
+      .subscribe(() => {
         this.volunteers[index] = this.volunteerService.getVolunteerById(volunteerId).subscribe((response) => {
           if (response.docs && response.docs.length > 0) {
             this.volunteers[index] = response.docs[0];
@@ -151,15 +168,6 @@ export class ListVolunteerComponent implements OnInit {
   }
 
   /**
-   * Retrives the list of courses from the courses service
-   */
-  getCourses() {
-    this.courseService.getCourses().subscribe((response: any) => {
-      this.courses = response.docs;
-    });
-  }
-
-  /**
    * When a selection is changed, new data is retrived
    */
   selectionsChanged() {
@@ -175,7 +183,7 @@ export class ListVolunteerComponent implements OnInit {
       this.volunteers = [];
     }
 
-    if (this.selectedCounty !== 'all' || this.selectedOrganisation || this.selectedCourse) {
+    if (this.selectedCounty || this.selectedOrganisation || this.selectedCourse) {
       this.volunteerService.filter(this.selectedCounty, this.selectedOrganisation, this.selectedCourse , this.page, this.limit)
       .subscribe((response: any) => {
         this.volunteers = response.docs;
@@ -201,7 +209,7 @@ export class ListVolunteerComponent implements OnInit {
 
       // App logic to determine if all data is loaded
       // and disable the infinite scroll
-      if (this.volunteers.length == 20) {
+      if (this.volunteers.length === 20) {
         event.target.disabled = true;
       }
     }, 500);
@@ -231,12 +239,16 @@ export class ListVolunteerComponent implements OnInit {
    *
    * @param county Retrieves the list of cities from the selected county
    */
-  getCityList(county: string) {
+  getCityList(county: any) {
     this.locationsService.getCityList().subscribe((response) => {
-      this.cities = response.filter(city => city.county === county);
+      this.cities = response.filter(city => city.county === county.name);
     });
   }
 
+  /**
+   * Opens a navigation browser with the website url
+   * @param website Organisation website url
+   */
   openBrowser(website: string) {
     if (website) {
       website = 'http://' + website.replace('http://', '').replace('https://', '');

@@ -6,6 +6,8 @@ import { OrganisationService,
   LocationsService,
   CourseService } from 'src/app/core/service';
 import { Router } from '@angular/router';
+import { SsnValidation } from 'src/app/core/validators/ssn-validation';
+import { PhoneValidation } from 'src/app/core/validators/phone-validation';
 
 @Component({
   selector: 'app-add-volunteer',
@@ -82,8 +84,8 @@ export class AddVolunteerComponent implements OnInit {
   private createForm() {
     this.addForm = this.formBuilder.group({
       name: ['', Validators.required],
-      ssn: ['', Validators.required],
-      phone: ['', Validators.required],
+      ssn: ['', [Validators.required, SsnValidation.ssnValidation]],
+      phone: ['', [Validators.required, PhoneValidation.phoneValidation]],
       organisation: ['', Validators.required],
       county: new FormControl({value: '', disabled: false}, Validators.required),
       city: new FormControl({value: '', disabled: true}, Validators.required),
@@ -97,38 +99,33 @@ export class AddVolunteerComponent implements OnInit {
    * It prepares the values that are going to be sent to the volunteer service
    */
   submit() {
-    this.computeSelectedOrganisation();
-
-    if (this.courseNone) {
-      this.addForm.controls['course'].setValue('');
-      this.selectedCourse = null;
-    }
-
-    this.createVolunteer();
-  }
-
-  /**
-   * Computes the selected organisation
-   */
-  computeSelectedOrganisation() {
     if (this.organisationNone) {
       this.addForm.controls['organisation'].setValue('');
       this.selectedOrganisation = null;
-    }
-
-    if (this.newOrganisation) {
-      this.organisationService.createOrganisation(this.newOrganisation).subscribe((data: any) => {
-      this.organisationService.getOrganisationById(data.id).subscribe((result: any) => {
-        this.selectedOrganisation = result.docs[0];
+      this.createVolunteer();
+    } else {
+      if (this.newOrganisation) {
+        this.organisationService.createOrganisation(this.newOrganisation).subscribe((data: any) => {
+          this.organisationService.getOrganisationById(data.id).subscribe((result: any) => {
+            this.selectedOrganisation = result.docs[0];
+            this.createVolunteer();
+          });
         });
-      });
-     }
+      } else {
+        this.createVolunteer();
+      }
+    }
   }
 
   /**
    * Sends the proper values to the volunteer service
    */
   private createVolunteer() {
+    if (this.courseNone) {
+      this.addForm.controls['course'].setValue('');
+      this.selectedCourse = null;
+    }
+
     this.volunteerService.createVolunteer(
       this.addForm.value.name,
       this.addForm.value.ssn.toString(),
@@ -157,7 +154,7 @@ export class AddVolunteerComponent implements OnInit {
    */
   private getCityList(county) {
     this.locationsService.getCityList().subscribe((response) => {
-      this.cities = response.filter(city => city.county === county);
+      this.cities = response.filter(city => city.county === county.name);
       if (this.cities.length > 0) {
         this.addForm.controls['city'].enable();
       }
@@ -179,12 +176,14 @@ export class AddVolunteerComponent implements OnInit {
    * Retrieves the list of courses from the courses service
    */
   private getCourses() {
-    // this.courseService.getCourses().subscribe((response: any) =>{
-    //   const data = response.rows.filter(item => item.doc.language !== 'query');
-
-    //   this.courses = data.map(item => item.doc.name).filter((value, index, self) => self.indexOf(value) === index);
-    // });
-    this.courses = ['prim-ajutor', 'constructii'];
+    // TEMP
+    this.courses = [{
+      _id: '1',
+      name: 'prim-ajutor'
+    }, {
+      _id: '2',
+      name: 'constructii'
+    }];
   }
 
   /**
@@ -231,23 +230,22 @@ export class AddVolunteerComponent implements OnInit {
    * Containing the organisations that are acreditors for the selected course
    */
   courseSelectionChanged() {
-    this.selectedCourse = {
-      name: this.addForm.value.course
-    };
+    this.selectedCourse = this.addForm.value.course;
 
-    // this.courseService.getCourseByName(this.addForm.value.course).subscribe((response: any) => {
-    //   this.acreditedOrganisations = response.docs;
-    // });
+    /* this.courseService.getCourseByName(this.addForm.value.course).subscribe((response: any) => {
+      this.acreditedOrganisations = response.docs;
+    });
 
-    // this.acreditedOrganisations = [
-    //   {
-    //     _id: '1',
-    //     acredited: 'Crucea Rosie'
-    //   },
-    //   {
-    //     _id: '2',
-    //     acredited:'SMURD'
-    //   }];
+    this.acreditedOrganisations = [
+      {
+        _id: '1',
+        acredited: 'Crucea Rosie'
+      },
+      {
+        _id: '2',
+        acredited:'SMURD'
+      }];
+      */
   }
 
   /**
@@ -262,6 +260,7 @@ export class AddVolunteerComponent implements OnInit {
       }
     });
   }
+
 
   // /**
   //  * Triggers a date picker pop-up after a course is added in order to take the course acreditation date

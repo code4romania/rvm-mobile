@@ -3,29 +3,40 @@
  */
 export class Volunteer {
     _id: string;
+    _rev: string;
+    name: string;
+    slug: string;
+    ssn: string;
+    email: string;
+    phone: string;
+    county: {
+        id: string;
+        name: string;
+    };
+    city: {
+        id: string;
+        name: string;
+    };
     organisation: {
-       id: string,
+       _id: string,
        name: string,
-       name_slug: string,
+       slug: string,
        website: string
     };
-    name: string;
-    name_slug: string;
-    ssn: string;
-    phone: string;
-    email: string;
-    county: string;
-    city: string;
-    address: string;
+    courses: {
+        id: string;
+        course_name_id: string;
+        name: string;
+        obtained: string;
+        acredited: string;
+    }[];
+    allocation: string;
     comments: string;
     job: string;
+    created_at: Date;
+    updated_at: Date;
     added_by: number;
-    created: Date;
-    updated: Date;
-    allocation: string;
     type: string;
 
     constructor() {}
 }
-
-// TODO edit all models and services

@@ -4,6 +4,7 @@ import * as PouchDBFind from 'pouchdb-find/lib/index';
 import { environment } from '../../../environments/environment';
 import { from, Observable } from 'rxjs';
 import { Course } from '../model/course.model';
+import { AuthenticationService } from '../authentication';
 
 /**
  * Reference for local PouchDB Courses Database
@@ -26,10 +27,12 @@ const remoteDB = new PouchDB(environment.databaseURL + '/courses');
 @Injectable()
 export class CourseService {
   private type = 'courses';
+
   /**
    * Class constructor, sets the synchronization options for CouchDB and PouchDB Courses Database
+   * @param authService Provider for authentication related operations
    */
-  constructor() {
+  constructor(private authService: AuthenticationService) {
     const options = {
       live: true,
       retry: true,
@@ -39,7 +42,7 @@ export class CourseService {
     localDB.sync(remoteDB, options);
 
     localDB.createIndex({
-      index: {fields: ['name', 'volunteer_id', 'acredited']}
+      index: {fields: ['course_name.id', 'volunteer_id', 'acredited.id']}
     });
    }
 
@@ -59,16 +62,16 @@ export class CourseService {
 
   /**
    * Finds a course by its name in the local database
-   * @param courseName The name of the course
+   * @param courseNameId Course name id from statics database
    * @returns An Observable with all courses with that name
    */
-  getCourseByName(courseName: string): Observable<any> {
+  getCourseByName(courseNameId: string): Observable<any> {
     return from(localDB.find({
       selector: {
-        name: {$eq: courseName},
+        'course_name.id': {$eq: courseNameId},
         type: this.type
       },
-      sort: ['name'],
+      sort: ['course_name.id'],
     }));
   }
 
@@ -97,17 +100,16 @@ export class CourseService {
 
   /**
    * Creates a course entry in the local database
-   * @param name String value containing the new course's name
-   * @param volunteer_id String value containing the volunteer's id
-   * @param obtained Date value when a course was obtained
-   * @returns An Observable with the created object
+   * @param courseName Entry from statics courses database
+   * @param volunteer_id The id of the volunteer that is acredited for this course
    */
-  createCourse(name: string, volunteer_id: string, acredited: string, obtained: Date): Observable<any> {
+  createCourse(courseName: any, volunteer_id: string): Observable<any> {
     const course = new Course();
     course.volunteer_id = volunteer_id;
-    course.name = name;
-    course.obtained = obtained;
-    course.acredited = acredited;
+    course.course_name = courseName;
+    course.created_at = new Date();
+    course.updated_at = new Date();
+    course.added_by = this.authService.user._id;
     course.type = this.type;
 
     return from(localDB.post(course));
@@ -118,10 +120,11 @@ export class CourseService {
    * @param course The new course entry
    */
   updateCourse(course: Course): void {
-    localDB.get(course._id).then((doc) => {
-      doc.name = course.name ? course.name : doc.name;
+    localDB.get(course._id).then((doc: Course) => {
+      doc.course_name = course.course_name ? course.course_name : doc.course_name;
       doc.acredited = course.acredited ? course.acredited : doc.acredited;
       doc.obtained = course.obtained ? course.obtained : doc.obtained;
+      doc.updated_at = new Date();
       localDB.put(doc);
     });
   }

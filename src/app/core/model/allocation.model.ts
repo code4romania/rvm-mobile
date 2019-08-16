@@ -3,6 +3,7 @@
  */
 export class Allocation {
     _id: string;
+    _rev: string;
     rescue_officer: {
         id: string;
         name: string;
@@ -11,13 +12,19 @@ export class Allocation {
         id: string;
         name: string;
     };
-    county: string;
-    city: string;
+    county: {
+      id: string;
+      name: string;
+    };
+    city: {
+      id: string;
+      name: string;
+    };
     organisation: {
         id: string;
         name: string;
-        website: string;
     };
     created_at: Date;
+    updated_at: Date;
     type: string;
 }

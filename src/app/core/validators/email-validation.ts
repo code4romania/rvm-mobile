@@ -9,6 +9,6 @@ export class EmailValidation {
             return null;
         }
 
-        return { 'email': true };
+        return { email: true };
     }
 }

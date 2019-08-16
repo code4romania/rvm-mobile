@@ -36,7 +36,7 @@ export class PasswordValidation {
             return { password: true };
         }
 
-        if (password.length >= 8) {
+        if (password.length < 8) {
             return { password: true };
         }
 

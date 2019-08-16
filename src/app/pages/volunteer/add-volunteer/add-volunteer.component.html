@@ -34,7 +34,7 @@
           Alege județ
         </ion-label>
         <ion-select class="mt-10" formControlName="county" (ionChange)="countySelectionChanged($event)">
-          <ion-select-option *ngFor="let county of counties" value="{{county.name}}">{{county.name}}</ion-select-option>
+          <ion-select-option *ngFor="let county of counties" [value]="county">{{county.name}}</ion-select-option>
         </ion-select>
       </div>
 
@@ -43,7 +43,7 @@
           Alege localitate
         </ion-label>
         <ion-select class="mt-10" formControlName="city" (ionChange)="citySelectionChanged($event)">
-          <ion-select-option *ngFor="let city of cities" value="{{city.name}}">{{city.name}}</ion-select-option>
+          <ion-select-option *ngFor="let city of cities" [value]="city">{{city.name}}</ion-select-option>
         </ion-select>
       </div>
 
@@ -74,7 +74,7 @@
         </ion-label>
         <ion-select class="mt-10" formControlName="course" (ionChange)="courseSelectionChanged()"
           [attr.disabled]="courseNone">
-          <ion-select-option *ngFor="let course of courses" value="{{course}}">{{course}}
+          <ion-select-option *ngFor="let course of courses" [value]="course">{{ course.name }}
           </ion-select-option>
         </ion-select>
       </div>

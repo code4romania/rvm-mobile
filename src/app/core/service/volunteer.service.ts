@@ -44,7 +44,19 @@ export class VolunteerService {
     localDB.sync(remoteDB, options);
 
     localDB.createIndex({
-      index: {fields: ['name', 'ssn', 'organisation.name', 'course.[].name', 'organisation.id', 'county', 'city', 'job', 'comments']}
+      index: {
+        fields: [
+          'name',
+          'slug',
+          'ssn',
+          'organisation.slug',
+          'course.[].course_name_id',
+          'organisation._id',
+          'county.id',
+          'city.id',
+          'job',
+          'comments'
+      ]}
     });
    }
 
@@ -83,13 +95,13 @@ export class VolunteerService {
           {
             $or: [
               {
-                name_slug: {$regex: pattern},
+                slug: {$regex: pattern},
               },
               {
                 ssn: {$regex: pattern},
               },
               {
-                'organisation.name_slug': {$regex: pattern},
+                'organisation.slug': {$regex: pattern},
               },
             ]
           },
@@ -144,35 +156,52 @@ export class VolunteerService {
    * @param course Volunteer's course with properties: {id, name, acredited, obtained}
    * @returns An Observable with the created object
    */
-  createVolunteer(name: string, ssn: string, phone: string, county: string, city: string, organisation: any, course: any): Observable<any> {
+  createVolunteer(name: string, ssn: string, phone: string, county: any, city: any, organisation: any, course: any): Observable<any> {
     const volunteer = new Volunteer();
     volunteer.name = name;
     volunteer.ssn = ssn;
-    volunteer.county = county;
-    volunteer.city = city;
-    volunteer.created = new Date();
-    volunteer.updated = new Date();
+    volunteer.county = {
+      id: county.id.toString(),
+      name: county.name
+    };
+    volunteer.city = {
+      id: city.id.toString(),
+      name: city.name
+    };
+    volunteer.created_at = new Date();
+    volunteer.updated_at = new Date();
     volunteer.allocation = '';
     volunteer.phone = phone;
-    volunteer.name_slug = this.removeSpecialChars(name);
+    volunteer.slug = this.removeSpecialChars(name);
     volunteer.type = this.type;
 
     if (organisation) {
       volunteer.organisation = {
-        id: organisation._id,
+        _id: organisation._id,
         name: organisation.name,
         website: organisation.website,
-        name_slug: this.removeSpecialChars(organisation.name)
+        slug: this.removeSpecialChars(organisation.name)
       };
     } else {
       volunteer.organisation = null;
     }
 
+    volunteer.courses = [];
+
     return from(localDB.post(volunteer))
     .pipe(
         map((response) => {
           if (course) {
-            this.courseService.createCourse(course.name, volunteer._id, course.acredited, course.obtained).subscribe(() => {});
+            this.courseService.createCourse(course, volunteer._id).subscribe((data) => {
+              volunteer.courses.push({
+                id: data.id,
+                course_name_id: course._id,
+                name: course.name,
+                obtained: null,
+                acredited: null
+              });
+              this.updateVolunteer(volunteer);
+            });
           }
           return response;
         })
@@ -184,16 +213,20 @@ export class VolunteerService {
     * @param volunteer The new volunteer entry
     */
   updateVolunteer(volunteer: Volunteer) {
-    localDB.get(volunteer._id).then((doc) => {
+    localDB.get(volunteer._id).then((doc: Volunteer) => {
       doc.name = volunteer.name ? volunteer.name : doc.name;
+      doc.slug = volunteer.name ? this.removeSpecialChars(volunteer.name) : doc.slug;
       doc.ssn = volunteer.ssn ? volunteer.ssn : doc.ssn;
+      doc.email = volunteer.email ? volunteer.email : doc.email;
       doc.phone = volunteer.phone ? volunteer.phone : doc.phone;
       doc.county = volunteer.county ? volunteer.county : doc.county;
       doc.city = volunteer.city ? volunteer.city : doc.city;
       doc.organisation = volunteer.organisation ? volunteer.organisation : doc.organisation;
+      doc.courses = volunteer.courses ? volunteer.courses : doc.courses;
       doc.comments = volunteer.comments ? volunteer.comments : doc.comments;
       doc.job = volunteer.job ? volunteer.job : doc.job;
-      doc.updated = new Date();
+      doc.allocation = volunteer.allocation ? volunteer.allocation : doc.allocation;
+      doc.updated_at = new Date();
       localDB.put(doc);
     });
   }
@@ -210,14 +243,14 @@ export class VolunteerService {
 
   /**
    * Filters local Volunteers database by the given parameters' values
-   * @param county County name
+   * @param countyId County id
    * @param organisationId Organisation id
-   * @param courseName Course Name
+   * @param courseId Course name id
    * @param page A number defining the current page of volunteers from the total list (used to paginate the response)
    * @param limit The number of volunteers per page
    * @returns An Observable with all volunteers matching the filters
    */
-  filter(county: string, organisationId: string, courseName: string, page: number, limit: number): Observable<any> {
+  filter(countyId: string, organisationId: string, courseId: string, page: number, limit: number): Observable<any> {
     const skip = page * limit;
     const selector: any = {$and : []};
 
@@ -225,22 +258,22 @@ export class VolunteerService {
       type: this.type,
     });
 
-    if (county !== 'all') {
+    if (countyId) {
       selector['$and'].push( {
-        county: {$eq: county},
+        'county.id': {$eq: countyId},
       });
     }
 
     if (organisationId) {
       selector['$and'].push(  {
-        'organisation.id': {$eq: organisationId},
+        'organisation._id': {$eq: organisationId},
       });
     }
 
-    if (courseName) {
+    if (courseId) {
       selector['$and'].push( {courses: {
         $elemMatch : {
-          name: {$eq: courseName},
+          course_name_id: {$eq: courseId},
           }
         }
       });
@@ -261,7 +294,7 @@ export class VolunteerService {
   allocateVolunteer(allocationId: string, volunteerId: string) {
     return localDB.get(volunteerId).then((doc) => {
       doc.allocation = allocationId;
-      doc.updated = new Date();
+      doc.updated_at = new Date();
       localDB.put(doc);
     });
   }

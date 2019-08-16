@@ -3,16 +3,16 @@
  */
 declare namespace Authentication {
   /**
- * Interface for login payload
- */
+   * Interface for login payload
+   */
   export interface LoginPayload {
     username: string;
     password: string;
   }
 
   /**
- * Interface for user object
- */
+   * Interface for user object
+   */
   export interface User {
     _id: string;
     name: string;
@@ -23,8 +23,8 @@ declare namespace Authentication {
   }
 
   /**
- * Interface for credentials object
- */
+   * Interface for credentials object
+   */
   export interface Credentials {
     user: User;
     token: string;

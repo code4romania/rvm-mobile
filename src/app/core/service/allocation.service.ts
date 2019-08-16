@@ -52,13 +52,13 @@ export class AllocationService {
     /**
      *  Creates an allocation entry in the local database and updates volunteer's allocation status
      * @param volunteer Volunteer object
-     * @param county String value containing the county in which the volunteer is allocated
-     * @param city String value containing the county in which the volunteer is allocated
+     * @param county County entry from statics database
+     * @param city City entry from statics database
      * @param organisation Object value containing the allocated volunteer's organisation
      * Either contains an object with the following properties {id, name, website}, or it's null
      * @returns An Observable with the created object
      */
-   createAllocation(volunteer: Volunteer, county: string, city: string, organisation: any) {
+   createAllocation(volunteer: Volunteer, county: any, city: any, organisation: any) {
     const rescue_officer = this.authenticationService.user;
     const allocation = new Allocation();
     allocation.volunteer = {
@@ -72,13 +72,13 @@ export class AllocationService {
     allocation.county = county;
     allocation.city = city;
     allocation.created_at = new Date();
+    allocation.updated_at = new Date();
     allocation.type = this.type;
 
     if (organisation) {
         allocation.organisation = {
           id: organisation.id,
           name: organisation.name,
-          website: organisation.website
         };
     }
 

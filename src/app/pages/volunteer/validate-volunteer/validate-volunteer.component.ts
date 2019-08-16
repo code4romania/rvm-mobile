@@ -22,8 +22,8 @@ export class ValidateVolunteerComponent implements OnInit {
   courses = [];
   counties = [];
   cities = [];
-  county = '';
-  city = '';
+  county: any;
+  city: any;
 
   /**
    * Pagination
@@ -107,6 +107,8 @@ export class ValidateVolunteerComponent implements OnInit {
     */
   confirmAllocation(volunteerId: string) {
     const index = this.volunteers.findIndex(volunteer => volunteer._id === volunteerId);
+    delete this.city.county;
+
     if (index >= 0) {
       this.allocationService.createAllocation(this.volunteers[index], this.county, this.city, this.volunteers[index].organisation)
       .subscribe(() => {
@@ -191,12 +193,11 @@ export class ValidateVolunteerComponent implements OnInit {
    *
    * @param county Retrieves the list of cities from the selected county
    */
-  getCityList(county: string) {
+  getCityList(county: any) {
     this.locationsService.getCityList().subscribe((response) => {
-      this.cities = response.filter(city => city.county === county);
+      this.cities = response.filter(city => city.county === county.name);
     });
   }
-
   /**
    * When a county is selected, the form's value is updated and starts retriving the list of cities from that county
    * @param event Changing event, triggered when a change is detected on an element
@@ -205,6 +206,10 @@ export class ValidateVolunteerComponent implements OnInit {
     this.getCityList(event.detail.value);
   }
 
+  /**
+   * Opens a navigation browser with the website url
+   * @param website Organisation website url
+   */
   openBrowser(website: string) {
     if (website) {
       website = 'http://' + website.replace('http://', '').replace('https://', '');
