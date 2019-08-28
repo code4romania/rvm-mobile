@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { from, Observable } from 'rxjs';
 import { AuthenticationService } from '../authentication';
 import { Organisation } from '../model/organisation.model';
+import * as moment from 'moment';
 
 /**
  * Reference for local PouchDB Organisations Database
@@ -99,8 +100,8 @@ export class OrganisationService {
     organisation.name = name;
     organisation.slug = this.removeSpecialChars(name);
     organisation.added_by = currentUser._id;
-    organisation.created_at = new Date();
-    organisation.updated_at = new Date();
+    organisation.created_at = moment().format('Y-MM-DD H:mm:ss');
+    organisation.updated_at = moment().format('Y-MM-DD H:mm:ss');
     organisation.type = this.type;
 
     return from(localDB.post(organisation));

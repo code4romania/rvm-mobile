@@ -6,6 +6,7 @@ import { Volunteer } from '../model/volunteer.model';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CourseService } from './course.service';
+import * as moment from 'moment';
 
 declare const emit: any;
 /**
@@ -168,8 +169,8 @@ export class VolunteerService {
       id: city.id.toString(),
       name: city.name
     };
-    volunteer.created_at = new Date();
-    volunteer.updated_at = new Date();
+    volunteer.created_at = moment().format('Y-MM-DD H:mm:ss');
+    volunteer.updated_at = moment().format('Y-MM-DD H:mm:ss');
     volunteer.allocation = '';
     volunteer.phone = phone;
     volunteer.slug = this.removeSpecialChars(name);

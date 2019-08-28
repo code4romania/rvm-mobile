@@ -24,7 +24,7 @@ export class Allocation {
         id: string;
         name: string;
     };
-    created_at: Date;
-    updated_at: Date;
+    created_at: any;
+    updated_at: any;
     type: string;
 }

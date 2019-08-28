@@ -33,8 +33,8 @@ export class Volunteer {
     allocation: string;
     comments: string;
     job: string;
-    created_at: Date;
-    updated_at: Date;
+    created_at: any;
+    updated_at: any;
     added_by: number;
     type: string;
 

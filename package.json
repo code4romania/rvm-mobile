@@ -42,6 +42,7 @@
     "cordova-sms-plugin": "^1.0.0",
     "core-js": "^2.5.4",
     "ionic-plugin-deeplinks": "^1.0.20",
+    "moment": "^2.24.0",
     "pouchdb": "^7.1.1",
     "pouchdb-find": "^7.1.1",
     "rxjs": "~6.5.1",

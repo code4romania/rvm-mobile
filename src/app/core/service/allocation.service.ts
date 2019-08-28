@@ -8,6 +8,7 @@ import { AuthenticationService } from '../authentication';
 import { VolunteerService } from './volunteer.service';
 import { Allocation } from '../model/allocation.model';
 import { Volunteer } from '../model/volunteer.model';
+import * as moment from 'moment';
 
 /**
  * Reference for local PouchDB Allocations Database
@@ -71,8 +72,8 @@ export class AllocationService {
     };
     allocation.county = county;
     allocation.city = city;
-    allocation.created_at = new Date();
-    allocation.updated_at = new Date();
+    allocation.created_at = moment().format('Y-MM-DD H:mm:ss');
+    allocation.updated_at = moment().format('Y-MM-DD H:mm:ss');
     allocation.type = this.type;
 
     if (organisation) {

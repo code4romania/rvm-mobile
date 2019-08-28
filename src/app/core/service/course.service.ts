@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { from, Observable } from 'rxjs';
 import { Course } from '../model/course.model';
 import { AuthenticationService } from '../authentication';
+import * as moment from 'moment';
 
 /**
  * Reference for local PouchDB Courses Database
@@ -107,8 +108,8 @@ export class CourseService {
     const course = new Course();
     course.volunteer_id = volunteer_id;
     course.course_name = courseName;
-    course.created_at = new Date();
-    course.updated_at = new Date();
+    course.created_at = moment().format('Y-MM-DD H:mm:ss');
+    course.updated_at = moment().format('Y-MM-DD H:mm:ss');
     course.added_by = this.authService.user._id;
     course.type = this.type;
 

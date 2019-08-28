@@ -20,8 +20,8 @@ export class Organisation {
         name: string;
     };
     comments: string;
-    created_at: Date;
-    updated_at: Date;
+    created_at: any;
+    updated_at: any;
     added_by: string;
     type: string;
 
