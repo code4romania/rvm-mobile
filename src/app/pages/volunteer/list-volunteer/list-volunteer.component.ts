@@ -4,6 +4,8 @@ import { VolunteerService } from '../../../core/service/volunteer.service';
 import { LocationsService } from 'src/app/core/service/locations.service';
 import { OrganisationService, CourseService, AllocationService } from 'src/app/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { NavigationExtras, Router } from '@angular/router';
+import { Volunteer } from 'src/app/core/model/volunteer.model';
 
 @Component({
   selector: 'app-list-volunteer',
@@ -59,6 +61,7 @@ export class ListVolunteerComponent implements OnInit {
    * @param organisationService Provider for organisation related operations
    * @param courseService Provider for course related operations
    * @param allocationService  Provider for volunteer allocation related operations
+   * @param router Provider for route navigation
    * @param iab Provider for accessing an url in browser
    */
   constructor(private volunteerService: VolunteerService,
@@ -66,6 +69,7 @@ export class ListVolunteerComponent implements OnInit {
               private organisationService: OrganisationService,
               private courseService: CourseService,
               private allocationService: AllocationService,
+              private router: Router,
               private iab: InAppBrowser) { }
 
   /**
@@ -141,10 +145,24 @@ export class ListVolunteerComponent implements OnInit {
   }
 
   /**
-   * Sends an alert message to all volunteers
+   * Sends an alert message to the selected volunteer/s
+   * @param volunteerId Selected volunteer id, if the message will be sent to only one recipient
    */
-  sendAlert() {
-    console.log('Alert sent');
+  sendAlert(volunteer?: Volunteer) {
+    let volunteers = [];
+    if (volunteer) {
+      volunteers.push(volunteer);
+    } else {
+      volunteers = this.volunteers;
+    }
+
+    const navigationExtras: NavigationExtras = {
+      state: {
+        volunteers
+      }
+    };
+
+    this.router.navigateByUrl('/volunteer/send', navigationExtras);
   }
 
   /**

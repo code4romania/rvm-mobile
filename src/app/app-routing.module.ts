@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthenticationGuard } from './core';
-import { UnauthenticatedGuard } from './core/authentication/unauthenticated.guard';
 
 const routes: Routes = [
   {
@@ -24,9 +23,9 @@ const routes: Routes = [
     loadChildren: './pages/volunteer/volunteer.module#VolunteerPageModule',
     canActivate: [AuthenticationGuard]
   },
-  { 
-    path: 'auth', 
-    loadChildren: './pages/authentication/authentication.module#AuthenticationPageModule' 
+  {
+    path: 'auth',
+    loadChildren: './pages/authentication/authentication.module#AuthenticationPageModule'
   }
 ];
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Camera } from '@ionic-native/camera';
 import { SMS } from '@ionic-native/sms/ngx';
@@ -17,11 +17,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
    */
   private routeSub: Subscription;
 
-  /**
-   * The id of the volunteer that will receive the message
-   */
-  private volunteerId: string;
-  private volunteer: Volunteer;
+  private phoneNumbers: string[] = [];
 
   /**
    * The message that gets sent
@@ -34,24 +30,23 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   public base64Image: string;
 
   /**
-   *
-   * @param route Provider for current route
    * @param sms Provider for sending SMS messages
+   * @param router Provider for router navigation
    */
-  constructor(private route: ActivatedRoute,
-              private sms: SMS,
-              private volunteerService: VolunteerService) { }
+  constructor(private sms: SMS,
+              private router: Router) { }
 
   /**
    * Page initialisation: the volunteer id needs to be retrieved from the url
    */
   ngOnInit() {
-    this.routeSub = this.route.params.subscribe(params => {
-      this.volunteerId = params['id'];
-      this.volunteerService.getVolunteerById(this.volunteerId).subscribe((response) => {
-        this.volunteer = response.docs[0];
-      });
-    });
+      const navigation = this.router.getCurrentNavigation();
+
+      if (navigation && navigation.extras && navigation.extras.state) {
+        const volunteers = navigation.extras.state.volunteers;
+
+        volunteers.forEach((volunteer: Volunteer) => this.phoneNumbers.push(volunteer.phone));
+      }
   }
 
   /**
@@ -85,7 +80,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
             intent: 'INTENT'
         }
     };
-    this.sms.send(this.volunteer.phone, this.message, options);
+    this.sms.send(this.phoneNumbers, this.message, options);
   }
 
   /**

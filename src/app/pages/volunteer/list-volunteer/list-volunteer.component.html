@@ -96,7 +96,7 @@
 
         <ion-row lines="none" *ngIf="!volunteer.isInAllocation">
           <ion-col col-6>
-            <ion-button color="light" class="w-100" [routerLink]="['../send', volunteer._id]">
+            <ion-button color="light" class="w-100" (click)="sendAlert(volunteer)">
               Trimite mesaj
             </ion-button>
           </ion-col>

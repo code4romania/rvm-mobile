@@ -34,7 +34,7 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard]
   },
   {
-    path: 'send/:id',
+    path: 'send',
     component: SendMessageComponent,
     canActivate: [AuthenticationGuard]
   }

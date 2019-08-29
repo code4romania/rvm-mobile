@@ -4,6 +4,8 @@ import { AllocationService } from 'src/app/core/service/allocation.service';
 import { LocationsService } from 'src/app/core/service/locations.service';
 import { CourseService } from 'src/app/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { NavigationExtras, Router } from '@angular/router';
+import { Volunteer } from 'src/app/core/model/volunteer.model';
 
 @Component({
   selector: 'app-validate-volunteer',
@@ -41,12 +43,14 @@ export class ValidateVolunteerComponent implements OnInit {
    * @param allocationService Provider for volunteer allocation related operations
    * @param locationsService Provider for location selection
    * @param courseService Provider for course related operations
+   * @param router Provider for route navigation
    * @param iab Provider for accessing an url in browser
    */
   constructor(private volunteerService: VolunteerService,
               private allocationService: AllocationService,
               private locationsService: LocationsService,
               private courseService: CourseService,
+              private router: Router,
               private iab: InAppBrowser) { }
 
   /**
@@ -215,5 +219,26 @@ export class ValidateVolunteerComponent implements OnInit {
       website = 'http://' + website.replace('http://', '').replace('https://', '');
       this.iab.create(website);
     }
+  }
+
+  /**
+   * Sends an alert message to the selected volunteer/s
+   * @param volunteerId Selected volunteer id, if the message will be sent to only one recipient
+   */
+  sendAlert(volunteer?: Volunteer) {
+    let volunteers = [];
+    if (volunteer) {
+      volunteers.push(volunteer);
+    } else {
+      volunteers = this.volunteers;
+    }
+
+    const navigationExtras: NavigationExtras = {
+      state: {
+        volunteers
+      }
+    };
+
+    this.router.navigateByUrl('/volunteer/send', navigationExtras);
   }
 }
