@@ -15,6 +15,7 @@ import { PasswordValidation } from 'src/app/core/validators/password-validation'
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string;
+  loading = false;
 
   /**
    *
@@ -52,6 +53,7 @@ export class LoginComponent implements OnInit {
    * If they are validated, the user will be redirected to the home page, if not, a toast will display an error message
    */
   submit() {
+    this.loading = true;
     this.authenticationService
       .login(this.loginForm.value)
       .pipe(
@@ -61,13 +63,15 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         (credentials) => {
-          this.router.navigate(['../home'], {
-            replaceUrl: true
+          this.databaseSyncService.sync().subscribe(response => {        
+            this.loading = false;
+            this.router.navigate(['../home'], {
+              replaceUrl: true
+            });
           });
-          this.databaseSyncService.sync();
-          this.location.replaceState(this.router.serializeUrl(this.router.createUrlTree(['home'])));
         },
         (error: any) => {
+          this.loading = false;
           this.errorMessage = 'Informații incorecte';
           setTimeout(() => {
             this.errorMessage = null;

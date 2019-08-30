@@ -139,4 +139,17 @@ export class CourseService {
       return localDB.remove(doc);
     });
   }
+
+  /**
+   * Returns all course names for selection
+   */
+  getCourseNames() {
+    return from(localDB.find({
+      selector: {
+          type: 'course_names'
+      },
+      include_docs: true,
+      attachments: true
+    }));
+  }
 }

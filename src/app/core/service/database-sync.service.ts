@@ -1,5 +1,6 @@
 import * as PouchDB from 'pouchdb/dist/pouchdb';
 import { environment } from '../../../environments/environment';
+import { forkJoin, of } from 'rxjs';
 
 /**
  * Reference for local PouchDB Volunteers Database
@@ -38,6 +39,15 @@ const localAllocationsDB = new PouchDB('allocations');
 const remoteAllocationsDB = new PouchDB(environment.databaseURL + '/allocations');
 
 /**
+ * Reference for local PouchDB Statics Database
+ */
+const localStaticsDB = new PouchDB('statics');
+/**
+ * Reference for server CouchDB Allocations Database
+ */
+const remoteStaticsDB = new PouchDB(environment.databaseURL + '/statics');
+
+/**
  * Service for database synchronization (local and remote)
  */
 export class DatabaseSyncService {
@@ -48,18 +58,22 @@ export class DatabaseSyncService {
     constructor() { }
 
     /**
-     * Strats database synchronization
+     * Starts database synchronization
      */
     sync() {
         const options = {
-            live: true,
+            live: false,
             retry: true,
             continuous: true
           };
 
-        localVolunteersDB.sync(remoteVolunteersDB, options);
-        localCoursesDB.sync(remoteCoursesDB, options);
-        localOrganisationsDB.sync(remoteOrganisationsDB, options);
-        localAllocationsDB.sync(remoteAllocationsDB, options);
+        return forkJoin(
+            [
+                of(localVolunteersDB.sync(remoteVolunteersDB, options)),
+                of(localCoursesDB.sync(remoteCoursesDB, options)),
+                of(localOrganisationsDB.sync(remoteOrganisationsDB, options)),
+                of(localAllocationsDB.sync(remoteAllocationsDB, options)),
+                of(localStaticsDB.sync(remoteStaticsDB, options))
+            ]);
     }
 }

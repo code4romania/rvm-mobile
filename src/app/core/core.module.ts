@@ -24,7 +24,7 @@ import {
   DatabaseSyncService,
   AllocationService
 } from './service';
-import { LocationsService } from './service/locations.service';
+import { StaticsService } from './service/statics.service';
 import { UnauthenticatedGuard } from './authentication/unauthenticated.guard';
 
 @NgModule({
@@ -39,7 +39,7 @@ import { UnauthenticatedGuard } from './authentication/unauthenticated.guard';
     ErrorHandlerInterceptor,
     VolunteerService,
     ErrorMessageService,
-    LocationsService,
+    StaticsService,
     CourseService,
     OrganisationService,
     DatabaseSyncService,

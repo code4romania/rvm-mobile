@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { OrganisationService,
   VolunteerService,
-  LocationsService,
+  StaticsService,
   CourseService } from 'src/app/core/service';
 import { Router } from '@angular/router';
 import { SsnValidation } from 'src/app/core/validators/ssn-validation';
@@ -53,7 +53,7 @@ export class AddVolunteerComponent implements OnInit {
   /**
    *
    * @param formBuilder Provider for reactive form creation
-   * @param locationsService Provider for location selection
+   * @param staticsService Provider for location selection
    * @param volunteerService Provider for volunteer related operations
    * @param organisationService Provider for organisation related operations
    * @param courseService Provider for course related operations
@@ -61,7 +61,7 @@ export class AddVolunteerComponent implements OnInit {
    * @param router Provider for route navigation
    */
   constructor(private formBuilder: FormBuilder,
-              private locationsService: LocationsService,
+              private staticsService: StaticsService,
               private volunteerService: VolunteerService,
               private organisationService: OrganisationService,
               private courseService: CourseService,
@@ -144,8 +144,9 @@ export class AddVolunteerComponent implements OnInit {
    * Retrives the list of counties from the locations service
    */
   private getCountyList() {
-    this.locationsService.getCountyList().subscribe((response) => {
-      this.counties = response;
+    this.staticsService.getCountyList().subscribe((response) => {
+      this.counties = response.rows.map(x => x.doc);
+      console.log(this.counties);
     });
   }
 
@@ -153,8 +154,10 @@ export class AddVolunteerComponent implements OnInit {
    * Retrives the list of cities from a selected county from the locations service
    */
   private getCityList(county) {
-    this.locationsService.getCityList().subscribe((response) => {
-      this.cities = response.filter(city => city.county === county.name);
+    this.staticsService.getCityList(county.name).subscribe((response) => {
+      this.cities = response.rows
+        .map(x => x.doc);
+        console.log(this.cities);
       if (this.cities.length > 0) {
         this.addForm.controls['city'].enable();
       }
@@ -176,14 +179,9 @@ export class AddVolunteerComponent implements OnInit {
    * Retrieves the list of courses from the courses service
    */
   private getCourses() {
-    // TEMP
-    this.courses = [{
-      _id: '1',
-      name: 'prim-ajutor'
-    }, {
-      _id: '2',
-      name: 'constructii'
-    }];
+    this.courseService.getCourseNames().subscribe((response: any) => {
+      this.courses = response.docs;
+    });
   }
 
   /**
@@ -200,6 +198,8 @@ export class AddVolunteerComponent implements OnInit {
    */
   countySelectionChanged(event) {
     this.addForm.controls['county'].setValue(event.detail.value);
+    this.addForm.controls['city'].reset('');
+    this.cities = [];
     this.getCityList(this.addForm.value.county);
   }
 

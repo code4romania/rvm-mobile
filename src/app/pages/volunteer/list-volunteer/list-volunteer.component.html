@@ -6,7 +6,7 @@
     <ion-buttons slot="end">
       <ion-menu-button color="dark"></ion-menu-button>
     </ion-buttons>
-    <img src="../../assets/images/DSU_logo.PNG" class="logo-title mx-auto" />
+    <img src="../../assets/images/DSU.png" class="logo-title mx-auto" />
   </ion-toolbar>
 </ion-header>
 
@@ -21,7 +21,7 @@
         Alege județ
       </ion-label>
       <ion-select class="mt-10" [(ngModel)]="selectedCounty" (ionChange)="selectionsChanged()" [ngClass]="{'selector-active': selectedCounty}">
-        <ion-select-option *ngFor="let county of counties" value="{{county.id}}">{{county.name}}</ion-select-option>
+        <ion-select-option *ngFor="let county of counties" value="{{county._id}}">{{county.name}}</ion-select-option>
       </ion-select>
       <ion-button float-right color="light" *ngIf="selectedCounty" (click)="selectedCounty = null">
           <ion-icon name="close"></ion-icon>

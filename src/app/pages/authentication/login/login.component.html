@@ -1,8 +1,9 @@
 <ion-content color="primary">
 
-  <form (ngSubmit)="submit()" class="login-form" [formGroup]="loginForm" id="loginform" (keyup.enter)="submit()">
+  <form (ngSubmit)="submit()" *ngIf="!loading" class="login-form" [formGroup]="loginForm" id="loginform"
+    (keyup.enter)="submit()">
     <div class="logo mx-auto mb-50">
-      <img src="../../assets/images/DSU_logo.PNG" class="mx-auto" />
+      <img src="../../assets/images/DSU.png" class="mx-auto" />
     </div>
     <ion-item color="transparent" class="login-item mx-10" lines="none">
       <ion-label position="floating">Adresă de email</ion-label>
@@ -20,4 +21,8 @@
     <a [routerLink]="['/auth/recover']">Am uitat parola</a>
     <ion-button ion-button type="submit" color="secondary" expand="full" class="full-button">Login</ion-button>
   </form>
+
+  <div class="center-spinner" *ngIf="loading">
+    <ion-spinner name="crescent" center></ion-spinner>
+  </div>
 </ion-content>

@@ -50,7 +50,6 @@ export class AuthenticationService {
   ): Observable<Authentication.Credentials> {
     return this.httpClient.post('/login', payload).pipe(
       map((body: any) => {
-        console.log(body);
         this.setCredentials(body);
         return body;
       })
@@ -139,6 +138,6 @@ export class AuthenticationService {
     * @returns an observable that contains a truth value: successful or not
     */
   public resetPassword(password: string, token: string) {
-    return this.httpClient.post('/passwordreset', {passowrd: password, password_confirm: password, token});
+    return this.httpClient.post('/resetpassword', {password, password_confirmation: password, token});
   }
 }

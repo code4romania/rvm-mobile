@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { VolunteerService } from '../../../core/service/volunteer.service';
-import { LocationsService } from 'src/app/core/service/locations.service';
+import { StaticsService } from 'src/app/core/service/statics.service';
 import { OrganisationService, CourseService, AllocationService } from 'src/app/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { NavigationExtras, Router } from '@angular/router';
@@ -32,7 +32,7 @@ export class ListVolunteerComponent implements OnInit {
    */
   volunteerIdWithDetails: string;
 
-  selectedCounty: string;
+  selectedCounty: any;
   selectedOrganisation: string;
   selectedCourse: string;
 
@@ -57,7 +57,7 @@ export class ListVolunteerComponent implements OnInit {
   /**
    *
    * @param volunteerService Provider for volunteer related operations
-   * @param locationsService Provider for location selection
+   * @param staticsService Provider for location selection
    * @param organisationService Provider for organisation related operations
    * @param courseService Provider for course related operations
    * @param allocationService  Provider for volunteer allocation related operations
@@ -65,7 +65,7 @@ export class ListVolunteerComponent implements OnInit {
    * @param iab Provider for accessing an url in browser
    */
   constructor(private volunteerService: VolunteerService,
-              private locationsService: LocationsService,
+              private staticsService: StaticsService,
               private organisationService: OrganisationService,
               private courseService: CourseService,
               private allocationService: AllocationService,
@@ -169,8 +169,8 @@ export class ListVolunteerComponent implements OnInit {
    * Retrives the list of counties from the locations service
    */
   getCountyList() {
-    this.locationsService.getCountyList().subscribe((response) => {
-      this.counties = response;
+    this.staticsService.getCountyList().subscribe((response) => {
+      this.counties = response.rows.map(x => x.doc);
     });
   }
 
@@ -258,8 +258,8 @@ export class ListVolunteerComponent implements OnInit {
    * @param county Retrieves the list of cities from the selected county
    */
   getCityList(county: any) {
-    this.locationsService.getCityList().subscribe((response) => {
-      this.cities = response.filter(city => city.county === county.name);
+    this.staticsService.getCityList(county._id).subscribe((response) => {
+      this.cities = response.rows.map(x => x.doc);
     });
   }
 
