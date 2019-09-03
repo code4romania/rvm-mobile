@@ -49,13 +49,14 @@ export class ResetPasswordComponent implements OnInit {
      * Page initialisation
      */
     ngOnInit() {
-        this.route.params.subscribe(
-            (params) => {
-                this.token = params['token'];
-            }
-        );
+        if (this.authenticationService.isAuthenticated() ) {
+            this.authenticationService.logout().subscribe(response => {
+                this.initialiseView();
+            });
+        } else {
+            this.initialiseView();
+        }
 
-        // todo password validation not ok
         this.resetPasswordForm = this.formBuilder.group({
             password: ['', [Validators.required,
                 PasswordValidation.passwordValidation
@@ -66,6 +67,17 @@ export class ResetPasswordComponent implements OnInit {
             }, {
                 validator: PasswordValidation.MatchPassword
             });
+    }
+
+    /**
+     * Page initialisation after user was logged out (if neccessary)
+     */
+    initialiseView() {
+        this.route.params.subscribe(
+            (params) => {
+                this.token = params['token'];
+            }
+        );
     }
 
     /**

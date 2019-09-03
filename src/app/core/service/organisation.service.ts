@@ -103,6 +103,7 @@ export class OrganisationService {
     organisation.created_at = moment().format('Y-MM-DD H:mm:ss');
     organisation.updated_at = moment().format('Y-MM-DD H:mm:ss');
     organisation.type = this.type;
+    organisation.status = 'inactiv';
 
     return from(localDB.post(organisation));
   }

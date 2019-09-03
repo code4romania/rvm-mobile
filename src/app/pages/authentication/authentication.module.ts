@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path: '',
     component: AuthenticationPage,
-  }, 
+  },
   {
     path: 'login',
     component: LoginComponent,
@@ -27,10 +27,9 @@ const routes: Routes = [
     path: 'logout',
     component: LogoutComponent
   },
-	{
+  {
     path: 'reset/:token',
     component: ResetPasswordComponent,
-    canActivate: [UnauthenticatedGuard]
   },
   {
     path: 'recover',

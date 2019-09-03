@@ -24,6 +24,8 @@ export class Organisation {
     updated_at: any;
     added_by: string;
     type: string;
+    status: string;
+    cover: string;
 
     constructor() {}
 }

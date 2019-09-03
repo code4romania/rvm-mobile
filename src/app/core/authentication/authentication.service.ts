@@ -48,7 +48,9 @@ export class AuthenticationService {
   login(
     payload: Authentication.LoginPayload
   ): Observable<Authentication.Credentials> {
-    return this.httpClient.post('/login', payload).pipe(
+    const loginInfo: any = payload;
+    loginInfo.device = 'mobile';
+    return this.httpClient.post('/login', loginInfo).pipe(
       map((body: any) => {
         this.setCredentials(body);
         return body;
