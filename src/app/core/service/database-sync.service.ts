@@ -61,19 +61,13 @@ export class DatabaseSyncService {
      * Starts database synchronization
      */
     sync() {
-        const options = {
-            live: false,
-            retry: true,
-            continuous: true
-          };
-
-        return forkJoin(
-            [
-                of(localVolunteersDB.sync(remoteVolunteersDB, options)),
-                of(localCoursesDB.sync(remoteCoursesDB, options)),
-                of(localOrganisationsDB.sync(remoteOrganisationsDB, options)),
-                of(localAllocationsDB.sync(remoteAllocationsDB, options)),
-                of(localStaticsDB.sync(remoteStaticsDB, options))
-            ]);
+        return Promise.all(
+          [localVolunteersDB.sync(remoteVolunteersDB),
+            localCoursesDB.sync(remoteCoursesDB),
+            localOrganisationsDB.sync(remoteOrganisationsDB),
+            localAllocationsDB.sync(remoteAllocationsDB),
+            localStaticsDB.sync(remoteStaticsDB)]).then((result) => {
+              console.log(result);
+            }).catch(error => console.log(`Error in promises ${error}`));
     }
 }

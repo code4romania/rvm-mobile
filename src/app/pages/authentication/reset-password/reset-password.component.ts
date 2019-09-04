@@ -84,10 +84,8 @@ export class ResetPasswordComponent implements OnInit {
      * Sends the reset password request
      */
     resetPassword() {
-        // TODO handles this when backend ready
-        if (this.resetPasswordForm.valid) {
-            this.loading = true;
-            this.authenticationService.resetPassword(this.resetPasswordForm.value.password, this.token).subscribe(response => {
+        this.loading = true;
+        this.authenticationService.resetPassword(this.resetPasswordForm.value.password, this.token).subscribe(response => {
                 this.presentToast('Parolă resetată cu succes.');
                 this.loading = false;
                 this.router.navigate(['/auth/login']);
@@ -95,16 +93,6 @@ export class ResetPasswordComponent implements OnInit {
                 this.loading = false;
                 this.setErrorMessage('A apărut o eroare. Vă rugăm reîncercați.');
             });
-        } else {
-
-            if (this.resetPasswordForm.controls['password'].errors && this.resetPasswordForm.controls['password'].errors['password']) {
-               this.setErrorMessage(
-                   'Parola trebuie să conțină cel puțin o literă mare, o cifră și cu un caracter special ( !#$%&‘()*?@[\]^_`{|}~ ).'
-                   );
-               } else {
-                this.setErrorMessage('Parolele trebuie să coincidă.');
-               }
-        }
     }
 
     /**

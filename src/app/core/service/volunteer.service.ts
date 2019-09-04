@@ -162,11 +162,11 @@ export class VolunteerService {
     volunteer.name = name;
     volunteer.ssn = ssn;
     volunteer.county = {
-      id: county.id.toString(),
+      id: county._id.toString(),
       name: county.name
     };
     volunteer.city = {
-      id: city.id.toString(),
+      id: city._id.toString(),
       name: city.name
     };
     volunteer.created_at = moment().format('Y-MM-DD H:mm:ss');

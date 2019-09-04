@@ -19,13 +19,14 @@
     <div class="mt-10">
       <ion-label class="title">Adaugă CNP</ion-label>
       <ion-input type="number" formControlName="ssn" class="mt-10" (ionChange)="ssnExists($event)"
-        [ngClass]="{'input-error': this.addForm.hasError('incorrect-ssn')}"></ion-input>
-      <p *ngIf="this.addForm.hasError('incorrect-ssn')" class="error-message">Acest CNP aparține deja unui voluntar.</p>
+        [ngClass]="{'input-error': !!this.addForm.controls.ssn.errors?.ssn && this.addForm.controls.ssn.touched}"></ion-input>
+      <p *ngIf="!!this.addForm.controls.ssn.errors?.ssn && this.addForm.controls.ssn.touched" class="error-message">{{ this.addForm.controls.ssn.errors?.ssn }}</p>
     </div>
 
     <div class="mt-10">
       <ion-label class="title">Adaugă număr de telefon</ion-label>
-      <ion-input type="tel" formControlName="phone" class="mt-10"></ion-input>
+      <ion-input type="tel" formControlName="phone" class="mt-10" [ngClass]="{'input-error': !!this.addForm.controls.phone.errors?.phone && this.addForm.controls.phone.touched}"></ion-input>
+      <p *ngIf="!!this.addForm.controls.phone.errors?.phone && this.addForm.controls.phone.touched" class="error-message">{{ this.addForm.controls.phone.errors?.phone }}</p>
     </div>
 
     <div class="selectors">
@@ -33,7 +34,7 @@
         <ion-label class="title">
           Alege județ
         </ion-label>
-        <ion-select class="mt-10" formControlName="county" (ionChange)="countySelectionChanged($event)">
+        <ion-select class="mt-10" formControlName="county" (ionChange)="countySelectionChanged($event)" interface="action-sheet">
           <ion-select-option *ngFor="let county of counties" [value]="county">{{county.name}}</ion-select-option>
         </ion-select>
       </div>
@@ -42,7 +43,7 @@
         <ion-label class="title">
           Alege localitate
         </ion-label>
-        <ion-select class="mt-10" formControlName="city" (ionChange)="citySelectionChanged($event)">
+        <ion-select class="mt-10" formControlName="city" (ionChange)="citySelectionChanged($event)" interface="action-sheet">
           <ion-select-option *ngFor="let city of cities" [value]="city">{{city.name}}</ion-select-option>
         </ion-select>
       </div>
@@ -52,7 +53,7 @@
           Alege organizație
         </ion-label>
         <ion-select class="mt-10" formControlName="organisation" *ngIf="!addNewOrganisation"
-          [attr.disabled]="organisationNone" (ionChange)="organisationSelectionChanged($event)">
+          [attr.disabled]="organisationNone" (ionChange)="organisationSelectionChanged($event)" interface="action-sheet">
           <ion-select-option *ngFor="let organisation of organisations" value="{{organisation._id}}">
             {{organisation.name}}</ion-select-option>
           <ion-select-option value="new">Adaugă organizație nouă</ion-select-option>
@@ -72,7 +73,7 @@
         <ion-label class="title">
           Alege specializare
         </ion-label>
-        <ion-select class="mt-10" formControlName="course" (ionChange)="courseSelectionChanged()"
+        <ion-select class="mt-10" formControlName="course" (ionChange)="courseSelectionChanged()" interface="action-sheet"
           [attr.disabled]="courseNone">
           <ion-select-option *ngFor="let course of courses" [value]="course">{{ course.name }}
           </ion-select-option>
@@ -83,7 +84,7 @@
         <ion-label class="title">
           Alege organizație acreditoare
         </ion-label>
-        <ion-select class="mt-10" formControlName="acreditedOrganisation"
+        <ion-select class="mt-10" formControlName="acreditedOrganisation" interface="action-sheet"
           (ionChange)="acreditedOrganisationSelectionChanged($event)">
           <ion-select-option>Invalideaza selectia</ion-select-option>
           <ion-select-option *ngFor="let acreditedOrganisation of acreditedOrganisations"
@@ -114,10 +115,8 @@
       <ion-col col-6>
       </ion-col>
       <ion-col col-6>
-        <!-- [disabled]="(!courseNone || !addForm.valid) && (courseNone || !addForm.valid || !selectedCourse.obtained)" -->
         <ion-button type="submit" color="success" class="mt-10 w-100"
-          [disabled]="addForm.invalid"
-          >
+          [disabled]="addForm.invalid">
           Salvează</ion-button>
       </ion-col>
     </ion-row>

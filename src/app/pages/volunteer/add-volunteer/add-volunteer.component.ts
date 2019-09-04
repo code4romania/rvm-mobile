@@ -146,7 +146,6 @@ export class AddVolunteerComponent implements OnInit {
   private getCountyList() {
     this.staticsService.getCountyList().subscribe((response) => {
       this.counties = response.rows.map(x => x.doc);
-      console.log(this.counties);
     });
   }
 
@@ -157,7 +156,6 @@ export class AddVolunteerComponent implements OnInit {
     this.staticsService.getCityList(county.name).subscribe((response) => {
       this.cities = response.rows
         .map(x => x.doc);
-        console.log(this.cities);
       if (this.cities.length > 0) {
         this.addForm.controls['city'].enable();
       }

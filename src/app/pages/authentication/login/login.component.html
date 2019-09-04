@@ -14,12 +14,15 @@
       <ion-input formControlName="password" type="password"></ion-input>
     </ion-item>
 
-    <ion-item color="danger" class="error-message m-10" lines="none" *ngIf="errorMessage">
-      <p> {{ errorMessage }} </p>
+    <ion-item color="danger" class="error-message m-10" lines="none"
+      *ngIf="errorMessage || ((loginForm.controls.email.errors?.email || loginForm.controls.password.errors?.password) && loginForm.touched)">
+      <p> {{ loginForm.controls.email.errors?.email || loginForm.controls.password.errors?.password || errorMessage }}
+      </p>
     </ion-item>
 
     <a [routerLink]="['/auth/recover']">Am uitat parola</a>
-    <ion-button ion-button type="submit" color="secondary" expand="full" class="full-button">Login</ion-button>
+    <ion-button ion-button type="submit" color="secondary" expand="full" class="full-button"
+      [disabled]="loginForm.invalid">Login</ion-button>
   </form>
 
   <div class="center-spinner" *ngIf="loading">

@@ -1,28 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Camera } from '@ionic-native/camera';
 import { SMS } from '@ionic-native/sms/ngx';
-import { VolunteerService } from 'src/app/core';
 import { Volunteer } from 'src/app/core/model/volunteer.model';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-send-message',
   templateUrl: './send-message.component.html',
   styleUrls: ['./send-message.component.scss']
 })
-export class SendMessageComponent implements OnInit, OnDestroy {
-  /**
-   * Route subscription, used for retriving parameters inserted in url route
-   */
-  private routeSub: Subscription;
+export class SendMessageComponent implements OnInit {
 
   private phoneNumbers: string[] = [];
-
-  /**
-   * The message that gets sent
-   */
-  public message = '';
+  messageForm: FormGroup;
 
   /**
    * Codification of the image that will be sent
@@ -47,13 +38,10 @@ export class SendMessageComponent implements OnInit, OnDestroy {
 
         volunteers.forEach((volunteer: Volunteer) => this.phoneNumbers.push(volunteer.phone));
       }
-  }
 
-  /**
-   * Triggered when page is removed, unsubscribes from the route changes
-   */
-  ngOnDestroy() {
-    this.routeSub.unsubscribe();
+      this.messageForm = new FormGroup({
+        message: new FormControl('', [Validators.required])
+        });
   }
 
   /**
@@ -80,7 +68,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
             intent: 'INTENT'
         }
     };
-    this.sms.send(this.phoneNumbers, this.message, options);
+    this.sms.send(this.phoneNumbers, this.messageForm.value.message, options);
   }
 
   /**

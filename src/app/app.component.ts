@@ -3,7 +3,7 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { IonRouterOutlet, Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { AuthenticationService } from './core';
+import { AuthenticationService, LocalStorageService, DatabaseSyncService } from './core';
 import { Router } from '@angular/router';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { ResetPasswordComponent } from './pages/authentication/reset-password/reset-password.component';
@@ -46,7 +46,7 @@ export class AppComponent implements AfterViewInit {
     {
       title: 'Apelează suport',
       url: 'tel:89992142265'
-    }, 
+    },
     {
       title: 'Delogare',
       url: '/auth/logout'
@@ -54,12 +54,14 @@ export class AppComponent implements AfterViewInit {
   ];
 
   /**
-   * 
+   *
    * @param platform Provider for cordova platforms
    * @param splashScreen Provider for splash screen
    * @param statusBar Provider for status bar
    * @param authenticationService Provider for authentication related operations
    * @param router Provider for route navigation
+   * @param localStorageService Provider for localStorage related operations
+   * @param databaseSyncService Provider for database synchronization
    */
   constructor(
     private platform: Platform,
@@ -67,7 +69,8 @@ export class AppComponent implements AfterViewInit {
     private statusBar: StatusBar,
     public authenticationService: AuthenticationService,
     private router: Router,
-    private nav: NavController) {
+    private localStorageService: LocalStorageService,
+    private databaseSyncService: DatabaseSyncService) {
     this.initializeApp();
   }
 
@@ -80,17 +83,25 @@ export class AppComponent implements AfterViewInit {
       if (this.platform.is('cordova')) {
         this.statusBar.backgroundColorByHexString('#264998');
         this.statusBar.styleDefault();
-        this.splashScreen.hide();
+
+        if (!this.localStorageService.getItem('firstLaunch')) {
+          this.databaseSyncService.sync().then(response => {
+            this.splashScreen.hide();
+           });
+          this.localStorageService.setItem('firstLaunch', false);
+        } else {
+          this.splashScreen.hide();
+        }
       }
     });
   }
 
   /**
-   * 
+   *
    * @param url Contains the value of the next application state
    */
   performAction(url: string) {
-    if(url.includes('tel')) {
+    if (url.includes('tel')) {
       window.open(url);
     } else {
       this.router.navigate([url]);
@@ -101,7 +112,7 @@ export class AppComponent implements AfterViewInit {
     this.platform.ready().then(() => {
       if (this.platform.is('cordova')) {
         Deeplinks.route({
-          '/reset/:token': ResetPasswordComponent
+          '/auth/reset/:token': ResetPasswordComponent
         }).subscribe((match) => {
           setTimeout(() => {
             this.router.navigate(['/auth/reset/', match.$args.token]);

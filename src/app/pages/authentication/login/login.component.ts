@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
-import { Location } from '@angular/common';
-import { DatabaseSyncService, AuthenticationService } from 'src/app/core';
+import { AuthenticationService } from 'src/app/core';
 import { EmailValidation } from 'src/app/core/validators/email-validation';
 import { PasswordValidation } from 'src/app/core/validators/password-validation';
 
@@ -22,14 +21,10 @@ export class LoginComponent implements OnInit {
    * @param router Provider for route navigation
    * @param formBuilder Provider for reactive form creation
    * @param authenticationService Provider for authentication related operation
-   * @param databaseSyncService Provider for database synchronization
-   * @param location Provider for location changes
    */
   constructor(private router: Router,
               private formBuilder: FormBuilder,
-              private authenticationService: AuthenticationService,
-              private databaseSyncService: DatabaseSyncService,
-              private location: Location) { }
+              private authenticationService: AuthenticationService) { }
 
   /**
    * Page initialisation
@@ -63,12 +58,10 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         (credentials) => {
-          this.databaseSyncService.sync().subscribe(response => {        
             this.loading = false;
             this.router.navigate(['../home'], {
               replaceUrl: true
             });
-          });
         },
         (error: any) => {
           this.loading = false;

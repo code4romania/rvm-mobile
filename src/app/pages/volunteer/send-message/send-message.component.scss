@@ -7,26 +7,30 @@ ion-button ion-icon {
 }
 
 .full-button-bottom {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 40px;
-    margin: 0;
+  margin: 0;
+  height: 50px;
 }
 
 .header {
     background-color: #f9f9f9; 
     min-height: 100px; 
     text-align: center;
-    padding: 25px 10px;
+    padding: 30px 10px;
 
     ion-icon {
-        font-size: 50px;
+        font-size: 35px;
     }
 
     ion-label {
         display: block;
         font-size: 25px;
     }
+}
+
+.message-textarea {
+    height: 300px;
+}
+
+ion-textarea textarea {
+    height: 100%;
 }

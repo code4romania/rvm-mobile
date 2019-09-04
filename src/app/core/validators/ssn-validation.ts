@@ -15,11 +15,11 @@ export class SsnValidation {
             if ((res < 10 && res === cnp[12]) || (res === 10 && cnp[12] === 1) ) {
                 return null;
             } else {
-                return { ssn: true };
+                return {'ssn': 'CNP-ul introdus nu este valid.'};
             }
 
         } else {
-            return { ssn: true };
+            return {'ssn': 'CNP-ul introdus nu este valid.'};
         }
     }
 }

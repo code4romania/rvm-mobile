@@ -20,7 +20,7 @@ export class RecoverPasswordComponent implements OnInit {
     /**
      * Error message that will be displayed
      */
-    errorMessage: string;
+    errorMessage: string = null;
 
     /**
      * Page is loading or not
@@ -51,7 +51,6 @@ export class RecoverPasswordComponent implements OnInit {
      * Sends the recover password request
      */
     resetPassword() {
-        // TODO handles this when backend ready
         this.loading = true;
         this.authenticationService.recoverPassword(this.resetPasswordForm.value.email).subscribe(response => {
             this.loading = false;
@@ -59,7 +58,7 @@ export class RecoverPasswordComponent implements OnInit {
             this.router.navigate(['/auth/login']);
         }, error => {
             this.loading = false;
-            this.errorMessage = 'Adresă de email nu există.';
+            this.errorMessage = 'Adresa de email specificată nu există. Te rugăm să verifici și să încerci din nou.';
             setTimeout(() => {
                 this.errorMessage = null;
             }, 3000);
