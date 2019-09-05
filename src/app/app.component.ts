@@ -87,8 +87,8 @@ export class AppComponent implements AfterViewInit {
         if (!this.localStorageService.getItem('firstLaunch')) {
           this.databaseSyncService.sync().then(response => {
             this.splashScreen.hide();
+            this.localStorageService.setItem('firstLaunch', false);
            });
-          this.localStorageService.setItem('firstLaunch', false);
         } else {
           this.splashScreen.hide();
         }

@@ -15,8 +15,8 @@
     </ion-item>
 
     <ion-item color="danger" class="error-message m-10" lines="none"
-      *ngIf="errorMessage || ((loginForm.controls.email.errors?.email || loginForm.controls.password.errors?.password) && loginForm.touched)">
-      <p> {{ loginForm.controls.email.errors?.email || loginForm.controls.password.errors?.password || errorMessage }}
+      *ngIf="errorMessage || ((loginForm.controls.email.errors?.email && loginForm.touched)">
+      <p> {{ loginForm.controls.email.errors?.email || errorMessage }}
       </p>
     </ion-item>
 

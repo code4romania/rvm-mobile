@@ -130,7 +130,7 @@ export class AuthenticationService {
    * @returns an observable that contains a truth value: successful or not
    */
   public recoverPassword(email: string) {
-    return this.httpClient.post('/recoverpassword', {email});
+    return this.httpClient.post('/recoverpassword', {email, device: 'mobile'});
   }
 
    /**
@@ -140,6 +140,6 @@ export class AuthenticationService {
     * @returns an observable that contains a truth value: successful or not
     */
   public resetPassword(password: string, token: string) {
-    return this.httpClient.post('/resetpassword', {password, password_confirmation: password, token});
+    return this.httpClient.post('/resetpassword', {password, password_confirmation: password, token, device: 'mobile'});
   }
 }

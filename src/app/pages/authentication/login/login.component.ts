@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/core';
 import { EmailValidation } from 'src/app/core/validators/email-validation';
-import { PasswordValidation } from 'src/app/core/validators/password-validation';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +38,7 @@ export class LoginComponent implements OnInit {
   private createForm() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, EmailValidation.emailValidation]],
-      password: ['', [Validators.required, PasswordValidation.passwordValidation]]
+      password: ['', Validators.required]
     });
   }
 
