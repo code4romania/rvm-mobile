@@ -73,6 +73,21 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#type">type</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -96,6 +111,10 @@
                             </li>
                             <li>
                                 <a href="#getOrganisations">getOrganisations</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#removeSpecialChars">removeSpecialChars</a>
                             </li>
                             <li>
                                 <a href="#updateOrganisation">updateOrganisation</a>
@@ -123,7 +142,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/core/service/organisation.service.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/core/service/organisation.service.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -195,8 +214,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="90"
-                            class="link-to-prism">src/app/core/service/organisation.service.ts:90</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="100"
+                            class="link-to-prism">src/app/core/service/organisation.service.ts:100</a></div>
                 </td>
             </tr>
 
@@ -273,8 +292,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="114"
-                            class="link-to-prism">src/app/core/service/organisation.service.ts:114</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="130"
+                            class="link-to-prism">src/app/core/service/organisation.service.ts:130</a></div>
                 </td>
             </tr>
 
@@ -350,8 +369,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="64"
-                            class="link-to-prism">src/app/core/service/organisation.service.ts:64</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="72"
+                            class="link-to-prism">src/app/core/service/organisation.service.ts:72</a></div>
                 </td>
             </tr>
 
@@ -428,8 +447,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="77"
-                            class="link-to-prism">src/app/core/service/organisation.service.ts:77</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="86"
+                            class="link-to-prism">src/app/core/service/organisation.service.ts:86</a></div>
                 </td>
             </tr>
 
@@ -506,8 +525,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="52"
-                            class="link-to-prism">src/app/core/service/organisation.service.ts:52</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="57"
+                            class="link-to-prism">src/app/core/service/organisation.service.ts:57</a></div>
                 </td>
             </tr>
 
@@ -525,6 +544,86 @@
                     </div>
                     <div class="io-description">
                         <p>An Observable with all organisations</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeSpecialChars"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            removeSpecialChars
+                        </b>
+                        <a href="#removeSpecialChars"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>removeSpecialChars(text: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="141"
+                            class="link-to-prism">src/app/core/service/organisation.service.ts:141</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Removes diacritics from a string</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>text</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>A string with diacritics</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>the new string, without diacritics</p>
 
                     </div>
                 </td>
@@ -553,8 +652,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="103"
-                            class="link-to-prism">src/app/core/service/organisation.service.ts:103</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="118"
+                            class="link-to-prism">src/app/core/service/organisation.service.ts:118</a></div>
                 </td>
             </tr>
 
@@ -609,6 +708,51 @@
         </tbody>
     </table>
 </section>
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="type"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            type</b>
+                            <a href="#type"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;organisations&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/core/service/organisation.service.ts:33</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Table type</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
 
     </div>
 
@@ -621,79 +765,89 @@ import { environment } from &#x27;../../../environments/environment&#x27;;
 import { from, Observable } from &#x27;rxjs&#x27;;
 import { AuthenticationService } from &#x27;../authentication&#x27;;
 import { Organisation } from &#x27;../model/organisation.model&#x27;;
+import * as moment from &#x27;moment&#x27;;
 
 /**
  * Reference for local PouchDB Organisations Database
  */
-var localDB &#x3D; new PouchDB(&#x27;organisations&#x27;);
+const localDB &#x3D; new PouchDB(&#x27;organisations&#x27;);
 
 /**
- * PouchDB find plugin added 
+ * PouchDB find plugin added
  */
 PouchDB.plugin(PouchDBFind);
 
 /**
  * Reference for server CouchDB Organisations Database
  */
-var remoteDB &#x3D; new PouchDB(environment.databaseURL + &#x27;/organisations&#x27;);
+const remoteDB &#x3D; new PouchDB(environment.databaseURL + &#x27;/organisations&#x27;);
 
 /**
  * Provider for organisation related operations
  */
 @Injectable()
 export class OrganisationService {
-  
   /**
-  * Class constructor, sets the synchronization options for CouchDB and PouchDB Organisations Database
-  * @param authenticationService Injected reference for AuthenticationService
-  */
+   * Table type
+   */
+  private type &#x3D; &#x27;organisations&#x27;;
+
+  /**
+   * Class constructor, sets the synchronization options for CouchDB and PouchDB Organisations Database
+   * @param authenticationService Injected reference for AuthenticationService
+   */
   constructor(private authenticationService: AuthenticationService) {
-    let options &#x3D; {
+    const options &#x3D; {
       live: true,
       retry: true,
       continuous: true
     };
 
-   localDB.sync(remoteDB, options);    
+    localDB.sync(remoteDB, options);
 
     localDB.createIndex({
-      index: {fields: [&#x27;name&#x27;]}
+      index: {fields: [&#x27;name&#x27;, &#x27;slug&#x27;]}
     });
    }
 
   /**
    * Getter method for all organisations from the local database
-  * @returns An Observable with all organisations
-  */
+   * @returns An Observable with all organisations
+   */
   getOrganisations(): Observable&lt;any&gt; {
-    return from(localDB.allDocs({
+    return from(localDB.find({
+      selector: {
+          type: this.type
+      },
       include_docs: true,
       attachments: true
     }));
   }
 
   /**
-  * Finds an organisation by its id in the local database
-  * @param organisationId Organisation&#x27;s id
-  * @returns An Observable containing the organisation with that id
-  */
+   * Finds an organisation by its id in the local database
+   * @param organisationId Organisation&#x27;s id
+   * @returns An Observable containing the organisation with that id
+   */
   getOrganisationById(organisationId: string): Observable&lt;any&gt; {
     return from(localDB.find({
       selector: {
         _id: {$eq: organisationId},
+        type: this.type
       }
-    }));    
+    }));
   }
 
   /**
-  * Finds an organisation by its name in the local database
-  * @param organisationName The name of the organisation
-  * @returns An Observable with all organisation with that name
-  */
+   * Finds an organisation by its name in the local database
+   * @param organisationName The name of the organisation
+   * @returns An Observable with all organisation with that name
+   */
   getOrganisationByName(organisationName: string): Observable&lt;any&gt; {
     return from(localDB.find({
       selector: {
         name: {$eq: organisationName},
+        type: this.type
       }
     }));
   }
@@ -703,36 +857,63 @@ export class OrganisationService {
    * @param name String value containing the new organisation&#x27;s name
    * @returns An Observable with the created object
    */
-  createOrganisation(name: string) : Observable&lt;any&gt; {
+  createOrganisation(name: string): Observable&lt;any&gt; {
     const currentUser &#x3D; this.authenticationService.user;
-    let organisation &#x3D; new Organisation();
+    const organisation &#x3D; new Organisation();
     organisation.name &#x3D; name;
+    organisation.slug &#x3D; this.removeSpecialChars(name);
     organisation.added_by &#x3D; currentUser._id;
- 
+    organisation.created_at &#x3D; moment().format(&#x27;Y-MM-DD H:mm:ss&#x27;);
+    organisation.updated_at &#x3D; moment().format(&#x27;Y-MM-DD H:mm:ss&#x27;);
+    organisation.type &#x3D; this.type;
+    organisation.status &#x3D; &#x27;inactiv&#x27;;
+
     return from(localDB.post(organisation));
   }
 
-   /**
-  * Updates an organisation entry in the local database
-  * @param organisation The new organisation entry
-  */
+  /**
+   * Updates an organisation entry in the local database
+   * @param organisation The new organisation entry
+   */
   updateOrganisation(organisation: Organisation) {
-    localDB.get(organisation._id).then(function (doc) {
+    localDB.get(organisation._id).then((doc) &#x3D;&gt; {
       doc.name &#x3D; organisation.name ? organisation.name : doc.name;
+      doc.slug &#x3D; organisation.name ? this.removeSpecialChars(organisation.name) : doc.slug;
       localDB.put(doc);
     });
   }
 
   /**
-  * Deletes an entry by its id from the local database
-  * @param organisationId The organisation id
-  */
+   * Deletes an entry by its id from the local database
+   * @param organisationId The organisation id
+   */
   deleteOrganisationById(organisationId: string) {
-    localDB.get(organisationId).then(function (doc) {
+    localDB.get(organisationId).then((doc) &#x3D;&gt; {
       return localDB.remove(doc);
     });
   }
-}</code></pre>
+
+   /**
+    * Removes diacritics from a string
+    * @param text A string with diacritics
+    * @returns the new string, without diacritics
+    */
+  private removeSpecialChars(text: string): string {
+    const input   &#x3D; &#x27;ăâîșț&#x27;;
+    const output  &#x3D; &#x27;aaist&#x27;;
+    const regex &#x3D; new RegExp(&#x27;[&#x27; + input + &#x27;]&#x27;, &#x27;g&#x27;);
+    const transl &#x3D; {};
+
+    const lookup &#x3D; (m) &#x3D;&gt; transl[m] || m;
+
+    for (let i &#x3D; 0; i &lt; input.length; i++) {
+      transl[input[i]] &#x3D; output[i];
+    }
+
+    return text.replace(regex, lookup);
+  }
+}
+</code></pre>
     </div>
 
 </div>

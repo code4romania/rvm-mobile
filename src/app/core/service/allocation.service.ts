@@ -30,6 +30,9 @@ const remoteDB = new PouchDB(environment.databaseURL + '/allocations');
  */
 @Injectable()
 export class AllocationService {
+  /**
+   * Table type
+   */
   private type = 'allocations';
 
   /**

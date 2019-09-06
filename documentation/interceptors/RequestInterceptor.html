@@ -108,7 +108,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/core/http/request.interceptor.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/http/request.interceptor.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -180,8 +180,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="31"
-                            class="link-to-prism">src/app/core/http/request.interceptor.ts:31</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="30"
+                            class="link-to-prism">src/app/core/http/request.interceptor.ts:30</a></div>
                 </td>
             </tr>
 
@@ -265,7 +265,6 @@
   HttpRequest
 } from &#x27;@angular/common/http&#x27;;
 import { Injectable } from &#x27;@angular/core&#x27;;
-import { environment } from &#x27;../../../environments/environment&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 
 import { AuthenticationService } from &#x27;../authentication/authentication.service&#x27;;
@@ -275,7 +274,7 @@ import { AuthenticationService } from &#x27;../authentication/authentication.ser
  */
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
-  
+
   /**
    * Class constructor
    * @param authenticationService Injected service referes the AuthenticationService for handling authentication related operations
@@ -294,17 +293,11 @@ export class RequestInterceptor implements HttpInterceptor {
   ): Observable&lt;HttpEvent&lt;any&gt;&gt; {
     request &#x3D; request.clone({
       setHeaders: {
-      &#x27;Accept&#x27;: &#x27;application/json&#x27;,
+      Accept: &#x27;application/json&#x27;,
       &#x27;Content-Type&#x27;: &#x27;application/json; charset&#x3D;utf-8&#x27;,
-      &#x27;Authorization&#x27;: &#x60;Bearer ${this.authenticationService.accessToken}&#x60;,
+      Authorization: &#x60;Bearer ${this.authenticationService.accessToken}&#x60;,
       }
     });
-
-    if(!request.url.includes(&#x27;assets&#x27;)) {
-      request &#x3D; request.clone({
-        url: environment.serverUrl + request.url
-      });
-    }
 
     return next.handle(request);
   }

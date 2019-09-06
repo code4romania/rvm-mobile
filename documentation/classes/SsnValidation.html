@@ -42,7 +42,7 @@
 
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>DatabaseSyncService</li>
+  <li>SsnValidation</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -60,16 +60,9 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/core/service/database-sync.service.ts</code>
+            <code>src/app/core/validators/ssn-validation.ts</code>
         </p>
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>Service for database synchronization (local and remote)</p>
-
-            </p>
 
 
 
@@ -88,7 +81,8 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#sync">sync</a>
+                                    <span class="modifier">Static</span>
+                                <a href="#ssnValidation">ssnValidation</a>
                             </li>
                         </ul>
                     </td>
@@ -113,37 +107,77 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="sync"></a>
+                    <a name="ssnValidation"></a>
                     <span class="name">
                         <b>
-                            sync
+                            <span class="modifier">Static</span>
+                            ssnValidation
                         </b>
-                        <a href="#sync"><span class="icon ion-ios-link"></span></a>
+                        <a href="#ssnValidation"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>sync()</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ssnValidation(abstractControl: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="62"
-                            class="link-to-prism">src/app/core/service/database-sync.service.ts:62</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="12"
+                            class="link-to-prism">src/app/core/validators/ssn-validation.ts:12</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Starts database synchronization</p>
+                    <div class="io-description"><p>Ssn validator</p>
 </div>
 
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>abstractControl</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>An abstract control reference, to automatically take the value from the input
+that is being validated</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>null if the string respects the pattern, an error message otherwise</p>
 
                     </div>
                 </td>
@@ -160,76 +194,36 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import * as PouchDB from &#x27;pouchdb/dist/pouchdb&#x27;;
-import { environment } from &#x27;../../../environments/environment&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AbstractControl } from &#x27;@angular/forms&#x27;;
+import { map } from &#x27;rxjs/operators&#x27;;
 
-/**
- * Reference for local PouchDB Volunteers Database
- */
-const localVolunteersDB &#x3D; new PouchDB(&#x27;volunteers&#x27;);
-/**
- * Reference for server CouchDB Volunteers Database
- */
-const remoteVolunteersDB &#x3D; new PouchDB(environment.databaseURL + &#x27;/volunteers&#x27;);
-
-/**
- * Reference for local PouchDB Courses Database
- */
-const localCoursesDB &#x3D; new PouchDB(&#x27;courses&#x27;);
-/**
- * Reference for server CouchDB Courses Database
- */
-const remoteCoursesDB &#x3D; new PouchDB(environment.databaseURL + &#x27;/courses&#x27;);
-
-/**
- * Reference for local PouchDB Organisations Database
- */
-const localOrganisationsDB &#x3D; new PouchDB(&#x27;organisations&#x27;);
-/**
- * Reference for server CouchDB Organisations Database
- */
-const remoteOrganisationsDB &#x3D; new PouchDB(environment.databaseURL + &#x27;/organisations&#x27;);
-
-/**
- * Reference for local PouchDB Allocations Database
- */
-const localAllocationsDB &#x3D; new PouchDB(&#x27;allocations&#x27;);
-/**
- * Reference for server CouchDB Allocations Database
- */
-const remoteAllocationsDB &#x3D; new PouchDB(environment.databaseURL + &#x27;/allocations&#x27;);
-
-/**
- * Reference for local PouchDB Statics Database
- */
-const localStaticsDB &#x3D; new PouchDB(&#x27;statics&#x27;);
-/**
- * Reference for server CouchDB Allocations Database
- */
-const remoteStaticsDB &#x3D; new PouchDB(environment.databaseURL + &#x27;/statics&#x27;);
-
-/**
- * Service for database synchronization (local and remote)
- */
-export class DatabaseSyncService {
+export class SsnValidation {
 
     /**
-     * @ignore
+     * Ssn validator
+     * @param abstractControl An abstract control reference, to automatically take the value from the input
+     * that is being validated
+     * @returns null if the string respects the pattern, an error message otherwise
      */
-    constructor() { }
+    static ssnValidation(abstractControl: AbstractControl): any {
+        const ssn &#x3D; parseInt(abstractControl.value, 10) || 0;
 
-    /**
-     * Starts database synchronization
-     */
-    sync(): Promise&lt;void&gt; {
-        return Promise.all(
-          [localVolunteersDB.sync(remoteVolunteersDB),
-            localCoursesDB.sync(remoteCoursesDB),
-            localOrganisationsDB.sync(remoteOrganisationsDB),
-            localAllocationsDB.sync(remoteAllocationsDB),
-            localStaticsDB.sync(remoteStaticsDB)]).then((result) &#x3D;&gt; {
-              console.log(result);
-            }).catch(error &#x3D;&gt; console.log(&#x60;Error in promises ${error}&#x60;));
+        if (ssn.toString().length &#x3D;&#x3D;&#x3D; 13) {
+            const cnp &#x3D; Array.from(String(ssn), Number);
+            const coefs &#x3D; [2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9];
+            const idx &#x3D; [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+            const s &#x3D; idx.map((x) &#x3D;&gt; coefs[x] * cnp[x]);
+            const res &#x3D; s.reduce((a, b) &#x3D;&gt; a + b, 0) % 11;
+
+            if ((res &lt; 10 &amp;&amp; res &#x3D;&#x3D;&#x3D; cnp[12]) || (res &#x3D;&#x3D;&#x3D; 10 &amp;&amp; cnp[12] &#x3D;&#x3D;&#x3D; 1) ) {
+                return null;
+            } else {
+                return {&#x27;ssn&#x27;: &#x27;CNP-ul introdus nu este valid.&#x27;};
+            }
+
+        } else {
+            return {&#x27;ssn&#x27;: &#x27;CNP-ul introdus nu este valid.&#x27;};
+        }
     }
 }
 </code></pre>
@@ -260,7 +254,7 @@ export class DatabaseSyncService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'DatabaseSyncService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'SsnValidation.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

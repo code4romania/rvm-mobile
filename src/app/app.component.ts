@@ -1,12 +1,13 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 
-import { IonRouterOutlet, Platform, NavController } from '@ionic/angular';
+import { IonRouterOutlet, Platform, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthenticationService, LocalStorageService, DatabaseSyncService } from './core';
 import { Router } from '@angular/router';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { ResetPasswordComponent } from './pages/authentication/reset-password/reset-password.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -54,6 +55,11 @@ export class AppComponent implements AfterViewInit {
   ];
 
   /**
+   * Stores the current state of back-button tapping: tapped once or twice (for exiting app)
+   */
+  private isDoubleTap = false;
+
+  /**
    *
    * @param platform Provider for cordova platforms
    * @param splashScreen Provider for splash screen
@@ -61,7 +67,9 @@ export class AppComponent implements AfterViewInit {
    * @param authenticationService Provider for authentication related operations
    * @param router Provider for route navigation
    * @param localStorageService Provider for localStorage related operations
+   * @param location Provider for route location change
    * @param databaseSyncService Provider for database synchronization
+   * @param toastCtrl Controller for toast management
    */
   constructor(
     private platform: Platform,
@@ -70,19 +78,41 @@ export class AppComponent implements AfterViewInit {
     public authenticationService: AuthenticationService,
     private router: Router,
     private localStorageService: LocalStorageService,
-    private databaseSyncService: DatabaseSyncService) {
+    private location: Location,
+    private databaseSyncService: DatabaseSyncService,
+    private toastCtrl: ToastController) {
     this.initializeApp();
   }
 
   /**
    * Application initialisation
    * If cordova is available then the splash screen is hidden and status bar style is set
+   * The back-button subscription is set (if the current route is login/home 
+   * then it closes the app completely on double tap within 3 seconds)
    */
   initializeApp() {
     this.platform.ready().then(() => {
       if (this.platform.is('cordova')) {
         this.statusBar.backgroundColorByHexString('#264998');
         this.statusBar.styleDefault();
+
+        document.addEventListener('backbutton', (event) => {
+          const currentPath = this.router.url;
+          if (currentPath.indexOf('login') >= 0 || currentPath.indexOf('home') >= 0) {
+            if (!this.isDoubleTap) {
+              this.isDoubleTap = true;
+              this.presentToast();
+
+              setTimeout(() => {
+                this.isDoubleTap = false;
+               }, 3000);
+            } else {
+              navigator['app'].exitApp();
+            }
+          } else {
+            this.location.back();
+          }
+        }, false);
 
         if (!this.localStorageService.getItem('firstLaunch')) {
           this.databaseSyncService.sync().then(response => {
@@ -108,6 +138,9 @@ export class AppComponent implements AfterViewInit {
     }
   }
 
+  /**
+   * Angular lifecycle method; gets triggered after view initialisation
+   */
   ngAfterViewInit() {
     this.platform.ready().then(() => {
       if (this.platform.is('cordova')) {
@@ -122,5 +155,18 @@ export class AppComponent implements AfterViewInit {
         });
       }
     });
+  }
+
+  /**
+   * Presents a toast that will be automatically dismessed after 3 seconds
+   */
+  async presentToast() {
+    const toast = await this.toastCtrl.create({
+      message: 'Apăsați din nou pentru a părăsi aplicația.',
+      position: 'bottom',
+      duration: 3000
+    });
+
+    toast.present();
   }
 }

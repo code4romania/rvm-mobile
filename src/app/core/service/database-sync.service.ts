@@ -1,6 +1,5 @@
 import * as PouchDB from 'pouchdb/dist/pouchdb';
 import { environment } from '../../../environments/environment';
-import { forkJoin, of } from 'rxjs';
 
 /**
  * Reference for local PouchDB Volunteers Database
@@ -60,7 +59,7 @@ export class DatabaseSyncService {
     /**
      * Starts database synchronization
      */
-    sync() {
+    sync(): Promise<void> {
         return Promise.all(
           [localVolunteersDB.sync(remoteVolunteersDB),
             localCoursesDB.sync(remoteCoursesDB),

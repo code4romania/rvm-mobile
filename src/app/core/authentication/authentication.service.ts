@@ -33,10 +33,10 @@ export class AuthenticationService {
   constructor(
     private httpClient: HttpClient,
     private localStorageService: LocalStorageService) {
-    const savedCredentials = this.localStorageService.getItem(credentialsKey);
-    if (savedCredentials) {
-      this._credentials = JSON.parse(savedCredentials);
-    }
+      const savedCredentials = this.localStorageService.getItem(credentialsKey);
+      if (savedCredentials) {
+        this._credentials = JSON.parse(savedCredentials);
+      }
   }
 
   /**

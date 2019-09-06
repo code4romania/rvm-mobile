@@ -217,7 +217,7 @@ export class LocalStorageService {
    * Adds an item to storage
    * @param key Item's key
    * @param value Item itself
-  */
+   */
   public setItem(key: string, value: any) {
     return this.localStorage.setItem(key, value);
   }
@@ -231,13 +231,13 @@ export class LocalStorageService {
   }
 
   /**
-  * Removes an item from storage by its key
-  * @param key Item key
-  */
+   * Removes an item from storage by its key
+   * @param key Item key
+   */
   public clearItem(key: string) {
     return this.localStorage.removeItem(key);
   }
-  
+
   /**
    * Clears the existing storage
    */

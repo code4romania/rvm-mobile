@@ -220,6 +220,7 @@ import { AppRoutingModule } from &#x27;./app-routing.module&#x27;;
 import { CoreModule } from &#x27;./core&#x27;;
 import { DatePicker } from &#x27;@ionic-native/date-picker/ngx&#x27;;
 import { SMS } from &#x27;@ionic-native/sms/ngx&#x27;;
+import { InAppBrowser } from &#x27;@ionic-native/in-app-browser/ngx&#x27;;
 
 @NgModule({
   declarations: [
@@ -237,7 +238,8 @@ import { SMS } from &#x27;@ionic-native/sms/ngx&#x27;;
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     DatePicker,
-    SMS
+    SMS,
+    InAppBrowser
   ],
   bootstrap: [AppComponent]
 })

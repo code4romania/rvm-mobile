@@ -18,22 +18,54 @@ export class ListVolunteerComponent implements OnInit {
    */
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
+  /**
+   * List of all volunteers
+   */
   volunteers = [];
-  counties = [];
-  organisations = [];
-  courses = [];
-  courseOptions = [];
-  cities = [];
 
-  keyword = '';
+  /**
+   * List of available counties
+   */
+  counties = [];
+
+  /**
+   * List of available organisations
+   */
+  organisations = [];
+
+  /**
+   * List of a volunteer's courses
+   */
+  courses = [];
+
+  /**
+   * List of available courses
+   */
+  courseOptions = [];
+
+  /**
+   * List of available cities
+   */
+  cities = [];
 
   /**
    * String that contains the id of the volunteer that currently has the open details
    */
   volunteerIdWithDetails: string;
 
+  /**
+   * User selected county
+   */
   selectedCounty: any;
+
+  /**
+   * User selected organisation
+   */
   selectedOrganisation: string;
+
+  /**
+   * User selected course
+   */
   selectedCourse: string;
 
   /**
@@ -103,13 +135,9 @@ export class ListVolunteerComponent implements OnInit {
    * Retrives the list of courses from the courses service
    */
   getCourseOptions() {
-    this.courseOptions = [{
-      _id: '1',
-      name: 'prim-ajutor'
-    }, {
-      _id: '2',
-      name: 'constructii'
-    }];
+    this.courseService.getCourseNames().subscribe((response: any) => {
+      this.courseOptions = response.docs;
+    });
   }
 
   /**
@@ -146,7 +174,8 @@ export class ListVolunteerComponent implements OnInit {
 
   /**
    * Sends an alert message to the selected volunteer/s
-   * @param volunteerId Selected volunteer id, if the message will be sent to only one recipient
+   * @param volunteerId Selected volunteer id, if the message will be sent to only one recipient (optional parameter)
+   * If no parameter is passed then the message will be sent to all volunteers in current page
    */
   sendAlert(volunteer?: Volunteer) {
     let volunteers = [];
@@ -219,7 +248,7 @@ export class ListVolunteerComponent implements OnInit {
    * Loads more data, the response is paginated so on scorll down more informations needs to be loaded
    * @param event Scroll event
    */
-  loadData(event) {
+  loadData(event: any) {
     setTimeout(() => {
       this.page++;
       this.getData();
@@ -254,8 +283,8 @@ export class ListVolunteerComponent implements OnInit {
   }
 
   /**
-   *
-   * @param county Retrieves the list of cities from the selected county
+   * Retrieves the list of cities from the selected county
+   * @param county The user-selected county
    */
   getCityList(county: any) {
     this.staticsService.getCityList(county._id).subscribe((response) => {

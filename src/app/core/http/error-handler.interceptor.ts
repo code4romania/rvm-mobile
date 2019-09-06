@@ -23,7 +23,7 @@ const credentialsKey = 'credentials';
  */
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {
-  
+
   /**
    * Class constructor
    * @param router Angular value which handles routing operations
@@ -37,11 +37,11 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
   ) {}
 
    /**
-   * Intercepts all requests that are sent and adds an error handling function to them
-   * @param request The current request that is being sent
-   * @param next Handles the next state of the request
-   * @returns An observable with the new request, with the additional information
-   */
+    * Intercepts all requests that are sent and adds an error handling function to them
+    * @param request The current request that is being sent
+    * @param next Handles the next state of the request
+    * @returns An observable with the new request, with the additional information
+    */
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler

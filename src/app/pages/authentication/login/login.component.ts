@@ -11,8 +11,20 @@ import { EmailValidation } from 'src/app/core/validators/email-validation';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+
+  /**
+   * Form with user's login credentials
+   */
   loginForm: FormGroup;
+
+  /**
+   * The error message that will be displayed when something didn't go as planned
+   */
   errorMessage: string;
+
+  /**
+   * True if page is in loading state false if not; used in design
+   */
   loading = false;
 
   /**
@@ -70,12 +82,5 @@ export class LoginComponent implements OnInit {
           }, 3000);
         }
       );
-  }
-
-  /**
-   * Ionic lifecycle method, in this case the default back navigation is blocked (android)
-   */
-  ionViewDidEnter() {
-    document.addEventListener('backbutton', (e) => { }, false);
   }
 }

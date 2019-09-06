@@ -1,4 +1,4 @@
-import { Component,   } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -44,12 +44,5 @@ export class HomePage {
     } else {
       this.router.navigate([url]);
     }
-  }
-
-  /**
-   * Ionic lifecycle method, in this case the default back navigation is blocked (android)
-   */
-  ionViewDidEnter() {
-    document.addEventListener('backbutton', (e) => { }, false);
   }
 }

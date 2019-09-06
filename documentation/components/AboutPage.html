@@ -66,12 +66,6 @@
 
 
 
-    <p class="comment">
-        <h3>Implements</h3>
-    </p>
-    <p class="comment">
-                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
-    </p>
 
 
 <section>
@@ -136,18 +130,12 @@
   templateUrl: &#x27;./about.page.html&#x27;,
   styleUrls: [&#x27;./about.page.scss&#x27;],
 })
-export class AboutPage implements OnInit {
+export class AboutPage {
 
   /**
-  * @ignore
-  */
+   * @ignore
+   */
   constructor() { }
-
-  /**
-  * @ignore
-  */
- ngOnInit() {
-  }
 
 }
 </code></pre>
@@ -162,7 +150,7 @@ export class AboutPage implements OnInit {
     &lt;ion-buttons slot&#x3D;&quot;end&quot;&gt;
       &lt;ion-menu-button color&#x3D;&quot;dark&quot;&gt;&lt;/ion-menu-button&gt;
     &lt;/ion-buttons&gt;
-    &lt;img src&#x3D;&quot;../../assets/images/logo.PNG&quot; class&#x3D;&quot;logo-title mx-auto&quot; /&gt;
+    &lt;img src&#x3D;&quot;../../assets/images/DSU.png&quot; class&#x3D;&quot;logo-title mx-auto&quot; /&gt;
   &lt;/ion-toolbar&gt;
 &lt;/ion-header&gt;
 &lt;ion-content padding&gt;
@@ -194,20 +182,20 @@ export class AboutPage implements OnInit {
 
   &lt;ion-item lines&#x3D;&quot;none&quot;&gt;
     &lt;ion-row&gt;
-      &lt;ion-col&gt;
-        &lt;img src&#x3D;&quot;../../../assets/images/DSU_logo.PNG&quot;/&gt;
+      &lt;ion-col size&#x3D;&quot;6&quot;&gt;
+        &lt;img src&#x3D;&quot;../../../assets/images/DSU.png&quot;/&gt;
       &lt;/ion-col&gt;
-      &lt;ion-col&gt;
+      &lt;ion-col size&#x3D;&quot;6&quot;&gt;
         &lt;img src&#x3D;&quot;../../../assets/images/code_4_romania_logo.svg&quot;/&gt;
       &lt;/ion-col&gt;
     &lt;/ion-row&gt;
   &lt;/ion-item&gt;
   &lt;ion-item lines&#x3D;&quot;none&quot;&gt;
     &lt;ion-row&gt;
-      &lt;ion-col&gt;
+      &lt;ion-col size&#x3D;&quot;6&quot;&gt;
         &lt;img src&#x3D;&quot;../../../assets/images/world_bank_logo.JPG&quot;/&gt;
       &lt;/ion-col&gt;
-      &lt;ion-col&gt;
+      &lt;ion-col size&#x3D;&quot;6&quot;&gt;
         &lt;img src&#x3D;&quot;../../../assets/images/GFDPR_logo.jpg&quot;/&gt;
       &lt;/ion-col&gt;
     &lt;/ion-row&gt;    
@@ -247,7 +235,7 @@ export class AboutPage implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar mode="ios">    <ion-buttons slot="start">      <ion-back-button color="dark" class="show-back-button" defaultHref="home"></ion-back-button>    </ion-buttons>    <ion-buttons slot="end">      <ion-menu-button color="dark"></ion-menu-button>    </ion-buttons>    <img src="../../assets/images/logo.PNG" class="logo-title mx-auto" />  </ion-toolbar></ion-header><ion-content padding>  <ion-title class="title pl-16">    <strong>      Despre Aplicație    </strong>  </ion-title>  <ion-item lines="none">    <p class="text-content">      Resource and Volunteer Management este o aplicație menită să ofere sprijin în eventualitatea unei calamități majore care ar avea loc în România. RVM este un instrument de administrare de voluntari și resurse pe care le pune la dispoziție societatea civilă către Departamentul de Situații de Urgență în cazul unui seism major sau al unui alt dezastru natural.     </p>  </ion-item>  <ion-item lines="none">    <p class="text-content">      Cu ajutorul acestei componente mobile a aplicației puteți să mobilizați voluntari sau să validați identitatea unor voluntari deja existenți în platformă în cazul în care aceștia își oferă ajutorul în teren și se identifică parte din protocolul de colaborare cu DSU.    </p>  </ion-item>  <ion-item lines="none">    <p class="text-content">      De asemenea, aplicația va permite și administrarea voluntarilor spontani care își oferă ajutorul în caz de dezastru. Puteți înregistra foarte simplu un voluntar nou în baza de date și îl puteți aloca unei zone de intervenție pentru un mai bun management al persoanelor implicate în eforturile de salvare din teren.      </p>  </ion-item>  <ion-item lines="none">    <p class="text-content">      Aplicația RVM este dezvoltată de Code for Romania, în parteneriat cu Departamentul pentru Situații de Urgență și cu sprijinul World Bank.     </p>  </ion-item>  <ion-item lines="none">    <ion-row>      <ion-col>        <img src="../../../assets/images/DSU_logo.PNG"/>      </ion-col>      <ion-col>        <img src="../../../assets/images/code_4_romania_logo.svg"/>      </ion-col>    </ion-row>  </ion-item>  <ion-item lines="none">    <ion-row>      <ion-col>        <img src="../../../assets/images/world_bank_logo.JPG"/>      </ion-col>      <ion-col>        <img src="../../../assets/images/GFDPR_logo.jpg"/>      </ion-col>    </ion-row>      </ion-item></ion-content></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar mode="ios">    <ion-buttons slot="start">      <ion-back-button color="dark" class="show-back-button" defaultHref="home"></ion-back-button>    </ion-buttons>    <ion-buttons slot="end">      <ion-menu-button color="dark"></ion-menu-button>    </ion-buttons>    <img src="../../assets/images/DSU.png" class="logo-title mx-auto" />  </ion-toolbar></ion-header><ion-content padding>  <ion-title class="title pl-16">    <strong>      Despre Aplicație    </strong>  </ion-title>  <ion-item lines="none">    <p class="text-content">      Resource and Volunteer Management este o aplicație menită să ofere sprijin în eventualitatea unei calamități majore care ar avea loc în România. RVM este un instrument de administrare de voluntari și resurse pe care le pune la dispoziție societatea civilă către Departamentul de Situații de Urgență în cazul unui seism major sau al unui alt dezastru natural.     </p>  </ion-item>  <ion-item lines="none">    <p class="text-content">      Cu ajutorul acestei componente mobile a aplicației puteți să mobilizați voluntari sau să validați identitatea unor voluntari deja existenți în platformă în cazul în care aceștia își oferă ajutorul în teren și se identifică parte din protocolul de colaborare cu DSU.    </p>  </ion-item>  <ion-item lines="none">    <p class="text-content">      De asemenea, aplicația va permite și administrarea voluntarilor spontani care își oferă ajutorul în caz de dezastru. Puteți înregistra foarte simplu un voluntar nou în baza de date și îl puteți aloca unei zone de intervenție pentru un mai bun management al persoanelor implicate în eforturile de salvare din teren.      </p>  </ion-item>  <ion-item lines="none">    <p class="text-content">      Aplicația RVM este dezvoltată de Code for Romania, în parteneriat cu Departamentul pentru Situații de Urgență și cu sprijinul World Bank.     </p>  </ion-item>  <ion-item lines="none">    <ion-row>      <ion-col size="6">        <img src="../../../assets/images/DSU.png"/>      </ion-col>      <ion-col size="6">        <img src="../../../assets/images/code_4_romania_logo.svg"/>      </ion-col>    </ion-row>  </ion-item>  <ion-item lines="none">    <ion-row>      <ion-col size="6">        <img src="../../../assets/images/world_bank_logo.JPG"/>      </ion-col>      <ion-col size="6">        <img src="../../../assets/images/GFDPR_logo.jpg"/>      </ion-col>    </ion-row>      </ion-item></ion-content></div>'
     var COMPONENTS = [{'name': 'AboutPage', 'selector': 'app-about'},{'name': 'AddVolunteerComponent', 'selector': 'app-add-volunteer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthenticationPage', 'selector': 'app-authentication'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'ListVolunteerComponent', 'selector': 'app-list-volunteer'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutComponent', 'selector': 'app-logout'},{'name': 'RecoverPasswordComponent', 'selector': 'app-recover-password'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SendMessageComponent', 'selector': 'app-send-message'},{'name': 'ValidateVolunteerComponent', 'selector': 'app-validate-volunteer'},{'name': 'VolunteerPage', 'selector': 'app-volunteer'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AboutPage'};

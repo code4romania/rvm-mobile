@@ -47,6 +47,7 @@ export class ResetPasswordComponent implements OnInit {
 
     /**
      * Page initialisation
+     * If user is already logged in when page is accessed, then a logout is performed
      */
     ngOnInit() {
         if (this.authenticationService.isAuthenticated() ) {

@@ -102,10 +102,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#getUserProfile">getUserProfile</a>
-                            </li>
-                            <li>
                                 <a href="#isAuthenticated">isAuthenticated</a>
                             </li>
                             <li>
@@ -239,55 +235,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getUserProfile"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Private</span>
-                            getUserProfile
-                        </b>
-                        <a href="#getUserProfile"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getUserProfile()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="133"
-                            class="link-to-prism">src/app/core/authentication/authentication.service.ts:133</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Sends a request to the backend server for current user&#39;s profile</p>
-</div>
-
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;Authentication.User&gt;</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        <p>An observable that contains the current user&#39;s profile</p>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="isAuthenticated"></a>
                     <span class="name">
                         <b>
@@ -306,8 +253,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="83"
-                            class="link-to-prism">src/app/core/authentication/authentication.service.ts:83</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="81"
+                            class="link-to-prism">src/app/core/authentication/authentication.service.ts:81</a></div>
                 </td>
             </tr>
 
@@ -373,6 +320,7 @@ If it&#39;s successful stores the credentials and returns the response body</p>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -387,6 +335,10 @@ If it&#39;s successful stores the credentials and returns the response body</p>
                                     </td>
 
 
+                                    <td>
+                                        <p>Login credentials</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -427,8 +379,8 @@ If it&#39;s successful stores the credentials and returns the response body</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="68"
-                            class="link-to-prism">src/app/core/authentication/authentication.service.ts:68</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="66"
+                            class="link-to-prism">src/app/core/authentication/authentication.service.ts:66</a></div>
                 </td>
             </tr>
 
@@ -477,8 +429,8 @@ If it&#39;s successful clears the credentials information from local storage</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="148"
-                            class="link-to-prism">src/app/core/authentication/authentication.service.ts:148</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="132"
+                            class="link-to-prism">src/app/core/authentication/authentication.service.ts:132</a></div>
                 </td>
             </tr>
 
@@ -557,8 +509,8 @@ If it&#39;s successful clears the credentials information from local storage</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="158"
-                            class="link-to-prism">src/app/core/authentication/authentication.service.ts:158</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="142"
+                            class="link-to-prism">src/app/core/authentication/authentication.service.ts:142</a></div>
                 </td>
             </tr>
 
@@ -653,8 +605,8 @@ If it&#39;s successful clears the credentials information from local storage</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="108"
-                            class="link-to-prism">src/app/core/authentication/authentication.service.ts:108</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="106"
+                            class="link-to-prism">src/app/core/authentication/authentication.service.ts:106</a></div>
                 </td>
             </tr>
 
@@ -805,7 +757,7 @@ It&#39;s null if the user never authenticates</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/core/authentication/authentication.service.ts:91</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/core/authentication/authentication.service.ts:89</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -840,7 +792,7 @@ It&#39;s null if the user never authenticates</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/core/authentication/authentication.service.ts:99</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/core/authentication/authentication.service.ts:97</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -875,7 +827,7 @@ It&#39;s null if the user never authenticates</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/core/authentication/authentication.service.ts:125</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/app/core/authentication/authentication.service.ts:123</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -934,28 +886,26 @@ export class AuthenticationService {
   constructor(
     private httpClient: HttpClient,
     private localStorageService: LocalStorageService) {
-    const savedCredentials &#x3D; this.localStorageService.getItem(credentialsKey);
-    if (savedCredentials) {
-      this._credentials &#x3D; JSON.parse(savedCredentials);
-    }
+      const savedCredentials &#x3D; this.localStorageService.getItem(credentialsKey);
+      if (savedCredentials) {
+        this._credentials &#x3D; JSON.parse(savedCredentials);
+      }
   }
 
   /**
    * Sends a login request to the backend server
    * If it&#x27;s successful stores the credentials and returns the response body
-   * @param payload 
+   * @param payload Login credentials
    * @returns An observable that contains the authentication credentials
    */
   login(
     payload: Authentication.LoginPayload
   ): Observable&lt;Authentication.Credentials&gt; {
-    return this.httpClient.post(&#x27;/login&#x27;, payload).pipe(
-      map((body: Authentication.Credentials) &#x3D;&gt; {
+    const loginInfo: any &#x3D; payload;
+    loginInfo.device &#x3D; &#x27;mobile&#x27;;
+    return this.httpClient.post(&#x27;/login&#x27;, loginInfo).pipe(
+      map((body: any) &#x3D;&gt; {
         this.setCredentials(body);
-        this.getUserProfile().subscribe((response) &#x3D;&gt; {
-          body.user &#x3D; response;
-          this.setCredentials(body);
-        });
         return body;
       })
     );
@@ -1020,44 +970,30 @@ export class AuthenticationService {
   }
 
    /**
-   * Getter method for current user&#x27;s profile
-   * @returns The current user
-   */
+    * Getter method for current user&#x27;s profile
+    * @returns The current user
+    */
   get user(): Authentication.User | null {
     return this.credentials ? this.credentials.user : null;
   }
 
   /**
-   * Sends a request to the backend server for current user&#x27;s profile
-   * @returns An observable that contains the current user&#x27;s profile
+   * Sends a request to the backend server for password recovery
+   * @param email User&#x27;s email, it&#x27;s the one that will receive the password reset link
+   * @returns an observable that contains a truth value: successful or not
    */
-  private getUserProfile(): Observable&lt;Authentication.User&gt; { 
-    return this.httpClient
-    .get(&#x27;/profile&#x27;)
-    .pipe(
-      map((response: Authentication.User) &#x3D;&gt; {
-        return response;
-      })
-    );
-  }
-
-  /**
-  * Sends a request to the backend server for password recovery
-  * @param email User&#x27;s email, it&#x27;s the one that will receive the password reset link
-  * @returns an observable that contains a truth value: successful or not
-  */
   public recoverPassword(email: string) {
-    return this.httpClient.post(&#x27;/password/recovery&#x27;, {email: email});
+    return this.httpClient.post(&#x27;/recoverpassword&#x27;, {email, device: &#x27;mobile&#x27;});
   }
 
    /**
-  * Sends a request to the backend server for password reset
-  * @param password User&#x27;s new password
-  * @param token The token from the email send by password recovery to prove that it&#x27;s the same user
-  * @returns an observable that contains a truth value: successful or not
-  */
+    * Sends a request to the backend server for password reset
+    * @param password User&#x27;s new password
+    * @param token The token from the email send by password recovery to prove that it&#x27;s the same user
+    * @returns an observable that contains a truth value: successful or not
+    */
   public resetPassword(password: string, token: string) {
-    return this.httpClient.post(&#x27;/password/reset&#x27;, {passowrd: password, password_confirm: password, token: token});
+    return this.httpClient.post(&#x27;/resetpassword&#x27;, {password, password_confirmation: password, token, device: &#x27;mobile&#x27;});
   }
 }
 </code></pre>

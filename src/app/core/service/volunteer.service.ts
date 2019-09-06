@@ -29,6 +29,10 @@ const remoteDB = new PouchDB(environment.databaseURL + '/volunteers');
  */
 @Injectable()
 export class VolunteerService {
+
+  /**
+   * Table type
+   */
   private type = 'volunteers';
 
    /**
@@ -63,8 +67,8 @@ export class VolunteerService {
 
   /**
    * Getter method for all volunteers from the local database
-   * @params page A number defining the current page of volunteers from the total list (used to paginate the response)
-   * @params limit The number of volunteers per page
+   * @param page A number defining the current page of volunteers from the total list (used to paginate the response)
+   * @param limit The number of volunteers per page
    * @returns An Observable with all volunteers
    */
   getVolunteers(page: number, limit: number): Observable<any> {
@@ -300,6 +304,11 @@ export class VolunteerService {
     });
   }
 
+  /**
+   * Removes diacritics from a string
+   * @param text A string with diacritics
+   * @returns the new string, without diacritics
+   */
   private removeSpecialChars(text: string): string {
       const input   = 'ăâîșț';
       const output  = 'aaist';

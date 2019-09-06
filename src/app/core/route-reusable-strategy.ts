@@ -10,7 +10,7 @@ import {
  * To reuse a given route, add `data: { reuse: true }` to the route definition.
  */
 export class RouteReusableStrategy extends RouteReuseStrategy {
-  
+
   /**
    * Route Reuse Strategy lifecycle method
    * @param route Current activated route

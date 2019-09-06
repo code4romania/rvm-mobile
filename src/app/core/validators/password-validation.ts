@@ -2,6 +2,12 @@ import {AbstractControl} from '@angular/forms';
 
 export class PasswordValidation {
 
+    /**
+     * Matching passwords validator
+     * @param abstractControl An abstract control reference, to automatically take the values from the inputs
+     * that are being validated
+     * @returns null if the strings match, an error message otherwise
+     */
     static MatchPassword(abstractControl: AbstractControl): any {
         const password = abstractControl.get('password').value;
         const confirmPassword = abstractControl.get('confirmPassword').value;
@@ -15,6 +21,12 @@ export class PasswordValidation {
         }
     }
 
+    /**
+     * Password validator
+     * @param abstractControl An abstract control reference, to automatically take the value from the input
+     * that is being validated
+     * @returns null if the string respects the pattern, an error message otherwise
+     */
     static passwordValidation(abstractControl: AbstractControl): any {
         const number = new RegExp('\\d');
         const password = abstractControl.value;

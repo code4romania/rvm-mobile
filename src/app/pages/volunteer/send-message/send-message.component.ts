@@ -10,9 +10,17 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
   templateUrl: './send-message.component.html',
   styleUrls: ['./send-message.component.scss']
 })
+
 export class SendMessageComponent implements OnInit {
 
+  /**
+   * A list of selected volunteers' phone numbers
+   */
   private phoneNumbers: string[] = [];
+
+  /**
+   * The form that contains the message
+   */
   messageForm: FormGroup;
 
   /**
@@ -59,7 +67,7 @@ export class SendMessageComponent implements OnInit {
   }
 
   /**
-   * Sends the message and image to the selected volunteer
+   * Sends the message and image to the selected volunteer/s
    */
   sendMessage() {
     const options = {

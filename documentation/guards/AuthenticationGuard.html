@@ -199,8 +199,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/app/core/authentication/authentication.guard.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="26"
+                            class="link-to-prism">src/app/core/authentication/authentication.guard.ts:26</a></div>
                 </td>
             </tr>
 
@@ -242,7 +242,6 @@ import { AuthenticationService } from &#x27;./authentication.service&#x27;;
 export class AuthenticationGuard implements CanActivate {
   /**
    * Class constructor
-   * 
    * @param router Angular value which handles routing operations
    * @param authenticationService The service which handles the authentication operations
    */
@@ -254,7 +253,6 @@ export class AuthenticationGuard implements CanActivate {
   /**
    * Determines if a user can access a route, depending on its state
    * If the route isn&#x27;t allowed, it automatically redirects to login page
-   * 
    * @returns a boolean value, current user&#x27;s status: authenticated or not
    */
   canActivate(): boolean {

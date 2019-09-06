@@ -178,9 +178,6 @@
                                 <a href="#citySelectionChanged">citySelectionChanged</a>
                             </li>
                             <li>
-                                <a href="#computeSelectedOrganisation">computeSelectedOrganisation</a>
-                            </li>
-                            <li>
                                 <a href="#countySelectionChanged">countySelectionChanged</a>
                             </li>
                             <li>
@@ -246,12 +243,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(formBuilder: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, locationsService: <a href="../injectables/LocationsService.html">LocationsService</a>, volunteerService: <a href="../injectables/VolunteerService.html">VolunteerService</a>, organisationService: <a href="../injectables/OrganisationService.html">OrganisationService</a>, courseService: <a href="../injectables/CourseService.html">CourseService</a>, datePicker: DatePicker, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(formBuilder: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, staticsService: <a href="../injectables/StaticsService.html">StaticsService</a>, volunteerService: <a href="../injectables/VolunteerService.html">VolunteerService</a>, organisationService: <a href="../injectables/OrganisationService.html">OrganisationService</a>, courseService: <a href="../injectables/CourseService.html">CourseService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:70</a></div>
                             </td>
                         </tr>
 
@@ -286,10 +283,10 @@
                                                         </td>
                                                 </tr>
                                                 <tr>
-                                                        <td>locationsService</td>
+                                                        <td>staticsService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/LocationsService.html" target="_self" >LocationsService</a></code>
+                                                                        <code><a href="../injectables/StaticsService.html" target="_self" >StaticsService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -350,22 +347,6 @@
                                                         </td>
                                                 </tr>
                                                 <tr>
-                                                        <td>datePicker</td>
-                                                  
-                                                        <td>
-                                                                    <code>DatePicker</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code><p>Provider for date selection</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                                <tr>
                                                         <td>router</td>
                                                   
                                                         <td>
@@ -414,15 +395,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>citySelectionChanged(event)</code>
+<code>citySelectionChanged(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="193"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:193</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="206"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:206</a></div>
                 </td>
             </tr>
 
@@ -438,6 +419,7 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
                                     <td>Description</td>
                                 </tr>
@@ -445,6 +427,9 @@
                             <tbody>
                                 <tr>
                                     <td>event</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
 
                                     <td>
                                         No
@@ -476,47 +461,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="computeSelectedOrganisation"></a>
-                    <span class="name">
-                        <b>
-                            computeSelectedOrganisation
-                        </b>
-                        <a href="#computeSelectedOrganisation"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>computeSelectedOrganisation()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="112"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:112</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Computes the selected organisation</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="countySelectionChanged"></a>
                     <span class="name">
                         <b>
@@ -528,15 +472,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>countySelectionChanged(event)</code>
+<code>countySelectionChanged(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="201"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:201</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="214"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:214</a></div>
                 </td>
             </tr>
 
@@ -552,6 +496,7 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
                                     <td>Description</td>
                                 </tr>
@@ -559,6 +504,9 @@
                             <tbody>
                                 <tr>
                                     <td>event</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
 
                                     <td>
                                         No
@@ -608,8 +556,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="299"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:299</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="315"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:315</a></div>
                 </td>
             </tr>
 
@@ -649,15 +597,15 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="232"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:232</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="247"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:247</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>When a course is selected, the acreditor organisations pop-up select is automatically triggered, 
+                    <div class="io-description"><p>When a course is selected, the acreditor organisations pop-up select is automatically triggered,
 Containing the organisations that are acreditors for the selected course</p>
 </div>
 
@@ -693,8 +641,8 @@ Containing the organisations that are acreditors for the selected course</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="81"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:81</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="101"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:101</a></div>
                 </td>
             </tr>
 
@@ -736,8 +684,8 @@ Containing the organisations that are acreditors for the selected course</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="130"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:130</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="140"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:140</a></div>
                 </td>
             </tr>
 
@@ -779,8 +727,8 @@ Containing the organisations that are acreditors for the selected course</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="157"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:157</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="172"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:172</a></div>
                 </td>
             </tr>
 
@@ -849,8 +797,8 @@ Containing the organisations that are acreditors for the selected course</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="148"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:148</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="163"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:163</a></div>
                 </td>
             </tr>
 
@@ -892,8 +840,8 @@ Containing the organisations that are acreditors for the selected course</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="180"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:180</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="196"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:196</a></div>
                 </td>
             </tr>
 
@@ -935,8 +883,8 @@ Containing the organisations that are acreditors for the selected course</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="169"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:169</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="185"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:185</a></div>
                 </td>
             </tr>
 
@@ -976,8 +924,8 @@ Containing the organisations that are acreditors for the selected course</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="71"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:71</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="91"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:91</a></div>
                 </td>
             </tr>
 
@@ -1017,8 +965,8 @@ Containing the organisations that are acreditors for the selected course</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="286"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:286</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="302"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:302</a></div>
                 </td>
             </tr>
 
@@ -1051,15 +999,15 @@ Containing the organisations that are acreditors for the selected course</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>organisationSelectionChanged(event)</code>
+<code>organisationSelectionChanged(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="210"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:210</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="225"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:225</a></div>
                 </td>
             </tr>
 
@@ -1075,6 +1023,7 @@ Containing the organisations that are acreditors for the selected course</p>
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
                                     <td>Description</td>
                                 </tr>
@@ -1082,6 +1031,9 @@ Containing the organisations that are acreditors for the selected course</p>
                             <tbody>
                                 <tr>
                                     <td>event</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
 
                                     <td>
                                         No
@@ -1124,15 +1076,15 @@ Containing the organisations that are acreditors for the selected course</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ssnExists(event)</code>
+<code>ssnExists(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="255"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:255</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="270"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:270</a></div>
                 </td>
             </tr>
 
@@ -1148,18 +1100,27 @@ Containing the organisations that are acreditors for the selected course</p>
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>event</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
 
                                     <td>
                                         No
                                     </td>
 
 
+                                    <td>
+                                        <p>Current event that triggered the function call</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1199,8 +1160,8 @@ Containing the organisations that are acreditors for the selected course</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="98"
-                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:98</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="118"
+                            class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:118</a></div>
                 </td>
             </tr>
 
@@ -1245,10 +1206,16 @@ It prepares the values that are going to be sent to the volunteer service</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:21</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Form for a new volunteer</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -1271,13 +1238,14 @@ It prepares the values that are going to be sent to the volunteer service</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:57</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Boolean value that contains the value of the volunteer&#39;s organisation&#39;s status: belongs to an existing one (false) or belongs to a new organisation (true)</p>
+                        <div class="io-description"><p>Boolean value that contains the value of the volunteer&#39;s organisation&#39;s status:
+belongs to an existing one (false) or belongs to a new organisation (true)</p>
 </div>
                     </td>
                 </tr>
@@ -1309,10 +1277,16 @@ It prepares the values that are going to be sent to the volunteer service</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:31</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>List of all available cities</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -1341,10 +1315,16 @@ It prepares the values that are going to be sent to the volunteer service</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:26</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>List of all available counties</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -1367,7 +1347,7 @@ It prepares the values that are going to be sent to the volunteer service</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:51</a></div>
                             </td>
                         </tr>
 
@@ -1405,10 +1385,16 @@ It prepares the values that are going to be sent to the volunteer service</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:41</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>List of all available courses</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -1437,7 +1423,7 @@ It prepares the values that are going to be sent to the volunteer service</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:48</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:70</a></div>
                             </td>
                         </tr>
 
@@ -1469,7 +1455,7 @@ It prepares the values that are going to be sent to the volunteer service</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:46</a></div>
                             </td>
                         </tr>
 
@@ -1507,10 +1493,16 @@ It prepares the values that are going to be sent to the volunteer service</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:36</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>List of all available organisations</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -1539,7 +1531,7 @@ It prepares the values that are going to be sent to the volunteer service</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:42</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:64</a></div>
                             </td>
                         </tr>
 
@@ -1566,7 +1558,7 @@ It prepares the values that are going to be sent to the volunteer service</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/pages/volunteer/add-volunteer/add-volunteer.component.ts:65</a></div>
                             </td>
                         </tr>
 
@@ -1581,23 +1573,44 @@ It prepares the values that are going to be sent to the volunteer service</p>
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
 import { FormBuilder, FormGroup, Validators, FormControl } from &#x27;@angular/forms&#x27;;
-import { DatePicker } from &#x27;@ionic-native/date-picker/ngx&#x27;;
 import { OrganisationService,
   VolunteerService,
-  LocationsService,
+  StaticsService,
   CourseService } from &#x27;src/app/core/service&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
+import { SsnValidation } from &#x27;src/app/core/validators/ssn-validation&#x27;;
+import { PhoneValidation } from &#x27;src/app/core/validators/phone-validation&#x27;;
 
 @Component({
   selector: &#x27;app-add-volunteer&#x27;,
   templateUrl: &#x27;./add-volunteer.component.html&#x27;,
   styleUrls: [&#x27;./add-volunteer.component.scss&#x27;],
 })
+
 export class AddVolunteerComponent implements OnInit {
+  /**
+   * Form for a new volunteer
+   */
   addForm: FormGroup;
+
+  /**
+   * List of all available counties
+   */
   counties &#x3D; [];
+
+  /**
+   * List of all available cities
+   */
   cities &#x3D; [];
+
+  /**
+   * List of all available organisations
+   */
   organisations &#x3D; [];
+
+  /**
+   * List of all available courses
+   */
   courses &#x3D; [];
 
   /**
@@ -1605,13 +1618,14 @@ export class AddVolunteerComponent implements OnInit {
    */
   organisationNone &#x3D; false;
 
-    /**
+  /**
    * Boolean value that contains the status of the new volunteer: has a course (false) or not (true)
    */
   courseNone &#x3D; false;
 
   /**
-   * Boolean value that contains the value of the volunteer&#x27;s organisation&#x27;s status: belongs to an existing one (false) or belongs to a new organisation (true)
+   * Boolean value that contains the value of the volunteer&#x27;s organisation&#x27;s status:
+   * belongs to an existing one (false) or belongs to a new organisation (true)
    */
   addNewOrganisation &#x3D; false;
 
@@ -1627,31 +1641,29 @@ export class AddVolunteerComponent implements OnInit {
    * New organisation&#x27;s name
    */
   newOrganisation &#x3D; &#x27;&#x27;;
-  
+
   /**
-   * 
+   *
    * @param formBuilder Provider for reactive form creation
-   * @param locationsService Provider for location selection
+   * @param staticsService Provider for location selection
    * @param volunteerService Provider for volunteer related operations
    * @param organisationService Provider for organisation related operations
    * @param courseService Provider for course related operations
-   * @param datePicker Provider for date selection
    * @param router Provider for route navigation
    */
   constructor(private formBuilder: FormBuilder,
-              private locationsService: LocationsService,
+              private staticsService: StaticsService,
               private volunteerService: VolunteerService,
               private organisationService: OrganisationService,
               private courseService: CourseService,
-              private datePicker: DatePicker,
               private router: Router) { }
 
   /**
-  * Page initialisation
-  */
+   * Page initialisation
+   */
   ngOnInit() {
     this.createForm();
-    this.getCountyList();   
+    this.getCountyList();
     this.getOrganisations();
     this.getCourses();
   }
@@ -1662,8 +1674,8 @@ export class AddVolunteerComponent implements OnInit {
   private createForm() {
     this.addForm &#x3D; this.formBuilder.group({
       name: [&#x27;&#x27;, Validators.required],
-      ssn: [&#x27;&#x27;, Validators.required],
-      phone: [&#x27;&#x27;, Validators.required],
+      ssn: [&#x27;&#x27;, [Validators.required, SsnValidation.ssnValidation]],
+      phone: [&#x27;&#x27;, [Validators.required, PhoneValidation.phoneValidation]],
       organisation: [&#x27;&#x27;, Validators.required],
       county: new FormControl({value: &#x27;&#x27;, disabled: false}, Validators.required),
       city: new FormControl({value: &#x27;&#x27;, disabled: true}, Validators.required),
@@ -1677,44 +1689,39 @@ export class AddVolunteerComponent implements OnInit {
    * It prepares the values that are going to be sent to the volunteer service
    */
   submit() {
-    this.computeSelectedOrganisation();
-    
-    if(this.courseNone) {
-      this.addForm.controls[&#x27;course&#x27;].setValue(&#x27;&#x27;);
-      this.selectedCourse &#x3D; null;
-    }
-
-    this.createVolunteer();
-  }
-
-  /**
-   * Computes the selected organisation
-   */
-  computeSelectedOrganisation() {
-    if(this.organisationNone) {
+    if (this.organisationNone) {
       this.addForm.controls[&#x27;organisation&#x27;].setValue(&#x27;&#x27;);
       this.selectedOrganisation &#x3D; null;
-    }
-    
-    if(this.newOrganisation) {
-      this.organisationService.createOrganisation(this.newOrganisation).subscribe((data: any) &#x3D;&gt; {   
-      this.organisationService.getOrganisationById(data.id).subscribe((result: any) &#x3D;&gt; {
-        this.selectedOrganisation &#x3D; result.docs[0];
+      this.createVolunteer();
+    } else {
+      if (this.newOrganisation) {
+        this.organisationService.createOrganisation(this.newOrganisation).subscribe((data: any) &#x3D;&gt; {
+          this.organisationService.getOrganisationById(data.id).subscribe((result: any) &#x3D;&gt; {
+            this.selectedOrganisation &#x3D; result.docs[0];
+            this.createVolunteer();
+          });
         });
-      });
-     }
+      } else {
+        this.createVolunteer();
+      }
+    }
   }
 
   /**
    * Sends the proper values to the volunteer service
    */
   private createVolunteer() {
+    if (this.courseNone) {
+      this.addForm.controls[&#x27;course&#x27;].setValue(&#x27;&#x27;);
+      this.selectedCourse &#x3D; null;
+    }
+
     this.volunteerService.createVolunteer(
-      this.addForm.value.name, 
-      this.addForm.value.ssn.toString(), 
-      this.addForm.value.phone.toString(), 
-      this.addForm.value.county, 
-      this.addForm.value.city, 
+      this.addForm.value.name,
+      this.addForm.value.ssn.toString(),
+      this.addForm.value.phone.toString(),
+      this.addForm.value.county,
+      this.addForm.value.city,
       this.selectedOrganisation,
       this.selectedCourse).subscribe(() &#x3D;&gt; {
         this.router.navigate([&#x27;/home&#x27;], {
@@ -1727,8 +1734,8 @@ export class AddVolunteerComponent implements OnInit {
    * Retrives the list of counties from the locations service
    */
   private getCountyList() {
-    this.locationsService.getCountyList().subscribe((response) &#x3D;&gt; {
-      this.counties &#x3D; response;
+    this.staticsService.getCountyList().subscribe((response) &#x3D;&gt; {
+      this.counties &#x3D; response.rows.map(x &#x3D;&gt; x.doc);
     });
   }
 
@@ -1736,9 +1743,10 @@ export class AddVolunteerComponent implements OnInit {
    * Retrives the list of cities from a selected county from the locations service
    */
   private getCityList(county) {
-    this.locationsService.getCityList().subscribe((response) &#x3D;&gt; {
-      this.cities &#x3D; response.filter(city &#x3D;&gt; city.county &#x3D;&#x3D;&#x3D; county);
-      if(this.cities.length &gt; 0){
+    this.staticsService.getCityList(county.name).subscribe((response) &#x3D;&gt; {
+      this.cities &#x3D; response.rows
+        .map(x &#x3D;&gt; x.doc);
+      if (this.cities.length &gt; 0) {
         this.addForm.controls[&#x27;city&#x27;].enable();
       }
     });
@@ -1748,9 +1756,9 @@ export class AddVolunteerComponent implements OnInit {
    * Retrieves the list of organisations from the organisations service
    */
   private getOrganisations() {
-    this.organisationService.getOrganisations().subscribe((result: any) &#x3D;&gt;{
-      result.rows.forEach(row &#x3D;&gt; {
-        this.organisations.push(row.doc);
+    this.organisationService.getOrganisations().subscribe((result: any) &#x3D;&gt; {
+      result.docs.forEach(doc &#x3D;&gt; {
+        this.organisations.push(doc);
       });
     });
   }
@@ -1759,19 +1767,16 @@ export class AddVolunteerComponent implements OnInit {
    * Retrieves the list of courses from the courses service
    */
   private getCourses() {
-    // this.courseService.getCourses().subscribe((response: any) &#x3D;&gt;{
-    //   const data &#x3D; response.rows.filter(item &#x3D;&gt; item.doc.language !&#x3D;&#x3D; &#x27;query&#x27;);
-     
-    //   this.courses &#x3D; data.map(item &#x3D;&gt; item.doc.name).filter((value, index, self) &#x3D;&gt; self.indexOf(value) &#x3D;&#x3D;&#x3D; index);
-    // });
-    this.courses &#x3D; [&#x27;prim-ajutor&#x27;, &#x27;constructii&#x27;];
+    this.courseService.getCourseNames().subscribe((response: any) &#x3D;&gt; {
+      this.courses &#x3D; response.docs;
+    });
   }
 
   /**
    * When a city is selected, the form&#x27;s value is updated
    * @param event Changing event, triggered when a change is detected on an element
    */
-  citySelectionChanged(event) {
+  citySelectionChanged(event: any) {
     this.addForm.controls[&#x27;city&#x27;].setValue(event.detail.value);
   }
 
@@ -1779,8 +1784,10 @@ export class AddVolunteerComponent implements OnInit {
    * When a county is selected, the form&#x27;s value is updated and starts retriving the list of cities from that county
    * @param event Changing event, triggered when a change is detected on an element
    */
-  countySelectionChanged(event) {
+  countySelectionChanged(event: any) {
     this.addForm.controls[&#x27;county&#x27;].setValue(event.detail.value);
+    this.addForm.controls[&#x27;city&#x27;].reset(&#x27;&#x27;);
+    this.cities &#x3D; [];
     this.getCityList(this.addForm.value.county);
   }
 
@@ -1788,10 +1795,10 @@ export class AddVolunteerComponent implements OnInit {
    * When an organisation is selected, the UI will be changed to the selection
    * @param event Changing event, triggered when a change is detected on an element
    */
-  organisationSelectionChanged(event) {
+  organisationSelectionChanged(event: any) {
     if (this.addForm.value.organisation &#x3D;&#x3D;&#x3D; &#x27;new&#x27;) {
-      this.addForm.value.organisation &#x3D;&#x3D;&#x3D; &#x27;&#x27;;
-      this.addNewOrganisation &#x3D; true;      
+      this.addForm.value.organisation &#x3D; &#x27;&#x27;;
+      this.addNewOrganisation &#x3D; true;
     } else {
       this.selectedOrganisation &#x3D; this.organisations.find(organisation &#x3D;&gt; organisation._id &#x3D;&#x3D;&#x3D; event.detail.value);
       this.addNewOrganisation &#x3D; false;
@@ -1807,41 +1814,42 @@ export class AddVolunteerComponent implements OnInit {
   // }
 
   /**
-   * When a course is selected, the acreditor organisations pop-up select is automatically triggered, 
+   * When a course is selected, the acreditor organisations pop-up select is automatically triggered,
    * Containing the organisations that are acreditors for the selected course
    */
-  courseSelectionChanged() {   
-    this.selectedCourse &#x3D; {
-      name: this.addForm.value.course
-    };
+  courseSelectionChanged() {
+    this.selectedCourse &#x3D; this.addForm.value.course;
 
-    // this.courseService.getCourseByName(this.addForm.value.course).subscribe((response: any) &#x3D;&gt; {
-    //   this.acreditedOrganisations &#x3D; response.docs;
-    // });
+    /* this.courseService.getCourseByName(this.addForm.value.course).subscribe((response: any) &#x3D;&gt; {
+      this.acreditedOrganisations &#x3D; response.docs;
+    });
 
-    // this.acreditedOrganisations &#x3D; [
-    //   {
-    //     _id: &#x27;1&#x27;,
-    //     acredited: &#x27;Crucea Rosie&#x27;
-    //   },
-    //   {
-    //     _id: &#x27;2&#x27;,
-    //     acredited:&#x27;SMURD&#x27;
-    //   }];
+    this.acreditedOrganisations &#x3D; [
+      {
+        _id: &#x27;1&#x27;,
+        acredited: &#x27;Crucea Rosie&#x27;
+      },
+      {
+        _id: &#x27;2&#x27;,
+        acredited:&#x27;SMURD&#x27;
+      }];
+      */
   }
 
   /**
    * Checks if the given ssn code exists in the local database and invalidates the form if the ssn already exists in database
+   * @param event Current event that triggered the function call
    */
-  ssnExists(event) {
+  ssnExists(event: any) {
     const ssn &#x3D; event.detail.value;
     this.volunteerService.getVolunteerBySsn(ssn.trim()).subscribe((response) &#x3D;&gt; {
-      if(response.docs.length &gt; 0){
-        this.addForm.controls[&#x27;ssn&#x27;].setErrors({&#x27;incorrect&#x27;: true});
+      if (response.docs.length &gt; 0) {
+        this.addForm.controls[&#x27;ssn&#x27;].setErrors({incorrect: true});
         this.addForm.setErrors({&#x27;incorrect-ssn&#x27;: true});
       }
     });
   }
+
 
   // /**
   //  * Triggers a date picker pop-up after a course is added in order to take the course acreditation date
@@ -1865,7 +1873,7 @@ export class AddVolunteerComponent implements OnInit {
    * Triggered when &#x27;Neafiliat&#x27; option is selected; updates the form so that organisation is no longer required
    */
   organisationNoneChanged() {
-    if(this.organisationNone) {
+    if (this.organisationNone) {
       this.addForm.controls[&#x27;organisation&#x27;].clearValidators();
       this.addForm.controls[&#x27;organisation&#x27;].updateValueAndValidity();
     } else {
@@ -1875,10 +1883,10 @@ export class AddVolunteerComponent implements OnInit {
   }
 
  /**
-   * Triggered when &#x27;Fără acreditare&#x27; option is selected; updates the form so that course and acreditedOrganisation is no longer required
-   */
+  * Triggered when &#x27;Fără acreditare&#x27; option is selected; updates the form so that course and acreditedOrganisation is no longer required
+  */
   courseNoneChanged() {
-    if(this.courseNone) {
+    if (this.courseNone) {
       this.addForm.controls[&#x27;course&#x27;].clearValidators();
       this.addForm.controls[&#x27;course&#x27;].updateValueAndValidity();
 
@@ -1905,7 +1913,7 @@ export class AddVolunteerComponent implements OnInit {
     &lt;ion-buttons slot&#x3D;&quot;end&quot;&gt;
       &lt;ion-menu-button color&#x3D;&quot;dark&quot;&gt;&lt;/ion-menu-button&gt;
     &lt;/ion-buttons&gt;
-    &lt;img src&#x3D;&quot;../../assets/images/logo.PNG&quot; class&#x3D;&quot;logo-title mx-auto&quot; /&gt;
+    &lt;img src&#x3D;&quot;../../assets/images/DSU.png&quot; class&#x3D;&quot;logo-title mx-auto&quot; /&gt;
   &lt;/ion-toolbar&gt;
 &lt;/ion-header&gt;
 &lt;ion-content padding&gt;
@@ -1918,13 +1926,14 @@ export class AddVolunteerComponent implements OnInit {
     &lt;div class&#x3D;&quot;mt-10&quot;&gt;
       &lt;ion-label class&#x3D;&quot;title&quot;&gt;Adaugă CNP&lt;/ion-label&gt;
       &lt;ion-input type&#x3D;&quot;number&quot; formControlName&#x3D;&quot;ssn&quot; class&#x3D;&quot;mt-10&quot; (ionChange)&#x3D;&quot;ssnExists($event)&quot;
-        [ngClass]&#x3D;&quot;{&#x27;input-error&#x27;: this.addForm.hasError(&#x27;incorrect-ssn&#x27;)}&quot;&gt;&lt;/ion-input&gt;
-      &lt;p *ngIf&#x3D;&quot;this.addForm.hasError(&#x27;incorrect-ssn&#x27;)&quot; class&#x3D;&quot;error-message&quot;&gt;Acest CNP aparține deja unui voluntar.&lt;/p&gt;
+        [ngClass]&#x3D;&quot;{&#x27;input-error&#x27;: !!this.addForm.controls.ssn.errors?.ssn &amp;&amp; this.addForm.controls.ssn.touched}&quot;&gt;&lt;/ion-input&gt;
+      &lt;p *ngIf&#x3D;&quot;!!this.addForm.controls.ssn.errors?.ssn &amp;&amp; this.addForm.controls.ssn.touched&quot; class&#x3D;&quot;error-message&quot;&gt;{{ this.addForm.controls.ssn.errors?.ssn }}&lt;/p&gt;
     &lt;/div&gt;
 
     &lt;div class&#x3D;&quot;mt-10&quot;&gt;
       &lt;ion-label class&#x3D;&quot;title&quot;&gt;Adaugă număr de telefon&lt;/ion-label&gt;
-      &lt;ion-input type&#x3D;&quot;tel&quot; formControlName&#x3D;&quot;phone&quot; class&#x3D;&quot;mt-10&quot;&gt;&lt;/ion-input&gt;
+      &lt;ion-input type&#x3D;&quot;tel&quot; formControlName&#x3D;&quot;phone&quot; class&#x3D;&quot;mt-10&quot; [ngClass]&#x3D;&quot;{&#x27;input-error&#x27;: !!this.addForm.controls.phone.errors?.phone &amp;&amp; this.addForm.controls.phone.touched}&quot;&gt;&lt;/ion-input&gt;
+      &lt;p *ngIf&#x3D;&quot;!!this.addForm.controls.phone.errors?.phone &amp;&amp; this.addForm.controls.phone.touched&quot; class&#x3D;&quot;error-message&quot;&gt;{{ this.addForm.controls.phone.errors?.phone }}&lt;/p&gt;
     &lt;/div&gt;
 
     &lt;div class&#x3D;&quot;selectors&quot;&gt;
@@ -1932,8 +1941,8 @@ export class AddVolunteerComponent implements OnInit {
         &lt;ion-label class&#x3D;&quot;title&quot;&gt;
           Alege județ
         &lt;/ion-label&gt;
-        &lt;ion-select class&#x3D;&quot;mt-10&quot; formControlName&#x3D;&quot;county&quot; (ionChange)&#x3D;&quot;countySelectionChanged($event)&quot;&gt;
-          &lt;ion-select-option *ngFor&#x3D;&quot;let county of counties&quot; value&#x3D;&quot;{{county.name}}&quot;&gt;{{county.name}}&lt;/ion-select-option&gt;
+        &lt;ion-select class&#x3D;&quot;mt-10&quot; formControlName&#x3D;&quot;county&quot; (ionChange)&#x3D;&quot;countySelectionChanged($event)&quot; interface&#x3D;&quot;action-sheet&quot;&gt;
+          &lt;ion-select-option *ngFor&#x3D;&quot;let county of counties&quot; [value]&#x3D;&quot;county&quot;&gt;{{county.name}}&lt;/ion-select-option&gt;
         &lt;/ion-select&gt;
       &lt;/div&gt;
 
@@ -1941,8 +1950,8 @@ export class AddVolunteerComponent implements OnInit {
         &lt;ion-label class&#x3D;&quot;title&quot;&gt;
           Alege localitate
         &lt;/ion-label&gt;
-        &lt;ion-select class&#x3D;&quot;mt-10&quot; formControlName&#x3D;&quot;city&quot; (ionChange)&#x3D;&quot;citySelectionChanged($event)&quot;&gt;
-          &lt;ion-select-option *ngFor&#x3D;&quot;let city of cities&quot; value&#x3D;&quot;{{city.name}}&quot;&gt;{{city.name}}&lt;/ion-select-option&gt;
+        &lt;ion-select class&#x3D;&quot;mt-10&quot; formControlName&#x3D;&quot;city&quot; (ionChange)&#x3D;&quot;citySelectionChanged($event)&quot; interface&#x3D;&quot;action-sheet&quot;&gt;
+          &lt;ion-select-option *ngFor&#x3D;&quot;let city of cities&quot; [value]&#x3D;&quot;city&quot;&gt;{{city.name}}&lt;/ion-select-option&gt;
         &lt;/ion-select&gt;
       &lt;/div&gt;
 
@@ -1951,7 +1960,7 @@ export class AddVolunteerComponent implements OnInit {
           Alege organizație
         &lt;/ion-label&gt;
         &lt;ion-select class&#x3D;&quot;mt-10&quot; formControlName&#x3D;&quot;organisation&quot; *ngIf&#x3D;&quot;!addNewOrganisation&quot;
-          [attr.disabled]&#x3D;&quot;organisationNone&quot; (ionChange)&#x3D;&quot;organisationSelectionChanged($event)&quot;&gt;
+          [attr.disabled]&#x3D;&quot;organisationNone&quot; (ionChange)&#x3D;&quot;organisationSelectionChanged($event)&quot; interface&#x3D;&quot;action-sheet&quot;&gt;
           &lt;ion-select-option *ngFor&#x3D;&quot;let organisation of organisations&quot; value&#x3D;&quot;{{organisation._id}}&quot;&gt;
             {{organisation.name}}&lt;/ion-select-option&gt;
           &lt;ion-select-option value&#x3D;&quot;new&quot;&gt;Adaugă organizație nouă&lt;/ion-select-option&gt;
@@ -1971,9 +1980,9 @@ export class AddVolunteerComponent implements OnInit {
         &lt;ion-label class&#x3D;&quot;title&quot;&gt;
           Alege specializare
         &lt;/ion-label&gt;
-        &lt;ion-select class&#x3D;&quot;mt-10&quot; formControlName&#x3D;&quot;course&quot; (ionChange)&#x3D;&quot;courseSelectionChanged()&quot;
+        &lt;ion-select class&#x3D;&quot;mt-10&quot; formControlName&#x3D;&quot;course&quot; (ionChange)&#x3D;&quot;courseSelectionChanged()&quot; interface&#x3D;&quot;action-sheet&quot;
           [attr.disabled]&#x3D;&quot;courseNone&quot;&gt;
-          &lt;ion-select-option *ngFor&#x3D;&quot;let course of courses&quot; value&#x3D;&quot;{{course}}&quot;&gt;{{course}}
+          &lt;ion-select-option *ngFor&#x3D;&quot;let course of courses&quot; [value]&#x3D;&quot;course&quot;&gt;{{ course.name }}
           &lt;/ion-select-option&gt;
         &lt;/ion-select&gt;
       &lt;/div&gt;
@@ -1982,7 +1991,7 @@ export class AddVolunteerComponent implements OnInit {
         &lt;ion-label class&#x3D;&quot;title&quot;&gt;
           Alege organizație acreditoare
         &lt;/ion-label&gt;
-        &lt;ion-select class&#x3D;&quot;mt-10&quot; formControlName&#x3D;&quot;acreditedOrganisation&quot;
+        &lt;ion-select class&#x3D;&quot;mt-10&quot; formControlName&#x3D;&quot;acreditedOrganisation&quot; interface&#x3D;&quot;action-sheet&quot;
           (ionChange)&#x3D;&quot;acreditedOrganisationSelectionChanged($event)&quot;&gt;
           &lt;ion-select-option&gt;Invalideaza selectia&lt;/ion-select-option&gt;
           &lt;ion-select-option *ngFor&#x3D;&quot;let acreditedOrganisation of acreditedOrganisations&quot;
@@ -2013,10 +2022,8 @@ export class AddVolunteerComponent implements OnInit {
       &lt;ion-col col-6&gt;
       &lt;/ion-col&gt;
       &lt;ion-col col-6&gt;
-        &lt;!-- [disabled]&#x3D;&quot;(!courseNone || !addForm.valid) &amp;&amp; (courseNone || !addForm.valid || !selectedCourse.obtained)&quot; --&gt;
         &lt;ion-button type&#x3D;&quot;submit&quot; color&#x3D;&quot;success&quot; class&#x3D;&quot;mt-10 w-100&quot;
-          [disabled]&#x3D;&quot;addForm.invalid&quot;
-          &gt;
+          [disabled]&#x3D;&quot;addForm.invalid&quot;&gt;
           Salvează&lt;/ion-button&gt;
       &lt;/ion-col&gt;
     &lt;/ion-row&gt;
@@ -2048,6 +2055,7 @@ export class AddVolunteerComponent implements OnInit {
 .add-form .error-message {
     color: red;
     margin-left: 10px;
+    background: white;
 }
 
 .course-date {
@@ -2082,7 +2090,7 @@ export class AddVolunteerComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar mode="ios">    <ion-buttons slot="start">      <ion-back-button color="dark" class="show-back-button" defaultHref="home"></ion-back-button>    </ion-buttons>    <ion-buttons slot="end">      <ion-menu-button color="dark"></ion-menu-button>    </ion-buttons>    <img src="../../assets/images/logo.PNG" class="logo-title mx-auto" />  </ion-toolbar></ion-header><ion-content padding>  <form (ngSubmit)="submit()" class="add-form" [formGroup]="addForm" id="addForm">    <div class="mt-10">      <ion-label class="title">Adaugă nume</ion-label>      <ion-input type="text" formControlName="name" class="mt-10"></ion-input>    </div>    <div class="mt-10">      <ion-label class="title">Adaugă CNP</ion-label>      <ion-input type="number" formControlName="ssn" class="mt-10" (ionChange)="ssnExists($event)"        [ngClass]="{\'input-error\': this.addForm.hasError(\'incorrect-ssn\')}"></ion-input>      <p *ngIf="this.addForm.hasError(\'incorrect-ssn\')" class="error-message">Acest CNP aparține deja unui voluntar.</p>    </div>    <div class="mt-10">      <ion-label class="title">Adaugă număr de telefon</ion-label>      <ion-input type="tel" formControlName="phone" class="mt-10"></ion-input>    </div>    <div class="selectors">      <div class="mt-10">        <ion-label class="title">          Alege județ        </ion-label>        <ion-select class="mt-10" formControlName="county" (ionChange)="countySelectionChanged($event)">          <ion-select-option *ngFor="let county of counties" value="{{county.name}}">{{county.name}}</ion-select-option>        </ion-select>      </div>      <div class="mt-10">        <ion-label class="title">          Alege localitate        </ion-label>        <ion-select class="mt-10" formControlName="city" (ionChange)="citySelectionChanged($event)">          <ion-select-option *ngFor="let city of cities" value="{{city.name}}">{{city.name}}</ion-select-option>        </ion-select>      </div>      <div class="mt-10">        <ion-label class="title">          Alege organizație        </ion-label>        <ion-select class="mt-10" formControlName="organisation" *ngIf="!addNewOrganisation"          [attr.disabled]="organisationNone" (ionChange)="organisationSelectionChanged($event)">          <ion-select-option *ngFor="let organisation of organisations" value="{{organisation._id}}">            {{organisation.name}}</ion-select-option>          <ion-select-option value="new">Adaugă organizație nouă</ion-select-option>        </ion-select>        <ion-input type="text" [(ngModel)]="newOrganisation" [ngModelOptions]="{standalone: true}" class="mt-10"          *ngIf="addNewOrganisation" [attr.disabled]="organisationNone"></ion-input>      </div>      <ion-item lines="none" class="checkbox-item">        <ion-checkbox [(ngModel)]="organisationNone" [ngModelOptions]="{standalone: true}" name="organisationNone"          (ionChange)="organisationNoneChanged()">        </ion-checkbox>        <ion-label class="pl-10">Neafiliat</ion-label>      </ion-item>      <div>        <ion-label class="title">          Alege specializare        </ion-label>        <ion-select class="mt-10" formControlName="course" (ionChange)="courseSelectionChanged()"          [attr.disabled]="courseNone">          <ion-select-option *ngFor="let course of courses" value="{{course}}">{{course}}          </ion-select-option>        </ion-select>      </div><!--       <div class="mt-10" *ngIf="!!selectedCourse.name && !courseNone">        <ion-label class="title">          Alege organizație acreditoare        </ion-label>        <ion-select class="mt-10" formControlName="acreditedOrganisation"          (ionChange)="acreditedOrganisationSelectionChanged($event)">          <ion-select-option>Invalideaza selectia</ion-select-option>          <ion-select-option *ngFor="let acreditedOrganisation of acreditedOrganisations"            value="{{acreditedOrganisation.acredited}}">{{acreditedOrganisation.acredited}}          </ion-select-option>        </ion-select>        <ion-row>          <ion-col>            <p class="course-date">              {{selectedCourse.obtained | date}}            </p>          </ion-col>          <ion-col>            <ion-button (click)="showDatePicker()" class="mt-10">              Alege data acreditării            </ion-button>          </ion-col>        </ion-row>      </div> -->      <ion-item lines="none" class="checkbox-item">        <ion-checkbox [(ngModel)]="courseNone" [ngModelOptions]="{standalone: true}" name="coursesNone" (ionChange)="courseNoneChanged()"></ion-checkbox>        <ion-label class="pl-10">Fără acreditare</ion-label>      </ion-item>    </div>    <ion-row>      <ion-col col-6>      </ion-col>      <ion-col col-6>        <!-- [disabled]="(!courseNone || !addForm.valid) && (courseNone || !addForm.valid || !selectedCourse.obtained)" -->        <ion-button type="submit" color="success" class="mt-10 w-100"          [disabled]="addForm.invalid"          >          Salvează</ion-button>      </ion-col>    </ion-row>  </form></ion-content></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar mode="ios">    <ion-buttons slot="start">      <ion-back-button color="dark" class="show-back-button" defaultHref="home"></ion-back-button>    </ion-buttons>    <ion-buttons slot="end">      <ion-menu-button color="dark"></ion-menu-button>    </ion-buttons>    <img src="../../assets/images/DSU.png" class="logo-title mx-auto" />  </ion-toolbar></ion-header><ion-content padding>  <form (ngSubmit)="submit()" class="add-form" [formGroup]="addForm" id="addForm">    <div class="mt-10">      <ion-label class="title">Adaugă nume</ion-label>      <ion-input type="text" formControlName="name" class="mt-10"></ion-input>    </div>    <div class="mt-10">      <ion-label class="title">Adaugă CNP</ion-label>      <ion-input type="number" formControlName="ssn" class="mt-10" (ionChange)="ssnExists($event)"        [ngClass]="{\'input-error\': !!this.addForm.controls.ssn.errors?.ssn && this.addForm.controls.ssn.touched}"></ion-input>      <p *ngIf="!!this.addForm.controls.ssn.errors?.ssn && this.addForm.controls.ssn.touched" class="error-message">{{ this.addForm.controls.ssn.errors?.ssn }}</p>    </div>    <div class="mt-10">      <ion-label class="title">Adaugă număr de telefon</ion-label>      <ion-input type="tel" formControlName="phone" class="mt-10" [ngClass]="{\'input-error\': !!this.addForm.controls.phone.errors?.phone && this.addForm.controls.phone.touched}"></ion-input>      <p *ngIf="!!this.addForm.controls.phone.errors?.phone && this.addForm.controls.phone.touched" class="error-message">{{ this.addForm.controls.phone.errors?.phone }}</p>    </div>    <div class="selectors">      <div class="mt-10">        <ion-label class="title">          Alege județ        </ion-label>        <ion-select class="mt-10" formControlName="county" (ionChange)="countySelectionChanged($event)" interface="action-sheet">          <ion-select-option *ngFor="let county of counties" [value]="county">{{county.name}}</ion-select-option>        </ion-select>      </div>      <div class="mt-10">        <ion-label class="title">          Alege localitate        </ion-label>        <ion-select class="mt-10" formControlName="city" (ionChange)="citySelectionChanged($event)" interface="action-sheet">          <ion-select-option *ngFor="let city of cities" [value]="city">{{city.name}}</ion-select-option>        </ion-select>      </div>      <div class="mt-10">        <ion-label class="title">          Alege organizație        </ion-label>        <ion-select class="mt-10" formControlName="organisation" *ngIf="!addNewOrganisation"          [attr.disabled]="organisationNone" (ionChange)="organisationSelectionChanged($event)" interface="action-sheet">          <ion-select-option *ngFor="let organisation of organisations" value="{{organisation._id}}">            {{organisation.name}}</ion-select-option>          <ion-select-option value="new">Adaugă organizație nouă</ion-select-option>        </ion-select>        <ion-input type="text" [(ngModel)]="newOrganisation" [ngModelOptions]="{standalone: true}" class="mt-10"          *ngIf="addNewOrganisation" [attr.disabled]="organisationNone"></ion-input>      </div>      <ion-item lines="none" class="checkbox-item">        <ion-checkbox [(ngModel)]="organisationNone" [ngModelOptions]="{standalone: true}" name="organisationNone"          (ionChange)="organisationNoneChanged()">        </ion-checkbox>        <ion-label class="pl-10">Neafiliat</ion-label>      </ion-item>      <div>        <ion-label class="title">          Alege specializare        </ion-label>        <ion-select class="mt-10" formControlName="course" (ionChange)="courseSelectionChanged()" interface="action-sheet"          [attr.disabled]="courseNone">          <ion-select-option *ngFor="let course of courses" [value]="course">{{ course.name }}          </ion-select-option>        </ion-select>      </div><!--       <div class="mt-10" *ngIf="!!selectedCourse.name && !courseNone">        <ion-label class="title">          Alege organizație acreditoare        </ion-label>        <ion-select class="mt-10" formControlName="acreditedOrganisation" interface="action-sheet"          (ionChange)="acreditedOrganisationSelectionChanged($event)">          <ion-select-option>Invalideaza selectia</ion-select-option>          <ion-select-option *ngFor="let acreditedOrganisation of acreditedOrganisations"            value="{{acreditedOrganisation.acredited}}">{{acreditedOrganisation.acredited}}          </ion-select-option>        </ion-select>        <ion-row>          <ion-col>            <p class="course-date">              {{selectedCourse.obtained | date}}            </p>          </ion-col>          <ion-col>            <ion-button (click)="showDatePicker()" class="mt-10">              Alege data acreditării            </ion-button>          </ion-col>        </ion-row>      </div> -->      <ion-item lines="none" class="checkbox-item">        <ion-checkbox [(ngModel)]="courseNone" [ngModelOptions]="{standalone: true}" name="coursesNone" (ionChange)="courseNoneChanged()"></ion-checkbox>        <ion-label class="pl-10">Fără acreditare</ion-label>      </ion-item>    </div>    <ion-row>      <ion-col col-6>      </ion-col>      <ion-col col-6>        <ion-button type="submit" color="success" class="mt-10 w-100"          [disabled]="addForm.invalid">          Salvează</ion-button>      </ion-col>    </ion-row>  </form></ion-content></div>'
     var COMPONENTS = [{'name': 'AboutPage', 'selector': 'app-about'},{'name': 'AddVolunteerComponent', 'selector': 'app-add-volunteer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthenticationPage', 'selector': 'app-authentication'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'ListVolunteerComponent', 'selector': 'app-list-volunteer'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutComponent', 'selector': 'app-logout'},{'name': 'RecoverPasswordComponent', 'selector': 'app-recover-password'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SendMessageComponent', 'selector': 'app-send-message'},{'name': 'ValidateVolunteerComponent', 'selector': 'app-validate-volunteer'},{'name': 'VolunteerPage', 'selector': 'app-volunteer'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AddVolunteerComponent'};

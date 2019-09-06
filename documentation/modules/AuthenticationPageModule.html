@@ -221,7 +221,7 @@ const routes: Routes &#x3D; [
   {
     path: &#x27;&#x27;,
     component: AuthenticationPage,
-  }, 
+  },
   {
     path: &#x27;login&#x27;,
     component: LoginComponent,
@@ -231,10 +231,9 @@ const routes: Routes &#x3D; [
     path: &#x27;logout&#x27;,
     component: LogoutComponent
   },
-	{
+  {
     path: &#x27;reset/:token&#x27;,
     component: ResetPasswordComponent,
-    canActivate: [UnauthenticatedGuard]
   },
   {
     path: &#x27;recover&#x27;,

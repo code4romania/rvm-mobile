@@ -12,8 +12,16 @@ import { Volunteer } from 'src/app/core/model/volunteer.model';
   templateUrl: './validate-volunteer.component.html',
   styleUrls: ['./validate-volunteer.component.scss'],
 })
+
 export class ValidateVolunteerComponent implements OnInit {
+  /**
+   * All volunteers
+   */
   volunteers = [];
+
+  /**
+   * The keyword inserted by the user is the search bar
+   */
   keyword = '';
 
   /**
@@ -21,10 +29,29 @@ export class ValidateVolunteerComponent implements OnInit {
    */
   volunteerIdWithDetails: string;
 
+  /**
+   * All available courses
+   */
   courses = [];
+
+  /**
+   * All available counties
+   */
   counties = [];
+
+  /**
+   * All available cities
+   */
   cities = [];
+
+  /**
+   * Selected county
+   */
   county: any;
+
+  /**
+   * Selected city
+   */
   city: any;
 
   /**
@@ -94,10 +121,10 @@ export class ValidateVolunteerComponent implements OnInit {
     }
   }
 
-    /**
-     * Opens the allocation menu for the selected user
-     * @param volunteerId String containing the id of the volunteer that was selected for allocation
-     */
+  /**
+   * Opens the allocation menu for the selected user
+   * @param volunteerId String containing the id of the volunteer that was selected for allocation
+   */
   allocateUser(volunteerId: string) {
     const index = this.volunteers.findIndex(volunteer => volunteer._id === volunteerId);
     if (index >= 0) {
@@ -105,10 +132,10 @@ export class ValidateVolunteerComponent implements OnInit {
     }
   }
 
-   /**
-    * Allocate the selected volunteer for a location using the allocation service
-    * @param volunteerId String containing the id of the volunteer that was selected for allocation
-    */
+  /**
+   * Allocate the selected volunteer for a location using the allocation service
+   * @param volunteerId String containing the id of the volunteer that was selected for allocation
+   */
   confirmAllocation(volunteerId: string) {
     const index = this.volunteers.findIndex(volunteer => volunteer._id === volunteerId);
     delete this.city.county;
@@ -158,7 +185,7 @@ export class ValidateVolunteerComponent implements OnInit {
     * Loads more data, the response is paginated so on scorll down more informations needs to be loaded
     * @param event Scroll event
     */
-  loadData(event) {
+  loadData(event: any) {
     setTimeout(() => {
       this.page++;
       this.getData();
@@ -176,7 +203,7 @@ export class ValidateVolunteerComponent implements OnInit {
    * Refreshes the data, on scroll up the page is reset
    * @param event Scroll event
    */
-  doRefresh(event) {
+  doRefresh(event: any) {
     setTimeout(() => {
       this.page = 0;
       this.getData();
@@ -194,19 +221,20 @@ export class ValidateVolunteerComponent implements OnInit {
   }
 
   /**
-   *
-   * @param county Retrieves the list of cities from the selected county
+   * Retrieves the list of cities from the selected county
+   * @param county User selected county
    */
   getCityList(county: any) {
     this.staticsService.getCityList(county._id).subscribe((response) => {
       this.cities = response.rows.map(x => x.doc);
     });
   }
+
   /**
    * When a county is selected, the form's value is updated and starts retriving the list of cities from that county
    * @param event Changing event, triggered when a change is detected on an element
    */
-  countySelectionChanged(event) {
+  countySelectionChanged(event: any) {
     this.getCityList(event.detail.value);
   }
 

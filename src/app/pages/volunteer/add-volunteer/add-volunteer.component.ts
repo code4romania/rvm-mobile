@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { OrganisationService,
   VolunteerService,
   StaticsService,
@@ -14,11 +13,31 @@ import { PhoneValidation } from 'src/app/core/validators/phone-validation';
   templateUrl: './add-volunteer.component.html',
   styleUrls: ['./add-volunteer.component.scss'],
 })
+
 export class AddVolunteerComponent implements OnInit {
+  /**
+   * Form for a new volunteer
+   */
   addForm: FormGroup;
+
+  /**
+   * List of all available counties
+   */
   counties = [];
+
+  /**
+   * List of all available cities
+   */
   cities = [];
+
+  /**
+   * List of all available organisations
+   */
   organisations = [];
+
+  /**
+   * List of all available courses
+   */
   courses = [];
 
   /**
@@ -57,7 +76,6 @@ export class AddVolunteerComponent implements OnInit {
    * @param volunteerService Provider for volunteer related operations
    * @param organisationService Provider for organisation related operations
    * @param courseService Provider for course related operations
-   * @param datePicker Provider for date selection
    * @param router Provider for route navigation
    */
   constructor(private formBuilder: FormBuilder,
@@ -65,7 +83,6 @@ export class AddVolunteerComponent implements OnInit {
               private volunteerService: VolunteerService,
               private organisationService: OrganisationService,
               private courseService: CourseService,
-              private datePicker: DatePicker,
               private router: Router) { }
 
   /**
@@ -186,7 +203,7 @@ export class AddVolunteerComponent implements OnInit {
    * When a city is selected, the form's value is updated
    * @param event Changing event, triggered when a change is detected on an element
    */
-  citySelectionChanged(event) {
+  citySelectionChanged(event: any) {
     this.addForm.controls['city'].setValue(event.detail.value);
   }
 
@@ -194,7 +211,7 @@ export class AddVolunteerComponent implements OnInit {
    * When a county is selected, the form's value is updated and starts retriving the list of cities from that county
    * @param event Changing event, triggered when a change is detected on an element
    */
-  countySelectionChanged(event) {
+  countySelectionChanged(event: any) {
     this.addForm.controls['county'].setValue(event.detail.value);
     this.addForm.controls['city'].reset('');
     this.cities = [];
@@ -205,7 +222,7 @@ export class AddVolunteerComponent implements OnInit {
    * When an organisation is selected, the UI will be changed to the selection
    * @param event Changing event, triggered when a change is detected on an element
    */
-  organisationSelectionChanged(event) {
+  organisationSelectionChanged(event: any) {
     if (this.addForm.value.organisation === 'new') {
       this.addForm.value.organisation = '';
       this.addNewOrganisation = true;
@@ -248,8 +265,9 @@ export class AddVolunteerComponent implements OnInit {
 
   /**
    * Checks if the given ssn code exists in the local database and invalidates the form if the ssn already exists in database
+   * @param event Current event that triggered the function call
    */
-  ssnExists(event) {
+  ssnExists(event: any) {
     const ssn = event.detail.value;
     this.volunteerService.getVolunteerBySsn(ssn.trim()).subscribe((response) => {
       if (response.docs.length > 0) {

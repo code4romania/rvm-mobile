@@ -2,6 +2,13 @@ import { AbstractControl } from '@angular/forms';
 import { map } from 'rxjs/operators';
 
 export class SsnValidation {
+
+    /**
+     * Ssn validator
+     * @param abstractControl An abstract control reference, to automatically take the value from the input
+     * that is being validated
+     * @returns null if the string respects the pattern, an error message otherwise
+     */
     static ssnValidation(abstractControl: AbstractControl): any {
         const ssn = parseInt(abstractControl.value, 10) || 0;
 

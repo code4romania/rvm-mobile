@@ -27,6 +27,9 @@ const remoteDB = new PouchDB(environment.databaseURL + '/organisations');
  */
 @Injectable()
 export class OrganisationService {
+  /**
+   * Table type
+   */
   private type = 'organisations';
 
   /**
@@ -130,6 +133,11 @@ export class OrganisationService {
     });
   }
 
+   /**
+    * Removes diacritics from a string
+    * @param text A string with diacritics
+    * @returns the new string, without diacritics
+    */
   private removeSpecialChars(text: string): string {
     const input   = 'ăâîșț';
     const output  = 'aaist';

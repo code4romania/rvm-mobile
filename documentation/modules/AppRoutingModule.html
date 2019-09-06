@@ -73,7 +73,6 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { PreloadAllModules, RouterModule, Routes } from &#x27;@angular/router&#x27;;
 import { AuthenticationGuard } from &#x27;./core&#x27;;
-import { UnauthenticatedGuard } from &#x27;./core/authentication/unauthenticated.guard&#x27;;
 
 const routes: Routes &#x3D; [
   {
@@ -96,9 +95,9 @@ const routes: Routes &#x3D; [
     loadChildren: &#x27;./pages/volunteer/volunteer.module#VolunteerPageModule&#x27;,
     canActivate: [AuthenticationGuard]
   },
-  { 
-    path: &#x27;auth&#x27;, 
-    loadChildren: &#x27;./pages/authentication/authentication.module#AuthenticationPageModule&#x27; 
+  {
+    path: &#x27;auth&#x27;,
+    loadChildren: &#x27;./pages/authentication/authentication.module#AuthenticationPageModule&#x27;
   }
 ];
 

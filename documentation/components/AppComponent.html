@@ -63,6 +63,12 @@
 
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
+    </p>
 
 
 <section>
@@ -125,6 +131,10 @@
                                 <a href="#authenticationService">authenticationService</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isDoubleTap">isDoubleTap</a>
+                            </li>
+                            <li>
                                 <a href="#routerOutlet">routerOutlet</a>
                             </li>
                             <li>
@@ -151,6 +161,10 @@
                             <li>
                                 <a href="#performAction">performAction</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#presentToast">presentToast</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -169,12 +183,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(platform: Platform, splashScreen: SplashScreen, statusBar: StatusBar, authenticationService: <a href="../injectables/AuthenticationService.html">AuthenticationService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, nav: NavController)</code>
+<code>constructor(platform: Platform, splashScreen: SplashScreen, statusBar: StatusBar, authenticationService: <a href="../injectables/AuthenticationService.html">AuthenticationService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, localStorageService: <a href="../injectables/LocalStorageService.html">LocalStorageService</a>, location: <a href="https://angular.io/api/common/Location" target="_blank">Location</a>, databaseSyncService: <a href="../classes/DatabaseSyncService.html">DatabaseSyncService</a>, toastCtrl: ToastController)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/app.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/app.component.ts:60</a></div>
                             </td>
                         </tr>
 
@@ -273,10 +287,10 @@
                                                         </td>
                                                 </tr>
                                                 <tr>
-                                                        <td>nav</td>
+                                                        <td>localStorageService</td>
                                                   
                                                         <td>
-                                                                    <code>NavController</code>
+                                                                        <code><a href="../injectables/LocalStorageService.html" target="_self" >LocalStorageService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -284,6 +298,56 @@
                                                     </td>
                                                     
                                                         <td>
+                                                                <code><p>Provider for localStorage related operations</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>location</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/common/Location" target="_blank" >Location</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>Provider for route location change</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>databaseSyncService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/DatabaseSyncService.html" target="_self" >DatabaseSyncService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>Provider for database synchronization</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>toastCtrl</td>
+                                                  
+                                                        <td>
+                                                                    <code>ToastController</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>Controller for toast management</p>
+</code>
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -326,8 +390,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="78"
-                            class="link-to-prism">src/app/app.component.ts:78</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="93"
+                            class="link-to-prism">src/app/app.component.ts:93</a></div>
                 </td>
             </tr>
 
@@ -335,7 +399,9 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Application initialisation
-If cordova is available then the splash screen is hidden and status bar style is set</p>
+If cordova is available then the splash screen is hidden and status bar style is set
+The back-button subscription is set (if the current route is login/home 
+then it closes the app completely on double tap within 3 seconds)</p>
 </div>
 
                     <div class="io-description">
@@ -368,14 +434,16 @@ If cordova is available then the splash screen is hidden and status bar style is
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="100"
-                            class="link-to-prism">src/app/app.component.ts:100</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="144"
+                            class="link-to-prism">src/app/app.component.ts:144</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Angular lifecycle method; gets triggered after view initialisation</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -407,8 +475,8 @@ If cordova is available then the splash screen is hidden and status bar style is
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="92"
-                            class="link-to-prism">src/app/app.component.ts:92</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="133"
+                            class="link-to-prism">src/app/app.component.ts:133</a></div>
                 </td>
             </tr>
 
@@ -455,6 +523,49 @@ If cordova is available then the splash screen is hidden and status bar style is
                     </div>
                     <div class="io-description">
                         
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="presentToast"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            presentToast
+                        </b>
+                        <a href="#presentToast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>presentToast()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="163"
+                            class="link-to-prism">src/app/app.component.ts:163</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Presents a toast that will be automatically dismessed after 3 seconds</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
                     </div>
                 </td>
             </tr>
@@ -507,7 +618,7 @@ If cordova is available then the splash screen is hidden and status bar style is
     {
       title: &#x27;Apelează suport&#x27;,
       url: &#x27;tel:89992142265&#x27;
-    }, 
+    },
     {
       title: &#x27;Delogare&#x27;,
       url: &#x27;/auth/logout&#x27;
@@ -517,7 +628,7 @@ If cordova is available then the splash screen is hidden and status bar style is
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/app.component.ts:29</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/app.component.ts:30</a></div>
                             </td>
                         </tr>
 
@@ -551,13 +662,46 @@ If cordova is available then the splash screen is hidden and status bar style is
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/app.component.ts:68</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/app.component.ts:78</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description">Provider for authentication related operations</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isDoubleTap"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            isDoubleTap</b>
+                            <a href="#isDoubleTap"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/app.component.ts:60</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Stores the current state of back-button tapping: tapped once or twice (for exiting app)</p>
+</div>
                     </td>
                 </tr>
 
@@ -592,7 +736,7 @@ If cordova is available then the splash screen is hidden and status bar style is
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/app.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/app.component.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -624,7 +768,7 @@ If cordova is available then the splash screen is hidden and status bar style is
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/app.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/app.component.ts:25</a></div>
                             </td>
                         </tr>
 
@@ -643,26 +787,27 @@ If cordova is available then the splash screen is hidden and status bar style is
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ViewChild } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ViewChild, AfterViewInit } from &#x27;@angular/core&#x27;;
 
-import { IonRouterOutlet, Platform, NavController } from &#x27;@ionic/angular&#x27;;
+import { IonRouterOutlet, Platform, ToastController } from &#x27;@ionic/angular&#x27;;
 import { SplashScreen } from &#x27;@ionic-native/splash-screen/ngx&#x27;;
 import { StatusBar } from &#x27;@ionic-native/status-bar/ngx&#x27;;
-import { AuthenticationService } from &#x27;./core&#x27;;
+import { AuthenticationService, LocalStorageService, DatabaseSyncService } from &#x27;./core&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { Deeplinks } from &#x27;@ionic-native/deeplinks&#x27;;
 import { ResetPasswordComponent } from &#x27;./pages/authentication/reset-password/reset-password.component&#x27;;
+import { Location } from &#x27;@angular/common&#x27;;
 
 @Component({
   selector: &#x27;app-root&#x27;,
   templateUrl: &#x27;app.component.html&#x27;
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   /**
    * Router outlet reference
    */
   @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
-  
+
   /**
    * Boolean value that shows/hides the side menu depending on user&#x27;s state
    */
@@ -691,7 +836,7 @@ export class AppComponent {
     {
       title: &#x27;Apelează suport&#x27;,
       url: &#x27;tel:89992142265&#x27;
-    }, 
+    },
     {
       title: &#x27;Delogare&#x27;,
       url: &#x27;/auth/logout&#x27;
@@ -699,12 +844,21 @@ export class AppComponent {
   ];
 
   /**
-   * 
+   * Stores the current state of back-button tapping: tapped once or twice (for exiting app)
+   */
+  private isDoubleTap &#x3D; false;
+
+  /**
+   *
    * @param platform Provider for cordova platforms
    * @param splashScreen Provider for splash screen
    * @param statusBar Provider for status bar
    * @param authenticationService Provider for authentication related operations
    * @param router Provider for route navigation
+   * @param localStorageService Provider for localStorage related operations
+   * @param location Provider for route location change
+   * @param databaseSyncService Provider for database synchronization
+   * @param toastCtrl Controller for toast management
    */
   constructor(
     private platform: Platform,
@@ -712,49 +866,97 @@ export class AppComponent {
     private statusBar: StatusBar,
     public authenticationService: AuthenticationService,
     private router: Router,
-    private nav: NavController) {
+    private localStorageService: LocalStorageService,
+    private location: Location,
+    private databaseSyncService: DatabaseSyncService,
+    private toastCtrl: ToastController) {
     this.initializeApp();
   }
 
   /**
    * Application initialisation
    * If cordova is available then the splash screen is hidden and status bar style is set
+   * The back-button subscription is set (if the current route is login/home 
+   * then it closes the app completely on double tap within 3 seconds)
    */
   initializeApp() {
     this.platform.ready().then(() &#x3D;&gt; {
-      if(this.platform.is(&#x27;cordova&#x27;)){
+      if (this.platform.is(&#x27;cordova&#x27;)) {
         this.statusBar.backgroundColorByHexString(&#x27;#264998&#x27;);
         this.statusBar.styleDefault();
-        this.splashScreen.hide();
+
+        document.addEventListener(&#x27;backbutton&#x27;, (event) &#x3D;&gt; {
+          const currentPath &#x3D; this.router.url;
+          if (currentPath.indexOf(&#x27;login&#x27;) &gt;&#x3D; 0 || currentPath.indexOf(&#x27;home&#x27;) &gt;&#x3D; 0) {
+            if (!this.isDoubleTap) {
+              this.isDoubleTap &#x3D; true;
+              this.presentToast();
+
+              setTimeout(() &#x3D;&gt; {
+                this.isDoubleTap &#x3D; false;
+               }, 3000);
+            } else {
+              navigator[&#x27;app&#x27;].exitApp();
+            }
+          } else {
+            this.location.back();
+          }
+        }, false);
+
+        if (!this.localStorageService.getItem(&#x27;firstLaunch&#x27;)) {
+          this.databaseSyncService.sync().then(response &#x3D;&gt; {
+            this.splashScreen.hide();
+            this.localStorageService.setItem(&#x27;firstLaunch&#x27;, false);
+           });
+        } else {
+          this.splashScreen.hide();
+        }
       }
     });
   }
 
   /**
-   * 
+   *
    * @param url Contains the value of the next application state
    */
   performAction(url: string) {
-    if(url.includes(&#x27;tel&#x27;)) {
+    if (url.includes(&#x27;tel&#x27;)) {
       window.open(url);
     } else {
       this.router.navigate([url]);
     }
   }
 
+  /**
+   * Angular lifecycle method; gets triggered after view initialisation
+   */
   ngAfterViewInit() {
     this.platform.ready().then(() &#x3D;&gt; {
-      Deeplinks.route({
-        &#x27;/reset/:token&#x27;: ResetPasswordComponent
-      }).subscribe((match) &#x3D;&gt; {
-        setTimeout(() &#x3D;&gt; {
-          this.router.navigate([&#x27;/auth/reset/&#x27;, match.$args.token])
-        }, 1000);
-      }, (nomatch) &#x3D;&gt; {
-        console.warn(&#x27;Unmatched Route&#x27;, nomatch);
-      });
+      if (this.platform.is(&#x27;cordova&#x27;)) {
+        Deeplinks.route({
+          &#x27;/auth/reset/:token&#x27;: ResetPasswordComponent
+        }).subscribe((match) &#x3D;&gt; {
+          setTimeout(() &#x3D;&gt; {
+            this.router.navigate([&#x27;/auth/reset/&#x27;, match.$args.token]);
+          }, 1000);
+        }, (nomatch) &#x3D;&gt; {
+          console.warn(&#x27;Unmatched Route&#x27;, nomatch);
+        });
+      }
     });
-    
+  }
+
+  /**
+   * Presents a toast that will be automatically dismessed after 3 seconds
+   */
+  async presentToast() {
+    const toast &#x3D; await this.toastCtrl.create({
+      message: &#x27;Apăsați din nou pentru a părăsi aplicația.&#x27;,
+      position: &#x27;bottom&#x27;,
+      duration: 3000
+    });
+
+    toast.present();
   }
 }
 </code></pre>

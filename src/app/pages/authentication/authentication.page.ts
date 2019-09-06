@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.page.html',
   styleUrls: ['./authentication.page.scss'],
 })
-export class AuthenticationPage implements OnInit {
+
+export class AuthenticationPage {
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

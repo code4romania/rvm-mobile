@@ -5,7 +5,6 @@ import {
   HttpRequest
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 
 import { AuthenticationService } from '../authentication/authentication.service';
@@ -15,7 +14,7 @@ import { AuthenticationService } from '../authentication/authentication.service'
  */
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
-  
+
   /**
    * Class constructor
    * @param authenticationService Injected service referes the AuthenticationService for handling authentication related operations
@@ -34,17 +33,11 @@ export class RequestInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     request = request.clone({
       setHeaders: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json; charset=utf-8',
-      'Authorization': `Bearer ${this.authenticationService.accessToken}`,
+      Authorization: `Bearer ${this.authenticationService.accessToken}`,
       }
     });
-
-    if(!request.url.includes('assets')) {
-      request = request.clone({
-        url: environment.serverUrl + request.url
-      });
-    }
 
     return next.handle(request);
   }

@@ -27,6 +27,10 @@ const remoteDB = new PouchDB(environment.databaseURL + '/courses');
  */
 @Injectable()
 export class CourseService {
+
+  /**
+   * Courses' table type (if the course is not a static value)
+   */
   private type = 'courses';
 
   /**
@@ -90,6 +94,11 @@ export class CourseService {
     }));
   }
 
+  /**
+   * Retrives the list of courses that belong to a volunteer
+   * @param volunteerId A volunteer's id
+   * @returns An observable containing the list of courses that belong to the given volunteer
+   */
   getCourseByVolunteerId(volunteerId: string): Observable<any> {
     return from(localDB.find({
       selector: {

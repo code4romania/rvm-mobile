@@ -139,9 +139,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#ionViewDidEnter">ionViewDidEnter</a>
-                            </li>
-                            <li>
                                 <a href="#performAction">performAction</a>
                             </li>
                         </ul>
@@ -219,47 +216,6 @@
     <h3 id="methods">
         Methods
     </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ionViewDidEnter"></a>
-                    <span class="name">
-                        <b>
-                            ionViewDidEnter
-                        </b>
-                        <a href="#ionViewDidEnter"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ionViewDidEnter()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="52"
-                            class="link-to-prism">src/app/pages/home/home.page.ts:52</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Ionic lifecycle method, in this case the default back navigation is blocked (android)</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -369,7 +325,7 @@ It can either mean navigation to a new page or opening the phone&#39;s call scre
       title: &#x27;Validează voluntar&#x27;,
       url: &#x27;/volunteer/validate&#x27;
     }, {
-      title: &#x27;Adaugă voluntar nou&#x27;,
+      title: &#x27;Adaugă voluntar&#x27;,
       url: &#x27;/volunteer/add&#x27;
     }, {
       title: &#x27;Vezi toți voluntarii&#x27;,
@@ -402,7 +358,7 @@ It can either mean navigation to a new page or opening the phone&#39;s call scre
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component,   } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 
 @Component({
@@ -411,7 +367,7 @@ import { Router } from &#x27;@angular/router&#x27;;
   styleUrls: [&#x27;home.page.scss&#x27;],
 })
 export class HomePage {
-  
+
   /**
    * Actions that can be performed from the side-menu
    */
@@ -420,7 +376,7 @@ export class HomePage {
       title: &#x27;Validează voluntar&#x27;,
       url: &#x27;/volunteer/validate&#x27;
     }, {
-      title: &#x27;Adaugă voluntar nou&#x27;,
+      title: &#x27;Adaugă voluntar&#x27;,
       url: &#x27;/volunteer/add&#x27;
     }, {
       title: &#x27;Vezi toți voluntarii&#x27;,
@@ -430,11 +386,11 @@ export class HomePage {
       url: &#x27;tel:89992142265&#x27;
     }
   ];
-  
+
   /**
-  * 
-  * @param router Provider for route navigation
-  */
+   *
+   * @param router Provider for route navigation
+   */
   constructor(private router: Router) { }
 
   /**
@@ -443,19 +399,11 @@ export class HomePage {
    * @param url String containing the url for the route that will be displayed on user click
    */
   performAction(url: string) {
-    if(url.includes(&#x27;tel&#x27;)) {
+    if (url.includes(&#x27;tel&#x27;)) {
       window.open(url);
     } else {
       this.router.navigate([url]);
     }
-  }
-  
-  /**
-   * Ionic lifecycle method, in this case the default back navigation is blocked (android)
-   */
-  ionViewDidEnter() {
-    document.addEventListener(&quot;backbutton&quot;,function(e) {
-    }, false);
   }
 }
 </code></pre>
@@ -464,10 +412,14 @@ export class HomePage {
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;ion-header&gt;
   &lt;ion-toolbar mode&#x3D;&quot;ios&quot;&gt;
+    &lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
+      &lt;div style&#x3D;&quot;width: 48px&quot;&gt;
+      &lt;/div&gt;
+    &lt;/ion-buttons&gt;
     &lt;ion-buttons slot&#x3D;&quot;end&quot;&gt;
       &lt;ion-menu-button color&#x3D;&quot;dark&quot;&gt;&lt;/ion-menu-button&gt;
     &lt;/ion-buttons&gt;
-    &lt;img src&#x3D;&quot;../../assets/images/logo.PNG&quot; class&#x3D;&quot;logo-title mx-auto&quot; /&gt;
+    &lt;img src&#x3D;&quot;../../assets/images/DSU.png&quot; class&#x3D;&quot;logo-title mx-auto&quot; /&gt;
   &lt;/ion-toolbar&gt;
 &lt;/ion-header&gt;
 
@@ -540,7 +492,7 @@ export class HomePage {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar mode="ios">    <ion-buttons slot="end">      <ion-menu-button color="dark"></ion-menu-button>    </ion-buttons>    <img src="../../assets/images/logo.PNG" class="logo-title mx-auto" />  </ion-toolbar></ion-header><ion-content center text-center>  <ion-grid class="home-columns">    <ion-row>      <ion-col size="5" *ngFor="let action of actions" class="menu-column m-7 border-5" (click)="performAction(action.url)">          <strong>            {{action.title}}          </strong>      </ion-col>    </ion-row>  </ion-grid></ion-content></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar mode="ios">    <ion-buttons slot="start">      <div style="width: 48px">      </div>    </ion-buttons>    <ion-buttons slot="end">      <ion-menu-button color="dark"></ion-menu-button>    </ion-buttons>    <img src="../../assets/images/DSU.png" class="logo-title mx-auto" />  </ion-toolbar></ion-header><ion-content center text-center>  <ion-grid class="home-columns">    <ion-row>      <ion-col size="5" *ngFor="let action of actions" class="menu-column m-7 border-5" (click)="performAction(action.url)">          <strong>            {{action.title}}          </strong>      </ion-col>    </ion-row>  </ion-grid></ion-content></div>'
     var COMPONENTS = [{'name': 'AboutPage', 'selector': 'app-about'},{'name': 'AddVolunteerComponent', 'selector': 'app-add-volunteer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthenticationPage', 'selector': 'app-authentication'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'ListVolunteerComponent', 'selector': 'app-list-volunteer'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutComponent', 'selector': 'app-logout'},{'name': 'RecoverPasswordComponent', 'selector': 'app-recover-password'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SendMessageComponent', 'selector': 'app-send-message'},{'name': 'ValidateVolunteerComponent', 'selector': 'app-validate-volunteer'},{'name': 'VolunteerPage', 'selector': 'app-volunteer'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HomePage'};

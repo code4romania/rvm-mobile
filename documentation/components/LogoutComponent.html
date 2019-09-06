@@ -284,17 +284,17 @@ import { Router } from &#x27;@angular/router&#x27;;
 export class LogoutComponent implements OnInit {
 
   /**
-   * 
+   *
    * @param authenticationService Provider for authentication related operations
    * @param router Provider for router navigation
    */
   constructor(private authenticationService: AuthenticationService,
-    private router: Router) { }
+              private router: Router) { }
 
   /**
-  * A request through the authentication service is sent for logout;
-  * If its successful the user will be redirected to the login screen
-  */
+   * A request through the authentication service is sent for logout;
+   * If its successful the user will be redirected to the login screen
+   */
   ngOnInit() {
     this.authenticationService.logout().subscribe(() &#x3D;&gt; {
       this.router.navigate([&#x27;../auth/login&#x27;], {
@@ -319,19 +319,7 @@ export class LogoutComponent implements OnInit {
                 <p class="comment">
                     <code>./logout.component.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">ion-spinner {
-    color: white;
-    height: 100px;
-    width: 100px;
-}
-
-.center-spinner {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}</code></pre>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">

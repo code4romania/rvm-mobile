@@ -24,7 +24,14 @@ const remoteDB = new PouchDB(environment.databaseURL + '/statics');
  */
 @Injectable()
 export class StaticsService {
+    /**
+     * Type for city entries
+     */
     city_type = 'cities';
+
+    /**
+     * Type for county entries
+     */
     county_type = 'counties';
 
     /**
