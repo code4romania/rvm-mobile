@@ -129,6 +129,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Login password</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -158,6 +164,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Login username/email</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -170,7 +182,14 @@
    * Interface for login payload
    */
   export interface LoginPayload {
+    /**
+     * Login username/email
+     */
     username: string;
+
+    /**
+     * Login password
+     */
     password: string;
   }
 
@@ -178,11 +197,34 @@
    * Interface for user object
    */
   export interface User {
+    /**
+     * User id
+     */
     _id: string;
+
+    /**
+     * User name
+     */
     name: string;
+
+    /**
+     * User phone number
+     */
     phone?: any;
+
+    /**
+     * User email address
+     */
     email: string;
+
+    /**
+     * User creation date
+     */
     createdAt: Date;
+
+    /**
+     * Date of the last update to the user&#x27;s progile
+     */
     updatedAt: Date;
   }
 
@@ -190,9 +232,15 @@
    * Interface for credentials object
    */
   export interface Credentials {
+    /**
+     * User object
+     */
     user: User;
+
+    /**
+     * Authentication token
+     */
     token: string;
-    session: string;
   }
 }
 </code></pre>

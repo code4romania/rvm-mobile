@@ -13,6 +13,7 @@ import { CustomSelectorComponent } from 'src/app/core/components/custom-selector
   templateUrl: './list-volunteer.component.html',
   styleUrls: ['./list-volunteer.component.scss'],
 })
+
 export class ListVolunteerComponent implements OnInit {
   /**
    * Infinite scroll reference that detects user's swipe to refresh events
@@ -88,7 +89,6 @@ export class ListVolunteerComponent implements OnInit {
   limit = 10;
 
   /**
-   *
    * @param volunteerService Provider for volunteer related operations
    * @param staticsService Provider for location selection
    * @param organisationService Provider for organisation related operations
@@ -265,7 +265,7 @@ export class ListVolunteerComponent implements OnInit {
    * Refreshes the data, on scroll up the page is reset
    * @param event Scroll event
    */
-  doRefresh(event) {
+  doRefresh(event: any) {
     setTimeout(() => {
       this.page = 0;
       this.getData();
@@ -303,6 +303,7 @@ export class ListVolunteerComponent implements OnInit {
    * @param items The list of elements that will represent user's choices in the modal
    * @param callback A callback function that will be used in order to add the selection to the proper variable
    * @param event Click event that triggers the function call
+   * @returns A promise for the async function
    */
   async presentModal(items: any, callback: any, event: any) {
     event.preventDefault();

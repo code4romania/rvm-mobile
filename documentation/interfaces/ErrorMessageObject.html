@@ -135,6 +135,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Error message</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -164,6 +170,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Error message id</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -193,6 +205,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Error url</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -222,6 +240,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Error type</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -230,13 +254,29 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">declare namespace ErrorModel {
+
   /**
    * Interface for error object
    */
   export interface RootObject {
+    /**
+     * Error status code
+     */
     statusCode: number;
+
+    /**
+     * Error
+     */
     error: string;
+
+    /**
+     * Error message
+     */
     message: string;
+
+    /**
+     * Error attributes
+     */
     attributes?: any;
   }
 
@@ -244,9 +284,24 @@
    * Interface for error message
    */
   export interface ErrorMessageObject {
+    /**
+     * Error message id
+     */
     id: number;
+
+    /**
+     * Error message
+     */
     error: string;
+
+    /**
+     * Error type
+     */
     type: string;
+
+    /**
+     * Error url
+     */
     serviceUrl: string;
   }
 }

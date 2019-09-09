@@ -1,9 +1,5 @@
 import * as PouchDB from 'pouchdb/dist/pouchdb';
 import { environment } from '../../../environments/environment';
-import * as moment from 'moment';
-import { from } from 'rxjs/internal/observable/from';
-
-declare const emit;
 
 /**
  * Service for database synchronization (local and remote)
@@ -76,6 +72,7 @@ export class DatabaseSyncService {
 
     /**
      * Starts database synchronization
+     * @returns A promise when all database synchronisations are finished and the view is indexed
      */
     sync(): Promise<void> {
       return Promise.all(

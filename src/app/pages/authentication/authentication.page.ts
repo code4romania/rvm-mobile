@@ -6,8 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./authentication.page.scss'],
 })
 
-export class AuthenticationPage {
-
-  constructor() { }
-
-}
+/**
+ * The main page for all authentication related pages (login/logout, recover/reset password)
+ */
+export class AuthenticationPage { }

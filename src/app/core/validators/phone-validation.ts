@@ -1,5 +1,8 @@
 import { AbstractControl } from '@angular/forms';
 
+/**
+ * Validator class for the phone number input field
+ */
 export class PhoneValidation {
 
     /**

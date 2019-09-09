@@ -1,5 +1,10 @@
 import {AbstractControl} from '@angular/forms';
 
+/**
+ * Validator class for password inputs
+ * Validates both matching passwords for password reset (password, confirmPassword)
+ * and simple password fields
+ */
 export class PasswordValidation {
 
     /**

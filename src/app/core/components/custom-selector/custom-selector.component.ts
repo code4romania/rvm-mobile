@@ -11,7 +11,7 @@ import { fromEvent } from 'rxjs';
 
 export class CustomSelectorComponent implements OnInit, OnDestroy {
   /**
-   * Data sent to the modal to reprezent the selections
+   * Data sent to the modal to represent the selections
    */
   @Input() items: any[];
 

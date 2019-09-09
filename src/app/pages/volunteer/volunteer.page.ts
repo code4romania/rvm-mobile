@@ -5,11 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './volunteer.page.html',
   styleUrls: ['./volunteer.page.scss'],
 })
-export class VolunteerPage {
 
-  /**
-   * @ignore
-   */
-  constructor() { }
-
-}
+/**
+ * The main page for all volunteer related pages (add, list, validate, send messages)
+ */
+export class VolunteerPage { }

@@ -10,6 +10,10 @@ import { EmailValidation } from 'src/app/core/validators/email-validation';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
+
+/**
+ * Login Page component for 'auth/login' route
+ */
 export class LoginComponent implements OnInit {
 
   /**
@@ -28,7 +32,7 @@ export class LoginComponent implements OnInit {
   loading = false;
 
   /**
-   *
+   * Class constructor
    * @param router Provider for route navigation
    * @param formBuilder Provider for reactive form creation
    * @param authenticationService Provider for authentication related operation

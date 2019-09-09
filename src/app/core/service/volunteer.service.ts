@@ -8,7 +8,6 @@ import { map } from 'rxjs/operators';
 import { CourseService } from './course.service';
 import * as moment from 'moment';
 
-declare const emit: any;
 /**
  * Reference for local PouchDB Volunteers Database
  */

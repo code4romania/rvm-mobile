@@ -1,5 +1,8 @@
 import { AbstractControl } from '@angular/forms';
 
+/**
+ * Validator class for the SSN field (CNP)
+ */
 export class SsnValidation {
 
     /**

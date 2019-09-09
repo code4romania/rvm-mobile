@@ -6,6 +6,10 @@ import { Router } from '@angular/router';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
+/**
+ * The main menu page of the app; first page for the authenticated user
+ */
 export class HomePage {
 
   /**

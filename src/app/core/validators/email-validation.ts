@@ -1,5 +1,8 @@
 import { AbstractControl } from '@angular/forms';
 
+/**
+ * Validtor class for email address' fields
+ */
 export class EmailValidation {
 
     /**
