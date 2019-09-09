@@ -1,11 +1,12 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { VolunteerService } from '../../../core/service/volunteer.service';
 import { StaticsService } from 'src/app/core/service/statics.service';
 import { OrganisationService, CourseService, AllocationService } from 'src/app/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { NavigationExtras, Router } from '@angular/router';
 import { Volunteer } from 'src/app/core/model/volunteer.model';
+import { CustomSelectorComponent } from 'src/app/core/components/custom-selector/custom-selector.component';
 
 @Component({
   selector: 'app-list-volunteer',
@@ -95,6 +96,7 @@ export class ListVolunteerComponent implements OnInit {
    * @param allocationService  Provider for volunteer allocation related operations
    * @param router Provider for route navigation
    * @param iab Provider for accessing an url in browser
+   * @param modalController Controller for modal operations
    */
   constructor(private volunteerService: VolunteerService,
               private staticsService: StaticsService,
@@ -102,7 +104,8 @@ export class ListVolunteerComponent implements OnInit {
               private courseService: CourseService,
               private allocationService: AllocationService,
               private router: Router,
-              private iab: InAppBrowser) { }
+              private iab: InAppBrowser,
+              private modalController: ModalController) { }
 
   /**
    * Page initialisation
@@ -233,7 +236,9 @@ export class ListVolunteerComponent implements OnInit {
     if (this.selectedCounty || this.selectedOrganisation || this.selectedCourse) {
       this.volunteerService.filter(this.selectedCounty, this.selectedOrganisation, this.selectedCourse , this.page, this.limit)
       .subscribe((response: any) => {
-        this.volunteers = response.docs;
+        response.docs.forEach(volunteer => {
+          this.volunteers.push(volunteer);
+        });
       });
     } else {
       this.volunteerService.getVolunteers(this.page, this.limit).subscribe((response: any) => {
@@ -253,12 +258,6 @@ export class ListVolunteerComponent implements OnInit {
       this.page++;
       this.getData();
       event.target.complete();
-
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-      if (this.volunteers.length === 20) {
-        event.target.disabled = true;
-      }
     }, 500);
   }
 
@@ -275,24 +274,6 @@ export class ListVolunteerComponent implements OnInit {
   }
 
   /**
-   * When a county is selected, the form's value is updated and starts retriving the list of cities from that county
-   * @param event Changing event, triggered when a change is detected on an element
-   */
-  countySelectionChanged(event) {
-    this.getCityList(event.detail.value);
-  }
-
-  /**
-   * Retrieves the list of cities from the selected county
-   * @param county The user-selected county
-   */
-  getCityList(county: any) {
-    this.staticsService.getCityList(county._id).subscribe((response) => {
-      this.cities = response.rows.map(x => x.doc);
-    });
-  }
-
-  /**
    * Opens a navigation browser with the website url
    * @param website Organisation website url
    */
@@ -301,5 +282,86 @@ export class ListVolunteerComponent implements OnInit {
       website = 'http://' + website.replace('http://', '').replace('https://', '');
       this.iab.create(website);
     }
+  }
+
+  /**
+   * Retrieves the list of cities that belong to the selected county
+   */
+  getCitiesList() {
+    this.staticsService.getCityList(this.county._id).subscribe((response) => {
+      this.cities = response.rows
+        .map(x => ({
+          _id: x.id,
+          name: x.value
+        }));
+    });
+  }
+
+  /**
+   * Prompts a scrollable modal view to replace the ion-selects; it is used in order
+   * to optimize the view for a large group of datas
+   * @param items The list of elements that will represent user's choices in the modal
+   * @param callback A callback function that will be used in order to add the selection to the proper variable
+   * @param event Click event that triggers the function call
+   */
+  async presentModal(items: any, callback: any, event: any) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    event.cancelBubble = true;
+    event.stopPropagation();
+
+    const modal = await this.modalController.create({
+      component: CustomSelectorComponent,
+      componentProps: {
+        items
+      }
+    });
+
+    modal.onDidDismiss()
+      .then(res => {
+        callback(res.data);
+    });
+
+    return await modal.present();
+  }
+
+  /**
+   * Calls the present modal function with the appropriate callback function (for filter inputs)
+   * @param items The list of elements that will be displayed in the modal
+   * @param event Click event that triggers the function call
+   * @param type String containing the calling selector type
+   */
+  filterModal(items: any, event: any, type: string) {
+    this.presentModal(items, (res: any) => {
+      if (type === 'county') {
+        this.selectedCounty = res;
+      }
+
+      if (type === 'organisation') {
+        this.selectedOrganisation = res;
+      }
+
+      if (type === 'course') {
+        this.selectedCourse = res;
+      }
+    }, event);
+  }
+
+  /**
+   * Calls the present modal function with the appropriate callback function (for allocation inputs)
+   * @param items The list of elements that will be displayed in the modal
+   * @param event Click event that triggers the function call
+   * @param type String containing the calling selector type
+   */
+  allocationModal(items: any, event: any, type: string) {
+    this.presentModal(items, (res: any) => {
+      if (type === 'county') {
+        this.county = res;
+      }
+
+      if (type === 'city') {
+        this.city = res;
+      }
+    }, event);
   }
 }

@@ -166,11 +166,11 @@ export class VolunteerService {
     volunteer.name = name;
     volunteer.ssn = ssn;
     volunteer.county = {
-      id: county._id.toString(),
+      _id: county._id.toString(),
       name: county.name
     };
     volunteer.city = {
-      id: city._id.toString(),
+      _id: city._id.toString(),
       name: city.name
     };
     volunteer.created_at = moment().format('Y-MM-DD H:mm:ss');
@@ -199,7 +199,7 @@ export class VolunteerService {
           if (course) {
             this.courseService.createCourse(course, volunteer._id).subscribe((data) => {
               volunteer.courses.push({
-                id: data.id,
+                _id: data.id,
                 course_name_id: course._id,
                 name: course.name,
                 obtained: null,

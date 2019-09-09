@@ -166,15 +166,15 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getCityList(countyName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>getCityList(countyId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="62"
-                            class="link-to-prism">src/app/core/service/statics.service.ts:62</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="69"
+                            class="link-to-prism">src/app/core/service/statics.service.ts:69</a></div>
                 </td>
             </tr>
 
@@ -192,11 +192,12 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>countyName</td>
+                                    <td>countyId</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
@@ -206,6 +207,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>The id of the county from which the cities will be selected</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -407,7 +412,7 @@ export class StaticsService {
             continuous: true
         };
 
-        localDB.sync(remoteDB, options);
+        localDB.replicate.from(remoteDB, options);
     }
 
     /**
@@ -415,17 +420,27 @@ export class StaticsService {
      * @returns An observable that contains the list of counties from resource files
      */
     public getCountyList(): Observable&lt;any&gt; {
-        return from(localDB.allDocs({include_docs: true, startkey: &#x27;county_romania_&#x27;, endkey: &#x27;county_romania_\ufff0&#x27;}));
+        return from(localDB.allDocs(
+            {
+                include_docs: true,
+                startkey: &#x27;county_romania_&#x27;,
+                endkey: &#x27;county_romania_\ufff0&#x27;
+            }
+        ));
     }
 
     /**
      * Getter for the list of cities
+     * @param countyId The id of the county from which the cities will be selected
      * @returns An observable that contains the list of cities from resource files
      */
-    public getCityList(countyName: string): Observable&lt;any&gt; {
-        return from(localDB.allDocs({include_docs: true,
-            startkey: &#x27;city_&#x27; + countyName.toLowerCase().replace(&#x27; &#x27;,&#x27;&#x27;),
-            endkey: &#x27;city_&#x27; + countyName.toLowerCase().replace(&#x27; &#x27;,&#x27;&#x27;) + &#x27;_\ufff0&#x27;}));
+    public getCityList(countyId: string): Observable&lt;any&gt; {
+        return from(localDB.query(&#x27;cities/slug&#x27;,
+            {
+                startkey: [countyId, null],
+                endkey: [countyId, {}]
+            }
+        ));
     }
 }
 </code></pre>

@@ -12,11 +12,11 @@ export class Organisation {
     address: string;
     email: string;
     county: {
-        id: string;
+        _id: string;
         name: string;
     };
     city: {
-        id: string;
+        _id: string;
         name: string;
     };
     comments: string;

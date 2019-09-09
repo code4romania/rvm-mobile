@@ -1424,11 +1424,11 @@ export class VolunteerService {
     volunteer.name &#x3D; name;
     volunteer.ssn &#x3D; ssn;
     volunteer.county &#x3D; {
-      id: county._id.toString(),
+      _id: county._id.toString(),
       name: county.name
     };
     volunteer.city &#x3D; {
-      id: city._id.toString(),
+      _id: city._id.toString(),
       name: city.name
     };
     volunteer.created_at &#x3D; moment().format(&#x27;Y-MM-DD H:mm:ss&#x27;);
@@ -1457,7 +1457,7 @@ export class VolunteerService {
           if (course) {
             this.courseService.createCourse(course, volunteer._id).subscribe((data) &#x3D;&gt; {
               volunteer.courses.push({
-                id: data.id,
+                _id: data.id,
                 course_name_id: course._id,
                 name: course.name,
                 obtained: null,

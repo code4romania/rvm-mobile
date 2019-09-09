@@ -6,6 +6,8 @@ import { CourseService } from 'src/app/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { NavigationExtras, Router } from '@angular/router';
 import { Volunteer } from 'src/app/core/model/volunteer.model';
+import { ModalController } from '@ionic/angular';
+import { CustomSelectorComponent } from 'src/app/core/components/custom-selector/custom-selector.component';
 
 @Component({
   selector: 'app-validate-volunteer',
@@ -72,13 +74,15 @@ export class ValidateVolunteerComponent implements OnInit {
    * @param courseService Provider for course related operations
    * @param router Provider for route navigation
    * @param iab Provider for accessing an url in browser
+   * @param modalController Controller for modal operations
    */
   constructor(private volunteerService: VolunteerService,
               private allocationService: AllocationService,
               private staticsService: StaticsService,
               private courseService: CourseService,
               private router: Router,
-              private iab: InAppBrowser) { }
+              private iab: InAppBrowser,
+              private modalController: ModalController) { }
 
   /**
    * Page initialisation
@@ -190,12 +194,6 @@ export class ValidateVolunteerComponent implements OnInit {
       this.page++;
       this.getData();
       event.target.complete();
-
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-      if (this.volunteers.length === 20) {
-        event.target.disabled = true;
-      }
     }, 500);
   }
 
@@ -218,24 +216,6 @@ export class ValidateVolunteerComponent implements OnInit {
     this.staticsService.getCountyList().subscribe((response) => {
       this.counties = response.rows.map(x => x.doc);
     });
-  }
-
-  /**
-   * Retrieves the list of cities from the selected county
-   * @param county User selected county
-   */
-  getCityList(county: any) {
-    this.staticsService.getCityList(county._id).subscribe((response) => {
-      this.cities = response.rows.map(x => x.doc);
-    });
-  }
-
-  /**
-   * When a county is selected, the form's value is updated and starts retriving the list of cities from that county
-   * @param event Changing event, triggered when a change is detected on an element
-   */
-  countySelectionChanged(event: any) {
-    this.getCityList(event.detail.value);
   }
 
   /**
@@ -268,5 +248,50 @@ export class ValidateVolunteerComponent implements OnInit {
     };
 
     this.router.navigateByUrl('/volunteer/send', navigationExtras);
+  }
+
+  /**
+   * Retrieves the list of cities that belong to the selected county
+   */
+  getCitiesList() {
+    this.staticsService.getCityList(this.county._id).subscribe((response) => {
+      this.cities = response.rows
+        .map(x => ({
+          _id: x.id,
+          name: x.value
+        }));
+    });
+  }
+
+  /**
+   * Prompts a scrollable modal view to replace the ion-selects; it is used in order
+   * to optimize the view for a large group of datas
+   * @param items The list of elements that will represent user's choices in the modal
+   * @param isCityList True if the list of items contains city object, false if it contains counties
+   * @param event The event that triggered the function call
+   */
+  async presentModal(items: any, isCityList: boolean, event: any) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    event.cancelBubble = true;
+    event.stopPropagation();
+
+    const modal = await this.modalController.create({
+      component: CustomSelectorComponent,
+      componentProps: {
+        items
+      }
+    });
+
+    modal.onDidDismiss()
+      .then(res => {
+        if (isCityList) {
+          this.city = res.data;
+        } else {
+          this.county = res.data;
+        }
+    });
+
+    return await modal.present();
   }
 }

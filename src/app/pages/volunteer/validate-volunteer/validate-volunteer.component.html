@@ -86,14 +86,14 @@
           <ion-row>
             <ion-col col-6 class="custom-input selectors">
               <ion-label class="title">Județ</ion-label>
-              <ion-select class="mt-10" [(ngModel)]="county" (ionChange)="countySelectionChanged($event)" class="mt-5 p-5" interface="action-sheet">
-                <ion-select-option *ngFor="let county of counties" [value]="county">{{county.name}}</ion-select-option>
+              <ion-select class="mt-10" [(ngModel)]="county" class="mt-5 p-5" (ionChange)="getCitiesList()" (click)="presentModal(counties, false, $event)">
+                <ion-select-option *ngFor="let county of [county]" [value]="county">{{county?.name}}</ion-select-option>
               </ion-select>
             </ion-col>
             <ion-col col-6 class="custom-input selectors">
               <ion-label class="title">Localitate</ion-label>
-              <ion-select class="mt-10" [(ngModel)]="city" class="mt-5 p-5" [disabled]="!county" interface="action-sheet">
-                <ion-select-option *ngFor="let city of cities" [value]="city">{{city.name}}</ion-select-option>
+              <ion-select class="mt-10" [(ngModel)]="city" class="mt-5 p-5" [disabled]="cities.length === 0" (click)="presentModal(this.cities, true, $event)">
+                <ion-select-option *ngFor="let city of [city]" [value]="city">{{city?.name}}</ion-select-option>
               </ion-select>
             </ion-col>
           </ion-row>

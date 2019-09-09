@@ -6,11 +6,11 @@ export class Course {
     _rev: string;
     volunteer_id: string;
     course_name: {
-        id: string;
+        _id: string;
         name: string;
     };
     acredited: {
-        id: string;
+        _id: string;
         name: string;
     };
     obtained: Date;

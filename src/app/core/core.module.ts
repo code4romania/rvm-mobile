@@ -25,10 +25,21 @@ import {
 } from './service';
 import { StaticsService } from './service/statics.service';
 import { UnauthenticatedGuard } from './authentication/unauthenticated.guard';
+import { CustomSelectorComponent } from './components/custom-selector/custom-selector.component';
+import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, RouterModule],
-  declarations: [],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    RouterModule,
+    IonicModule,
+    FormsModule
+  ],
+  declarations: [
+    CustomSelectorComponent
+  ],
   providers: [
     LocalStorageService,
     AuthenticationService,
@@ -52,6 +63,9 @@ import { UnauthenticatedGuard } from './authentication/unauthenticated.guard';
       provide: RouteReuseStrategy,
       useClass: RouteReusableStrategy
     }
+  ],
+  entryComponents: [
+    CustomSelectorComponent
   ]
 })
 

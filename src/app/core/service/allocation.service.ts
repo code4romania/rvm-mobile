@@ -66,14 +66,17 @@ export class AllocationService {
     const rescue_officer = this.authenticationService.user;
     const allocation = new Allocation();
     allocation.volunteer = {
-      id: volunteer._id,
+      _id: volunteer._id,
       name: volunteer.name
     };
     allocation.rescue_officer = {
-      id: rescue_officer._id,
+      _id: rescue_officer._id,
       name: rescue_officer.name
     };
-    allocation.county = county;
+    allocation.county = {
+      _id: county._id,
+      name
+    };
     allocation.city = city;
     allocation.created_at = moment().format('Y-MM-DD H:mm:ss');
     allocation.updated_at = moment().format('Y-MM-DD H:mm:ss');
@@ -81,7 +84,7 @@ export class AllocationService {
 
     if (organisation) {
         allocation.organisation = {
-          id: organisation.id,
+          _id: organisation.id,
           name: organisation.name,
         };
     }

@@ -87,8 +87,9 @@ export class AppComponent implements AfterViewInit {
   /**
    * Application initialisation
    * If cordova is available then the splash screen is hidden and status bar style is set
-   * The back-button subscription is set (if the current route is login/home 
+   * The back-button subscription is set (if the current route is login/home
    * then it closes the app completely on double tap within 3 seconds)
+   * If a modal is open, then the back-button navigation is ignored
    */
   initializeApp() {
     this.platform.ready().then(() => {
@@ -98,6 +99,13 @@ export class AppComponent implements AfterViewInit {
 
         document.addEventListener('backbutton', (event) => {
           const currentPath = this.router.url;
+
+          if (this.localStorageService.getItem('prevent_back')) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return;
+          }
+
           if (currentPath.indexOf('login') >= 0 || currentPath.indexOf('home') >= 0) {
             if (!this.isDoubleTap) {
               this.isDoubleTap = true;
@@ -115,7 +123,7 @@ export class AppComponent implements AfterViewInit {
         }, false);
 
         if (!this.localStorageService.getItem('firstLaunch')) {
-          this.databaseSyncService.sync().then(response => {
+          this.databaseSyncService.sync().then(() => {
             this.splashScreen.hide();
             this.localStorageService.setItem('firstLaunch', false);
            });

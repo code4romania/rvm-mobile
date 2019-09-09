@@ -5,4 +5,5 @@ export * from './route-reusable-strategy';
 export * from './authentication';
 export * from './http';
 export * from './service';
+export * from './components';
 // end:ng42.barrel

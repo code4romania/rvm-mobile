@@ -121,15 +121,30 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="modules/CoreModule.html" data-type="entity-link">CoreModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                            'data-target="#components-links-module-CoreModule-f158682dc778138f9e1428a0625662f3"' : 'data-target="#xs-components-links-module-CoreModule-f158682dc778138f9e1428a0625662f3"' }>
+                                            <span class="icon ion-md-cog"></span>
+                                            <span>Components</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-CoreModule-f158682dc778138f9e1428a0625662f3"' :
+                                            'id="xs-components-links-module-CoreModule-f158682dc778138f9e1428a0625662f3"' }>
+                                            <li class="link">
+                                                <a href="components/CustomSelectorComponent.html"
+                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">CustomSelectorComponent</a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-CoreModule-f50ae92ce0a3ee5ee16d08922f840abb"' : 'data-target="#xs-injectables-links-module-CoreModule-f50ae92ce0a3ee5ee16d08922f840abb"' }>
+                                        'data-target="#injectables-links-module-CoreModule-f158682dc778138f9e1428a0625662f3"' : 'data-target="#xs-injectables-links-module-CoreModule-f158682dc778138f9e1428a0625662f3"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-CoreModule-f50ae92ce0a3ee5ee16d08922f840abb"' :
-                                        'id="xs-injectables-links-module-CoreModule-f50ae92ce0a3ee5ee16d08922f840abb"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-CoreModule-f158682dc778138f9e1428a0625662f3"' :
+                                        'id="xs-injectables-links-module-CoreModule-f158682dc778138f9e1428a0625662f3"' }>
                                         <li class="link">
                                             <a href="injectables/AllocationService.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>AllocationService</a>

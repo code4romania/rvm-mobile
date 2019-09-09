@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { AuthenticationService } from '../authentication/authentication.service';
+import { environment } from '../../../environments/environment';
 
 /**
  * Prefixes all requests with `environment.serverUrl` and adds the authentication token to requests
@@ -36,7 +37,8 @@ export class RequestInterceptor implements HttpInterceptor {
       Accept: 'application/json',
       'Content-Type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${this.authenticationService.accessToken}`,
-      }
+      },
+      url: environment.serverUrl + request.url
     });
 
     return next.handle(request);

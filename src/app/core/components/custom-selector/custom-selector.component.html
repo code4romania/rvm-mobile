@@ -1,0 +1,12 @@
+<ion-content>
+  <div style="padding-bottom: 50px;">
+    <ion-virtual-scroll [items]="items" style="height: 100%">
+        <ion-item *virtualItem="let item"  lines="none" (click)="changeSelectedEntry(item)">
+          {{ item.name }}
+        </ion-item>
+      </ion-virtual-scroll>
+    </div>
+    <div class="close-button">
+      <ion-label (click)="dismiss()">Cancel</ion-label>
+    </div>
+</ion-content>

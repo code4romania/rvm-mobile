@@ -44,7 +44,7 @@ export class StaticsService {
             continuous: true
         };
 
-        localDB.sync(remoteDB, options);
+        localDB.replicate.from(remoteDB, options);
     }
 
     /**
@@ -52,16 +52,26 @@ export class StaticsService {
      * @returns An observable that contains the list of counties from resource files
      */
     public getCountyList(): Observable<any> {
-        return from(localDB.allDocs({include_docs: true, startkey: 'county_romania_', endkey: 'county_romania_\ufff0'}));
+        return from(localDB.allDocs(
+            {
+                include_docs: true,
+                startkey: 'county_romania_',
+                endkey: 'county_romania_\ufff0'
+            }
+        ));
     }
 
     /**
      * Getter for the list of cities
+     * @param countyId The id of the county from which the cities will be selected
      * @returns An observable that contains the list of cities from resource files
      */
-    public getCityList(countyName: string): Observable<any> {
-        return from(localDB.allDocs({include_docs: true,
-            startkey: 'city_' + countyName.toLowerCase().replace(' ',''),
-            endkey: 'city_' + countyName.toLowerCase().replace(' ','') + '_\ufff0'}));
+    public getCityList(countyId: string): Observable<any> {
+        return from(localDB.query('cities/slug',
+            {
+                startkey: [countyId, null],
+                endkey: [countyId, {}]
+            }
+        ));
     }
 }

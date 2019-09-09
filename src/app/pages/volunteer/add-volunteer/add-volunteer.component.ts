@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { OrganisationService,
   VolunteerService,
@@ -7,11 +7,13 @@ import { OrganisationService,
 import { Router } from '@angular/router';
 import { SsnValidation } from 'src/app/core/validators/ssn-validation';
 import { PhoneValidation } from 'src/app/core/validators/phone-validation';
+import { ModalController } from '@ionic/angular';
+import { CustomSelectorComponent } from 'src/app/core/components/custom-selector/custom-selector.component';
 
 @Component({
   selector: 'app-add-volunteer',
   templateUrl: './add-volunteer.component.html',
-  styleUrls: ['./add-volunteer.component.scss'],
+  styleUrls: ['./add-volunteer.component.scss']
 })
 
 export class AddVolunteerComponent implements OnInit {
@@ -56,11 +58,6 @@ export class AddVolunteerComponent implements OnInit {
    */
   addNewOrganisation = false;
 
-  // /**
-  //  * Array with the list of all organisations that have acreditations for a selected course
-  //  */
-  // acreditedOrganisations = [];
-
   selectedCourse: any = {};
   selectedOrganisation: any;
 
@@ -77,13 +74,15 @@ export class AddVolunteerComponent implements OnInit {
    * @param organisationService Provider for organisation related operations
    * @param courseService Provider for course related operations
    * @param router Provider for route navigation
+   * @param modalController Controller for modal operations
    */
   constructor(private formBuilder: FormBuilder,
               private staticsService: StaticsService,
               private volunteerService: VolunteerService,
               private organisationService: OrganisationService,
               private courseService: CourseService,
-              private router: Router) { }
+              private router: Router,
+              public modalController: ModalController) { }
 
   /**
    * Page initialisation
@@ -106,8 +105,7 @@ export class AddVolunteerComponent implements OnInit {
       organisation: ['', Validators.required],
       county: new FormControl({value: '', disabled: false}, Validators.required),
       city: new FormControl({value: '', disabled: true}, Validators.required),
-      course: new FormControl({value: '', disabled: false}, Validators.required),
-      // acreditedOrganisation: new FormControl({value: '', disabled: false}, Validators.required)
+      course: new FormControl({value: '', disabled: false}, Validators.required)
     });
   }
 
@@ -129,6 +127,8 @@ export class AddVolunteerComponent implements OnInit {
           });
         });
       } else {
+        this.selectedOrganisation = this.addForm.value.organisation;
+        this.selectedCourse = this.addForm.value.course;
         this.createVolunteer();
       }
     }
@@ -163,18 +163,15 @@ export class AddVolunteerComponent implements OnInit {
   private getCountyList() {
     this.staticsService.getCountyList().subscribe((response) => {
       this.counties = response.rows.map(x => x.doc);
-    });
-  }
 
-  /**
-   * Retrives the list of cities from a selected county from the locations service
-   */
-  private getCityList(county) {
-    this.staticsService.getCityList(county.name).subscribe((response) => {
-      this.cities = response.rows
-        .map(x => x.doc);
-      if (this.cities.length > 0) {
-        this.addForm.controls['city'].enable();
+      if (this.counties[0]) {
+        this.staticsService.getCityList(this.counties[0]._id).subscribe((res) => {
+          this.cities = res.rows
+            .map(x => ({
+              _id: x.id,
+              name: x.value
+            }));
+        });
       }
     });
   }
@@ -188,6 +185,7 @@ export class AddVolunteerComponent implements OnInit {
         this.organisations.push(doc);
       });
     });
+    this.organisations.push({_id: 'new', name: 'Adaugă organizație nouă'});
   }
 
   /**
@@ -200,22 +198,22 @@ export class AddVolunteerComponent implements OnInit {
   }
 
   /**
-   * When a city is selected, the form's value is updated
-   * @param event Changing event, triggered when a change is detected on an element
-   */
-  citySelectionChanged(event: any) {
-    this.addForm.controls['city'].setValue(event.detail.value);
-  }
-
-  /**
-   * When a county is selected, the form's value is updated and starts retriving the list of cities from that county
+   * When a county is selected, the form's value is updated
    * @param event Changing event, triggered when a change is detected on an element
    */
   countySelectionChanged(event: any) {
     this.addForm.controls['county'].setValue(event.detail.value);
-    this.addForm.controls['city'].reset('');
-    this.cities = [];
-    this.getCityList(this.addForm.value.county);
+
+    const countyId = this.addForm.value.county._id;
+    this.staticsService.getCityList(countyId).subscribe((response) => {
+      this.cities = response.rows
+        .map(x => ({
+          _id: x.id,
+          name: x.value
+        }));
+      this.addForm.controls['city'].reset('');
+      this.addForm.controls['city'].enable();
+    });
   }
 
   /**
@@ -223,7 +221,7 @@ export class AddVolunteerComponent implements OnInit {
    * @param event Changing event, triggered when a change is detected on an element
    */
   organisationSelectionChanged(event: any) {
-    if (this.addForm.value.organisation === 'new') {
+    if (event.detail && event.detail.value && event.detail.value._id === 'new') {
       this.addForm.value.organisation = '';
       this.addNewOrganisation = true;
     } else {
@@ -232,35 +230,12 @@ export class AddVolunteerComponent implements OnInit {
     }
   }
 
-  // /**
-  //  * When an acreditor organisation is selected, the selection is updated as well
-  //  * @param event Changing event, triggered when a change is detected on an element
-  //  */
-  // acreditedOrganisationSelectionChanged(event) {
-  //   this.selectedCourse.acredited = this.addForm.value.acreditedOrganisation;
-  // }
-
   /**
    * When a course is selected, the acreditor organisations pop-up select is automatically triggered,
    * Containing the organisations that are acreditors for the selected course
    */
   courseSelectionChanged() {
     this.selectedCourse = this.addForm.value.course;
-
-    /* this.courseService.getCourseByName(this.addForm.value.course).subscribe((response: any) => {
-      this.acreditedOrganisations = response.docs;
-    });
-
-    this.acreditedOrganisations = [
-      {
-        _id: '1',
-        acredited: 'Crucea Rosie'
-      },
-      {
-        _id: '2',
-        acredited:'SMURD'
-      }];
-      */
   }
 
   /**
@@ -271,30 +246,10 @@ export class AddVolunteerComponent implements OnInit {
     const ssn = event.detail.value;
     this.volunteerService.getVolunteerBySsn(ssn.trim()).subscribe((response) => {
       if (response.docs.length > 0) {
-        this.addForm.controls['ssn'].setErrors({incorrect: true});
-        this.addForm.setErrors({'incorrect-ssn': true});
+        this.addForm.controls['ssn'].setErrors({'ssn': 'CNP introdus există deja.'});
       }
     });
   }
-
-
-  // /**
-  //  * Triggers a date picker pop-up after a course is added in order to take the course acreditation date
-  //  */
-  // showDatePicker() {
-  //   this.datePicker.show({
-  //     date: new Date(),
-  //     mode: 'date',
-  //     androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
-  //   }).then(
-  //     date => {
-  //       this.selectedCourse.obtained = date;
-  //     },
-  //     err => {
-  //       this.selectedCourse.obtained = new Date();
-  //     }
-  //   );
-  // }
 
   /**
    * Triggered when 'Neafiliat' option is selected; updates the form so that organisation is no longer required
@@ -326,5 +281,33 @@ export class AddVolunteerComponent implements OnInit {
       // this.addForm.controls['acreditedOrganisation'].setValidators([Validators.required]);
       // this.addForm.controls['acreditedOrganisation'].updateValueAndValidity();
     }
+  }
+
+  /**
+   * Prompts a scrollable modal view to replace the ion-selects; it is used in order
+   * to optimize the view for a large group of datas
+   * @param items The list of elements that will represent user's choices in the modal
+   * @param controlName The name of the control that the modal replaces
+   * @param event The event that triggered the function call
+   */
+  async presentModal(items: any, controlName: string, event: any) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    event.cancelBubble = true;
+    event.stopPropagation();
+
+    const modal = await this.modalController.create({
+      component: CustomSelectorComponent,
+      componentProps: {
+        items
+      }
+    });
+
+    modal.onDidDismiss()
+      .then(res => {
+        this.addForm.controls[controlName].setValue(res.data);
+    });
+
+    return await modal.present();
   }
 }

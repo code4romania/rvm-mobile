@@ -10,11 +10,11 @@ export class Volunteer {
     email: string;
     phone: string;
     county: {
-        id: string;
+        _id: string;
         name: string;
     };
     city: {
-        id: string;
+        _id: string;
         name: string;
     };
     organisation: {
@@ -24,7 +24,7 @@ export class Volunteer {
        website: string
     };
     courses: {
-        id: string;
+        _id: string;
         course_name_id: string;
         name: string;
         obtained: string;

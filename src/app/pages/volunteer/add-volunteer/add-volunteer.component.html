@@ -34,8 +34,8 @@
         <ion-label class="title">
           Alege județ
         </ion-label>
-        <ion-select class="mt-10" formControlName="county" (ionChange)="countySelectionChanged($event)" interface="action-sheet">
-          <ion-select-option *ngFor="let county of counties" [value]="county">{{county.name}}</ion-select-option>
+        <ion-select class="mt-10" formControlName="county" (ionChange)="countySelectionChanged($event)" (click)="presentModal(counties, 'county', $event)">
+          <ion-select-option *ngFor="let county of [addForm.controls.county.value]" [value]="county">{{county?.name}}</ion-select-option>
         </ion-select>
       </div>
 
@@ -43,8 +43,8 @@
         <ion-label class="title">
           Alege localitate
         </ion-label>
-        <ion-select class="mt-10" formControlName="city" (ionChange)="citySelectionChanged($event)" interface="action-sheet">
-          <ion-select-option *ngFor="let city of cities" [value]="city">{{city.name}}</ion-select-option>
+        <ion-select class="mt-10" formControlName="city" (click)="presentModal(cities, 'city', $event)">
+          <ion-select-option *ngFor="let city of [addForm.controls.city.value]" [value]="city">{{city?.name}}</ion-select-option>
         </ion-select>
       </div>
 
@@ -52,11 +52,9 @@
         <ion-label class="title">
           Alege organizație
         </ion-label>
-        <ion-select class="mt-10" formControlName="organisation" *ngIf="!addNewOrganisation"
-          [attr.disabled]="organisationNone" (ionChange)="organisationSelectionChanged($event)" interface="action-sheet">
-          <ion-select-option *ngFor="let organisation of organisations" value="{{organisation._id}}">
-            {{organisation.name}}</ion-select-option>
-          <ion-select-option value="new">Adaugă organizație nouă</ion-select-option>
+        <ion-select class="mt-10" formControlName="organisation" *ngIf="!addNewOrganisation" (click)="presentModal(organisations, 'organisation', $event)"
+          [attr.disabled]="organisationNone" (ionChange)="organisationSelectionChanged($event)">
+          <ion-select-option *ngFor="let organisation of [addForm.controls.organisation.value]" [value]="organisation">{{organisation?.name}}</ion-select-option>
         </ion-select>
         <ion-input type="text" [(ngModel)]="newOrganisation" [ngModelOptions]="{standalone: true}" class="mt-10"
           *ngIf="addNewOrganisation" [attr.disabled]="organisationNone"></ion-input>
@@ -73,37 +71,11 @@
         <ion-label class="title">
           Alege specializare
         </ion-label>
-        <ion-select class="mt-10" formControlName="course" (ionChange)="courseSelectionChanged()" interface="action-sheet"
+        <ion-select class="mt-10" formControlName="course" (ionChange)="courseSelectionChanged()" (click)="presentModal(courses, 'course', $event)"
           [attr.disabled]="courseNone">
-          <ion-select-option *ngFor="let course of courses" [value]="course">{{ course.name }}
-          </ion-select-option>
+            <ion-select-option *ngFor="let course of [addForm.controls.course.value]" [value]="course">{{course?.name}}</ion-select-option>
         </ion-select>
       </div>
-<!-- 
-      <div class="mt-10" *ngIf="!!selectedCourse.name && !courseNone">
-        <ion-label class="title">
-          Alege organizație acreditoare
-        </ion-label>
-        <ion-select class="mt-10" formControlName="acreditedOrganisation" interface="action-sheet"
-          (ionChange)="acreditedOrganisationSelectionChanged($event)">
-          <ion-select-option>Invalideaza selectia</ion-select-option>
-          <ion-select-option *ngFor="let acreditedOrganisation of acreditedOrganisations"
-            value="{{acreditedOrganisation.acredited}}">{{acreditedOrganisation.acredited}}
-          </ion-select-option>
-        </ion-select>
-        <ion-row>
-          <ion-col>
-            <p class="course-date">
-              {{selectedCourse.obtained | date}}
-            </p>
-          </ion-col>
-          <ion-col>
-            <ion-button (click)="showDatePicker()" class="mt-10">
-              Alege data acreditării
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </div> -->
 
       <ion-item lines="none" class="checkbox-item">
         <ion-checkbox [(ngModel)]="courseNone" [ngModelOptions]="{standalone: true}" name="coursesNone" (ionChange)="courseNoneChanged()"></ion-checkbox>
