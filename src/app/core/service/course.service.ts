@@ -47,7 +47,7 @@ export class CourseService {
     localDB.sync(remoteDB, options);
 
     localDB.createIndex({
-      index: {fields: ['course_name.id', 'volunteer_id', 'acredited.id']}
+      index: {fields: ['course_name._id', 'volunteer_id', 'acredited._id']}
     });
    }
 
@@ -73,10 +73,10 @@ export class CourseService {
   getCourseByName(courseNameId: string): Observable<any> {
     return from(localDB.find({
       selector: {
-        'course_name.id': {$eq: courseNameId},
+        'course_name._id': {$eq: courseNameId},
         type: this.type
       },
-      sort: ['course_name.id'],
+      sort: ['course_name._id'],
     }));
   }
 
@@ -134,7 +134,7 @@ export class CourseService {
       doc.course_name = course.course_name ? course.course_name : doc.course_name;
       doc.acredited = course.acredited ? course.acredited : doc.acredited;
       doc.obtained = course.obtained ? course.obtained : doc.obtained;
-      doc.updated_at = new Date();
+      doc.updated_at = moment().format('Y-MM-DD H:mm:ss');
       localDB.put(doc);
     });
   }

@@ -121,7 +121,7 @@ export class AddVolunteerComponent implements OnInit {
     } else {
       if (this.newOrganisation) {
         this.organisationService.createOrganisation(this.newOrganisation).subscribe((data: any) => {
-          this.organisationService.getOrganisationById(data.id).subscribe((result: any) => {
+          this.organisationService.getOrganisationById(data._id).subscribe((result: any) => {
             this.selectedOrganisation = result.docs[0];
             this.createVolunteer();
           });
@@ -145,8 +145,8 @@ export class AddVolunteerComponent implements OnInit {
 
     this.volunteerService.createVolunteer(
       this.addForm.value.name,
-      this.addForm.value.ssn.toString(),
-      this.addForm.value.phone.toString(),
+      String(this.addForm.value.ssn),
+      this.addForm.value.phone,
       this.addForm.value.county,
       this.addForm.value.city,
       this.selectedOrganisation,
@@ -271,15 +271,9 @@ export class AddVolunteerComponent implements OnInit {
     if (this.courseNone) {
       this.addForm.controls['course'].clearValidators();
       this.addForm.controls['course'].updateValueAndValidity();
-
-      // this.addForm.controls['acreditedOrganisation'].clearValidators();
-      // this.addForm.controls['acreditedOrganisation'].updateValueAndValidity();
     } else {
       this.addForm.controls['course'].setValidators([Validators.required]);
       this.addForm.controls['course'].updateValueAndValidity();
-
-      // this.addForm.controls['acreditedOrganisation'].setValidators([Validators.required]);
-      // this.addForm.controls['acreditedOrganisation'].updateValueAndValidity();
     }
   }
 

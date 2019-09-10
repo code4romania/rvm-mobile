@@ -49,7 +49,7 @@ export class AllocationService {
     localDB.sync(remoteDB, options);
 
     localDB.createIndex({
-      index: {fields: ['volunteer.id', 'rescue_officer.id']}
+      index: {fields: ['volunteer._id', 'rescue_officer._id']}
     });
    }
 
@@ -75,7 +75,7 @@ export class AllocationService {
     };
     allocation.county = {
       _id: county._id,
-      name
+      name: county.name
     };
     allocation.city = city;
     allocation.created_at = moment().format('Y-MM-DD H:mm:ss');
@@ -84,7 +84,7 @@ export class AllocationService {
 
     if (organisation) {
         allocation.organisation = {
-          _id: organisation.id,
+          _id: organisation._id,
           name: organisation.name,
         };
     }

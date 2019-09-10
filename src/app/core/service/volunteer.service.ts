@@ -56,8 +56,8 @@ export class VolunteerService {
           'organisation.slug',
           'course.[].course_name_id',
           'organisation._id',
-          'county.id',
-          'city.id',
+          'county._id',
+          'city._id',
           'job',
           'comments'
       ]}
@@ -165,11 +165,11 @@ export class VolunteerService {
     volunteer.name = name;
     volunteer.ssn = ssn;
     volunteer.county = {
-      _id: county._id.toString(),
+      _id: county._id,
       name: county.name
     };
     volunteer.city = {
-      _id: city._id.toString(),
+      _id: city._id,
       name: city.name
     };
     volunteer.created_at = moment().format('Y-MM-DD H:mm:ss');
@@ -195,7 +195,7 @@ export class VolunteerService {
     return from(localDB.post(volunteer))
     .pipe(
         map((response) => {
-          if (course) {
+          if (!!course) {
             this.courseService.createCourse(course, volunteer._id).subscribe((data) => {
               volunteer.courses.push({
                 _id: data.id,
@@ -230,7 +230,7 @@ export class VolunteerService {
       doc.comments = volunteer.comments ? volunteer.comments : doc.comments;
       doc.job = volunteer.job ? volunteer.job : doc.job;
       doc.allocation = volunteer.allocation ? volunteer.allocation : doc.allocation;
-      doc.updated_at = new Date();
+      doc.updated_at = moment().format('Y-MM-DD H:mm:ss');
       localDB.put(doc);
     });
   }
@@ -247,14 +247,14 @@ export class VolunteerService {
 
   /**
    * Filters local Volunteers database by the given parameters' values
-   * @param countyId County id
-   * @param organisationId Organisation id
-   * @param courseId Course name id
+   * @param county County object
+   * @param organisationId Organisation object
+   * @param course Course name object
    * @param page A number defining the current page of volunteers from the total list (used to paginate the response)
    * @param limit The number of volunteers per page
    * @returns An Observable with all volunteers matching the filters
    */
-  filter(countyId: string, organisationId: string, courseId: string, page: number, limit: number): Observable<any> {
+  filter(county: any, organisation: any, course: any, page: number, limit: number): Observable<any> {
     const skip = page * limit;
     const selector: any = {$and : []};
 
@@ -262,22 +262,22 @@ export class VolunteerService {
       type: this.type,
     });
 
-    if (countyId) {
+    if (!!county && !!county._id) {
       selector['$and'].push( {
-        'county.id': {$eq: countyId},
+        'county._id': {$eq: county._id},
       });
     }
 
-    if (organisationId) {
+    if (!!organisation && organisation._id) {
       selector['$and'].push(  {
-        'organisation._id': {$eq: organisationId},
+        'organisation._id': {$eq: organisation._id},
       });
     }
 
-    if (courseId) {
+    if (!!course && !!course._id) {
       selector['$and'].push( {courses: {
         $elemMatch : {
-          course_name_id: {$eq: courseId},
+          course_name_id: {$eq: course._id},
           }
         }
       });
@@ -298,7 +298,7 @@ export class VolunteerService {
   allocateVolunteer(allocationId: string, volunteerId: string) {
     return localDB.get(volunteerId).then((doc) => {
       doc.allocation = allocationId;
-      doc.updated_at = new Date();
+      doc.updated_at = moment().format('Y-MM-DD H:mm:ss');
       localDB.put(doc);
     });
   }
