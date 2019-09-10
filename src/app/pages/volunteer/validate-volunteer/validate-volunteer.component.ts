@@ -32,9 +32,14 @@ export class ValidateVolunteerComponent implements OnInit {
   volunteerIdWithDetails: string;
 
   /**
-   * All available courses
+   * Open volunteer's courses
    */
   courses = [];
+
+  /**
+   * Open volunteer's last allocation
+   */
+  allocation = null;
 
   /**
    * All available counties
@@ -103,6 +108,7 @@ export class ValidateVolunteerComponent implements OnInit {
     this.volunteerService.getVolunteers(this.page, this.limit).subscribe((response: any) => {
       if (response.docs && response.docs.length > 0) {
         response.docs.forEach(volunteer => {
+          volunteer.created_at = volunteer.created_at.replace(/\s/g, 'T');
           this.volunteers.push(volunteer);
         });
       }
@@ -112,15 +118,23 @@ export class ValidateVolunteerComponent implements OnInit {
   /**
    * Opens a details menu for the selected volunteer and closes all already opened ones
    * @param volunteerId String containing the id of the volunteer that was selected
+   * @param allocationId String containing the id of the volunteer's last allocation
    */
-  openMenu(volunteerId: string) {
+  openMenu(volunteerId: string, allocationId: string) {
     this.courses = [];
+    this.allocation = null;
+
     if (this.volunteerIdWithDetails === volunteerId) {
       this.volunteerIdWithDetails = null;
     } else {
       this.volunteerIdWithDetails = volunteerId;
+
       this.courseService.getCourseByVolunteerId(volunteerId).subscribe(response => {
         this.courses = response.docs;
+      });
+
+      this.allocationService.getAllocationById(allocationId).subscribe((response: any) => {
+        this.allocation = response.docs[0];
       });
     }
   }
@@ -154,6 +168,19 @@ export class ValidateVolunteerComponent implements OnInit {
           this.volunteers[index].isInAllocation = false;
         });
       });
+    }
+  }
+
+  /**
+   * Cancel the allocation process
+   * @param volunteerId String containing the id of the volunteer that was initially selected for allocation
+   */
+  cancelAllocation(volunteerId: string) {
+    this.city = null;
+    this.county = null;
+    const index = this.volunteers.findIndex(volunteer => volunteer._id === volunteerId);
+    if (index >= 0) {
+      this.volunteers[index].isInAllocation = false;
     }
   }
 
@@ -254,6 +281,7 @@ export class ValidateVolunteerComponent implements OnInit {
    * Retrieves the list of cities that belong to the selected county
    */
   getCitiesList() {
+    this.cities = [];
     this.staticsService.getCityList(this.county._id).subscribe((response) => {
       this.cities = response.rows
         .map(x => ({

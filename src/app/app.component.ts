@@ -1,6 +1,6 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 
-import { IonRouterOutlet, Platform, ToastController } from '@ionic/angular';
+import { IonRouterOutlet, Platform, ToastController, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthenticationService, LocalStorageService, DatabaseSyncService } from './core';
@@ -8,12 +8,14 @@ import { Router } from '@angular/router';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { ResetPasswordComponent } from './pages/authentication/reset-password/reset-password.component';
 import { Location } from '@angular/common';
+import { config } from 'src/config';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent implements AfterViewInit {
+
   /**
    * Router outlet reference
    */
@@ -46,7 +48,7 @@ export class AppComponent implements AfterViewInit {
     },
     {
       title: 'Apelează suport',
-      url: 'tel:89992142265'
+      url: 'tel:' + config.phoneNumber
     },
     {
       title: 'Delogare',
@@ -70,6 +72,7 @@ export class AppComponent implements AfterViewInit {
    * @param location Provider for route location change
    * @param databaseSyncService Provider for database synchronization
    * @param toastCtrl Controller for toast management
+   * @param menuController Controller for side menu management
    */
   constructor(
     private platform: Platform,
@@ -80,7 +83,8 @@ export class AppComponent implements AfterViewInit {
     private localStorageService: LocalStorageService,
     private location: Location,
     private databaseSyncService: DatabaseSyncService,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    private menuController: MenuController) {
     this.initializeApp();
   }
 
@@ -100,26 +104,33 @@ export class AppComponent implements AfterViewInit {
         document.addEventListener('backbutton', (event) => {
           const currentPath = this.router.url;
 
-          if (this.localStorageService.getItem('prevent_back')) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            return;
-          }
-
-          if (currentPath.indexOf('login') >= 0 || currentPath.indexOf('home') >= 0) {
-            if (!this.isDoubleTap) {
-              this.isDoubleTap = true;
-              this.presentToast();
-
-              setTimeout(() => {
-                this.isDoubleTap = false;
-               }, 3000);
+          this.menuController.getOpen().then(res => {
+            if (!!res) {
+              this.menuController.close();
+              return;
             } else {
-              navigator['app'].exitApp();
+              if (this.localStorageService.getItem('prevent_back')) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                return;
+              }
+
+              if (currentPath.indexOf('login') >= 0 || currentPath.indexOf('home') >= 0) {
+                if (!this.isDoubleTap) {
+                  this.isDoubleTap = true;
+                  this.presentToast();
+
+                  setTimeout(() => {
+                    this.isDoubleTap = false;
+                   }, 3000);
+                } else {
+                  navigator['app'].exitApp();
+                }
+              } else {
+                this.location.back();
+              }
             }
-          } else {
-            this.location.back();
-          }
+          });
         }, false);
 
         if (!this.localStorageService.getItem('firstLaunch')) {

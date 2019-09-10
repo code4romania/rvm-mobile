@@ -4,6 +4,7 @@ import { Camera } from '@ionic-native/camera';
 import { SMS } from '@ionic-native/sms/ngx';
 import { Volunteer } from 'src/app/core/model/volunteer.model';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-send-message',
@@ -31,9 +32,11 @@ export class SendMessageComponent implements OnInit {
   /**
    * @param sms Provider for sending SMS messages
    * @param router Provider for router navigation
+   * @param location Provider for url location navigation
    */
   constructor(private sms: SMS,
-              private router: Router) { }
+              private router: Router,
+              private location: Location) { }
 
   /**
    * Page initialisation: the volunteer id needs to be retrieved from the url
@@ -77,6 +80,7 @@ export class SendMessageComponent implements OnInit {
         }
     };
     this.sms.send(this.phoneNumbers, this.messageForm.value.message, options);
+    this.location.back();
   }
 
   /**

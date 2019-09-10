@@ -20,11 +20,12 @@
       <ion-label class="title">
         Alege județ
       </ion-label>
-      <ion-select class="mt-10" [(ngModel)]="selectedCounty" (ionChange)="selectionsChanged()" [ngClass]="{'selector-active': selectedCounty}" (click)="filterModal(counties, $event, 'county')">
+      <ion-select class="mt-10" [(ngModel)]="selectedCounty" (ionChange)="selectionsChanged()"
+        [ngClass]="{'selector-active': selectedCounty}" (click)="filterModal(counties, $event, 'county')">
         <ion-select-option *ngFor="let county of [selectedCounty]" [value]="county">{{county?.name}}</ion-select-option>
       </ion-select>
       <ion-button float-right color="light" *ngIf="selectedCounty" (click)="selectedCounty = null">
-          <ion-icon name="close"></ion-icon>
+        <ion-icon name="close"></ion-icon>
       </ion-button>
     </div>
 
@@ -32,23 +33,27 @@
       <ion-label class="title">
         Alege organizație
       </ion-label>
-      <ion-select class="mt-10" [(ngModel)]="selectedOrganisation" (ionChange)="selectionsChanged()" [ngClass]="{'selector-active': selectedOrganisation}" (click)="filterModal(organisations, $event, 'organisation')">
-          <ion-select-option *ngFor="let organisation of [selectedOrganisation]" [value]="organisation">{{organisation?.name}}</ion-select-option>
+      <ion-select class="mt-10" [(ngModel)]="selectedOrganisation" (ionChange)="selectionsChanged()"
+        [ngClass]="{'selector-active': selectedOrganisation}"
+        (click)="filterModal(organisations, $event, 'organisation')">
+        <ion-select-option *ngFor="let organisation of [selectedOrganisation]" [value]="organisation">
+          {{organisation?.name}}</ion-select-option>
       </ion-select>
       <ion-button color="light" *ngIf="selectedOrganisation" (click)="selectedOrganisation = null">
         <ion-icon name="close"></ion-icon>
-      </ion-button>    
+      </ion-button>
     </div>
 
     <div class="mt-10 clear-selector">
       <ion-label class="title">
         Alege specializare
       </ion-label>
-      <ion-select class="mt-10" [(ngModel)]="selectedCourse" (ionChange)="selectionsChanged()" [ngClass]="{'selector-active': selectedCourse}"  (click)="filterModal(courseOptions, $event, 'course')">
+      <ion-select class="mt-10" [(ngModel)]="selectedCourse" (ionChange)="selectionsChanged()"
+        [ngClass]="{'selector-active': selectedCourse}" (click)="filterModal(courseOptions, $event, 'course')">
         <ion-select-option *ngFor="let course of [selectedCourse]" [value]="course">{{course?.name}}</ion-select-option>
       </ion-select>
       <ion-button float-right color="light" *ngIf="selectedCourse" (click)="selectedCourse = null">
-          <ion-icon name="close"></ion-icon>
+        <ion-icon name="close"></ion-icon>
       </ion-button>
     </div>
   </div>
@@ -74,11 +79,17 @@
       </ion-item>
 
       <div *ngIf="volunteer._id === volunteerIdWithDetails" class="item-menu mb-5">
-          <ion-item lines="none" *ngFor="let course of courses" >
-              <ion-label class="m-0">
-                Voluntar acreditat pentru <a>{{course.course_name.name}}</a>.
-              </ion-label>
-            </ion-item>
+        <ion-item lines="none" *ngFor="let course of courses">
+          <ion-label class="m-0">
+            Voluntar acreditat pentru <a>{{course.course_name.name}}</a>.
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none" *ngIf="allocation">
+          <ion-label class="m-0">
+            Ultima alocare {{ allocation?.city?.name }}, {{ allocation?.county?.name}}.
+          </ion-label>
+        </ion-item>
 
         <ion-item lines="none" *ngIf="volunteer.job">
           <ion-label class="m-0">
@@ -114,22 +125,28 @@
           <ion-row>
             <ion-col col-6 class="custom-input selectors">
               <ion-label class="title">Județ</ion-label>
-              <ion-select [(ngModel)]="county" class="mt-5 p-5" (ionChange)="getCitiesList()" (click)="allocationModal(counties, $event, 'county')">
-                <ion-select-option *ngFor="let county of [county]" [value]="county">{{county?.name}}</ion-select-option>  
+              <ion-select [(ngModel)]="county" class="mt-5 p-5" (ionChange)="getCitiesList()"
+                (click)="allocationModal(counties, $event, 'county')">
+                <ion-select-option *ngFor="let county of [county]" [value]="county">{{county?.name}}</ion-select-option>
               </ion-select>
             </ion-col>
             <ion-col col-6 class="custom-input selectors">
               <ion-label class="title">Localitate</ion-label>
-              <ion-select [(ngModel)]="city" class="mt-5 p-5" (click)="allocationModal(cities, $event, 'city')" [disabled]="cities.length === 0">      
-                <ion-select-option *ngFor="let city of [city]" [value]="city">{{city?.name}}</ion-select-option>          
+              <ion-select [(ngModel)]="city" class="mt-5 p-5" (click)="allocationModal(cities, $event, 'city')"
+                [disabled]="cities.length === 0">
+                <ion-select-option *ngFor="let city of [city]" [value]="city">{{city?.name}}</ion-select-option>
               </ion-select>
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col col-6></ion-col>
             <ion-col col-6>
               <ion-button color="success" (click)="confirmAllocation(volunteer._id)" class="w-100 h-25">
                 Confirmă
+              </ion-button>
+            </ion-col>
+            <ion-col col-6>
+              <ion-button color="danger" (click)="cancelAllocation(volunteer._id)" class="w-100 h-25">
+                Anulează
               </ion-button>
             </ion-col>
           </ion-row>
@@ -139,11 +156,9 @@
   </ion-list>
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles"
-        loadingText="Se încarcă voluntari...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Se încarcă voluntari...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
   <ion-row *ngIf="volunteers.length > 0">
     <ion-col col-6></ion-col>

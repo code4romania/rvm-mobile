@@ -97,4 +97,18 @@ export class AllocationService {
         })
       );
    }
+
+   /**
+    * Returns an allocation entry by its id
+    * @param allocationId The id of the allocation
+    */
+   public getAllocationById(allocationId: string) {
+    return from(localDB.find({
+      selector: {
+        _id: {$eq: allocationId},
+        type: this.type
+      },
+      limit: 1
+    }));
+  }
 }

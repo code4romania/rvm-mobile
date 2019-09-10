@@ -27,7 +27,7 @@
 
   <ion-list class="pb-0 underlined-list">
     <div *ngFor="let volunteer of volunteers" class="list-item">
-      <ion-item lines="none" (click)="openMenu(volunteer._id)">
+      <ion-item lines="none" (click)="openMenu(volunteer._id, volunteer.allocation)">
         <ion-label class="name">
           {{volunteer.name}}
         </ion-label>
@@ -49,6 +49,12 @@
         <ion-item lines="none" *ngFor="let course of courses" >
           <ion-label class="m-0">
             Voluntar acreditat pentru <a>{{course.course_name.name}}</a>.
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none" *ngIf="allocation">
+          <ion-label class="m-0">
+            Ultima alocare {{ allocation?.city?.name }}, {{ allocation?.county?.name}}.
           </ion-label>
         </ion-item>
 
@@ -98,10 +104,14 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col col-6></ion-col>
             <ion-col col-6>
               <ion-button color="success" (click)="confirmAllocation(volunteer._id)" class="w-100 h-25">
                 Confirmă
+              </ion-button>
+            </ion-col>
+            <ion-col col-6>
+              <ion-button color="danger" (click)="cancelAllocation(volunteer._id)" class="w-100 h-25">
+                Anulează
               </ion-button>
             </ion-col>
           </ion-row>
