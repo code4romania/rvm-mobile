@@ -192,16 +192,18 @@ export class VolunteerService {
 
     volunteer.courses = [];
 
-    const newCourse = {
-      course_name : {
-        _id: course._id,
-        name: course.name,
-        slug: course.slug
-      },
-      obtained: null,
-      acredited: null
-    };
-    volunteer.courses.push(newCourse);
+    if (course && course._id) {
+      const newCourse = {
+        course_name : {
+          _id: course._id,
+          name: course.name,
+          slug: course.slug
+        },
+        obtained: null,
+        acredited: null
+      };
+      volunteer.courses.push(newCourse);
+    }
 
     return from(localDB.post(volunteer));
   }

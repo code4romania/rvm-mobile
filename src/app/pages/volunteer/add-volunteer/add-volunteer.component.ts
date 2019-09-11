@@ -114,6 +114,7 @@ export class AddVolunteerComponent implements OnInit {
    * It prepares the values that are going to be sent to the volunteer service
    */
   submit() {
+    this.selectedCourse = this.addForm.value.course;
     if (this.organisationNone) {
       this.addForm.controls['organisation'].setValue('');
       this.selectedOrganisation = null;
@@ -128,7 +129,6 @@ export class AddVolunteerComponent implements OnInit {
         });
       } else {
         this.selectedOrganisation = this.addForm.value.organisation;
-        this.selectedCourse = this.addForm.value.course;
         this.createVolunteer();
       }
     }
