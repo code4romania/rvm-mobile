@@ -32,11 +32,6 @@ export class ValidateVolunteerComponent implements OnInit {
   volunteerIdWithDetails: string;
 
   /**
-   * Open volunteer's courses
-   */
-  courses = [];
-
-  /**
    * Open volunteer's last allocation
    */
   allocation = null;
@@ -121,17 +116,12 @@ export class ValidateVolunteerComponent implements OnInit {
    * @param allocationId String containing the id of the volunteer's last allocation
    */
   openMenu(volunteerId: string, allocationId: string) {
-    this.courses = [];
     this.allocation = null;
 
     if (this.volunteerIdWithDetails === volunteerId) {
       this.volunteerIdWithDetails = null;
     } else {
       this.volunteerIdWithDetails = volunteerId;
-
-      this.courseService.getCourseByVolunteerId(volunteerId).subscribe(response => {
-        this.courses = response.docs;
-      });
 
       this.allocationService.getAllocationById(allocationId).subscribe((response: any) => {
         this.allocation = response.docs[0];

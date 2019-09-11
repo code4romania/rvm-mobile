@@ -192,24 +192,18 @@ export class VolunteerService {
 
     volunteer.courses = [];
 
-    return from(localDB.post(volunteer))
-    .pipe(
-        map((response) => {
-          if (!!course) {
-            this.courseService.createCourse(course, volunteer._id).subscribe((data) => {
-              volunteer.courses.push({
-                _id: data.id,
-                course_name_id: course._id,
-                name: course.name,
-                obtained: null,
-                acredited: null
-              });
-              this.updateVolunteer(volunteer);
-            });
-          }
-          return response;
-        })
-      );
+    const newCourse = {
+      course_name : {
+        _id: course._id,
+        name: course.name,
+        slug: course.slug
+      },
+      obtained: null,
+      acredited: null
+    };
+    volunteer.courses.push(newCourse);
+
+    return from(localDB.post(volunteer));
   }
 
    /**

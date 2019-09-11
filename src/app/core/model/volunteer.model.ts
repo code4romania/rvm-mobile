@@ -99,19 +99,24 @@ export class Volunteer {
      */
     courses: {
         /**
-         * Course id
+         * Course name object, from the course_name Database
          */
-        _id: string;
+        course_name: {
+            /**
+             * Course name id
+             */
+            _id: string;
 
-        /**
-         * Course name id, from the course_name Database
-         */
-        course_name_id: string;
+            /**
+             * Course name
+             */
+            name: string;
 
-        /**
-         * Course name
-         */
-        name: string;
+            /**
+             * Course name slug
+             */
+            slug: string;
+        }
 
         /**
          * Course obtained date
@@ -119,9 +124,19 @@ export class Volunteer {
         obtained: string;
 
         /**
-         * Course acredited organisation
+         * Course acredited organisation from the acreditors database
          */
-        acredited: string;
+        acredited: {
+            /**
+             * Acreditor organisation id
+             */
+            _id: string;
+
+            /**
+             * Acreditor organisation name
+             */
+            name: string;
+        }
     }[];
 
     /**

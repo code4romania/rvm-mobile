@@ -46,9 +46,9 @@
       </ion-item>
 
       <div *ngIf="volunteer._id === volunteerIdWithDetails" class="item-menu mb-5">
-        <ion-item lines="none" *ngFor="let course of courses" >
+        <ion-item lines="none" *ngFor="let course of volunteer.courses" >
           <ion-label class="m-0">
-            Voluntar acreditat pentru <a>{{course.course_name.name}}</a>.
+            Voluntar acreditat pentru <a>{{course.course_name?.name}}</a>.
           </ion-label>
         </ion-item>
 
