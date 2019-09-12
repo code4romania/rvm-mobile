@@ -74,6 +74,9 @@
 import { PreloadAllModules, RouterModule, Routes } from &#x27;@angular/router&#x27;;
 import { AuthenticationGuard } from &#x27;./core&#x27;;
 
+/**
+ * List of all parent routes accessible from the &#x27;&#x27; route and their respective modules
+ */
 const routes: Routes &#x3D; [
   {
     path: &#x27;&#x27;,
@@ -107,6 +110,10 @@ const routes: Routes &#x3D; [
   ],
   exports: [RouterModule]
 })
+
+/**
+ * Main app module, lazy loads all parent routes
+ */
 export class AppRoutingModule {}
 </code></pre>
     </div>

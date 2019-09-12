@@ -12,6 +12,9 @@ import { ValidateVolunteerComponent } from './validate-volunteer/validate-volunt
 import { AuthenticationGuard } from '../../core/authentication/authentication.guard';
 import { SendMessageComponent } from './send-message/send-message.component';
 
+/**
+ * All routes that are derivated from '/volunteers' and their respective components
+ */
 const routes: Routes = [
   {
     path: '',
@@ -57,4 +60,8 @@ const routes: Routes = [
     SendMessageComponent
   ]
 })
+
+/**
+ * The volunteer components module
+ */
 export class VolunteerPageModule {}

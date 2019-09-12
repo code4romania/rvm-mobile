@@ -863,8 +863,8 @@ export class OrganisationService {
     organisation.name &#x3D; name;
     organisation.slug &#x3D; this.removeSpecialChars(name);
     organisation.added_by &#x3D; currentUser._id;
-    organisation.created_at &#x3D; moment().format(&#x27;Y-MM-DD H:mm:ss&#x27;);
-    organisation.updated_at &#x3D; moment().format(&#x27;Y-MM-DD H:mm:ss&#x27;);
+    organisation.created_at &#x3D; moment().format(&#x27;Y-MM-DD HH:mm:ss&#x27;);
+    organisation.updated_at &#x3D; moment().format(&#x27;Y-MM-DD HH:mm:ss&#x27;);
     organisation.type &#x3D; this.type;
     organisation.status &#x3D; &#x27;inactiv&#x27;;
 

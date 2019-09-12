@@ -12,7 +12,9 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { UnauthenticatedGuard } from 'src/app/core/authentication/unauthenticated.guard';
 
-
+/**
+ * All routes that are derivated from '/auth' and linked to authentication components
+ */
 const routes: Routes = [
   {
     path: '',
@@ -54,4 +56,7 @@ const routes: Routes = [
     LogoutComponent
   ]
 })
+/**
+ * Authentication components module, loads all the auth components when it is loaded
+ */
 export class AuthenticationPageModule {}

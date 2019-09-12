@@ -9,6 +9,10 @@ import { fromEvent } from 'rxjs';
   styleUrls: ['./custom-selector.component.scss'],
 })
 
+/**
+ * Custom selector with scoll loader
+ * Loads big chucks of information faster and doesn't stall the UI
+ */
 export class CustomSelectorComponent implements OnInit, OnDestroy {
   /**
    * Data sent to the modal to represent the selections

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { VolunteerService } from 'src/app/core/service/volunteer.service';
 import { AllocationService } from 'src/app/core/service/allocation.service';
 import { StaticsService } from 'src/app/core/service/statics.service';
-import { CourseService } from 'src/app/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { NavigationExtras, Router } from '@angular/router';
 import { Volunteer } from 'src/app/core/model/volunteer.model';
@@ -15,6 +14,9 @@ import { CustomSelectorComponent } from 'src/app/core/components/custom-selector
   styleUrls: ['./validate-volunteer.component.scss'],
 })
 
+/**
+ * Component that handles the validate volunteer page functionality
+ */
 export class ValidateVolunteerComponent implements OnInit {
   /**
    * All volunteers
@@ -71,7 +73,6 @@ export class ValidateVolunteerComponent implements OnInit {
    * @param volunteerService Provider for volunteer related operations
    * @param allocationService Provider for volunteer allocation related operations
    * @param staticsService Provider for location selection
-   * @param courseService Provider for course related operations
    * @param router Provider for route navigation
    * @param iab Provider for accessing an url in browser
    * @param modalController Controller for modal operations
@@ -79,7 +80,6 @@ export class ValidateVolunteerComponent implements OnInit {
   constructor(private volunteerService: VolunteerService,
               private allocationService: AllocationService,
               private staticsService: StaticsService,
-              private courseService: CourseService,
               private router: Router,
               private iab: InAppBrowser,
               private modalController: ModalController) { }

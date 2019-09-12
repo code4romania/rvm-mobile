@@ -34,4 +34,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
   ],
   bootstrap: [AppComponent]
 })
+
+/**
+ * Main app modul, contains all the important providers, plugins and modules that are used all over the app
+ */
 export class AppModule {}

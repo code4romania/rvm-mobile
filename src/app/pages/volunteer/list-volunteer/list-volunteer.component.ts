@@ -14,6 +14,9 @@ import { CustomSelectorComponent } from 'src/app/core/components/custom-selector
   styleUrls: ['./list-volunteer.component.scss'],
 })
 
+/**
+ * Component that manages the list of volunteers page
+ */
 export class ListVolunteerComponent implements OnInit {
   /**
    * Infinite scroll reference that detects user's swipe to refresh events

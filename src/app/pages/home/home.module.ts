@@ -21,4 +21,8 @@ import { AuthenticationGuard } from '../../core/authentication/authentication.gu
   ],
   declarations: [HomePage]
 })
+
+/**
+ * Main page module
+ */
 export class HomePageModule {}

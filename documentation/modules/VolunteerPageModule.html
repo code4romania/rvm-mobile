@@ -216,6 +216,9 @@ import { ValidateVolunteerComponent } from &#x27;./validate-volunteer/validate-v
 import { AuthenticationGuard } from &#x27;../../core/authentication/authentication.guard&#x27;;
 import { SendMessageComponent } from &#x27;./send-message/send-message.component&#x27;;
 
+/**
+ * All routes that are derivated from &#x27;/volunteers&#x27; and their respective components
+ */
 const routes: Routes &#x3D; [
   {
     path: &#x27;&#x27;,
@@ -261,6 +264,10 @@ const routes: Routes &#x3D; [
     SendMessageComponent
   ]
 })
+
+/**
+ * The volunteer components module
+ */
 export class VolunteerPageModule {}
 </code></pre>
     </div>

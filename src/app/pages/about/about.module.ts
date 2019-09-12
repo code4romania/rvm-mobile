@@ -8,6 +8,9 @@ import { IonicModule } from '@ionic/angular';
 import { AboutPage } from './about.page';
 import { AuthenticationGuard } from '../../core/authentication/authentication.guard';
 
+/**
+ * List of all routes that are derivate from '/about'
+ */
 const routes: Routes = [
   {
     path: '',
@@ -25,4 +28,8 @@ const routes: Routes = [
   ],
   declarations: [AboutPage]
 })
+
+/**
+ * Module that loads the components derived from the 'about' section
+ */
 export class AboutPageModule {}

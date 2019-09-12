@@ -182,12 +182,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(sms: SMS, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(sms: SMS, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, location: <a href="https://angular.io/api/common/Location" target="_blank">Location</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -237,6 +237,22 @@
 </code>
                                                         </td>
                                                 </tr>
+                                                <tr>
+                                                        <td>location</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/common/Location" target="_blank" >Location</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>Provider for url location navigation</p>
+</code>
+                                                        </td>
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -277,8 +293,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="58"
-                            class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:58</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="64"
+                            class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:64</a></div>
                 </td>
             </tr>
 
@@ -318,8 +334,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="85"
-                            class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:85</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="92"
+                            class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:92</a></div>
                 </td>
             </tr>
 
@@ -359,8 +375,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="41"
-                            class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:41</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:47</a></div>
                 </td>
             </tr>
 
@@ -400,8 +416,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="72"
-                            class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:72</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="78"
+                            class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:78</a></div>
                 </td>
             </tr>
 
@@ -446,7 +462,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:29</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -479,7 +495,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:28</a></div>
                             </td>
                         </tr>
 
@@ -518,7 +534,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/pages/volunteer/send-message/send-message.component.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -543,6 +559,7 @@ import { Camera } from &#x27;@ionic-native/camera&#x27;;
 import { SMS } from &#x27;@ionic-native/sms/ngx&#x27;;
 import { Volunteer } from &#x27;src/app/core/model/volunteer.model&#x27;;
 import { FormGroup, Validators, FormControl } from &#x27;@angular/forms&#x27;;
+import { Location } from &#x27;@angular/common&#x27;;
 
 @Component({
   selector: &#x27;app-send-message&#x27;,
@@ -550,6 +567,9 @@ import { FormGroup, Validators, FormControl } from &#x27;@angular/forms&#x27;;
   styleUrls: [&#x27;./send-message.component.scss&#x27;]
 })
 
+/**
+ * Component that handles the send message page functionality
+ */
 export class SendMessageComponent implements OnInit {
 
   /**
@@ -570,9 +590,11 @@ export class SendMessageComponent implements OnInit {
   /**
    * @param sms Provider for sending SMS messages
    * @param router Provider for router navigation
+   * @param location Provider for url location navigation
    */
   constructor(private sms: SMS,
-              private router: Router) { }
+              private router: Router,
+              private location: Location) { }
 
   /**
    * Page initialisation: the volunteer id needs to be retrieved from the url
@@ -616,6 +638,7 @@ export class SendMessageComponent implements OnInit {
         }
     };
     this.sms.send(this.phoneNumbers, this.messageForm.value.message, options);
+    this.location.back();
   }
 
   /**

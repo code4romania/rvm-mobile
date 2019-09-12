@@ -100,6 +100,10 @@
                             <li>
                                 <a href="#createAllocation">createAllocation</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getAllocationById">getAllocationById</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -307,6 +311,85 @@ Either contains an object with the following properties {id, name, website}, or 
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllocationById"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getAllocationById
+                        </b>
+                        <a href="#getAllocationById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAllocationById(allocationId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="105"
+                            class="link-to-prism">src/app/core/service/allocation.service.ts:105</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns an allocation entry by its id</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>allocationId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>The id of the allocation</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
             <section>
     
@@ -409,7 +492,7 @@ export class AllocationService {
     localDB.sync(remoteDB, options);
 
     localDB.createIndex({
-      index: {fields: [&#x27;volunteer.id&#x27;, &#x27;rescue_officer.id&#x27;]}
+      index: {fields: [&#x27;volunteer._id&#x27;, &#x27;rescue_officer._id&#x27;]}
     });
    }
 
@@ -435,16 +518,16 @@ export class AllocationService {
     };
     allocation.county &#x3D; {
       _id: county._id,
-      name
+      name: county.name
     };
     allocation.city &#x3D; city;
-    allocation.created_at &#x3D; moment().format(&#x27;Y-MM-DD H:mm:ss&#x27;);
-    allocation.updated_at &#x3D; moment().format(&#x27;Y-MM-DD H:mm:ss&#x27;);
+    allocation.created_at &#x3D; moment().format(&#x27;Y-MM-DD HH:mm:ss&#x27;);
+    allocation.updated_at &#x3D; moment().format(&#x27;Y-MM-DD HH:mm:ss&#x27;);
     allocation.type &#x3D; this.type;
 
     if (organisation) {
         allocation.organisation &#x3D; {
-          _id: organisation.id,
+          _id: organisation._id,
           name: organisation.name,
         };
     }
@@ -457,6 +540,20 @@ export class AllocationService {
         })
       );
    }
+
+   /**
+    * Returns an allocation entry by its id
+    * @param allocationId The id of the allocation
+    */
+   public getAllocationById(allocationId: string) {
+    return from(localDB.find({
+      selector: {
+        _id: {$eq: allocationId},
+        type: this.type
+      },
+      limit: 1
+    }));
+  }
 }
 </code></pre>
     </div>

@@ -14,6 +14,10 @@ import { config } from 'src/config';
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
+
+/**
+ * Main app component, it is the loading container for all app pages
+ */
 export class AppComponent implements AfterViewInit {
 
   /**

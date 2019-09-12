@@ -16,6 +16,9 @@ import { CustomSelectorComponent } from 'src/app/core/components/custom-selector
   styleUrls: ['./add-volunteer.component.scss']
 })
 
+/**
+ * Component for add volunteer page
+ */
 export class AddVolunteerComponent implements OnInit {
   /**
    * Form for a new volunteer
@@ -58,7 +61,14 @@ export class AddVolunteerComponent implements OnInit {
    */
   addNewOrganisation = false;
 
+  /**
+   * The course that was selected by the user from the list
+   */
   selectedCourse: any = {};
+
+  /**
+   * The organisation that was selected by the user from the list
+   */
   selectedOrganisation: any;
 
   /**

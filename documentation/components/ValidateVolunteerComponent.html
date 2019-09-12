@@ -130,6 +130,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#allocation">allocation</a>
+                            </li>
+                            <li>
                                 <a href="#cities">cities</a>
                             </li>
                             <li>
@@ -140,9 +143,6 @@
                             </li>
                             <li>
                                 <a href="#county">county</a>
-                            </li>
-                            <li>
-                                <a href="#courses">courses</a>
                             </li>
                             <li>
                                 <a href="#keyword">keyword</a>
@@ -173,6 +173,9 @@
                         <ul class="index-list">
                             <li>
                                 <a href="#allocateUser">allocateUser</a>
+                            </li>
+                            <li>
+                                <a href="#cancelAllocation">cancelAllocation</a>
                             </li>
                             <li>
                                 <a href="#confirmAllocation">confirmAllocation</a>
@@ -229,12 +232,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(volunteerService: <a href="../injectables/VolunteerService.html">VolunteerService</a>, allocationService: <a href="../injectables/AllocationService.html">AllocationService</a>, staticsService: <a href="../injectables/StaticsService.html">StaticsService</a>, courseService: <a href="../injectables/CourseService.html">CourseService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, iab: InAppBrowser, modalController: ModalController)</code>
+<code>constructor(volunteerService: <a href="../injectables/VolunteerService.html">VolunteerService</a>, allocationService: <a href="../injectables/AllocationService.html">AllocationService</a>, staticsService: <a href="../injectables/StaticsService.html">StaticsService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, iab: InAppBrowser, modalController: ModalController)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:69</a></div>
                             </td>
                         </tr>
 
@@ -297,22 +300,6 @@
                                                     
                                                         <td>
                                                                 <code><p>Provider for location selection</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>courseService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/CourseService.html" target="_self" >CourseService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code><p>Provider for course related operations</p>
 </code>
                                                         </td>
                                                 </tr>
@@ -404,8 +391,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="132"
-                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:132</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="136"
+                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:136</a></div>
                 </td>
             </tr>
 
@@ -463,6 +450,83 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="cancelAllocation"></a>
+                    <span class="name">
+                        <b>
+                            cancelAllocation
+                        </b>
+                        <a href="#cancelAllocation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cancelAllocation(volunteerId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="168"
+                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:168</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cancel the allocation process</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>volunteerId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>String containing the id of the volunteer that was initially selected for allocation</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="confirmAllocation"></a>
                     <span class="name">
                         <b>
@@ -481,8 +545,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="143"
-                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:143</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="147"
+                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:147</a></div>
                 </td>
             </tr>
 
@@ -558,8 +622,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="204"
-                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:204</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="221"
+                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:221</a></div>
                 </td>
             </tr>
 
@@ -635,8 +699,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="256"
-                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:256</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="273"
+                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:273</a></div>
                 </td>
             </tr>
 
@@ -676,8 +740,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="215"
-                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:215</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="232"
+                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:232</a></div>
                 </td>
             </tr>
 
@@ -758,8 +822,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="192"
-                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:192</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="209"
+                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:209</a></div>
                 </td>
             </tr>
 
@@ -876,8 +940,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="225"
-                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:225</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="242"
+                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:242</a></div>
                 </td>
             </tr>
 
@@ -946,15 +1010,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>openMenu(volunteerId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>openMenu(volunteerId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, allocationId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="116"
-                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:116</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="118"
+                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:118</a></div>
                 </td>
             </tr>
 
@@ -989,6 +1053,22 @@
 
                                     <td>
                                         <p>String containing the id of the volunteer that was selected</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>allocationId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>String containing the id of the volunteer&#39;s last allocation</p>
 
                                     </td>
                                 </tr>
@@ -1032,8 +1112,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="273"
-                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:273</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="291"
+                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:291</a></div>
                 </td>
             </tr>
 
@@ -1142,8 +1222,8 @@ to optimize the view for a large group of datas</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="166"
-                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:166</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="183"
+                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:183</a></div>
                 </td>
             </tr>
 
@@ -1221,8 +1301,8 @@ otherwise it&#39;s the whole list of volunteers</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="236"
-                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:236</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="253"
+                            class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:253</a></div>
                 </td>
             </tr>
 
@@ -1281,6 +1361,44 @@ otherwise it&#39;s the whole list of volunteers</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="allocation"></a>
+                        <span class="name">
+                            <b>
+                            allocation</b>
+                            <a href="#allocation"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>null</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:39</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Open volunteer&#39;s last allocation</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="cities"></a>
                         <span class="name">
                             <b>
@@ -1302,7 +1420,7 @@ otherwise it&#39;s the whole list of volunteers</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:47</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:49</a></div>
                             </td>
                         </tr>
 
@@ -1335,7 +1453,7 @@ otherwise it&#39;s the whole list of volunteers</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:59</a></div>
                             </td>
                         </tr>
 
@@ -1373,7 +1491,7 @@ otherwise it&#39;s the whole list of volunteers</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:42</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:44</a></div>
                             </td>
                         </tr>
 
@@ -1406,51 +1524,13 @@ otherwise it&#39;s the whole list of volunteers</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:52</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:54</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>Selected county</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="courses"></a>
-                        <span class="name">
-                            <b>
-                            courses</b>
-                            <a href="#courses"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>[]</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>[]</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:37</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>All available courses</p>
 </div>
                     </td>
                 </tr>
@@ -1482,7 +1562,7 @@ otherwise it&#39;s the whole list of volunteers</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:29</a></div>
                             </td>
                         </tr>
 
@@ -1520,7 +1600,7 @@ otherwise it&#39;s the whole list of volunteers</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:67</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:69</a></div>
                             </td>
                         </tr>
 
@@ -1558,7 +1638,7 @@ otherwise it&#39;s the whole list of volunteers</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:62</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:64</a></div>
                             </td>
                         </tr>
 
@@ -1591,7 +1671,7 @@ otherwise it&#39;s the whole list of volunteers</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:32</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:34</a></div>
                             </td>
                         </tr>
 
@@ -1629,7 +1709,7 @@ otherwise it&#39;s the whole list of volunteers</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/pages/volunteer/validate-volunteer/validate-volunteer.component.ts:24</a></div>
                             </td>
                         </tr>
 
@@ -1652,7 +1732,6 @@ otherwise it&#39;s the whole list of volunteers</p>
 import { VolunteerService } from &#x27;src/app/core/service/volunteer.service&#x27;;
 import { AllocationService } from &#x27;src/app/core/service/allocation.service&#x27;;
 import { StaticsService } from &#x27;src/app/core/service/statics.service&#x27;;
-import { CourseService } from &#x27;src/app/core&#x27;;
 import { InAppBrowser } from &#x27;@ionic-native/in-app-browser/ngx&#x27;;
 import { NavigationExtras, Router } from &#x27;@angular/router&#x27;;
 import { Volunteer } from &#x27;src/app/core/model/volunteer.model&#x27;;
@@ -1665,6 +1744,9 @@ import { CustomSelectorComponent } from &#x27;src/app/core/components/custom-sel
   styleUrls: [&#x27;./validate-volunteer.component.scss&#x27;],
 })
 
+/**
+ * Component that handles the validate volunteer page functionality
+ */
 export class ValidateVolunteerComponent implements OnInit {
   /**
    * All volunteers
@@ -1682,9 +1764,9 @@ export class ValidateVolunteerComponent implements OnInit {
   volunteerIdWithDetails: string;
 
   /**
-   * All available courses
+   * Open volunteer&#x27;s last allocation
    */
-  courses &#x3D; [];
+  allocation &#x3D; null;
 
   /**
    * All available counties
@@ -1721,7 +1803,6 @@ export class ValidateVolunteerComponent implements OnInit {
    * @param volunteerService Provider for volunteer related operations
    * @param allocationService Provider for volunteer allocation related operations
    * @param staticsService Provider for location selection
-   * @param courseService Provider for course related operations
    * @param router Provider for route navigation
    * @param iab Provider for accessing an url in browser
    * @param modalController Controller for modal operations
@@ -1729,7 +1810,6 @@ export class ValidateVolunteerComponent implements OnInit {
   constructor(private volunteerService: VolunteerService,
               private allocationService: AllocationService,
               private staticsService: StaticsService,
-              private courseService: CourseService,
               private router: Router,
               private iab: InAppBrowser,
               private modalController: ModalController) { }
@@ -1753,6 +1833,7 @@ export class ValidateVolunteerComponent implements OnInit {
     this.volunteerService.getVolunteers(this.page, this.limit).subscribe((response: any) &#x3D;&gt; {
       if (response.docs &amp;&amp; response.docs.length &gt; 0) {
         response.docs.forEach(volunteer &#x3D;&gt; {
+          volunteer.created_at &#x3D; volunteer.created_at.replace(/\s/g, &#x27;T&#x27;);
           this.volunteers.push(volunteer);
         });
       }
@@ -1762,15 +1843,18 @@ export class ValidateVolunteerComponent implements OnInit {
   /**
    * Opens a details menu for the selected volunteer and closes all already opened ones
    * @param volunteerId String containing the id of the volunteer that was selected
+   * @param allocationId String containing the id of the volunteer&#x27;s last allocation
    */
-  openMenu(volunteerId: string) {
-    this.courses &#x3D; [];
+  openMenu(volunteerId: string, allocationId: string) {
+    this.allocation &#x3D; null;
+
     if (this.volunteerIdWithDetails &#x3D;&#x3D;&#x3D; volunteerId) {
       this.volunteerIdWithDetails &#x3D; null;
     } else {
       this.volunteerIdWithDetails &#x3D; volunteerId;
-      this.courseService.getCourseByVolunteerId(volunteerId).subscribe(response &#x3D;&gt; {
-        this.courses &#x3D; response.docs;
+
+      this.allocationService.getAllocationById(allocationId).subscribe((response: any) &#x3D;&gt; {
+        this.allocation &#x3D; response.docs[0];
       });
     }
   }
@@ -1804,6 +1888,19 @@ export class ValidateVolunteerComponent implements OnInit {
           this.volunteers[index].isInAllocation &#x3D; false;
         });
       });
+    }
+  }
+
+  /**
+   * Cancel the allocation process
+   * @param volunteerId String containing the id of the volunteer that was initially selected for allocation
+   */
+  cancelAllocation(volunteerId: string) {
+    this.city &#x3D; null;
+    this.county &#x3D; null;
+    const index &#x3D; this.volunteers.findIndex(volunteer &#x3D;&gt; volunteer._id &#x3D;&#x3D;&#x3D; volunteerId);
+    if (index &gt;&#x3D; 0) {
+      this.volunteers[index].isInAllocation &#x3D; false;
     }
   }
 
@@ -1904,6 +2001,7 @@ export class ValidateVolunteerComponent implements OnInit {
    * Retrieves the list of cities that belong to the selected county
    */
   getCitiesList() {
+    this.cities &#x3D; [];
     this.staticsService.getCityList(this.county._id).subscribe((response) &#x3D;&gt; {
       this.cities &#x3D; response.rows
         .map(x &#x3D;&gt; ({
@@ -1978,7 +2076,7 @@ export class ValidateVolunteerComponent implements OnInit {
 
   &lt;ion-list class&#x3D;&quot;pb-0 underlined-list&quot;&gt;
     &lt;div *ngFor&#x3D;&quot;let volunteer of volunteers&quot; class&#x3D;&quot;list-item&quot;&gt;
-      &lt;ion-item lines&#x3D;&quot;none&quot; (click)&#x3D;&quot;openMenu(volunteer._id)&quot;&gt;
+      &lt;ion-item lines&#x3D;&quot;none&quot; (click)&#x3D;&quot;openMenu(volunteer._id, volunteer.allocation)&quot;&gt;
         &lt;ion-label class&#x3D;&quot;name&quot;&gt;
           {{volunteer.name}}
         &lt;/ion-label&gt;
@@ -1997,9 +2095,15 @@ export class ValidateVolunteerComponent implements OnInit {
       &lt;/ion-item&gt;
 
       &lt;div *ngIf&#x3D;&quot;volunteer._id &#x3D;&#x3D;&#x3D; volunteerIdWithDetails&quot; class&#x3D;&quot;item-menu mb-5&quot;&gt;
-        &lt;ion-item lines&#x3D;&quot;none&quot; *ngFor&#x3D;&quot;let course of courses&quot; &gt;
+        &lt;ion-item lines&#x3D;&quot;none&quot; *ngFor&#x3D;&quot;let course of volunteer.courses&quot; &gt;
           &lt;ion-label class&#x3D;&quot;m-0&quot;&gt;
-            Voluntar acreditat pentru &lt;a&gt;{{course.course_name.name}}&lt;/a&gt;.
+            Voluntar acreditat pentru &lt;a&gt;{{course.course_name?.name}}&lt;/a&gt;.
+          &lt;/ion-label&gt;
+        &lt;/ion-item&gt;
+
+        &lt;ion-item lines&#x3D;&quot;none&quot; *ngIf&#x3D;&quot;allocation&quot;&gt;
+          &lt;ion-label class&#x3D;&quot;m-0&quot;&gt;
+            Ultima alocare {{ allocation?.city?.name }}, {{ allocation?.county?.name}}.
           &lt;/ion-label&gt;
         &lt;/ion-item&gt;
 
@@ -2049,10 +2153,14 @@ export class ValidateVolunteerComponent implements OnInit {
             &lt;/ion-col&gt;
           &lt;/ion-row&gt;
           &lt;ion-row&gt;
-            &lt;ion-col col-6&gt;&lt;/ion-col&gt;
             &lt;ion-col col-6&gt;
               &lt;ion-button color&#x3D;&quot;success&quot; (click)&#x3D;&quot;confirmAllocation(volunteer._id)&quot; class&#x3D;&quot;w-100 h-25&quot;&gt;
                 Confirmă
+              &lt;/ion-button&gt;
+            &lt;/ion-col&gt;
+            &lt;ion-col col-6&gt;
+              &lt;ion-button color&#x3D;&quot;danger&quot; (click)&#x3D;&quot;cancelAllocation(volunteer._id)&quot; class&#x3D;&quot;w-100 h-25&quot;&gt;
+                Anulează
               &lt;/ion-button&gt;
             &lt;/ion-col&gt;
           &lt;/ion-row&gt;
@@ -2125,7 +2233,7 @@ export class ValidateVolunteerComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar mode="ios">    <ion-buttons slot="start">      <ion-back-button color="dark" class="show-back-button" defaultHref="home"></ion-back-button>    </ion-buttons>    <ion-buttons slot="end">      <ion-menu-button color="dark"></ion-menu-button>    </ion-buttons>    <img src="../../assets/images/DSU.png" class="logo-title mx-auto" />  </ion-toolbar></ion-header><ion-content padding>  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">    <ion-refresher-content></ion-refresher-content>  </ion-refresher>  <ion-item lines="none" class="item item-text-wrap title">    Caută după nume, CNP sau organizație  </ion-item>  <ion-item lines="none" class="search-box mx-auto">    <ion-searchbar type="text" debounce="500" (ionInput)="searchKeyword($event)"></ion-searchbar>    <ion-button color="success" (click)="searchKeyword($event)">      Caută    </ion-button>  </ion-item>  <ion-list class="pb-0 underlined-list">    <div *ngFor="let volunteer of volunteers" class="list-item">      <ion-item lines="none" (click)="openMenu(volunteer._id)">        <ion-label class="name">          {{volunteer.name}}        </ion-label>        <ion-label class="organisation pl-10">          <a (click)="openBrowser(volunteer.organisation?.website)" *ngIf="volunteer.organisation">            {{(volunteer.organisation.name)}}          </a>          <a *ngIf="!volunteer.organisation">            Neafiliat          </a>        </ion-label>        <ion-icon name="arrow-dropdown" class="drop-down-icon" *ngIf="volunteer._id !== volunteerIdWithDetails">        </ion-icon>        <ion-icon name="arrow-dropup" class="drop-down-icon" *ngIf="volunteer._id === volunteerIdWithDetails">        </ion-icon>      </ion-item>      <div *ngIf="volunteer._id === volunteerIdWithDetails" class="item-menu mb-5">        <ion-item lines="none" *ngFor="let course of courses" >          <ion-label class="m-0">            Voluntar acreditat pentru <a>{{course.course_name.name}}</a>.          </ion-label>        </ion-item>        <ion-item lines="none" *ngIf="volunteer.job">          <ion-label class="m-0">            {{volunteer.job}}.          </ion-label>        </ion-item>        <ion-item lines="none">          <ion-label class="m-0">            Înregistrat în {{volunteer.created_at | date: \'dd.MM.yyyy\'}}.          </ion-label>        </ion-item>        <ion-row lines="none" *ngIf="!volunteer.isInAllocation">          <ion-col col-6>            <ion-button color="light" class="w-100" (click)="sendAlert(volunteer)">              Trimite mesaj            </ion-button>          </ion-col>          <ion-col col-6 *ngIf="!volunteer.allocation" (click)="allocateUser(volunteer._id)">            <ion-button color="secondary" class="w-100">              Alocă voluntar            </ion-button>          </ion-col>          <ion-col col-6 *ngIf="volunteer.allocation"  (click)="allocateUser(volunteer._id)">            <ion-button color="light" class="w-100">              Voluntar alocat            </ion-button>          </ion-col>        </ion-row>        <div *ngIf="volunteer.isInAllocation">          <ion-row>            <ion-col col-6 class="custom-input selectors">              <ion-label class="title">Județ</ion-label>              <ion-select class="mt-10" [(ngModel)]="county" class="mt-5 p-5" (ionChange)="getCitiesList()" (click)="presentModal(counties, false, $event)">                <ion-select-option *ngFor="let county of [county]" [value]="county">{{county?.name}}</ion-select-option>              </ion-select>            </ion-col>            <ion-col col-6 class="custom-input selectors">              <ion-label class="title">Localitate</ion-label>              <ion-select class="mt-10" [(ngModel)]="city" class="mt-5 p-5" [disabled]="cities.length === 0" (click)="presentModal(this.cities, true, $event)">                <ion-select-option *ngFor="let city of [city]" [value]="city">{{city?.name}}</ion-select-option>              </ion-select>            </ion-col>          </ion-row>          <ion-row>            <ion-col col-6></ion-col>            <ion-col col-6>              <ion-button color="success" (click)="confirmAllocation(volunteer._id)" class="w-100 h-25">                Confirmă              </ion-button>            </ion-col>          </ion-row>        </div>      </div>    </div>  </ion-list>  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Se încarcă voluntari...">    </ion-infinite-scroll-content>  </ion-infinite-scroll>  <ion-row *ngIf="volunteers.length > 0">    <ion-col col-6></ion-col>    <ion-col col-6 align-self-end>      <ion-button color="secondary" (click)="sendAlert()" float-right class="w-100">        Trimite-le alertă      </ion-button>    </ion-col>  </ion-row></ion-content></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar mode="ios">    <ion-buttons slot="start">      <ion-back-button color="dark" class="show-back-button" defaultHref="home"></ion-back-button>    </ion-buttons>    <ion-buttons slot="end">      <ion-menu-button color="dark"></ion-menu-button>    </ion-buttons>    <img src="../../assets/images/DSU.png" class="logo-title mx-auto" />  </ion-toolbar></ion-header><ion-content padding>  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">    <ion-refresher-content></ion-refresher-content>  </ion-refresher>  <ion-item lines="none" class="item item-text-wrap title">    Caută după nume, CNP sau organizație  </ion-item>  <ion-item lines="none" class="search-box mx-auto">    <ion-searchbar type="text" debounce="500" (ionInput)="searchKeyword($event)"></ion-searchbar>    <ion-button color="success" (click)="searchKeyword($event)">      Caută    </ion-button>  </ion-item>  <ion-list class="pb-0 underlined-list">    <div *ngFor="let volunteer of volunteers" class="list-item">      <ion-item lines="none" (click)="openMenu(volunteer._id, volunteer.allocation)">        <ion-label class="name">          {{volunteer.name}}        </ion-label>        <ion-label class="organisation pl-10">          <a (click)="openBrowser(volunteer.organisation?.website)" *ngIf="volunteer.organisation">            {{(volunteer.organisation.name)}}          </a>          <a *ngIf="!volunteer.organisation">            Neafiliat          </a>        </ion-label>        <ion-icon name="arrow-dropdown" class="drop-down-icon" *ngIf="volunteer._id !== volunteerIdWithDetails">        </ion-icon>        <ion-icon name="arrow-dropup" class="drop-down-icon" *ngIf="volunteer._id === volunteerIdWithDetails">        </ion-icon>      </ion-item>      <div *ngIf="volunteer._id === volunteerIdWithDetails" class="item-menu mb-5">        <ion-item lines="none" *ngFor="let course of volunteer.courses" >          <ion-label class="m-0">            Voluntar acreditat pentru <a>{{course.course_name?.name}}</a>.          </ion-label>        </ion-item>        <ion-item lines="none" *ngIf="allocation">          <ion-label class="m-0">            Ultima alocare {{ allocation?.city?.name }}, {{ allocation?.county?.name}}.          </ion-label>        </ion-item>        <ion-item lines="none" *ngIf="volunteer.job">          <ion-label class="m-0">            {{volunteer.job}}.          </ion-label>        </ion-item>        <ion-item lines="none">          <ion-label class="m-0">            Înregistrat în {{volunteer.created_at | date: \'dd.MM.yyyy\'}}.          </ion-label>        </ion-item>        <ion-row lines="none" *ngIf="!volunteer.isInAllocation">          <ion-col col-6>            <ion-button color="light" class="w-100" (click)="sendAlert(volunteer)">              Trimite mesaj            </ion-button>          </ion-col>          <ion-col col-6 *ngIf="!volunteer.allocation" (click)="allocateUser(volunteer._id)">            <ion-button color="secondary" class="w-100">              Alocă voluntar            </ion-button>          </ion-col>          <ion-col col-6 *ngIf="volunteer.allocation"  (click)="allocateUser(volunteer._id)">            <ion-button color="light" class="w-100">              Voluntar alocat            </ion-button>          </ion-col>        </ion-row>        <div *ngIf="volunteer.isInAllocation">          <ion-row>            <ion-col col-6 class="custom-input selectors">              <ion-label class="title">Județ</ion-label>              <ion-select class="mt-10" [(ngModel)]="county" class="mt-5 p-5" (ionChange)="getCitiesList()" (click)="presentModal(counties, false, $event)">                <ion-select-option *ngFor="let county of [county]" [value]="county">{{county?.name}}</ion-select-option>              </ion-select>            </ion-col>            <ion-col col-6 class="custom-input selectors">              <ion-label class="title">Localitate</ion-label>              <ion-select class="mt-10" [(ngModel)]="city" class="mt-5 p-5" [disabled]="cities.length === 0" (click)="presentModal(this.cities, true, $event)">                <ion-select-option *ngFor="let city of [city]" [value]="city">{{city?.name}}</ion-select-option>              </ion-select>            </ion-col>          </ion-row>          <ion-row>            <ion-col col-6>              <ion-button color="success" (click)="confirmAllocation(volunteer._id)" class="w-100 h-25">                Confirmă              </ion-button>            </ion-col>            <ion-col col-6>              <ion-button color="danger" (click)="cancelAllocation(volunteer._id)" class="w-100 h-25">                Anulează              </ion-button>            </ion-col>          </ion-row>        </div>      </div>    </div>  </ion-list>  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Se încarcă voluntari...">    </ion-infinite-scroll-content>  </ion-infinite-scroll>  <ion-row *ngIf="volunteers.length > 0">    <ion-col col-6></ion-col>    <ion-col col-6 align-self-end>      <ion-button color="secondary" (click)="sendAlert()" float-right class="w-100">        Trimite-le alertă      </ion-button>    </ion-col>  </ion-row></ion-content></div>'
     var COMPONENTS = [{'name': 'AboutPage', 'selector': 'app-about'},{'name': 'AddVolunteerComponent', 'selector': 'app-add-volunteer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthenticationPage', 'selector': 'app-authentication'},{'name': 'CustomSelectorComponent', 'selector': 'app-custom-selector'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'ListVolunteerComponent', 'selector': 'app-list-volunteer'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutComponent', 'selector': 'app-logout'},{'name': 'RecoverPasswordComponent', 'selector': 'app-recover-password'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SendMessageComponent', 'selector': 'app-send-message'},{'name': 'ValidateVolunteerComponent', 'selector': 'app-validate-volunteer'},{'name': 'VolunteerPage', 'selector': 'app-volunteer'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ValidateVolunteerComponent'};

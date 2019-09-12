@@ -245,7 +245,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/app/core/model/volunteer.model.ts:156</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">src/app/core/model/volunteer.model.ts:171</a></div>
                             </td>
                         </tr>
 
@@ -278,7 +278,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/core/model/volunteer.model.ts:131</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">src/app/core/model/volunteer.model.ts:146</a></div>
                             </td>
                         </tr>
 
@@ -345,7 +345,7 @@ otherwise it contains the id of the volunteer&#39;s last allocation entry from t
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">src/app/core/model/volunteer.model.ts:136</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">src/app/core/model/volunteer.model.ts:151</a></div>
                             </td>
                         </tr>
 
@@ -445,7 +445,7 @@ If it&#39;s empty, than the volunteer has no specialisation</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">src/app/core/model/volunteer.model.ts:146</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="161" class="link-to-prism">src/app/core/model/volunteer.model.ts:161</a></div>
                             </td>
                         </tr>
 
@@ -511,7 +511,7 @@ If it&#39;s empty, than the volunteer has no specialisation</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/core/model/volunteer.model.ts:141</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/app/core/model/volunteer.model.ts:156</a></div>
                             </td>
                         </tr>
 
@@ -710,7 +710,7 @@ or &#39;null&#39;, in the second case it means that the volunteer has the &#39;N
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="161" class="link-to-prism">src/app/core/model/volunteer.model.ts:161</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="176" class="link-to-prism">src/app/core/model/volunteer.model.ts:176</a></div>
                             </td>
                         </tr>
 
@@ -743,7 +743,7 @@ or &#39;null&#39;, in the second case it means that the volunteer has the &#39;N
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">src/app/core/model/volunteer.model.ts:151</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="166" class="link-to-prism">src/app/core/model/volunteer.model.ts:166</a></div>
                             </td>
                         </tr>
 
@@ -866,19 +866,24 @@ or &#39;null&#39;, in the second case it means that the volunteer has the &#39;N
      */
     courses: {
         /**
-         * Course id
+         * Course name object, from the course_name Database
          */
-        _id: string;
+        course_name: {
+            /**
+             * Course name id
+             */
+            _id: string;
 
-        /**
-         * Course name id, from the course_name Database
-         */
-        course_name_id: string;
+            /**
+             * Course name
+             */
+            name: string;
 
-        /**
-         * Course name
-         */
-        name: string;
+            /**
+             * Course name slug
+             */
+            slug: string;
+        }
 
         /**
          * Course obtained date
@@ -886,9 +891,19 @@ or &#39;null&#39;, in the second case it means that the volunteer has the &#39;N
         obtained: string;
 
         /**
-         * Course acredited organisation
+         * Course acredited organisation from the acreditors database
          */
-        acredited: string;
+        acredited: {
+            /**
+             * Acreditor organisation id
+             */
+            _id: string;
+
+            /**
+             * Acreditor organisation name
+             */
+            name: string;
+        }
     }[];
 
     /**

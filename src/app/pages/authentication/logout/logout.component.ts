@@ -7,6 +7,11 @@ import { Router } from '@angular/router';
   templateUrl: './logout.component.html',
   styleUrls: ['./logout.component.scss'],
 })
+
+/**
+ * Component for the logout functionality, displays nothing,
+ * its purpose is only to facilitate the logout action
+ */
 export class LogoutComponent implements OnInit {
 
   /**

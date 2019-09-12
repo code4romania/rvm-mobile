@@ -11,6 +11,10 @@ import { ToastController } from '@ionic/angular';
   templateUrl: './recover-password.component.html',
   styleUrls: ['./recover-password.component.scss'],
 })
+
+/**
+ * Component for the recover password functionality
+ */
 export class RecoverPasswordComponent implements OnInit {
     /**
      * Form reference

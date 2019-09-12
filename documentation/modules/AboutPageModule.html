@@ -152,6 +152,9 @@ import { IonicModule } from &#x27;@ionic/angular&#x27;;
 import { AboutPage } from &#x27;./about.page&#x27;;
 import { AuthenticationGuard } from &#x27;../../core/authentication/authentication.guard&#x27;;
 
+/**
+ * List of all routes that are derivate from &#x27;/about&#x27;
+ */
 const routes: Routes &#x3D; [
   {
     path: &#x27;&#x27;,
@@ -169,6 +172,10 @@ const routes: Routes &#x3D; [
   ],
   declarations: [AboutPage]
 })
+
+/**
+ * Module that loads the components derived from the &#x27;about&#x27; section
+ */
 export class AboutPageModule {}
 </code></pre>
     </div>

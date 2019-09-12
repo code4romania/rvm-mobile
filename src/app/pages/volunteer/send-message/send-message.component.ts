@@ -12,6 +12,9 @@ import { Location } from '@angular/common';
   styleUrls: ['./send-message.component.scss']
 })
 
+/**
+ * Component that handles the send message page functionality
+ */
 export class SendMessageComponent implements OnInit {
 
   /**

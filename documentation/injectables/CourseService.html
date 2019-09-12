@@ -83,6 +83,10 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Private</span>
+                                <a href="#courseNamesType">courseNamesType</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
                                 <a href="#type">type</a>
                             </li>
                         </ul>
@@ -98,28 +102,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#createCourse">createCourse</a>
-                            </li>
-                            <li>
-                                <a href="#deleteCourseById">deleteCourseById</a>
-                            </li>
-                            <li>
-                                <a href="#getCourseById">getCourseById</a>
-                            </li>
-                            <li>
-                                <a href="#getCourseByName">getCourseByName</a>
-                            </li>
-                            <li>
-                                <a href="#getCourseByVolunteerId">getCourseByVolunteerId</a>
-                            </li>
-                            <li>
                                 <a href="#getCourseNames">getCourseNames</a>
-                            </li>
-                            <li>
-                                <a href="#getCourses">getCourses</a>
-                            </li>
-                            <li>
-                                <a href="#updateCourse">updateCourse</a>
                             </li>
                         </ul>
                     </td>
@@ -144,7 +127,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/core/service/course.service.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/core/service/course.service.ts:37</a></div>
                             </td>
                         </tr>
 
@@ -198,410 +181,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createCourse"></a>
-                    <span class="name">
-                        <b>
-                            createCourse
-                        </b>
-                        <a href="#createCourse"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>createCourse(courseName: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, volunteer_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="116"
-                            class="link-to-prism">src/app/core/service/course.service.ts:116</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Creates a course entry in the local database</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>courseName</td>
-                                    <td>
-                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>Entry from statics courses database</p>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>volunteer_id</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>The id of the volunteer that is acredited for this course</p>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="deleteCourseById"></a>
-                    <span class="name">
-                        <b>
-                            deleteCourseById
-                        </b>
-                        <a href="#deleteCourseById"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>deleteCourseById(courseId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="146"
-                            class="link-to-prism">src/app/core/service/course.service.ts:146</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Deletes an entry by its id from the local database</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>courseId</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>The course id</p>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getCourseById"></a>
-                    <span class="name">
-                        <b>
-                            getCourseById
-                        </b>
-                        <a href="#getCourseById"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getCourseById(courseId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="88"
-                            class="link-to-prism">src/app/core/service/course.service.ts:88</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Finds a course by its id in the local database</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>courseId</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>Course&#39;s id</p>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        <p>An Observable containing the course with that id</p>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getCourseByName"></a>
-                    <span class="name">
-                        <b>
-                            getCourseByName
-                        </b>
-                        <a href="#getCourseByName"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getCourseByName(courseNameId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="73"
-                            class="link-to-prism">src/app/core/service/course.service.ts:73</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Finds a course by its name in the local database</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>courseNameId</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>Course name id from statics database</p>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        <p>An Observable with all courses with that name</p>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getCourseByVolunteerId"></a>
-                    <span class="name">
-                        <b>
-                            getCourseByVolunteerId
-                        </b>
-                        <a href="#getCourseByVolunteerId"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getCourseByVolunteerId(volunteerId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="102"
-                            class="link-to-prism">src/app/core/service/course.service.ts:102</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Retrives the list of courses that belong to a volunteer</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>volunteerId</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>A volunteer&#39;s id</p>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        <p>An observable containing the list of courses that belong to the given volunteer</p>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="getCourseNames"></a>
                     <span class="name">
                         <b>
@@ -620,8 +199,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="155"
-                            class="link-to-prism">src/app/core/service/course.service.ts:155</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">src/app/core/service/course.service.ts:56</a></div>
                 </td>
             </tr>
 
@@ -639,136 +218,51 @@
             </tr>
         </tbody>
     </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getCourses"></a>
-                    <span class="name">
-                        <b>
-                            getCourses
-                        </b>
-                        <a href="#getCourses"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getCourses()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="58"
-                            class="link-to-prism">src/app/core/service/course.service.ts:58</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Getter method for all courses from the local database</p>
-</div>
-
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        <p>An Observable with all courses</p>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateCourse"></a>
-                    <span class="name">
-                        <b>
-                            updateCourse
-                        </b>
-                        <a href="#updateCourse"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>updateCourse(course: <a href="../classes/Course.html">Course</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="132"
-                            class="link-to-prism">src/app/core/service/course.service.ts:132</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Updates a course entry in the local database</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>course</td>
-                                    <td>
-                                                <code><a href="../classes/Course.html" target="_self" >Course</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>The new course entry</p>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </section>
             <section>
     
         <h3 id="inputs">
             Properties
         </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="courseNamesType"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            courseNamesType</b>
+                            <a href="#courseNamesType"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;course_names&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/core/service/course.service.ts:37</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Course&#39;s names table type</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -795,7 +289,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/core/service/course.service.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/core/service/course.service.ts:32</a></div>
                             </td>
                         </tr>
 
@@ -818,10 +312,8 @@
 import * as PouchDB from &#x27;pouchdb/dist/pouchdb&#x27;;
 import * as PouchDBFind from &#x27;pouchdb-find/lib/index&#x27;;
 import { environment } from &#x27;../../../environments/environment&#x27;;
-import { from, Observable } from &#x27;rxjs&#x27;;
-import { Course } from &#x27;../model/course.model&#x27;;
+import { from } from &#x27;rxjs&#x27;;
 import { AuthenticationService } from &#x27;../authentication&#x27;;
-import * as moment from &#x27;moment&#x27;;
 
 /**
  * Reference for local PouchDB Courses Database
@@ -850,6 +342,11 @@ export class CourseService {
   private type &#x3D; &#x27;courses&#x27;;
 
   /**
+   * Course&#x27;s names table type
+   */
+  private courseNamesType &#x3D; &#x27;course_names&#x27;;
+
+  /**
    * Class constructor, sets the synchronization options for CouchDB and PouchDB Courses Database
    * @param authService Provider for authentication related operations
    */
@@ -861,109 +358,7 @@ export class CourseService {
     };
 
     localDB.sync(remoteDB, options);
-
-    localDB.createIndex({
-      index: {fields: [&#x27;course_name.id&#x27;, &#x27;volunteer_id&#x27;, &#x27;acredited.id&#x27;]}
-    });
    }
-
-  /**
-   * Getter method for all courses from the local database
-   * @returns An Observable with all courses
-   */
-  getCourses(): Observable&lt;any&gt; {
-    return from(localDB.find({
-      selector: {
-          type: this.type
-      },
-      include_docs: true,
-      attachments: true
-    }));
-  }
-
-  /**
-   * Finds a course by its name in the local database
-   * @param courseNameId Course name id from statics database
-   * @returns An Observable with all courses with that name
-   */
-  getCourseByName(courseNameId: string): Observable&lt;any&gt; {
-    return from(localDB.find({
-      selector: {
-        &#x27;course_name.id&#x27;: {$eq: courseNameId},
-        type: this.type
-      },
-      sort: [&#x27;course_name.id&#x27;],
-    }));
-  }
-
-  /**
-   * Finds a course by its id in the local database
-   * @param courseId Course&#x27;s id
-   * @returns An Observable containing the course with that id
-   */
-  getCourseById(courseId: string): Observable&lt;any&gt; {
-    return from(localDB.find({
-      selector: {
-        _id: {$eq: courseId},
-        type: this.type
-      }
-    }));
-  }
-
-  /**
-   * Retrives the list of courses that belong to a volunteer
-   * @param volunteerId A volunteer&#x27;s id
-   * @returns An observable containing the list of courses that belong to the given volunteer
-   */
-  getCourseByVolunteerId(volunteerId: string): Observable&lt;any&gt; {
-    return from(localDB.find({
-      selector: {
-        volunteer_id: {$eq: volunteerId},
-        type: this.type
-      }
-    }));
-  }
-
-  /**
-   * Creates a course entry in the local database
-   * @param courseName Entry from statics courses database
-   * @param volunteer_id The id of the volunteer that is acredited for this course
-   */
-  createCourse(courseName: any, volunteer_id: string): Observable&lt;any&gt; {
-    const course &#x3D; new Course();
-    course.volunteer_id &#x3D; volunteer_id;
-    course.course_name &#x3D; courseName;
-    course.created_at &#x3D; moment().format(&#x27;Y-MM-DD H:mm:ss&#x27;);
-    course.updated_at &#x3D; moment().format(&#x27;Y-MM-DD H:mm:ss&#x27;);
-    course.added_by &#x3D; this.authService.user._id;
-    course.type &#x3D; this.type;
-
-    return from(localDB.post(course));
-  }
-
-  /**
-   * Updates a course entry in the local database
-   * @param course The new course entry
-   */
-  updateCourse(course: Course): void {
-    localDB.get(course._id).then((doc: Course) &#x3D;&gt; {
-      doc.course_name &#x3D; course.course_name ? course.course_name : doc.course_name;
-      doc.acredited &#x3D; course.acredited ? course.acredited : doc.acredited;
-      doc.obtained &#x3D; course.obtained ? course.obtained : doc.obtained;
-      doc.updated_at &#x3D; new Date();
-      localDB.put(doc);
-    });
-  }
-
-  /**
-   * Deletes an entry by its id from the local database
-   * @param courseId The course id
-   */
-  deleteCourseById(courseId: string): void {
-    localDB.get(courseId).then(doc &#x3D;&gt; {
-      return localDB.remove(doc);
-    });
-  }
 
   /**
    * Returns all course names for selection
