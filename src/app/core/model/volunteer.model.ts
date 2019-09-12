@@ -124,9 +124,9 @@ export class Volunteer {
         obtained: string;
 
         /**
-         * Course acredited organisation from the acreditors database
+         * Course accredited organisation from the acreditors database
          */
-        acredited: {
+        accredited: {
             /**
              * Acreditor organisation id
              */

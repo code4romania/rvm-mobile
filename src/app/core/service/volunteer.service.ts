@@ -54,7 +54,7 @@ export class VolunteerService {
           'slug',
           'ssn',
           'organisation.slug',
-          'course.[].course_name_id',
+          'course.[].course_name._id',
           'organisation._id',
           'county._id',
           'city._id',
@@ -92,6 +92,7 @@ export class VolunteerService {
    */
   search(keyword: string, page: number, limit: number): Observable<any> {
     const skip = page * limit;
+    keyword = this.removeSpecialChars(keyword);
     const pattern = new RegExp('.*' + keyword + '.*', 'ig');
     return from(localDB.find({
       selector: {
@@ -157,7 +158,7 @@ export class VolunteerService {
    * @param city String value containing the new volunteer's city
    * @param organisation Object value containing the new volunteer's organisation
    * Either contains an object with the following properties {id, name, website}, or it's null
-   * @param course Volunteer's course with properties: {id, name, acredited, obtained}
+   * @param course Volunteer's course with properties: {id, name, accredited, obtained}
    * @returns An Observable with the created object
    */
   createVolunteer(name: string, ssn: string, phone: string, county: any, city: any, organisation: any, course: any): Observable<any> {
@@ -200,7 +201,7 @@ export class VolunteerService {
           slug: course.slug
         },
         obtained: null,
-        acredited: null
+        accredited: null
       };
       volunteer.courses.push(newCourse);
     }
@@ -273,7 +274,7 @@ export class VolunteerService {
     if (!!course && !!course._id) {
       selector['$and'].push( {courses: {
         $elemMatch : {
-          course_name_id: {$eq: course._id},
+          'course_name._id': {$eq: course._id},
           }
         }
       });

@@ -60,7 +60,7 @@
 
   <ion-list class="mt-30 pb-0" class="underlined-list">
     <div *ngFor="let volunteer of volunteers" class="list-item">
-      <ion-item lines="none" (click)="openMenu(volunteer._id)">
+      <ion-item lines="none" (click)="openMenu(volunteer._id, volunteer.allocation)">
         <ion-label class="name">
           {{volunteer.name}}
         </ion-label>

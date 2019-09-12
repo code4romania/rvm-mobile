@@ -123,9 +123,11 @@ export class ValidateVolunteerComponent implements OnInit {
     } else {
       this.volunteerIdWithDetails = volunteerId;
 
-      this.allocationService.getAllocationById(allocationId).subscribe((response: any) => {
-        this.allocation = response.docs[0];
-      });
+      if (allocationId) {
+        this.allocationService.getAllocationById(allocationId).subscribe((response: any) => {
+          this.allocation = response.docs[0];
+        });
+      }
     }
   }
 
@@ -154,6 +156,10 @@ export class ValidateVolunteerComponent implements OnInit {
         this.volunteers[index] = this.volunteerService.getVolunteerById(volunteerId).subscribe((response) => {
           if (response.docs && response.docs.length > 0) {
             this.volunteers[index] = response.docs[0];
+
+            this.allocationService.getAllocationById(this.volunteers[index].allocation).subscribe((res: any) => {
+              this.allocation = res.docs[0];
+            });
           }
           this.volunteers[index].isInAllocation = false;
         });

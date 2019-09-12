@@ -4,7 +4,7 @@
 export const environment = {
   env: 'PROD',
   production: true,
-  serverBaseUrl: 'https://rvm-api.lxhost.ro',
-  serverUrl: 'https://rvm-api.lxhost.ro/api',
-  databaseURL: 'http://rvm.lxhost.ro:5984'
+  serverBaseUrl: 'http://52.50.54.63:8080',
+  serverUrl: 'http://52.50.54.63:8080/api',
+  databaseURL: 'admin@admin:http://52.50.54.63:5984'
 };
