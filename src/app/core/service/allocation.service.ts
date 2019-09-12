@@ -78,8 +78,8 @@ export class AllocationService {
       name: county.name
     };
     allocation.city = city;
-    allocation.created_at = moment().format('Y-MM-DD H:mm:ss');
-    allocation.updated_at = moment().format('Y-MM-DD H:mm:ss');
+    allocation.created_at = moment().format('Y-MM-DD HH:mm:ss');
+    allocation.updated_at = moment().format('Y-MM-DD HH:mm:ss');
     allocation.type = this.type;
 
     if (organisation) {

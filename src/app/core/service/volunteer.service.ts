@@ -172,8 +172,8 @@ export class VolunteerService {
       _id: city._id,
       name: city.name
     };
-    volunteer.created_at = moment().format('Y-MM-DD H:mm:ss');
-    volunteer.updated_at = moment().format('Y-MM-DD H:mm:ss');
+    volunteer.created_at = moment().format('Y-MM-DD HH:mm:ss');
+    volunteer.updated_at = moment().format('Y-MM-DD HH:mm:ss');
     volunteer.allocation = '';
     volunteer.phone = phone;
     volunteer.slug = this.removeSpecialChars(name);
@@ -226,7 +226,7 @@ export class VolunteerService {
       doc.comments = volunteer.comments ? volunteer.comments : doc.comments;
       doc.job = volunteer.job ? volunteer.job : doc.job;
       doc.allocation = volunteer.allocation ? volunteer.allocation : doc.allocation;
-      doc.updated_at = moment().format('Y-MM-DD H:mm:ss');
+      doc.updated_at = moment().format('Y-MM-DD HH:mm:ss');
       localDB.put(doc);
     });
   }
@@ -294,7 +294,7 @@ export class VolunteerService {
   allocateVolunteer(allocationId: string, volunteerId: string) {
     return localDB.get(volunteerId).then((doc) => {
       doc.allocation = allocationId;
-      doc.updated_at = moment().format('Y-MM-DD H:mm:ss');
+      doc.updated_at = moment().format('Y-MM-DD HH:mm:ss');
       localDB.put(doc);
     });
   }

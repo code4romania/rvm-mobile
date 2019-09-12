@@ -103,8 +103,8 @@ export class OrganisationService {
     organisation.name = name;
     organisation.slug = this.removeSpecialChars(name);
     organisation.added_by = currentUser._id;
-    organisation.created_at = moment().format('Y-MM-DD H:mm:ss');
-    organisation.updated_at = moment().format('Y-MM-DD H:mm:ss');
+    organisation.created_at = moment().format('Y-MM-DD HH:mm:ss');
+    organisation.updated_at = moment().format('Y-MM-DD HH:mm:ss');
     organisation.type = this.type;
     organisation.status = 'inactiv';
 
