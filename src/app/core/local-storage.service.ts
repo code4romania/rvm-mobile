@@ -22,7 +22,7 @@ function createCookie(name: any, value: any, days: any) {
 /**
  * Getter for a cookie document by its name
  * @param name Cookie's name
- * @returns cookie document 
+ * @returns cookie document
  */
 function readCookie(name: any) {
   const nameEQ = name + '=',

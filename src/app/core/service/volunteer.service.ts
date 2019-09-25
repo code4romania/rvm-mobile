@@ -4,7 +4,6 @@ import * as PouchDBFind from 'pouchdb-find/lib/index';
 import { environment } from '../../../environments/environment';
 import { Volunteer } from '../model/volunteer.model';
 import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { CourseService } from './course.service';
 import * as moment from 'moment';
 

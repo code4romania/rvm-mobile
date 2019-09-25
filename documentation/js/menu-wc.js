@@ -246,9 +246,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="classes/Allocation.html" data-type="entity-link">Allocation</a>
                             </li>
                             <li class="link">
-                                <a href="classes/AppPage.html" data-type="entity-link">AppPage</a>
-                            </li>
-                            <li class="link">
                                 <a href="classes/DatabaseSyncService.html" data-type="entity-link">DatabaseSyncService</a>
                             </li>
                             <li class="link">

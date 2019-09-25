@@ -223,8 +223,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="294"
-                            class="link-to-prism">src/app/core/service/volunteer.service.ts:294</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="301"
+                            class="link-to-prism">src/app/core/service/volunteer.service.ts:301</a></div>
                 </td>
             </tr>
 
@@ -316,8 +316,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="163"
-                            class="link-to-prism">src/app/core/service/volunteer.service.ts:163</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="164"
+                            class="link-to-prism">src/app/core/service/volunteer.service.ts:164</a></div>
                 </td>
             </tr>
 
@@ -448,7 +448,7 @@ Either contains an object with the following properties {id, name, website}, or 
 
 
                                     <td>
-                                        <p>Volunteer&#39;s course with properties: {id, name, acredited, obtained}</p>
+                                        <p>Volunteer&#39;s course with properties: {id, name, accredited, obtained}</p>
 
                                     </td>
                                 </tr>
@@ -491,8 +491,8 @@ Either contains an object with the following properties {id, name, website}, or 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="238"
-                            class="link-to-prism">src/app/core/service/volunteer.service.ts:238</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="245"
+                            class="link-to-prism">src/app/core/service/volunteer.service.ts:245</a></div>
                 </td>
             </tr>
 
@@ -568,8 +568,8 @@ Either contains an object with the following properties {id, name, website}, or 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="253"
-                            class="link-to-prism">src/app/core/service/volunteer.service.ts:253</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="260"
+                            class="link-to-prism">src/app/core/service/volunteer.service.ts:260</a></div>
                 </td>
             </tr>
 
@@ -708,8 +708,8 @@ Either contains an object with the following properties {id, name, website}, or 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="128"
-                            class="link-to-prism">src/app/core/service/volunteer.service.ts:128</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="129"
+                            class="link-to-prism">src/app/core/service/volunteer.service.ts:129</a></div>
                 </td>
             </tr>
 
@@ -786,8 +786,8 @@ Either contains an object with the following properties {id, name, website}, or 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="142"
-                            class="link-to-prism">src/app/core/service/volunteer.service.ts:142</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="143"
+                            class="link-to-prism">src/app/core/service/volunteer.service.ts:143</a></div>
                 </td>
             </tr>
 
@@ -960,8 +960,8 @@ Either contains an object with the following properties {id, name, website}, or 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="307"
-                            class="link-to-prism">src/app/core/service/volunteer.service.ts:307</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="314"
+                            class="link-to-prism">src/app/core/service/volunteer.service.ts:314</a></div>
                 </td>
             </tr>
 
@@ -1148,8 +1148,8 @@ Either contains an object with the following properties {id, name, website}, or 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="215"
-                            class="link-to-prism">src/app/core/service/volunteer.service.ts:215</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="222"
+                            class="link-to-prism">src/app/core/service/volunteer.service.ts:222</a></div>
                 </td>
             </tr>
 
@@ -1310,7 +1310,7 @@ export class VolunteerService {
           &#x27;slug&#x27;,
           &#x27;ssn&#x27;,
           &#x27;organisation.slug&#x27;,
-          &#x27;course.[].course_name_id&#x27;,
+          &#x27;course.[].course_name._id&#x27;,
           &#x27;organisation._id&#x27;,
           &#x27;county._id&#x27;,
           &#x27;city._id&#x27;,
@@ -1348,6 +1348,7 @@ export class VolunteerService {
    */
   search(keyword: string, page: number, limit: number): Observable&lt;any&gt; {
     const skip &#x3D; page * limit;
+    keyword &#x3D; this.removeSpecialChars(keyword);
     const pattern &#x3D; new RegExp(&#x27;.*&#x27; + keyword + &#x27;.*&#x27;, &#x27;ig&#x27;);
     return from(localDB.find({
       selector: {
@@ -1413,7 +1414,7 @@ export class VolunteerService {
    * @param city String value containing the new volunteer&#x27;s city
    * @param organisation Object value containing the new volunteer&#x27;s organisation
    * Either contains an object with the following properties {id, name, website}, or it&#x27;s null
-   * @param course Volunteer&#x27;s course with properties: {id, name, acredited, obtained}
+   * @param course Volunteer&#x27;s course with properties: {id, name, accredited, obtained}
    * @returns An Observable with the created object
    */
   createVolunteer(name: string, ssn: string, phone: string, county: any, city: any, organisation: any, course: any): Observable&lt;any&gt; {
@@ -1449,6 +1450,11 @@ export class VolunteerService {
     volunteer.courses &#x3D; [];
 
     if (course &amp;&amp; course._id) {
+      let accreditor &#x3D; null;
+      if (course.static_accreditor) {
+        accreditor &#x3D; course.static_accreditor;
+      }
+
       const newCourse &#x3D; {
         course_name : {
           _id: course._id,
@@ -1456,8 +1462,9 @@ export class VolunteerService {
           slug: course.slug
         },
         obtained: null,
-        acredited: null
+        accredited: accreditor
       };
+
       volunteer.courses.push(newCourse);
     }
 
@@ -1529,7 +1536,7 @@ export class VolunteerService {
     if (!!course &amp;&amp; !!course._id) {
       selector[&#x27;$and&#x27;].push( {courses: {
         $elemMatch : {
-          course_name_id: {$eq: course._id},
+          &#x27;course_name._id&#x27;: {$eq: course._id},
           }
         }
       });
