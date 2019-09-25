@@ -194,6 +194,11 @@ export class VolunteerService {
     volunteer.courses = [];
 
     if (course && course._id) {
+      let accreditor = null;
+      if (course.static_accreditor) {
+        accreditor = course.static_accreditor;
+      }
+
       const newCourse = {
         course_name : {
           _id: course._id,
@@ -201,8 +206,9 @@ export class VolunteerService {
           slug: course.slug
         },
         obtained: null,
-        accredited: null
+        accredited: accreditor
       };
+
       volunteer.courses.push(newCourse);
     }
 

@@ -28,24 +28,34 @@ export class Organisation {
     website: string;
 
     /**
-     * Organisation contact person name
+     * Organisation contact person object
      */
-    contact_person: string;
+    contact_person: {
+        /**
+         * Ngo Admin user id from Users table
+         */
+        _id: string;
 
-    /**
-     * Phone number
-     */
-    phone: string;
+        /**
+         * Ngo Admin user name
+         */
+        name: string;
+
+        /**
+         * Ngo Admin email address
+         */
+        email: string;
+
+        /**
+         * Ngo Admin phone number
+         */
+        phone: string;
+    };
 
     /**
      * Address
      */
     address: string;
-
-    /**
-     * Email address
-     */
-    email: string;
 
     /**
      * Organisation's county, from the statics database
