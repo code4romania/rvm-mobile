@@ -110,7 +110,7 @@ export class AddVolunteerComponent implements OnInit {
   private createForm() {
     this.addForm = this.formBuilder.group({
       name: ['', Validators.required],
-      ssn: ['', [Validators.required, SsnValidation.ssnValidation]],
+      ssn: ['', SsnValidation.ssnValidation],
       phone: ['', [Validators.required, PhoneValidation.phoneValidation]],
       organisation: ['', Validators.required],
       county: new FormControl({value: '', disabled: false}, Validators.required),

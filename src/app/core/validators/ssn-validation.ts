@@ -28,6 +28,10 @@ export class SsnValidation {
             }
 
         } else {
+            if (ssn === 0) {
+                return null;
+            }
+
             return {'ssn': 'CNP-ul introdus nu este valid.'};
         }
     }
